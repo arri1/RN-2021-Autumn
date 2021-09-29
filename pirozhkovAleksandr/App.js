@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import toasty from './toasty.png';
+import toasty from './assets/toasty.png';
 
 
 import{
