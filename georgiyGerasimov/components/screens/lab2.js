@@ -40,7 +40,7 @@ const Lab2 = () => {
         setData(newData);
       })
       .catch(() => {});
-  });
+  }, []);
 
   const content = () => {
     return (
