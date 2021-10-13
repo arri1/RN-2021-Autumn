@@ -1,2 +1,4 @@
 # RN-2021-Autumn
-test
+0. Создать проект
+1. useState
+2. todo list
