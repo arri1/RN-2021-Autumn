@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   StyleSheet,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import axios from 'axios';
 
@@ -14,50 +15,105 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     borderRadius: 10,
+    marginTop: 10,
     marginBottom: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    borderColor: '#4A398F',
-    borderWidth: StyleSheet.hairlineWidth,
+    backgroundColor: '#D4D5D9',
   },
   container: {
     flex: 1,
-    margin: 15,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#969696',
+  },
+  parent: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
   },
   title: {
     fontSize: 18,
     fontWeight: 'bold',
   },
   text: {
-    marginTop: 10,
+    fontSize: 20,
   },
   image: {
     marginTop: 10,
-    height: 100,
-    width: 200,
+    height: 150,
+    width: 150,
+    borderRadius: 75,
+  },
+  littleBox: {
+    height: 30,
+    width: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+    marginBottom: 10,
+    borderRadius: 15,
+    backgroundColor: '#DBAB84',
   },
 });
+
 const Lab2 = () => {
-  const [data, setData] = useState([]);
+  const [photos, setPhotos] = useState([]);
+  const [firstEl, setFirst] = useState(0);
+  const [lastEl, setLast] = useState(5);
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
-    axios
-      .get('https://jsonplaceholder.typicode.com/photos')
-      .then(({data: newData}) => {
-        setData(newData);
-      })
-      .catch(() => {});
+    const axiosPhotos = async () => {
+      const response = await axios(
+        'https://jsonplaceholder.typicode.com/photos',
+      );
+      setPhotos(response.data.slice(0, 100));
+    };
+    axiosPhotos();
   }, []);
+
+  const pageControl = () => {
+    return (
+      <View style={styles.parent}>
+        {page ? (
+          <TouchableOpacity
+            style={styles.littleBox}
+            onPress={() => {
+              setFirst(firstEl - 5);
+              setLast(lastEl - 5);
+              setPage(page - 1);
+            }}>
+            <Text style={styles.text}>Previous</Text>
+          </TouchableOpacity>
+        ) : null}
+        <View style={styles.littleBox}>
+          <Text style={styles.text}>{page + 1}</Text>
+        </View>
+        {photos.length / 5 - page - 1 ? (
+          <TouchableOpacity
+            style={styles.littleBox}
+            onPress={() => {
+              setFirst(firstEl + 5);
+              setLast(lastEl + 5);
+              setPage(page + 1);
+            }}>
+            <Text style={styles.text}>Next</Text>
+          </TouchableOpacity>
+        ) : null}
+      </View>
+    );
+  };
 
   const content = () => {
     return (
       <ScrollView>
-        {data.map(item => {
+        {pageControl()}
+        {photos.slice(firstEl, lastEl).map(item => {
           return (
             <View key={item.id} style={styles.item}>
               <Text style={styles.title}>{item.title}</Text>
+              <Text style={styles.title}>{item.id}</Text>
               <Image
                 style={styles.image}
                 source={{
@@ -67,13 +123,14 @@ const Lab2 = () => {
             </View>
           );
         })}
+        {pageControl()}
       </ScrollView>
     );
   };
 
   return (
     <View style={styles.container}>
-      {data ? content() : <ActivityIndicator color={'red'} />}
+      {photos ? content() : <ActivityIndicator color={'red'} />}
     </View>
   );
 };
