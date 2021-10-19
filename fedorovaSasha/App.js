@@ -15,29 +15,36 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.main}>
-    <ScrollView>
+      <ScrollView>
+        <View style={styles.box}>
+          <Text style={[styles.text, {fontSize: size}]}>
+            Какой-то текст ....
+          </Text>
+        </View>
 
-      <View style={styles.box}>
-        <Text style={[styles.text, {fontSize: size}]}>Какой-то текст ....</Text>
-      </View>
+        <TouchableOpacity
+          style={[styles.countButton, {backgroundColor: color1}]}
+          onPress={() => {
+            setColor1('#98DB46');
+            setColor2('#C75CDB');
+            setSize(36);
+          }}>
+          <Text>Increase font size</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        style={[styles.countButton, {backgroundColor: color1}]}
-        onPress={() => {setColor1('#98DB46'); setColor2('#C75CDB'); setSize(26)}}>
-        <Text>Increase font size</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={[styles.countButton, {backgroundColor: color2}]}
-        onPress={() => {setColor1('#C75CDB'); setColor2('#98DB46'); setSize(16)}}>
-        <Text>Reduce font size</Text>
-      </TouchableOpacity>
-
-    </ScrollView>
-  </SafeAreaView>
-);
+        <TouchableOpacity
+          style={[styles.countButton, {backgroundColor: color2}]}
+          onPress={() => {
+            setColor1('#C75CDB');
+            setColor2('#98DB46');
+            setSize(16);
+          }}>
+          <Text>Reduce font size</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </SafeAreaView>
+  );
 };
-
 
 const styles = StyleSheet.create({
   main: {
