@@ -9,7 +9,7 @@ import {
 from 'react-native';
 
 const Arts = ({navigation}) => {
-    const[count, setCount]=useState(1)
+  const[count, setCount]=useState(1)
   const[image, setImg]=useState(require('../img/1.jpg'))
   const[name, setName]=useState('Наруто')
   useEffect(()=>{
