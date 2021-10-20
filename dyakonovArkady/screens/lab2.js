@@ -20,10 +20,10 @@ const lab2 = () => {
         {data.map(item => {
           return (
             <View key={item.id} style={styles.item}>
-              <Text style={styles.container}>{item.username} {item.name}</Text>
-              <Text style={styles.address}>City: {item.address.city}, street: {item.address.street}, suite: {item.address.suite}</Text>
-              <Text style={styles.email}>email: {item.email}</Text>
-              <Text style={styles.phone}>phone: {item.phone}</Text>
+              <Text style={styles.text}>{item.username} {item.name}</Text>
+              <Text>Address: {item.address.city}, {item.address.street}, {item.address.suite}</Text>
+              <Text>email: {item.email}</Text>
+              <Text>phone: {item.phone}</Text>
             </View>
           );
         })}
@@ -42,17 +42,21 @@ const styles = StyleSheet.create({
   item: {
     padding: 10,
     borderRadius: 10,
-    marginBottom: 10,
-    borderColor: 'black',
+    marginTop: 5,
+    marginBottom: 5,
     borderWidth: StyleSheet.hairlineWidth,
+    backgroundColor: '#BCEEEB'
   },
   container: {
-    fontSize: 15,
+    marginBottom: 75,
+    justifyContent: 'center',
     alignItems: 'center',
-    fontWeight: 'bold',
+    backgroundColor: '#92D6BE'
   },
+
   text: {
-    marginTop: 10,
+    fontSize: 15,
+    fontWeight: 'bold',
   },
 });
 
