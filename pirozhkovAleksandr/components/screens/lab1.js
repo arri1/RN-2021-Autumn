@@ -65,7 +65,7 @@ const Lab1 = ({navigation, route}) => {
     <SafeAreaView style={[styles.main, {backgroundColor: color}]}>
       <ScrollView>
         <View style={styles.image}>
-          {shouldShow ? <Image source={toasty} /> : null}
+          {!!shouldShow && <Image source={toasty} />}
         </View>
 
         <TouchableOpacity
@@ -73,6 +73,7 @@ const Lab1 = ({navigation, route}) => {
           onPress={() => setColor('#458F46')}>
           <Text style={styles.text}>Click me</Text>
         </TouchableOpacity>
+
         <TouchableOpacity
           style={[styles.box, {backgroundColor: '#836EDB'}]}
           onPress={() => setColor('#4A398F')}>

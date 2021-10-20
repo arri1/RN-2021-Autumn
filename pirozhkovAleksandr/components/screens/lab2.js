@@ -76,7 +76,7 @@ const Lab2 = () => {
   const pageControl = () => {
     return (
       <View style={styles.parent}>
-        {page ? (
+        {!!page && (
           <TouchableOpacity
             style={styles.littleBox}
             onPress={() => {
@@ -86,7 +86,7 @@ const Lab2 = () => {
             }}>
             <Text style={styles.text}>Previous</Text>
           </TouchableOpacity>
-        ) : null}
+        )}
         <View style={styles.littleBox}>
           <Text style={styles.text}>{page + 1}</Text>
         </View>
