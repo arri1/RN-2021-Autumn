@@ -1,4 +1,9 @@
 import React, {useState, useEffect} from 'react';
+import img1 from './img/1.jpg';
+import img2 from './img/2.jpg';
+import img3 from './img/3.jpg';
+import img4 from './img/4.jpg';
+import img5 from './img/5.jpg';
 import {
     StyleSheet,
     Text,
@@ -8,34 +13,34 @@ import {
 }
 from 'react-native';
 
-const App = ({navigation}) => {
-  const[count, setCount]=useState(1)
-  const[image, setImg]=useState(require('./img/1.jpg'))
-  const[name, setName]=useState('Наруто')
+const App = () => {
+  const [count, setCount] = useState(1)
+  const [image, setImg] = useState(img1)
+  const [name, setName] = useState('Наруто')
   useEffect(()=>{
     if(count==2)
     {
-      setImg(require('./img/2.jpg'))
+      setImg(img2)
       setName('Атака титанов')
     }
     if(count==3)
     {
-      setImg(require('./img/3.jpg'))
+      setImg(img3)
       setName('Волейбол')
     }
     if(count==4)
     {
-      setImg(require('./img/4.jpg'))
+      setImg(img4)
       setName('Клинок рассекающий демонов')
     }
     if(count==5)
     {
-      setImg(require('./img/5.jpg'))
+      setImg(img5)
       setName('Геройская академия')
     }
     if(count==6)
     {
-      setImg(require('./img/1.jpg'))
+      setImg(img1)
       setName('Наруто')
       setCount(1)
     }
