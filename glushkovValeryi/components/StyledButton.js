@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
 
-export default function StyleByutton({ text, onPress, style }) {
+const StyledButton = ({ text, onPress, style }) =>  {
     return (
         <TouchableOpacity onPress = { onPress }>
             <View style = { style }>
@@ -26,3 +26,5 @@ const styles = StyleSheet.create({
         textAlign: "center"
     }
 })
+
+export default StyledButton;
