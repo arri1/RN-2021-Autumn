@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet,Text,View,Button,ScrollView,TouchableOpacity} from 'react-native';
+import {StyleSheet,Text,View,Button,TouchableOpacity} from 'react-native';
 
 
 const styles = StyleSheet.create({
