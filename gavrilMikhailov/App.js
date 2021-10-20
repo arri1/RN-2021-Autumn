@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -11,8 +11,8 @@ import {
  
 const App = () => {
   
-  const [email, onChangeEmail] = React.useState("");
-  const [password, onChangePassword] = React.useState("");
+  const [email, onChangeEmail] = useState("");
+  const [password, onChangePassword] = useState("");
 
   const didTapButton = () => {
     Alert.alert('Далее', `Почта: ${email}\nПароль: ${password}`, [
