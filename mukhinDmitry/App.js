@@ -1,13 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import { stringLiteral } from '@babel/types';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -23,7 +14,7 @@ const colorStep = (bgColor) => {
   return "#" + bgStr
 }
 
-const RNApp = () => {
+const rnApp = () => {
   const [bgColor, setBgColor] = useState('#000000');
   return (
     <SafeAreaView>
@@ -63,4 +54,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default RNApp;
+export default rnApp;
