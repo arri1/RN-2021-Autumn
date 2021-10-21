@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import DropShadow from 'react-native-drop-shadow';
 import {
   View,
   Text,
@@ -11,49 +12,133 @@ import {
 import axios from 'axios';
 
 const styles = StyleSheet.create({
-  item: {
-    flex: 1,
-    padding: 10,
-    borderRadius: 10,
-    marginTop: 10,
-    marginBottom: 10,
+  newsBox: {
+    borderRadius: 25,
+    marginTop: 8.5,
+    marginBottom: 8.5,
+    width: 373,
+    height: 295,
+    alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#D4D5D9',
+    backgroundColor: '#F2EEED',
   },
-  container: {
-    flex: 1,
+  boxShadow: {
+    shadowColor: 'rgba(163, 71, 60, 0.8)',
+    shadowOffset: {
+      width: 4,
+      height: 4,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 3,
+  },
+  backContainer: {
+    width: '100%',
+    height: 625,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#969696',
+    backgroundColor: 'black',
+  },
+  back: {
+    width: '100%',
+    backgroundColor: 'white',
+  },
+  bottomContainer: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#FFFFFF',
   },
   parent: {
-    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-around',
+    backgroundColor: '#FFFFFF',
   },
   title: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    width: 349,
+    height: 104,
+    fontSize: 22,
+    fontFamily: 'latoRegular',
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    color: '#29A364',
   },
-  text: {
-    fontSize: 20,
+  titleShadow: {
+    shadowColor: 'rgba(41, 163, 100, 0.6)',
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 1,
+  },
+  pageText: {
+    fontSize: 26,
+    color: '#29A364',
+    fontFamily: 'latoLight',
+  },
+  pageTextShadow: {
+    shadowColor: 'rgba(144, 240, 190, 0.8)',
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 2,
   },
   image: {
-    marginTop: 10,
-    height: 150,
-    width: 150,
-    borderRadius: 75,
+    marginTop: 13,
+    height: 159,
+    width: 159,
+    borderRadius: 79.5,
   },
-  littleBox: {
-    height: 30,
-    width: 100,
+  curPage: {
+    height: 50,
+    width: 50,
+    marginTop: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 10,
-    marginBottom: 10,
-    borderRadius: 15,
-    backgroundColor: '#DBAB84',
+    borderRadius: 25,
+    backgroundColor: '#F2EEED',
+  },
+  button: {
+    marginTop: 5,
+    height: 50,
+    width: 120,
+    borderRadius: 10,
+    backgroundColor: '#90F0BE',
+  },
+  buttonText: {
+    fontFamily: 'latoBlack',
+    fontSize: 40,
+    textAlign: 'center',
+    color: '#A3473C',
+  },
+  buttonTextShadow: {
+    shadowColor: 'rgba(240, 147, 137, 0.8)',
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 2,
+  },
+  buttonShadow: {
+    shadowColor: 'rgba(41, 163, 100, 0.8)',
+    shadowOffset: {
+      width: 4,
+      height: 4,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 2,
+  },
+  pageShadow: {
+    shadowColor: 'rgba(240, 147, 137, 0.7)',
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 2,
   },
 });
 
@@ -77,60 +162,76 @@ const Lab2 = () => {
     return (
       <View style={styles.parent}>
         {!!page && (
-          <TouchableOpacity
-            style={styles.littleBox}
-            onPress={() => {
-              setFirst(firstEl - 5);
-              setLast(lastEl - 5);
-              setPage(page - 1);
-            }}>
-            <Text style={styles.text}>Previous</Text>
-          </TouchableOpacity>
+          <DropShadow style={styles.buttonShadow}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                setFirst(firstEl - 5);
+                setLast(lastEl - 5);
+                setPage(page - 1);
+              }}>
+              <DropShadow style={styles.buttonTextShadow}>
+                <Text style={styles.buttonText}>←</Text>
+              </DropShadow>
+            </TouchableOpacity>
+          </DropShadow>
         )}
-        <View style={styles.littleBox}>
-          <Text style={styles.text}>{page + 1}</Text>
-        </View>
-        {photos.length / 5 - page - 1 ? (
-          <TouchableOpacity
-            style={styles.littleBox}
-            onPress={() => {
-              setFirst(firstEl + 5);
-              setLast(lastEl + 5);
-              setPage(page + 1);
-            }}>
-            <Text style={styles.text}>Next</Text>
-          </TouchableOpacity>
-        ) : null}
+        <DropShadow style={styles.pageShadow}>
+          <View style={styles.curPage}>
+            <DropShadow style={styles.pageTextShadow}>
+              <Text style={styles.pageText}>{page + 1}</Text>
+            </DropShadow>
+          </View>
+        </DropShadow>
+        {!!(photos.length / 5 - page - 1) && (
+          <DropShadow style={styles.buttonShadow}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                setFirst(firstEl + 5);
+                setLast(lastEl + 5);
+                setPage(page + 1);
+              }}>
+              <DropShadow style={styles.buttonTextShadow}>
+                <Text style={styles.buttonText}>→</Text>
+              </DropShadow>
+            </TouchableOpacity>
+          </DropShadow>
+        )}
       </View>
     );
   };
 
   const content = () => {
     return (
-      <ScrollView>
-        {pageControl()}
-        {photos.slice(firstEl, lastEl).map(item => {
-          return (
-            <View key={item.id} style={styles.item}>
-              <Text style={styles.title}>{item.title}</Text>
-              <Text style={styles.title}>{item.id}</Text>
-              <Image
-                style={styles.image}
-                source={{
-                  uri: item.thumbnailUrl,
-                }}
-              />
-            </View>
-          );
-        })}
-        {pageControl()}
-      </ScrollView>
+      <View style={styles.backContainer}>
+        <ScrollView style={styles.back}>
+          {photos.slice(firstEl, lastEl).map(item => {
+            return (
+              <DropShadow key={item.id} style={styles.boxShadow}>
+                <View key={item.id} style={styles.newsBox}>
+                  <DropShadow style={styles.titleShadow}>
+                    <Text style={styles.title}>{item.title}</Text>
+                  </DropShadow>
+                  <Image
+                    style={styles.image}
+                    source={{
+                      uri: item.thumbnailUrl,
+                    }}
+                  />
+                </View>
+              </DropShadow>
+            );
+          })}
+        </ScrollView>
+      </View>
     );
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.bottomContainer}>
       {photos ? content() : <ActivityIndicator color={'red'} />}
+      <View>{pageControl()}</View>
     </View>
   );
 };
