@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import DropShadow from 'react-native-drop-shadow';
+import {Shadow} from 'react-native-neomorph-shadows';
 import {
   View,
   Text,
@@ -11,79 +11,81 @@ import {
 } from 'react-native';
 import axios from 'axios';
 
+const MorphOut = ({styleTop, styleBottom, children}) => {
+  return (
+    <Shadow style={styleTop}>
+      <Shadow style={styleBottom}>{children}</Shadow>
+    </Shadow>
+  );
+};
+
 const styles = StyleSheet.create({
-  newsBox: {
-    borderRadius: 25,
-    marginTop: 8.5,
-    marginBottom: 8.5,
-    width: 373,
-    height: 295,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F2EEED',
-  },
-  boxShadow: {
-    shadowColor: 'rgba(163, 71, 60, 0.8)',
-    shadowOffset: {
-      width: 4,
-      height: 4,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 3,
-  },
-  backContainer: {
-    width: '100%',
-    height: 625,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'black',
-  },
-  back: {
-    width: '100%',
-    backgroundColor: 'white',
-  },
-  bottomContainer: {
+  container: {
     width: '100%',
     height: '100%',
-    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
   },
-  parent: {
+  boxTopShadow: {
+    shadowOffset: {width: -8, height: -8},
+    shadowOpacity: 1,
+    shadowColor: '#9F72CC',
+    shadowRadius: 8,
+    borderRadius: 40,
+    marginTop: 25,
+    alignItems: 'center',
+    backgroundColor: '#774991', //B85849
+    width: 339,
+    height: 266,
+  },
+  boxBottomShadow: {
+    shadowOffset: {width: 8, height: 8},
+    shadowOpacity: 1,
+    shadowColor: '#5A4074',
+    shadowRadius: 8,
+    borderRadius: 40,
+    alignItems: 'center',
+    backgroundColor: '#774991', //B85849
+    width: 339,
+    height: 266,
+  },
+  topContainer: {
+    width: '100%',
+    height: 608,
+  },
+  back: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    backgroundColor: '#D9D9D6',
+  },
+  bottomContainer: {
+    height: 104,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#B5B2B2',
+  },
+  scrollBottom: {
+    height: 25,
+    backgroundColor: '#B5B2B2',
+  },
+  scrollTop: {
+    height: 10,
+    backgroundColor: 'red',
   },
   title: {
-    width: 349,
-    height: 104,
-    fontSize: 22,
-    fontFamily: 'latoRegular',
+    width: 275,
+    height: 69,
+    fontSize: 27,
+    marginTop: 14,
+    fontFamily: 'chakraPetchBold',
     textAlign: 'center',
     textTransform: 'uppercase',
-    color: '#29A364',
-  },
-  titleShadow: {
-    shadowColor: 'rgba(41, 163, 100, 0.6)',
-    shadowOffset: {
-      width: 1,
-      height: 1,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 1,
+    color: '#E0DB7E',
   },
   pageText: {
-    fontSize: 26,
-    color: '#29A364',
-    fontFamily: 'latoLight',
-  },
-  pageTextShadow: {
-    shadowColor: 'rgba(144, 240, 190, 0.8)',
-    shadowOffset: {
-      width: 2,
-      height: 2,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 2,
+    fontSize: 36,
+    color: 'white',
+    fontFamily: 'chakraPetchBold',
   },
   image: {
     marginTop: 13,
@@ -91,112 +93,114 @@ const styles = StyleSheet.create({
     width: 159,
     borderRadius: 79.5,
   },
-  curPage: {
-    height: 50,
-    width: 50,
-    marginTop: 5,
+  curPageTop: {
+    shadowOffset: {width: -4, height: -4},
+    shadowOpacity: 1,
+    shadowColor: '#7DE79B',
+    shadowRadius: 8,
+    height: 63,
+    width: 63,
+    marginTop: 16,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 25,
-    backgroundColor: '#F2EEED',
+    borderRadius: 31.5,
+    backgroundColor: '#5AA870',
   },
-  button: {
-    marginTop: 5,
-    height: 50,
-    width: 120,
-    borderRadius: 10,
-    backgroundColor: '#90F0BE',
+  curPageBottom: {
+    shadowOffset: {width: 4, height: 4},
+    shadowOpacity: 1,
+    shadowColor: '#457D55',
+    shadowRadius: 8,
+    height: 63,
+    width: 63,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 31.5,
+    backgroundColor: '#5AA870',
+  },
+  buttonBottomShadow: {
+    shadowOffset: {width: 4, height: 4},
+    shadowOpacity: 1,
+    shadowColor: '#1E3A53',
+    shadowRadius: 8,
+    borderRadius: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#5A83A8',
+    width: 112,
+    height: 63,
+  },
+  buttonTopShadow: {
+    shadowOffset: {width: -7, height: -7},
+    shadowOpacity: 1,
+    shadowColor: '#9BC6ED',
+    marginTop: 16,
+    shadowRadius: 14,
+    borderRadius: 40,
+    backgroundColor: '#5A83A8',
+    width: 112,
+    height: 63,
   },
   buttonText: {
-    fontFamily: 'latoBlack',
-    fontSize: 40,
+    fontFamily: 'chakraPetchBold',
+    fontSize: 18,
     textAlign: 'center',
-    color: '#A3473C',
-  },
-  buttonTextShadow: {
-    shadowColor: 'rgba(240, 147, 137, 0.8)',
-    shadowOffset: {
-      width: 2,
-      height: 2,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 2,
-  },
-  buttonShadow: {
-    shadowColor: 'rgba(41, 163, 100, 0.8)',
-    shadowOffset: {
-      width: 4,
-      height: 4,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 2,
-  },
-  pageShadow: {
-    shadowColor: 'rgba(240, 147, 137, 0.7)',
-    shadowOffset: {
-      width: 2,
-      height: 2,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 2,
+    color: 'white',
   },
 });
 
 const Lab2 = () => {
-  const [photos, setPhotos] = useState([]);
+  const [randImages, setRandImage] = useState([]);
   const [firstEl, setFirst] = useState(0);
   const [lastEl, setLast] = useState(5);
   const [page, setPage] = useState(0);
+  const ref = React.useRef(null);
 
   useEffect(() => {
-    const axiosPhotos = async () => {
-      const response = await axios(
-        'https://jsonplaceholder.typicode.com/photos',
-      );
-      setPhotos(response.data.slice(0, 100));
+    const randImage = async () => {
+      const response = await axios('https://picsum.photos/v2/list');
+      setRandImage(response.data.slice(0, 100));
     };
-    axiosPhotos();
+    randImage();
   }, []);
 
   const pageControl = () => {
     return (
-      <View style={styles.parent}>
+      <View style={styles.bottomContainer}>
         {!!page && (
-          <DropShadow style={styles.buttonShadow}>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => {
-                setFirst(firstEl - 5);
-                setLast(lastEl - 5);
-                setPage(page - 1);
-              }}>
-              <DropShadow style={styles.buttonTextShadow}>
-                <Text style={styles.buttonText}>←</Text>
-              </DropShadow>
-            </TouchableOpacity>
-          </DropShadow>
+          <TouchableOpacity
+            onPress={() => {
+              setFirst(firstEl - 5);
+              setLast(lastEl - 5);
+              setPage(page - 1);
+              ref.current.scrollTo({x: 0, y: 0, animated: true});
+            }}>
+            <MorphOut
+              styleTop={styles.buttonTopShadow}
+              styleBottom={styles.buttonBottomShadow}>
+              <Text style={styles.buttonText}>PREV</Text>
+            </MorphOut>
+          </TouchableOpacity>
         )}
-        <DropShadow style={styles.pageShadow}>
-          <View style={styles.curPage}>
-            <DropShadow style={styles.pageTextShadow}>
-              <Text style={styles.pageText}>{page + 1}</Text>
-            </DropShadow>
-          </View>
-        </DropShadow>
-        {!!(photos.length / 5 - page - 1) && (
-          <DropShadow style={styles.buttonShadow}>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => {
-                setFirst(firstEl + 5);
-                setLast(lastEl + 5);
-                setPage(page + 1);
-              }}>
-              <DropShadow style={styles.buttonTextShadow}>
-                <Text style={styles.buttonText}>→</Text>
-              </DropShadow>
-            </TouchableOpacity>
-          </DropShadow>
+        <MorphOut
+          styleTop={styles.curPageTop}
+          styleBottom={styles.curPageBottom}>
+          <Text style={styles.pageText}>{page + 1}</Text>
+        </MorphOut>
+        {!!(randImages.length / 5 - page - 1) && (
+          <TouchableOpacity
+            onPress={() => {
+              setFirst(firstEl + 5);
+              setLast(lastEl + 5);
+              setPage(page + 1);
+              ref.current.scrollTo({x: 0, y: 0, animated: true});
+            }}>
+            <MorphOut
+              styleTop={styles.buttonTopShadow}
+              styleBottom={styles.buttonBottomShadow}>
+              <Text style={styles.buttonText}>NEXT</Text>
+            </MorphOut>
+          </TouchableOpacity>
         )}
       </View>
     );
@@ -204,34 +208,37 @@ const Lab2 = () => {
 
   const content = () => {
     return (
-      <View style={styles.backContainer}>
-        <ScrollView style={styles.back}>
-          {photos.slice(firstEl, lastEl).map(item => {
-            return (
-              <DropShadow key={item.id} style={styles.boxShadow}>
-                <View key={item.id} style={styles.newsBox}>
-                  <DropShadow style={styles.titleShadow}>
-                    <Text style={styles.title}>{item.title}</Text>
-                  </DropShadow>
+      <View style={styles.topContainer}>
+        <ScrollView ref={ref}>
+          <View style={styles.back}>
+            <View style={styles.scrollTop} />
+            {randImages.slice(firstEl, lastEl).map(item => {
+              return (
+                <MorphOut
+                  key={item.id}
+                  styleBottom={styles.boxBottomShadow}
+                  styleTop={styles.boxTopShadow}>
+                  <Text style={styles.title}>{item.author}</Text>
                   <Image
                     style={styles.image}
                     source={{
-                      uri: item.thumbnailUrl,
+                      uri: item.download_url,
                     }}
                   />
-                </View>
-              </DropShadow>
-            );
-          })}
+                </MorphOut>
+              );
+            })}
+            <View style={styles.scrollBottom} />
+          </View>
         </ScrollView>
       </View>
     );
   };
 
   return (
-    <View style={styles.bottomContainer}>
-      {photos ? content() : <ActivityIndicator color={'red'} />}
-      <View>{pageControl()}</View>
+    <View style={styles.container}>
+      {randImages ? content() : <ActivityIndicator color={'red'} />}
+      {pageControl()}
     </View>
   );
 };
