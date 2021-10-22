@@ -6,106 +6,80 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {Text, View, Animated, StyleSheet, PanResponder} from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const App = () => {
+  const loc = useState(new Animated.ValueXY())[0];
+  const col = useState(new Animated.Value(0))[0];
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
+  const [state, setState] = useState({
+    stat: '#F26E22',
+    stat1: '#0396A6',
+    opacity: 1,
+  });
+
+  const panResponder = useState(
+    PanResponder.create({
+      onMoveShouldSetPanResponder: () => true,
+      onPanResponderGrant: () => {
+        loc.setOffset({
+          x: loc.x._value,
+          y: loc.y._value,
+        });
+      },
+      onPanResponderMove: (event, gesture) => {
+        loc.setValue({x: gesture.dx, y: gesture.dy});
+        if (gesture.dx >= 0) {
+          setState({...state, opacity: 0.5, stat: '#F26E22', stat1: '#0396A6'});
+        } else {
+          setState({...state, opacity: 0.5, stat: '#0396A6', stat1: '#F26E22'});
+        }
+      },
+      onPanResponderRelease: () => {
+        loc.flattenOffset();
+        setState({...state, opacity: 1});
+      },
+    }),
+  )[0];
+
   return (
-    <View style={styles.sectionContainer}>
-      <Text
+    <View style={styles.container}>
+      <Animated.View
         style={[
-          styles.sectionTitle,
+          styles.round,
+          loc.getLayout(),
           {
-            color: isDarkMode ? Colors.white : Colors.black,
+            backgroundColor: state.stat1,
+            opacity: state.opacity,
           },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
+        ]}
+        {...panResponder.panHandlers}>
+        <Text style={styles.text}>L----R</Text>
+      </Animated.View>
     </View>
   );
 };
 
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
-
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    backgroundColor: '#333',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  text: {
+    fontSize: 14,
+    fontWeight: '800',
+    color: '#fff',
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
+  round: {
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
