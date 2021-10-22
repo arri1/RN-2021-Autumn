@@ -1,45 +1,39 @@
-import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react'
+import {SafeAreaView, StyleSheet, Text, TouchableOpacity} from 'react-native'
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    borderRadius: 10,
+    width: '50%',
+    height: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+  },
+})
 
 const Lab1: React.FC = () => {
-  const [darkTheme] = useState('#000');
-  const [lightTheme] = useState('#FFF');
-  const [isDarkThemeOn, setIsDarkThemeOn] = useState(false);
-
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: isDarkThemeOn ? darkTheme : lightTheme,
-    },
-    button: {
-      borderRadius: 10,
-      width: '50%',
-      height: 30,
-      backgroundColor: isDarkThemeOn ? darkTheme : lightTheme,
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderWidth: 1,
-      borderColor: isDarkThemeOn ? lightTheme : darkTheme,
-    },
-    buttonText: {
-      color: isDarkThemeOn ? lightTheme : darkTheme,
-    },
-  });
+  const [darkTheme] = useState('#000')
+  const [lightTheme] = useState('#FFF')
+  const [isDarkThemeOn, setIsDarkThemeOn] = useState(false)
 
   const toggleDarkMode = () => {
-    console.log(!isDarkThemeOn);
-    setIsDarkThemeOn(!isDarkThemeOn);
-  };
+    setIsDarkThemeOn(!isDarkThemeOn)
+  }
 
   return (
-    <SafeAreaView style={styles.container}>
-        <TouchableOpacity style={styles.button} onPress={toggleDarkMode}>
-          <Text style={styles.buttonText}>Click on me</Text>
+    <SafeAreaView style={[styles.container, {backgroundColor: isDarkThemeOn ? darkTheme : lightTheme}]}>
+        <TouchableOpacity style={[
+          styles.button, {backgroundColor: isDarkThemeOn ? darkTheme : lightTheme, borderColor: isDarkThemeOn ? lightTheme : darkTheme}]} onPress={toggleDarkMode}>
+          <Text style={{color: isDarkThemeOn ? lightTheme : darkTheme}}>Click on me</Text>
         </TouchableOpacity>
     </SafeAreaView>
-  );
-};
+  )
+}
 
-export default Lab1;
+export default Lab1

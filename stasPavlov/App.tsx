@@ -1,10 +1,10 @@
-import React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Lab1 from './components/Lab1';
-import {NavigationContainer} from '@react-navigation/native';
-import Lab2 from './components/Lab2';
+import React from 'react'
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+import Lab1 from './components/Lab1'
+import {NavigationContainer} from '@react-navigation/native'
+import Lab2 from './components/Lab2'
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator()
 
 const App:React.FC = () => {
   return (
@@ -23,7 +23,7 @@ const App:React.FC = () => {
         />
       </Tab.Navigator>
     </NavigationContainer>
-  );
-};
+  )
+}
 
-export default App;
+export default App

@@ -14,6 +14,8 @@ module.exports = {
   rules: {
     'prettier/prettier': 0,
     '@typescript-eslint/no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars-experimental': 'error',
+    semi: ['error', 'never'],
+    'no-extra-semi': 2,
+    quotes: [2, 'single', { 'avoidEscape': true }],
   },
-};
+}
