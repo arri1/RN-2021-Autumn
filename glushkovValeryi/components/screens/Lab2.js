@@ -25,7 +25,9 @@ const Lab2 = () => {
 
 const styles = StyleSheet.create({
     item: {
-        margin: 10,
+        marginTop: '5%',
+        marginBottom: '0%',
+        margin: '5%',
         padding: 15,
         height: 50, 
         width: '90%',

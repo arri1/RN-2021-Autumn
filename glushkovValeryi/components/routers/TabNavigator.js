@@ -14,8 +14,7 @@ const TabNavigator = () => {
                 tabBarStyle: {
                     position: 'absolute',
                     bottom: 25,
-                    left: 20,
-                    right: 20,
+                    marginLeft: '5%',
                     elevation: 0,
                     backgroundColor: '#ffffff',
                     borderRadius: 15,
