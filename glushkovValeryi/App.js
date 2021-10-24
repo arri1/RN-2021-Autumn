@@ -14,7 +14,7 @@ const App = () => {
           style = {styles.button} 
           onPress = {() => setPressed(!isPresed)}
         />
-        {isPresed ? (<View style = {styles.rectangle} />) : null}
+        {!!isPresed && (<View style = {styles.rectangle} />)}
       </View>
     </SafeAreaView>
   );
