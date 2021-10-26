@@ -1,25 +1,30 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+import React, { useState } from 'react';
+import { StyleSheet, Button, SafeAreaView } from 'react-native';
 
-import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView, 
-  Text
-} from 'react-native';
-
-const App: () => Node = () => {
-
-  return (
-    <SafeAreaView>
-      <Text>Hello world!</Text>
-    </SafeAreaView>
-  );
+const colArr = ["#FF0000","#FF7400","#FFE800","#32FF00","#00FFCD","#0C00FF","#B600FF"];
+const Colour = () => {
+    colNum =  Math.floor(Math.random() * colArr.length);
+    return colArr[colNum];
 };
+
+const App = () =>{
+    const [backColor, setColor] = useState(Colour())
+    return(
+        <SafeAreaView style = {{...styles.main, backgroundColor: backColor}}>
+            <Button  
+                title = "Нажми меня"
+                onPress={() => setColor(Colour())}
+            />
+        </SafeAreaView>
+    );
+};
+
+const styles = StyleSheet.create({
+    main:{
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
 
 export default App;
