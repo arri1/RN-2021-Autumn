@@ -101,7 +101,7 @@ const Lab1 = ({navigation, route}) => {
             darkShadowColor="#576178"
             style={styles.buttonShadow}>
             <GradientText colorsOfGradient={['#FAFF00', '#DF791A']}>
-              <Text style={styles.text}>Click me</Text>
+              <Text style={styles.buttonText}>Click me</Text>
             </GradientText>
           </Neomorph>
         </TouchableOpacity>
@@ -112,7 +112,7 @@ const Lab1 = ({navigation, route}) => {
             darkShadowColor="#576178"
             style={styles.buttonShadow}>
             <GradientText colorsOfGradient={['#FAFF00', '#DF791A']}>
-              <Text style={styles.text}>Click me too</Text>
+              <Text style={styles.buttonText}>Click me too</Text>
             </GradientText>
           </Neomorph>
         </TouchableOpacity>
@@ -123,7 +123,7 @@ const Lab1 = ({navigation, route}) => {
             darkShadowColor="#576178"
             style={styles.buttonShadow}>
             <GradientText colorsOfGradient={['#FAFF00', '#DF791A']}>
-              <Text style={styles.text}>{counter}</Text>
+              <Text style={styles.buttonText}>{counter}</Text>
             </GradientText>
           </Neomorph>
         </View>
@@ -134,7 +134,7 @@ const Lab1 = ({navigation, route}) => {
             darkShadowColor="#576178"
             style={styles.buttonShadow}>
             <GradientText colorsOfGradient={['#FAFF00', '#DF791A']}>
-              <Text style={styles.text}>Add some points</Text>
+              <Text style={styles.buttonText}>Add some points</Text>
             </GradientText>
           </Neomorph>
         </TouchableOpacity>
@@ -145,7 +145,7 @@ const Lab1 = ({navigation, route}) => {
             darkShadowColor="#576178"
             style={styles.buttonShadow}>
             <GradientText colorsOfGradient={['#FAFF00', '#DF791A']}>
-              <Text style={styles.text}>Subtract some points</Text>
+              <Text style={styles.buttonText}>Subtract some points</Text>
             </GradientText>
           </Neomorph>
         </TouchableOpacity>
