@@ -1,109 +1,86 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import React from 'react';
-import type {Node} from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
+  Alert,
   Text,
-  useColorScheme,
+  Button,
+  TextInput,
   View,
 } from 'react-native';
+ 
+const App = () => {
+  
+  const [email, onChangeEmail] = useState("");
+  const [password, onChangePassword] = useState("");
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+  const didTapButton = () => {
+    Alert.alert('Далее', `Почта: ${email}\nПароль: ${password}`, [
+      { text: "Ok", onPress: () => {} }
+    ])
+  }
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
+  const isValidEmail = () => {
+    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return regex.test(email)
+  }
 
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  const isValidPassword = () => {
+    return password.length > 6
+  }
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step 913">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
+    <SafeAreaView>
+      <View style={styles.view}>
+        <Text style={styles.title}>
+          Вход в какую то систему
+        </Text>
+        <TextInput 
+          style={styles.textInput}
+          onChangeText={onChangeEmail} 
+          value={email}
+          placeholder={"E-mail"}/>
+        <TextInput 
+          style={styles.textInput}
+          onChangeText={onChangePassword} 
+          value={password}
+          secureTextEntry={true}
+          placeholder={"Пароль"}/>
+        <Button 
+          title={"Продолжить"}
+          disabled={!(isValidEmail() && isValidPassword())}
+          onPress={didTapButton}/>
+      </View>
     </SafeAreaView>
-  );
+  )
 };
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  view: {
+    backgroundColor: '#FFFFFF',
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 36,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
+  title: {
+    color: '#000',
+    width: '100%',
     fontSize: 18,
-    fontWeight: '400',
+    marginBottom: 16,
   },
-  highlight: {
-    fontWeight: '700',
-  },
+  textInput: {
+    width: '100%',
+    height: 40,
+    marginHorizontal: 16,
+    borderWidth: 0.5,
+    padding: 10,
+    color: '#2C394B',
+    marginVertical: 5,
+    borderRadius: 5,
+    borderColor: '#2C394B'
+  }
 });
 
 export default App;
