@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     shadowRadius: 16,
     borderRadius: 37.5,
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '#353A45',
     width: 334,
     height: 261,
@@ -72,14 +73,11 @@ const styles = StyleSheet.create({
     height: 10,
   },
   title: {
-    width: 275,
     height: 69,
-    fontSize: 27,
-    marginTop: 14,
+    fontSize: 25,
     fontFamily: 'chakraPetchBold',
     textAlign: 'center',
     textTransform: 'uppercase',
-    color: '#E0DB7E',
   },
   pageText: {
     fontSize: 36,
@@ -120,7 +118,6 @@ const styles = StyleSheet.create({
     fontFamily: 'chakraPetchBold',
     fontSize: 18,
     textAlign: 'center',
-    color: 'white',
   },
 });
 
