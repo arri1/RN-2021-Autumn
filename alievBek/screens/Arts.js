@@ -18,23 +18,23 @@ const Arts = ({navigation}) => {
   const[image, setImg]=useState(require('../img/1.jpg'))
   const[name, setName]=useState('Наруто')
   useEffect(()=>{
-    if(count==2){
+    if(count===2){
       setImg(img2)
       setName('Атака титанов')
     }
-    if(count==3){
+    if(count===3){
       setImg(img3)
       setName('Волейбол')
     }
-    if(count==4){
+    if(count===4){
       setImg(img4)
       setName('Клинок рассекающий демонов')
     }
-    if(count==5){
+    if(count===5){
       setImg(img5)
       setName('Геройская академия')
     }
-    if(count==6){
+    if(count===6){
       setImg(img1)
       setName('Наруто')
       setCount(1)
