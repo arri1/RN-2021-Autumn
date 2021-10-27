@@ -31,12 +31,11 @@ const TabNavigation = () => {
                     tabBarIcon: ({focused}) => (
                         <View style = {{alignItems: 'center', justifyContent: 'center', top: 5}}>
                             <Image 
-                                source = {require('../tabIcons/react.png')}
+                                source = {require('../tabIcons/smile_lab1.png')}
                                 resizeMode = "contain"
                                 style={{
                                     width: 30,
                                     height: 30,
-                                    tintColor: focused ? '#53C1DE' : '#748C94',
                                 }}
                             />
                             <Text style = {{color: focused ?'#53C1DE' : '#748C94', fontSize: 12}}>
@@ -54,12 +53,11 @@ const TabNavigation = () => {
                     tabBarIcon: ({focused}) => (
                         <View style = {{alignItems: 'center', justifyContent: 'center', top: 5}}>
                             <Image 
-                                source = {require('../tabIcons/react.png')}
+                                source = {require('../tabIcons/smile_lab2.png')}
                                 resizeMode = "contain"
                                 style={{
                                     width: 30,
                                     height: 30,
-                                    tintColor: focused ? '#53C1DE' : '#748C94',
                                 }}
                             />
                             <Text style = {{color: focused ?'#53C1DE' : '#748C94', fontSize: 12}}>
