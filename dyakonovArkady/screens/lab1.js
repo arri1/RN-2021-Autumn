@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
     height: 100,
     margin: 100,
     marginTop: '50%',
-    borderRadius: 100,
-    backgroundColor: '#9AFF8F'
+    borderRadius: 10,
+    backgroundColor: '#54A9F5'
   },
   bText: 
   { 
@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
     marginTop: '16%',
-    width: 200
+    width: 200,
+    color: '#FFFFFF'
   },
 });
