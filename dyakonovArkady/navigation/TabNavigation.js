@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 
 import lab1 from '../screens/lab1';
 import lab2 from '../screens/lab2';
@@ -14,12 +14,13 @@ const TabNavigation = () => {
                 tabBarShowLabel: false,
                 tabBarStyle: {
                     position: 'absolute',
-                    bottom: 5,
-                    left: 5,
-                    right: 5,
+                    bottom: 10,
+                    left: 10,
+                    right: 10,
                     elevation: 0,
                     borderRadius: 10,
                     height: 70,
+                    ...styles.shadow
                 }
             }}
         >
@@ -72,5 +73,18 @@ const TabNavigation = () => {
         </Tab.Navigator>
     );
 }
+
+const styles = StyleSheet.create({
+    shadow: {
+        shadowColor: '#000000',
+        shadowOffset: {
+            width: 10,
+            height: 10,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.5,
+        elevation: 5
+    }
+});
 
 export default TabNavigation;
