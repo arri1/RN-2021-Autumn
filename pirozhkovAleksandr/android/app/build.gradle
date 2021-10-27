@@ -198,6 +198,8 @@ dependencies {
         exclude group:'com.facebook.flipper'
     }
 
+    implementation project(':react-native-text-gradient')
+
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
         debugImplementation files(hermesPath + "hermes-debug.aar")
