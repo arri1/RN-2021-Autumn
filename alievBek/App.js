@@ -1,112 +1,76 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import React from 'react';
-import type {Node} from 'react';
+import React, {useState, useEffect} from 'react';
+import img1 from './img/1.jpg';
+import img2 from './img/2.jpg';
+import img3 from './img/3.jpg';
+import img4 from './img/4.jpg';
+import img5 from './img/5.jpg';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+    StyleSheet,
+    Text,
+    View,
+    Button,
+    Image,
+}
+from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
+const App = () => {
+  const [count, setCount] = useState(1)
+  const [image, setImg] = useState(img1)
+  const [name, setName] = useState('Наруто')
+  useEffect(()=>{
+    if(count==2)
+    {
+      setImg(img2)
+      setName('Атака титанов')
+    }
+    if(count==3)
+    {
+      setImg(img3)
+      setName('Волейбол')
+    }
+    if(count==4)
+    {
+      setImg(img4)
+      setName('Клинок рассекающий демонов')
+    }
+    if(count==5)
+    {
+      setImg(img5)
+      setName('Геройская академия')
+    }
+    if(count==6)
+    {
+      setImg(img1)
+      setName('Наруто')
+      setCount(1)
+    }
+  })
+    return(
+    <View style={styles.container}>
+      <Image style={styles.img} source={image}/>
+      <Text style={styles.text}>Аниме: {name}</Text>
+      <Button title='Next' color='maroon' onPress={()=>{setCount(count+1)}}></Button>
     </View>
-  );
-};
-
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
+    container:{
+        flex:1,
+        backgroundColor: '#000',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      text:{
+        color: '#fff',
+        margin: 10,
+      },
+      img:{
+        marginTop: 5,
+        borderRadius: 20,
+        width: 350,
+        height: 450,
+      },
 });
 
 export default App;
