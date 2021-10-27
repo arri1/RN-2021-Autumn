@@ -10,6 +10,8 @@ const styles = StyleSheet.create({
   tabBar: {
     backgroundColor: '#353A45',
     height: 52,
+    marginLeft: 14,
+    marginRight: 14,
   },
   tabItem: {
     height: 47,
@@ -33,7 +35,8 @@ function TopTabNavigator() {
         tabBarLabelStyle: styles.tabLabel,
         tabBarItemStyle: styles.tabItem,
         tabBarStyle: styles.tabBar,
-      }}>
+      }}
+      style={{backgroundColor: '#353A45'}}>
       <Tab.Screen name="Lab2" component={Lab2} />
       <Tab.Screen name="Lab1" component={Lab1} />
     </Tab.Navigator>
