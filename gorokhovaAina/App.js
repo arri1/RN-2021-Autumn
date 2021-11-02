@@ -10,15 +10,15 @@ const App = () => {
      const [image, setImage] = useState(img1);
 
      const generateNewImage = () => {
-        let images = [img1, img2, img3, img4];
-        let b = Math.floor(Math.random() * 4);
-        return images[b];
+          let images = [img1, img2, img3, img4];
+          let b = Math.floor(Math.random() * 4);
+          return images[b];
      }
 
      const generateNewColor = () => {
-        let colors = ['#FED6BC', '#FFFADD', '#DEF7FE', '#E7ECFF', '#C3FBD8', '#FfFFFf', '#B5F2EA', '#C6D8FF', '#FADADD', '#AFEEEE', '#D0F0C0', '#5F9EA0', '#8A6642', '#9DB1CC', '#316650', '#876C99', '#E66761', '#8A9597', '#4682B4', '#EFAF8C']
-        let a = Math.floor(Math.random() * 20);
-        return colors[a];
+          const colors = ['#FED6BC', '#FFFADD', '#DEF7FE', '#E7ECFF', '#C3FBD8', '#FfFFFf', '#B5F2EA', '#C6D8FF', '#FADADD', '#AFEEEE', '#D0F0C0', '#5F9EA0', '#8A6642', '#9DB1CC', '#316650', '#876C99', '#E66761', '#8A9597', '#4682B4', '#EFAF8C']
+          let a = Math.floor(Math.random() * 20);
+          return colors[a];
      }
 
      const clicked = () => {
@@ -27,7 +27,7 @@ const App = () => {
      }
 
           return(
-               <View style={{backgroundColor: `${bodyColor}`, flex:1, alignItems:"center", justifyContent:"center"}}>
+               <View style={[styles.main, {backgroundColor: `${bodyColor}`}]}>
                     <Text>Just random pics</Text>
                     <Image source = {image} style = {styles.image}/>
                     <View>
@@ -43,6 +43,11 @@ const styles = StyleSheet.create({
         height: 200,
         padding: 10,
         margin: 10
+    },
+    main:{
+         flex: 1,
+         alignItems:"center",
+         justifyContent:"center"
     }
 });
 
