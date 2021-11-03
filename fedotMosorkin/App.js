@@ -1,112 +1,71 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+import React, {useState, useEffect} from 'react';
+import {StyleSheet,Text,View,Button,TouchableOpacity} from 'react-native';
 
-import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
-
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
+    container:{
+        flex:1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      text:{
+        color: '#fff',
+        margin: 12,
+      },
+      button:{
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 10,
+        borderRadius: 4,
+        paddingHorizontal: 30,
+        elevation: 3,
+        backgroundColor: '#F80012',
+      }
 });
+
+const App = () => {
+  const [color, setColor] = useState('#009E8E');
+  const[count, setCount]=useState(1)
+  const[name, setName]=useState('Не плюй в колодец, пригодится воды напиться.')
+  useEffect(()=>{
+    if(count==2)
+    {
+      setName('Без труда не выловишь и рыбку из пруда.')
+    }
+    if(count==3)
+    {
+      setName('Не беречь поросли, не видать и дерева.')
+    }
+    if(count==4)
+    {
+      setName('Дважды в год лето не бывает.')
+    }
+    if(count==5)
+    {
+      setName('Летом не припасешь, зимой не принесешь.')
+    }
+    if(count==6)
+    {
+      setName('Не плюй в колодец, пригодится воды напиться')
+      setCount(1)
+    }
+    if(count==0)
+        {
+          setName('Дважды в год лето не бывает.')
+          setCount(5)
+        }
+  })
+    return(
+    <View style={[styles.container,{backgroundColor:color}]}>
+      <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => setColor( '#' + Math.floor(Math.random()*21341241).toString(16))}
+      />
+      <Text style={styles.text}>Есть такая пословица: {name}</Text>
+      <Button title='Next' color='#3415B0' onPress={()=>{setCount(count+1)}}></Button>
+      <Button title='Back' color='#3415B0' onPress={()=>{setCount(count-1)}}></Button>
+    </View>
+  )
+}
 
 export default App;
