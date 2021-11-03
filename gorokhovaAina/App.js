@@ -10,14 +10,14 @@ const App = () => {
      const [image, setImage] = useState(img1);
 
      const generateNewImage = () => {
-          let images = [img1, img2, img3, img4];
-          let b = Math.floor(Math.random() * 4);
+          const images = [img1, img2, img3, img4];
+          const b = Math.floor(Math.random() * 4);
           return images[b];
      }
 
      const generateNewColor = () => {
           const colors = ['#FED6BC', '#FFFADD', '#DEF7FE', '#E7ECFF', '#C3FBD8', '#FfFFFf', '#B5F2EA', '#C6D8FF', '#FADADD', '#AFEEEE', '#D0F0C0', '#5F9EA0', '#8A6642', '#9DB1CC', '#316650', '#876C99', '#E66761', '#8A9597', '#4682B4', '#EFAF8C']
-          let a = Math.floor(Math.random() * 20);
+          const a = Math.floor(Math.random() * 20);
           return colors[a];
      }
 
