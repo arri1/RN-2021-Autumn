@@ -1,42 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
-  View,
 } from 'react-native';
 
 const rnLab2 = () => {
+  const [data, setData] = useState([]);
+
+  const getData = async = () => {
+    fetch('https://jsonplaceholder.typicode.com/users/1/todos')
+    .then((response) => response.json())
+    .then((json) => {
+      setData(json);
+    })
+    .catch((error) => {
+      console.error(error);
+    })
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <SafeAreaView>
-      <View>
-        <Text style = {styles.rnTitle}>
-          TO-DO:
-            CHANGE TO FIGMA PROTOTYPE
-        </Text>
-      </View>
+      <ScrollView>
+        { data.map(item => <Text style = {styles.rnItem} key = {item.id}>{ item.title }</Text>) }
+      </ScrollView>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  rnButton: {
-    marginTop: 64,
-    paddingHorizontal: 24,
-  },
-  rnTitle: {
-    marginTop: 32,
-    marginBottom: 16,
-    fontSize: 24,
-    fontWeight: '600',
-    textAlign: 'center',
-  },
-  rnBox: {
-    height: 100,
-    margin: 50,
-  },
-  rnMain: {
-    backgroundColor: '#424448',
+  rnItem: {
+    height: 80,
+    marginTop: 10,
+    display: 'flex',
+    flexDirection: 'row'
   }
 });
 
