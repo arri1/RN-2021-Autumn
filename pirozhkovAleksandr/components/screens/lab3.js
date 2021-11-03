@@ -1,9 +1,8 @@
-import React, {useState, useEffect, useMemo} from 'react';
+import React, {useState, useEffect, useMemo, useCallback} from 'react';
 import axios from 'axios';
 import {Neomorph} from 'react-native-neomorph-shadows';
 import LinearGradient from 'react-native-linear-gradient';
 import {LinearTextGradient} from 'react-native-text-gradient';
-
 import {
   View,
   Text,
@@ -12,6 +11,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
+import FastImage from 'react-native-fast-image';
 
 const GradientText = ({children, colorsOfGradient}) => {
   return (
@@ -33,14 +33,14 @@ const styles = StyleSheet.create({
   label: {
     shadowOffset: {width: -4, height: -4},
     shadowOpacity: 1,
-    margin: 10,
+    margin: 5,
     shadowRadius: 8,
     borderRadius: 40,
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#353A45',
-    width: 224,
+    width: 112,
     height: 50,
   },
   image: {
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     borderRadius: 37.5,
   },
   box2: {
-    margin: 10,
+    margin: 5,
     borderRadius: 10,
     alignSelf: 'center',
     alignItems: 'center',
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   buttonShadow: {
     shadowOffset: {width: -7, height: -7},
     shadowOpacity: 1,
-    marginTop: 10,
+    margin: 5,
     shadowRadius: 14,
     borderRadius: 40,
     alignItems: 'center',
@@ -100,24 +100,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#353A45',
     width: 112,
     height: 63,
-  },
-  buttonShadow2: {
-    shadowOffset: {width: -7, height: -7},
-    shadowOpacity: 1,
-    marginTop: 10,
-    shadowRadius: 14,
-    borderRadius: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#353A45',
-    width: 50,
-    height: 50,
-  },
-  buttonText2: {
-    fontFamily: 'chakraPetchBold',
-    fontSize: 12,
-    textAlign: 'center',
-    color: '#FF008A',
   },
   buttonText: {
     fontFamily: 'chakraPetchBold',
@@ -127,7 +109,7 @@ const styles = StyleSheet.create({
   },
   box: {
     borderRadius: 30,
-    margin: 10,
+    margin: 5,
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
@@ -145,11 +127,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const journey = n => {
+const journey = (n, inc = 0) => {
   console.log('' + n + 'started');
-  for (let i = 0; i < 600000000; i++) {}
+  for (let i = 0; i < 600; i++) {}
   console.log('' + n + 'ended');
-  return n + 600000000;
+  return n + inc;
 };
 
 const Lab3 = () => {
@@ -159,56 +141,26 @@ const Lab3 = () => {
   const [page, setPage] = useState(0);
   const [show1, setShow1] = useState(0);
   const notSoLongJorney = useMemo(() => journey(number), [number]);
+  const longJorney = useCallback(inc => journey(number, inc), [number]);
+  const [notLongJorney, setJorney] = useState(0);
+  const [albumUrl, setAlbumUrl] = useState(
+    'https://picsum.photos/v2/list?page=2',
+  );
+  const [switched, setSwitch] = useState(0);
+  const [album, setAlbum] = useState([]);
+  const [curUrl, setCurUrl] = useState();
+  const ref = React.useRef(null);
+  const ref2 = React.useRef(null);
+
+  useEffect(() => {
+    setJorney(longJorney(2));
+  }, [longJorney]);
 
   const sliceImages = useMemo(() => {
     return allImages.slice(url, url + 6);
   }, [allImages, url]);
 
-  const ref = React.useRef(null);
-
-  useEffect(() => {
-    const allImg = async () => {
-      const response = await axios(
-        'https://picsum.photos/v2/list?page=2&limit=90',
-      );
-      setAllImages(response.data);
-    };
-    allImg();
-  }, []);
-
-  const album = () => {
-    return (
-      <LinearGradient
-        colors={['#FF008A', '#9E00FF']}
-        start={{x: 0.5, y: 0.0}}
-        end={{x: 0.5, y: 1.0}}
-        style={styles.box}>
-        <Neomorph
-          inner
-          lightShadowColor="#1E2126"
-          darkShadowColor="#576178"
-          style={styles.boxShadow}>
-          <ScrollView ref={ref} horizontal={true}>
-            <View style={styles.scroll} />
-            {sliceImages.map(item => {
-              return (
-                <Image
-                  key={item.id}
-                  style={styles.image}
-                  source={{
-                    uri: item.download_url,
-                  }}
-                />
-              );
-            })}
-            <View style={styles.scroll} />
-          </ScrollView>
-        </Neomorph>
-      </LinearGradient>
-    );
-  };
-
-  const miniAlbum = () => {
+  const miniAlbumm = (allImages1, ref1) => {
     return (
       <LinearGradient
         colors={['#FF008A', '#9E00FF']}
@@ -220,8 +172,8 @@ const Lab3 = () => {
           lightShadowColor="#1E2126"
           darkShadowColor="#576178"
           style={styles.boxShadow2}>
-          <ScrollView horizontal={true}>
-            {sliceImages.map((item, index) => {
+          <ScrollView ref={ref1} horizontal={true}>
+            {allImages1.map((item, index) => {
               return (
                 <TouchableOpacity
                   key={item.id}
@@ -231,12 +183,15 @@ const Lab3 = () => {
                       y: 0,
                       animated: true,
                     });
+                    setCurUrl(item.download_url);
                   }}>
-                  <Image
+                  <FastImage
                     key={item.id}
                     style={styles.image2}
                     source={{
                       uri: item.download_url,
+                      headers: {Authorization: 'token'},
+                      cache: FastImage.cacheControl.immutable,
                     }}
                   />
                 </TouchableOpacity>
@@ -248,6 +203,61 @@ const Lab3 = () => {
     );
   };
 
+  const albumCall = useCallback(
+    ref1 => {
+      return (
+        <LinearGradient
+          colors={['#FF008A', '#9E00FF']}
+          start={{x: 0.5, y: 0.0}}
+          end={{x: 0.5, y: 1.0}}
+          style={styles.box}>
+          <Neomorph
+            inner
+            lightShadowColor="#1E2126"
+            darkShadowColor="#576178"
+            style={styles.boxShadow}>
+            <ScrollView ref={ref1} horizontal={true}>
+              <View style={styles.scroll} />
+              {allImages.map(item => {
+                return (
+                  <FastImage
+                    key={item.id}
+                    style={styles.image}
+                    source={{
+                      uri: item.download_url,
+                      headers: {Authorization: 'token'},
+                      cache: FastImage.cacheControl.immutable,
+                    }}
+                  />
+                );
+              })}
+              <View style={styles.scroll} />
+            </ScrollView>
+          </Neomorph>
+        </LinearGradient>
+      );
+    },
+    [allImages],
+  );
+
+  useEffect(() => {
+    setAlbum(albumCall(ref));
+  }, [albumCall]);
+
+  const minialbum = useMemo(
+    () => miniAlbumm(allImages, ref2),
+    [allImages, ref2],
+  );
+
+  useEffect(() => {
+    axios
+      .get(albumUrl)
+      .then(({data: newData}) => {
+        setAllImages(newData);
+      })
+      .catch(() => {});
+  }, [albumUrl]);
+
   const pageControl = () => {
     return (
       <View style={styles.cont}>
@@ -256,6 +266,11 @@ const Lab3 = () => {
             onPress={() => {
               setUrl(url - 6);
               setPage(page - 1);
+              ref2.current.scrollTo({
+                x: (page - 1) * 360,
+                y: 0,
+                animated: true,
+              });
             }}>
             <Neomorph
               lightShadowColor="#1E2126"
@@ -272,6 +287,11 @@ const Lab3 = () => {
             onPress={() => {
               setUrl(url + 6);
               setPage(page + 1);
+              ref2.current.scrollTo({
+                x: (page + 1) * 360,
+                y: 0,
+                animated: true,
+              });
             }}>
             <Neomorph
               lightShadowColor="#1E2126"
@@ -293,13 +313,35 @@ const Lab3 = () => {
         style={{
           width: '100%',
         }}>
-        <View style={{alignSelf: 'center'}}>
+        <View style={styles.cont}>
+          <TouchableOpacity
+            onPress={() => {
+              setNumber(number + 1);
+            }}>
+            <Neomorph
+              lightShadowColor="#1E2126"
+              darkShadowColor="#576178"
+              style={styles.label}>
+              <GradientText colorsOfGradient={['#FAFF00', '#DF791A']}>
+                <Text style={styles.buttonText}>ADD</Text>
+              </GradientText>
+            </Neomorph>
+          </TouchableOpacity>
           <Neomorph
             inner
             lightShadowColor="#1E2126"
             darkShadowColor="#576178"
             style={styles.label}>
             <Text style={styles.buttonText}>{number}</Text>
+          </Neomorph>
+        </View>
+        <View style={styles.cont}>
+          <Neomorph
+            inner
+            lightShadowColor="#1E2126"
+            darkShadowColor="#576178"
+            style={styles.label}>
+            <Text style={styles.buttonText}>Memo</Text>
           </Neomorph>
           <Neomorph
             inner
@@ -312,16 +354,38 @@ const Lab3 = () => {
           </Neomorph>
         </View>
         <View style={styles.cont}>
+          <Neomorph
+            inner
+            lightShadowColor="#1E2126"
+            darkShadowColor="#576178"
+            style={styles.label}>
+            <Text style={styles.buttonText}>callBack</Text>
+          </Neomorph>
+          <Neomorph
+            inner
+            lightShadowColor="#1E2126"
+            darkShadowColor="#576178"
+            style={styles.label}>
+            <Text style={styles.buttonText}>
+              {show1 ? notLongJorney : null}
+            </Text>
+          </Neomorph>
+        </View>
+
+        <View style={styles.cont}>
           <TouchableOpacity
             onPress={() => {
-              setNumber(number + 1);
+              switched
+                ? setAlbumUrl('https://picsum.photos/v2/list?page=2')
+                : setAlbumUrl('https://picsum.photos/v2/list?page=1');
+              setSwitch(!switched);
             }}>
             <Neomorph
               lightShadowColor="#1E2126"
               darkShadowColor="#576178"
               style={styles.buttonShadow}>
               <GradientText colorsOfGradient={['#FAFF00', '#DF791A']}>
-                <Text style={styles.buttonText}>ADD</Text>
+                <Text style={styles.buttonText}>SWITCH</Text>
               </GradientText>
             </Neomorph>
           </TouchableOpacity>
@@ -347,8 +411,8 @@ const Lab3 = () => {
     <View style={styles.main}>
       <View>
         {memoUse()}
-        {album()}
-        {miniAlbum()}
+        {album}
+        {minialbum}
         {pageControl()}
       </View>
     </View>
