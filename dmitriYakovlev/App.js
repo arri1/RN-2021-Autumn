@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 
 let Colour = () => {
-  let b = "0123456789ABCDEF";
+  const b = "0123456789ABCDEF";
   let color = "#";
   for (let i = 0; i < 6; i++) {
       color += b[Math.floor(Math.random() * 16)];
