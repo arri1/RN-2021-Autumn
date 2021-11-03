@@ -89,6 +89,8 @@ const styles = StyleSheet.create({
     height: 159,
     width: 159,
     borderRadius: 79.5,
+    borderWidth: 4,
+    borderColor: 'white',
   },
   curPage: {
     shadowOffset: {width: -4, height: -4},
@@ -131,7 +133,7 @@ const Lab2 = () => {
   useEffect(() => {
     const randImage = async () => {
       const response = await axios('https://picsum.photos/v2/list');
-      setRandImage(response.data.slice(0, 100));
+      setRandImage(response.data);
     };
     randImage();
   }, []);
