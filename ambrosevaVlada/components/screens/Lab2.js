@@ -36,11 +36,7 @@ const Lab2 = () => {
   };
 
   const getCompletedSign = status => {
-    if (status == 1) {
-      return '#21434F';
-    } else {
-      return '#E6D899';
-    }
+    return (status === 1) ? '#21434F' : '#E6D899';
   };
 
   const createNewTask = () => {
