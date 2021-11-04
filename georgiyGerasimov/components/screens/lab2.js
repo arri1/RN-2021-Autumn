@@ -1,12 +1,14 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {
   View,
   Text,
   ActivityIndicator,
   StyleSheet,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
-import axios from 'axios';
+import {useDispatch, useSelector} from 'react-redux';
+import {checkItem} from '../../store/tasks';
 
 const styles = StyleSheet.create({
   item: {
@@ -31,26 +33,25 @@ const styles = StyleSheet.create({
   },
 });
 const Lab2 = () => {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get('https://jsonplaceholder.typicode.com/posts')
-      .then(({data: newData}) => {
-        setData(newData);
-      })
-      .catch(() => {});
-  }, []);
-
+  const data = useSelector(state => state.data.value);
+  const dispatch = useDispatch();
   const content = () => {
     return (
       <ScrollView>
         {data.map(item => {
           return (
-            <View key={item.id} style={styles.item}>
+            <TouchableOpacity
+              key={item.id}
+              style={[
+                styles.item,
+                item.checked ? {backgroundColor: 'green'} : undefined,
+              ]}
+              onPress={() => {
+                dispatch(checkItem(item.id));
+              }}>
               <Text style={styles.title}>{item.title}</Text>
               <Text style={styles.text}>{item.body}</Text>
-            </View>
+            </TouchableOpacity>
           );
         })}
       </ScrollView>

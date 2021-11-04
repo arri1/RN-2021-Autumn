@@ -1,112 +1,54 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+import React, { useState } from 'react'
+import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import img1 from './img/1.png'
+import img2 from './img/2.jpg'
+import img3 from './img/3.jpg'
+import img4 from './img/4.png'
 
-import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+const App = () => {
+     const [bodyColor, setBodyColor] = useState('white');
+     const [image, setImage] = useState(img1);
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+     const generateNewImage = () => {
+          const images = [img1, img2, img3, img4];
+          const b = Math.floor(Math.random() * 4);
+          return images[b];
+     }
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
+     const generateNewColor = () => {
+          const colors = ['#FED6BC', '#FFFADD', '#DEF7FE', '#E7ECFF', '#C3FBD8', '#FfFFFf', '#B5F2EA', '#C6D8FF', '#FADADD', '#AFEEEE', '#D0F0C0', '#5F9EA0', '#8A6642', '#9DB1CC', '#316650', '#876C99', '#E66761', '#8A9597', '#4682B4', '#EFAF8C']
+          const a = Math.floor(Math.random() * 20);
+          return colors[a];
+     }
 
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
+     const clicked = () => {
+          setBodyColor(generateNewColor());
+          setImage(generateNewImage());
+     }
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
+          return(
+               <View style={[styles.main, {backgroundColor: `${bodyColor}`}]}>
+                    <Text>Just random pics</Text>
+                    <Image source = {image} style = {styles.image}/>
+                    <View>
+                        <Button title="change" onPress={clicked}/>
+                    </View>
+               </View>
+          );
+     }
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
+    image:{
+        width: 200,
+        height: 200,
+        padding: 10,
+        margin: 10
+    },
+    main:{
+         flex: 1,
+         alignItems:"center",
+         justifyContent:"center"
+    }
 });
 
 export default App;

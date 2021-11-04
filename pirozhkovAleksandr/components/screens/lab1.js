@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
 import {Neomorph} from 'react-native-neomorph-shadows';
-import LinearGradient from 'react-native-linear-gradient';
 import {LinearTextGradient} from 'react-native-text-gradient';
 
 import {
   View,
-  SafeAreaView,
   Text,
   StyleSheet,
   TouchableOpacity,
@@ -90,7 +88,6 @@ const styles = StyleSheet.create({
 const Lab1 = ({navigation, route}) => {
   const [color, setColor] = useState('#353A45');
   const [counter, setCounter] = useState(0);
-  const [shouldShow, setShouldShow] = useState(false);
 
   return (
     <ScrollView style={{backgroundColor: color}}>
@@ -121,6 +118,7 @@ const Lab1 = ({navigation, route}) => {
           <Neomorph
             lightShadowColor="#1E2126"
             darkShadowColor="#576178"
+            inner
             style={styles.buttonShadow}>
             <GradientText colorsOfGradient={['#FAFF00', '#DF791A']}>
               <Text style={styles.buttonText}>{counter}</Text>
