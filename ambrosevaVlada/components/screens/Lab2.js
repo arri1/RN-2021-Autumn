@@ -10,85 +10,45 @@ import {
   StyleSheet,
 } from 'react-native';
 
+import axios from 'axios';
+
 const Lab2 = () => {
-  const [notCmplCount, setNotCmplCount] = useState(0);
   const [tasks, setTasks] = useState([]);
-  const [newTask, setNewTask] = useState({});
 
   useEffect(() => {
-    setNotCmplCount(tasks.filter(item => item.status == 0).length);
-  }, [tasks]);
+    const apiUrl = 'https://jsonplaceholder.typicode.com/todos?userId=1';
+    axios.get(apiUrl).then((resp) => {     
+      setTasks(resp.data);
+    });
+  }, []);
 
-  const inputTask = text => {
-    setNewTask({id: tasks.length + 1, text: text, status: 0});
-  };
-
-  const changeStatus = id => {
-    const n = tasks.map(item =>
-      item.id == id ? {...item, status: Math.abs(item.status - 1)} : item,
-    );
-    setTasks(n);
-  };
-
-  const deleteTask = id => {
-    const t = tasks.filter(item => item.id != id);
-    setTasks(t);
-  };
-
-  const getCompletedSign = status => {
-    return (status === 1) ? '#21434F' : '#E6D899';
-  };
-
-  const createNewTask = () => {
-    Keyboard.dismiss();
-    if (newTask.text.length > 0) {
-      const t = [...tasks];
-      t.push(newTask);
-      setTasks(t);
-      setNewTask({id: 0, text: '', status: 0});
-    }
+  const getCompletedSign = completed => {
+    return (completed) ? '#21434F' : '#E6D899';
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.textArea}>
         <Text style={styles.title}>TODAY'S TASKS</Text>
-        <Text style={[styles.text, {textAlign: 'right'}]}>
-          {notCmplCount} not completed
-        </Text>
       </View>
       <View style={styles.tasksContainer}>
         <ImageBackground
           style={styles.imgBackGround}
           imageStyle={{borderRadius: 40}}
           source={require('../../android/app/src/main/assets/images/bgd.jpg')}>
-          <View style={[styles.taskField, {left: 29, marginTop: 77}]}>
-            <TextInput
-              style={[styles.inputTask]}
-              placeholder={'Add task...'}
-              onChangeText={text => inputTask(text)}
-              value={newTask.text}></TextInput>
-            <TouchableOpacity
-              style={styles.newTaskButton}
-              onPress={createNewTask}>
-              <Text style={styles.buttonText}>+</Text>
-            </TouchableOpacity>
-          </View>
-
           <ScrollView style={styles.tasksArea}>
             {tasks.map(item => {
               return (
                 <View key={item.id} style={styles.taskField}>
-                  <TouchableOpacity
+                  <View
                     style={[
-                      styles.statusField,
-                      {backgroundColor: getCompletedSign(item.status)},
-                    ]}
-                    onPress={() => changeStatus(item.id)}></TouchableOpacity>
-                  <Text style={[styles.text, {width: 250}]}>{item.text}</Text>
-                  <TouchableOpacity
-                    style={styles.deleteButton}
-                    onPress={() => deleteTask(item.id)}></TouchableOpacity>
+                      styles.completedField,
+                      {backgroundColor: getCompletedSign(item.completed)}]}>
+                  </View>
+                  <Text style={styles.text}>{item.title}</Text>
+                  <View
+                    style={styles.redCircle}>                     
+                  </View>
                 </View>
               );
             })}
@@ -106,24 +66,20 @@ const styles = StyleSheet.create({
   },
   tasksContainer: {
     width: '100%',
-    marginTop: 9,
     height: 628,
     borderRadius: 49,
     backgroundColor: '#21434F',
   },
   textArea: {
-    marginLeft: 29,
-    marginTop: 55,
-    width: 335,
-    height: 73,
+    height: 137,
+    paddingLeft: 29,
+    paddingRight: 29,
+    paddingTop: 55,
   },
   tasksArea: {
     paddingLeft: 29,
-    maxHeight: 350,
-    minHeight: 350,
-  },
-  img: {
-    borderRadius: 40,
+    maxHeight: 493,
+    minHeight: 493,
   },
   imgBackGround: {
     height: 493, 
@@ -138,29 +94,21 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   text: {
-    height: 25,
+    width: 250,
     fontFamily: 'Montserrat',
     fontSize: 18,
     color: '#121213',
     textAlignVertical: 'center',
-  },
-  inputTask: {
-    width: 284,
-    height: 56,
-    borderRadius: 5,
-    backgroundColor: '#FFFFFC',
-    fontFamily: 'Montserrat',
-    fontSize: 18,
-    color: '#121213',
-    padding: 11,
+    paddingTop: 5,
+    paddingBottom: 5,
   },
   taskField: {
     width: 335,
-    height: 56,
+    minHeight: 56,
+    flexDirection: 'row',
+    alignItems: 'center',
     borderRadius: 5,
     backgroundColor: '#FFFFFC',
-    alignItems: 'center',
-    flexDirection: 'row',
     marginBottom: 14,
     shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.25,
@@ -168,7 +116,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
     elevation: 3,
   },
-  statusField: {
+  completedField: {
     width: 17,
     height: 17,
     borderRadius: 3,
@@ -176,27 +124,12 @@ const styles = StyleSheet.create({
     marginLeft: 11,
     marginRight: 11,
   },
-  deleteButton: {
+  redCircle: {
     width: 15,
     height: 15,
     borderRadius: 15 / 2,
     backgroundColor: '#FD442E',
     marginLeft: 11,
-  },
-  newTaskButton: {
-    width: 40,
-    height: 40,
-    marginRight: 11,
-    borderRadius: 20,
-    backgroundColor: '#E6D899',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonText: {
-    fontFamily: 'Montserrat',
-    color: '#FFFFFC',
-    fontSize: 24,
-    fontWeight: 'bold',
   },
   bottom: {
     width: '100%',
@@ -206,7 +139,7 @@ const styles = StyleSheet.create({
     bottom: 137,
     padding: 11,
     alignItems: 'center',
-  },
+  }
 });
 
 export default Lab2;
