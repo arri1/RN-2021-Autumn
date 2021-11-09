@@ -1,35 +1,32 @@
-import React, {useState, useEffect, useReducer} from "react";
-import { StyleSheet, Text, Alert, View, FlatList, TextInput} from "react-native";
-
+import React, {useState, useEffect} from "react";
+import { StyleSheet, Text, View, FlatList, TextInput} from "react-native";
+import axios from 'axios';
 export default function App() {
-
-  const reducer = (state, action) => {
-    switch(action.type) {
-      case "add":
-        return[
-          ...state,
-          {
-            text: action.payload, 
-            key: Math.round().toString(36).substring(3), 
-            completed: false
-          }
-        ]
-      default: return state
-    }
+  
+  const [posts, setPosts] = useState([]);
+  const addTodo = () => {
+    return setPosts([
+      {
+        id: Math.round().toString(36).substring(3),
+        title: text
+      },
+      ...posts
+    ])
   }
-  const [state, dispatch] = useReducer(reducer, []);
+
+  useEffect(()=>{
+    axios
+        .get('https://jsonplaceholder.typicode.com/posts')
+        .then(response=>{
+          setPosts(response.data);
+          })
+        .catch((error) => {console.error(error);});
+  },[]);
+
   const [text, setText] = useState('');
   const onChangeText = (text) => {
     setText(text);
   }
-
-  useEffect(()=>{
-    if (text)
-    {
-      Alert.alert("Задача добавлена")
-    }
-   
-  },[state]);
 
   return(
     <View>
@@ -38,11 +35,11 @@ export default function App() {
       </View>
       <View>
         <TextInput style = {styles.textInput} onChangeText={onChangeText} placeholder="Добавить задачу..."/>
-        <Text style={styles.textBtn} onPress={() => dispatch({type: 'add', payload: text})}>Добавить</Text>
+        <Text style={styles.textBtn} onPress={addTodo}>Добавить</Text>
       </View>
       <View> 
-        <FlatList data={state} renderItem={({item})=>(
-          <Text>{item.text}</Text>
+        <FlatList data={posts} renderItem={({item})=>(
+          <Text>{item.title}</Text>
         )}/>
       </View>
     </View>
