@@ -7,18 +7,24 @@ import {
   View,
   Text,
 } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import Tabs from './components/routers/tabs';
 
-const App = () => {
+const lab1 = () => {
 
   const [color, setColor] = useState('#2E1F99');
 
   return (
     <SafeAreaView style={styles.main}>
-      <NavigationContainer>
-        <Tabs />
-      </NavigationContainer>
+      <ScrollView>
+
+        <TouchableOpacity
+          style={[ styles.circle, {backgroundColor: color} ]}
+          onPress={() => setColor( '#' + Math.floor(Math.random()*16581375).toString(16) )}>
+        </TouchableOpacity>
+
+        <View style={styles.colorCodeBox}>
+          <Text style = {[styles.mainText, {textTransform: 'uppercase'}]}>{color}</Text>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -26,21 +32,22 @@ const App = () => {
 const styles = StyleSheet.create({
   main: {
     height: '100%',
-    backgroundColor: '#8EDFDD',
+    backgroundColor: '#2F88F0',
   },
 
   circle: {
     width: 300,
     height: 300,        
     borderRadius: 300,
-    marginVertical: 120,
+    marginVertical: 50,
     marginHorizontal: 50,
     justifyContent: 'center',
     alignItems: 'center',
+    alignSelf: 'center',
  },
 
   colorCodeBox: {
-    backgroundColor: '#17A326',
+    backgroundColor: '#FFFFFF',
     padding: 20,
     marginVertical: 10,
     marginHorizontal: 70,
@@ -55,4 +62,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default App;
+export default lab1;
