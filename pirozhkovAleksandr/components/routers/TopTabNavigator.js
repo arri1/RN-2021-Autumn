@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function TopTabNavigator() {
+const TopTabNavigator = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     const randImage = async () => {
@@ -67,6 +67,6 @@ function TopTabNavigator() {
       <Tab.Screen name="Lab1" component={Lab1} />
     </Tab.Navigator>
   );
-}
+};
 
 export default TopTabNavigator;

@@ -46,7 +46,8 @@ const GradientNeomorph = ({children, styleBox, styleShadow}) => {
     </LinearGradient>
   );
 };
-function GradientButton({text}) {
+
+const GradientButton = ({text}) => {
   return (
     <Neomorph
       lightShadowColor="#1E2126"
@@ -55,6 +56,6 @@ function GradientButton({text}) {
       <Text style={styles.buttonText}>{text}</Text>
     </Neomorph>
   );
-}
+};
 
 export {GradientButton, GradientNeomorph};
