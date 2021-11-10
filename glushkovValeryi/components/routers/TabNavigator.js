@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Lab1 from '../screens/Lab1'
 import Lab2 from '../screens/Lab2'
+import Lab4 from '../screens/Lab4'
 
 const Tab = createBottomTabNavigator();
 
@@ -25,6 +26,7 @@ const TabNavigator = () => {
         >
             <Tab.Screen name = "lab1" component = {Lab1} />
             <Tab.Screen name = "lab2" component = {Lab2} />
+            <Tab.Screen name = "lab4" component = {Lab4} />
         </Tab.Navigator>
     );
 }
