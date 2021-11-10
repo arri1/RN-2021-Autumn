@@ -1,45 +1,43 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
-  View,
-  Text,
+  Text
 } from 'react-native';
-import Sound from 'react-native-sound';
- 
+
 const App = () => {
-  sound = new Sound('test_sound.mp3');
+  const [color, setColor] = useState('#752FB1');
+
   return (
-    <SafeAreaView style={styles.main}>
+    <SafeAreaView style={[styles.main, {backgroundColor: color}]}>
       <ScrollView>
         <TouchableOpacity
-          style={[styles.countButton]}
-          onPress={() => {
-            this.sound.play()
-          }}>
-          <Text>Воспроизвести звук</Text>
+          style={styles.countButton}
+          onPress={() => setColor( '#' + Math.floor(Math.random() * Math.pow(256, 3)).toString(16))}>
+          <Text style = {styles.bText}>Поменять фон</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
 };
- 
+
 const styles = StyleSheet.create({
-  main: {
-    height: '100%',
-    backgroundColor: '#FFFFFF',
+  main:{
+    height: '100%'
   },
   countButton: {
-    backgroundColor: '#000000',
+    backgroundColor: '#5CBDDB',
     margin: 25,
     borderRadius: 100,
     padding: 60,
     justifyContent: 'center',
     alignItems: 'center',
   },
+  text: {
+    fontSize: 16,
+  },
 });
- 
-export default App;
 
+export default App;
