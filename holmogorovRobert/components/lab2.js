@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
 import { StyleSheet, Text, View, FlatList, TextInput} from "react-native";
 import axios from 'axios';
-export default function App() {
+
+export default Lab2 = () => {
   
   const [posts, setPosts] = useState([]);
   const addTodo = () => {
