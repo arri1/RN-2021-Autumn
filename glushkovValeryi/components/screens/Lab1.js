@@ -24,11 +24,12 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 50,
     marginBottom: 50,
-    borderRadius: 15,
+    borderRadius: 10,
     paddingVertical: 14,
     paddingHorizontal: 10,
-    backgroundColor: '#ff8000',
-    width: 300,
+    backgroundColor: '#D7FCD4',
+    color: '#000000',
+    width: 360,
     height: 50
   },
   content: {
@@ -36,14 +37,14 @@ const styles = StyleSheet.create({
     padding: 0,
     width: '100%',
     height: '100%',
-    backgroundColor: '#000000',
+    backgroundColor: '#545454',
     alignItems: 'center'
   },
   rectangle: {
-    width: '80%',
+    width: '90%',
     height: '50%',
-    borderRadius: 15,
-    backgroundColor: '#ff8000',
+    borderRadius: 10,
+    backgroundColor: '#B6CCA1',
     alignItems: 'center'
   }
 });
