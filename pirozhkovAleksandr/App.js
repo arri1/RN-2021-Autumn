@@ -4,7 +4,7 @@ import TopTabNavigator from './components/routers/TopTabNavigator';
 import {Provider} from 'react-redux';
 import store from './store';
 
-export default function App() {
+const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
@@ -12,4 +12,6 @@ export default function App() {
       </NavigationContainer>
     </Provider>
   );
-}
+};
+
+export default App;
