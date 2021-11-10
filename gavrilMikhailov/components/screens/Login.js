@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Alert,
   Text,
-  Button,
+  Pressable,
   TextInput,
   View,
 } from 'react-native';
@@ -28,27 +28,38 @@ const Login = () => {
     return password.length > 6
   }
 
+  const isDisabled = !(isValidEmail() && isValidPassword())
+
   return (
     <SafeAreaView>
       <View style={styles.view}>
-        <Text style={styles.title}>
-          Вход в какую то систему
-        </Text>
         <TextInput 
           style={styles.textInput}
           onChangeText={onChangeEmail} 
           value={email}
-          placeholder={"E-mail"}/>
+          placeholder={"E-mail"}
+          placeholderTextColor="#787A91"/>
         <TextInput 
           style={styles.textInput}
           onChangeText={onChangePassword} 
           value={password}
           secureTextEntry={true}
-          placeholder={"Пароль"}/>
-        <Button 
-          title={"Продолжить"}
-          disabled={!(isValidEmail() && isValidPassword())}
-          onPress={didTapButton}/>
+          placeholder={"Пароль"}
+          placeholderTextColor="#787A91"/>
+        <Pressable 
+          style={[
+            styles.submitButton, 
+            isDisabled ? styles.disabledBackground : styles.normalBackground
+          ]}
+          disabled={isDisabled}
+          onPress={didTapButton}>
+            <Text style={[
+              styles.submitButtonText,
+              isDisabled ? styles.disabledText : styles.normalText
+            ]}>
+              Sign In
+            </Text>
+        </Pressable>
       </View>
     </SafeAreaView>
   )
@@ -56,29 +67,48 @@ const Login = () => {
 
 const styles = StyleSheet.create({
   view: {
-    backgroundColor: '#FFFFFF',
-    width: '100%',
+    backgroundColor: '#0F044C',
     height: '100%',
-    alignItems: 'center',
     justifyContent: 'center',
-    padding: 36,
-  },
-  title: {
-    color: '#000',
-    width: '100%',
-    fontSize: 18,
-    marginBottom: 16,
+    alignItems: 'center',
+    padding: 30,
   },
   textInput: {
     width: '100%',
     height: 40,
+    fontSize: 18,
     marginHorizontal: 16,
-    borderWidth: 0.5,
-    padding: 10,
-    color: '#2C394B',
+    color: '#EEEEEE',
     marginVertical: 5,
-    borderRadius: 5,
-    borderColor: '#2C394B'
+    borderTopWidth: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    borderBottomWidth: 1,
+    borderColor: '#787A91'
+  },
+  submitButton: {
+    marginTop: 40,
+    width: 240,
+    height: 40,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 6
+  },
+  submitButtonText: {
+    fontSize: 18
+  },
+  normalBackground: {
+    backgroundColor: "#EEEEEE"
+  },
+  disabledBackground: {
+    backgroundColor: '#141E61'
+  },
+  disabledText: {
+    color: "#787A91"
+  },
+  normalText: {
+    color: "#141E61"
   }
 });
 
