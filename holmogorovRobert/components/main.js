@@ -1,6 +1,5 @@
 import React from "react";
-
-import { StyleSheet, Button, View, Text} from "react-native";
+import { StyleSheet, View, Text} from "react-native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
