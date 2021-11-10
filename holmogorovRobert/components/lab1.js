@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { StyleSheet, Text, SafeAreaView, View } from "react-native";
 
-export default function lab1() {
+export default Lab1 = () => {
   
   const arrayColor = ["#2EE2FF", "#F54777", "#E74BF5", "#50E835", "#FFBD2E", "#4C93F5", "#D4816C", "#8AC7F6"]
   const randomColor = () => {

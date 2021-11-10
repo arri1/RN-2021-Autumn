@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
-export default function main({navigation}) {
+export default Main = ({navigation}) => {
     return (
         <View>
             <Text style={styles.btn} title="Задание 1" onPress={()=> navigation.navigate("lab1")}>Задание 1</Text>
