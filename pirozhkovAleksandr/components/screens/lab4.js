@@ -1,17 +1,17 @@
 import React, {useState} from 'react';
+import {
+  View,
+  ScrollView,
+  StyleSheet,
+  Text,
+  Image,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import {Neomorph} from 'react-native-neomorph-shadows';
 import LinearGradient from 'react-native-linear-gradient';
 import {useDispatch, useSelector} from 'react-redux';
 import {favItem} from '../../store/album';
-import {
-  View,
-  Text,
-  Image,
-  ActivityIndicator,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -47,6 +47,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
+    height: '100%',
+    backgroundColor: '#353A45',
   },
   bottomContainer: {
     height: 104,
@@ -89,6 +91,15 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: 'white',
   },
+  image2: {
+    alignSelf: 'center',
+    borderColor: 'black',
+    borderWidth: 4,
+    height: 200,
+    width: 300,
+    borderRadius: 37.5,
+    margin: 10,
+  },
   curPage: {
     shadowOffset: {width: -4, height: -4},
     shadowOpacity: 1,
@@ -125,14 +136,15 @@ const styles = StyleSheet.create({
   },
 });
 
-const Lab2 = () => {
+const Lab4 = () => {
   const [firstEl, setFirst] = useState(0);
   const [lastEl, setLast] = useState(5);
   const [page, setPage] = useState(0);
-  const ref = React.useRef(null);
-
-  const data = useSelector(state => state.data.value);
   const dispatch = useDispatch();
+  const ref = React.useRef(null);
+  const data = useSelector(state => state.data.value);
+  const selectedItems = data?.filter(item => item.favorite);
+  const photo = useSelector(state => state.photo.value);
 
   const pageControl = () => {
     return (
@@ -160,7 +172,7 @@ const Lab2 = () => {
           style={styles.curPage}>
           <Text style={styles.pageText}>{page + 1}</Text>
         </Neomorph>
-        {!!(data.length / 5 - page - 1 > 0 ? 1 : 0) && (
+        {!!(selectedItems.length / 5 - page - 1 > 0 ? 1 : 0) && (
           <TouchableOpacity
             onPress={() => {
               setFirst(firstEl + 5);
@@ -186,7 +198,25 @@ const Lab2 = () => {
         <ScrollView ref={ref}>
           <View style={styles.back}>
             <View style={styles.scrollTop} />
-            {data.slice(firstEl, lastEl).map(item => {
+            <LinearGradient
+              colors={['#FF008A', '#9E00FF']}
+              start={{x: 0.5, y: 0.0}}
+              end={{x: 0.5, y: 1.0}}
+              style={styles.box}>
+              <Neomorph
+                inner
+                lightShadowColor="#1E2126"
+                darkShadowColor="#576178"
+                style={styles.boxShadow}>
+                <Image
+                  style={styles.image2}
+                  source={{
+                    uri: photo,
+                  }}
+                />
+              </Neomorph>
+            </LinearGradient>
+            {selectedItems.slice(firstEl, lastEl).map(item => {
               return (
                 <LinearGradient
                   key={item.id}
@@ -204,12 +234,11 @@ const Lab2 = () => {
                       {item.author + item.favIcon}
                     </Text>
                     <TouchableOpacity
-                      key={item.id}
+                      key={'image' + item.id}
                       onPress={() => {
                         dispatch(favItem(item.id));
                       }}>
                       <Image
-                        key={item.id}
                         style={styles.image}
                         source={{
                           uri: item.download_url,
@@ -220,6 +249,7 @@ const Lab2 = () => {
                 </LinearGradient>
               );
             })}
+
             <View style={styles.scrollBottom} />
           </View>
         </ScrollView>
@@ -235,4 +265,4 @@ const Lab2 = () => {
   );
 };
 
-export default Lab2;
+export default Lab4;
