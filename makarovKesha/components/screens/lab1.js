@@ -8,7 +8,7 @@ import {
   Text,
 } from "react-native";
 
-const lab1 = () => {
+const Lab1 = () => {
 
   const [color, setColor] = useState('#2E1F99');
 
@@ -62,4 +62,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default lab1;
+export default Lab1;

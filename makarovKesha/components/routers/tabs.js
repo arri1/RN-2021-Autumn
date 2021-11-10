@@ -25,7 +25,6 @@ const TabNavigation = () => {
         >
             <Tab.Screen 
                 name = "Lab 1" 
-                color = '#AEAEAE'
                 component = {lab1} 
                 options = {{
                     tabBarIcon: ({focused}) => (
