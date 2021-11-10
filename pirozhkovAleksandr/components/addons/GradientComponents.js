@@ -2,7 +2,6 @@ import React from 'react';
 
 import {Neomorph} from 'react-native-neomorph-shadows';
 import LinearGradient from 'react-native-linear-gradient';
-import {LinearTextGradient} from 'react-native-text-gradient';
 import {Text, StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
@@ -19,24 +18,17 @@ const styles = StyleSheet.create({
     height: 63,
   },
   buttonText: {
+    width: '100%',
+    textShadowColor: 'black',
+    textShadowRadius: 5,
+    textShadowOffset: {width: 2, height: 2},
+    color: '#FDD400',
     fontFamily: 'chakraPetchBold',
     fontSize: 18,
     textAlign: 'center',
-    color: '#FF008A',
   },
 });
 
-function GradientText({children, colorsOfGradient}) {
-  return (
-    <LinearTextGradient
-      locations={[0, 1]}
-      colors={colorsOfGradient}
-      start={{x: 0.5, y: 0.0}}
-      end={{x: 0.5, y: 1.0}}>
-      {children}
-    </LinearTextGradient>
-  );
-}
 const GradientNeomorph = ({children, styleBox, styleShadow}) => {
   return (
     <LinearGradient
@@ -60,11 +52,9 @@ function GradientButton({text}) {
       lightShadowColor="#1E2126"
       darkShadowColor="#576178"
       style={styles.buttonShadow}>
-      <GradientText colorsOfGradient={['#FAFF00', '#DF791A']}>
-        <Text style={styles.buttonText}>{text}</Text>
-      </GradientText>
+      <Text style={styles.buttonText}>{text}</Text>
     </Neomorph>
   );
 }
 
-export {GradientButton, GradientNeomorph, GradientText};
+export {GradientButton, GradientNeomorph};
