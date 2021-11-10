@@ -1,20 +1,32 @@
 import React, {useState} from 'react';
-
-import toasty from '../../assets/toasty.png';
+import {Neomorph} from 'react-native-neomorph-shadows';
+import {LinearTextGradient} from 'react-native-text-gradient';
 
 import {
   View,
-  SafeAreaView,
   Text,
-  Image,
   StyleSheet,
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
 
+const GradientText = ({children, colorsOfGradient}) => {
+  return (
+    <LinearTextGradient
+      locations={[0, 1]}
+      colors={colorsOfGradient}
+      start={{x: 0.5, y: 0.0}}
+      end={{x: 0.5, y: 1.0}}>
+      {children}
+    </LinearTextGradient>
+  );
+};
+
 const styles = StyleSheet.create({
   main: {
-    height: '100%',
+    height: 690,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   box: {
     height: 150,
@@ -54,55 +66,89 @@ const styles = StyleSheet.create({
     left: 150,
     right: 0,
   },
+  buttonShadow: {
+    shadowOffset: {width: -7, height: -7},
+    shadowOpacity: 1,
+    marginTop: 16,
+    shadowRadius: 14,
+    borderRadius: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#353A45',
+    width: 200,
+    height: 63,
+  },
+  buttonText: {
+    fontFamily: 'chakraPetchBold',
+    fontSize: 18,
+    textAlign: 'center',
+  },
 });
 
 const Lab1 = ({navigation, route}) => {
-  const [color, setColor] = useState('#4A398F');
+  const [color, setColor] = useState('#353A45');
   const [counter, setCounter] = useState(0);
-  const [shouldShow, setShouldShow] = useState(false);
 
   return (
-    <SafeAreaView style={[styles.main, {backgroundColor: color}]}>
-      <ScrollView>
-        <View style={styles.image}>
-          {!!shouldShow && <Image source={toasty} />}
+    <ScrollView style={{backgroundColor: color}}>
+      <View style={styles.main}>
+        <TouchableOpacity onPress={() => setColor('#555C70')}>
+          <Neomorph
+            lightShadowColor="#1E2126"
+            darkShadowColor="#576178"
+            style={styles.buttonShadow}>
+            <GradientText colorsOfGradient={['#FAFF00', '#DF791A']}>
+              <Text style={styles.buttonText}>Click me</Text>
+            </GradientText>
+          </Neomorph>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => setColor('#353A45')}>
+          <Neomorph
+            lightShadowColor="#1E2126"
+            darkShadowColor="#576178"
+            style={styles.buttonShadow}>
+            <GradientText colorsOfGradient={['#FAFF00', '#DF791A']}>
+              <Text style={styles.buttonText}>Click me too</Text>
+            </GradientText>
+          </Neomorph>
+        </TouchableOpacity>
+
+        <View>
+          <Neomorph
+            lightShadowColor="#1E2126"
+            darkShadowColor="#576178"
+            inner
+            style={styles.buttonShadow}>
+            <GradientText colorsOfGradient={['#FAFF00', '#DF791A']}>
+              <Text style={styles.buttonText}>{counter}</Text>
+            </GradientText>
+          </Neomorph>
         </View>
 
-        <TouchableOpacity
-          style={[styles.box, {backgroundColor: '#58DB5A'}, {marginTop: 90}]}
-          onPress={() => setColor('#458F46')}>
-          <Text style={styles.text}>Click me</Text>
+        <TouchableOpacity onPress={() => setCounter(counter + 1)}>
+          <Neomorph
+            lightShadowColor="#1E2126"
+            darkShadowColor="#576178"
+            style={styles.buttonShadow}>
+            <GradientText colorsOfGradient={['#FAFF00', '#DF791A']}>
+              <Text style={styles.buttonText}>Add some points</Text>
+            </GradientText>
+          </Neomorph>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={[styles.box, {backgroundColor: '#836EDB'}]}
-          onPress={() => setColor('#4A398F')}>
-          <Text style={styles.text}>Click me too</Text>
+        <TouchableOpacity onPress={() => setCounter(counter - 1)}>
+          <Neomorph
+            lightShadowColor="#1E2126"
+            darkShadowColor="#576178"
+            style={styles.buttonShadow}>
+            <GradientText colorsOfGradient={['#FAFF00', '#DF791A']}>
+              <Text style={styles.buttonText}>Subtract some points</Text>
+            </GradientText>
+          </Neomorph>
         </TouchableOpacity>
-
-        <View style={styles.counterContainer}>
-          <Text style={styles.text}>{counter}</Text>
-        </View>
-
-        <TouchableOpacity
-          style={styles.littleBox}
-          onPress={() => setCounter(counter + 1)}>
-          <Text style={styles.text}>Add some points</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.littleBox}
-          onPress={() => setCounter(counter - 1)}>
-          <Text style={styles.text}>Subtract some points</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.littleBox, {backgroundColor: '#B16FDB'}]}
-          onPress={() => setShouldShow(!shouldShow)}>
-          <Text style={styles.text}>Toasty</Text>
-        </TouchableOpacity>
-      </ScrollView>
-    </SafeAreaView>
+      </View>
+    </ScrollView>
   );
 };
 
