@@ -3,7 +3,7 @@ import { View, StyleSheet, Pressable } from 'react-native';
 
 const CheckButton = (props) => {
   const [checked, setChecked] = useState(false)
-  const { aStyle = {} } = props;
+  const { aStyle } = props;
 
   useEffect(()=>{styles.checked},[checked])
   return (
