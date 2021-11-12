@@ -15,7 +15,7 @@ const colorStep = (bgColor) => {
 }
 
 const rnLab1 = () => {
-  const [bgColor, setBgColor] = useState('#030005');
+  const [bgColor, setBgColor] = useState('#000000');
   return (
     <SafeAreaView style={styles.rnMain}>
       <View>
