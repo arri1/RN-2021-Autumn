@@ -42,20 +42,24 @@ const Posts = () => {
 
 const styles = StyleSheet.create({
   view: {
-    backgroundColor: '#FFFFFF'
+    height: '100%',
+    backgroundColor: '#0F044C',
+    padding: 20
   },
   item: {
     borderRadius: 4,
-    margin: 4,
-    padding: 12,
-    backgroundColor: '#FAFAFA'
+    marginBottom: 14,
+    padding: 20,
+    backgroundColor: '#141E61'
   },
   itemTitle: {
-    fontSize: 14
+    fontSize: 24,
+    color: '#EEEEEE'
   },
   itemBody: {
-    marginTop: 4,
-    fontSize: 10
+    marginTop: 16,
+    fontSize: 14,
+    color: '#EEEEEE'
   }
 })
 
