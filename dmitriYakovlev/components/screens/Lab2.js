@@ -5,7 +5,6 @@ import Zagolovok from '../routers/Zagolovok';
 
 const Lab2 = () => {
   const [data, setData] = useState([]);
-  const [color, setColor] = useState('white');
 
   useEffect(() => {
     axios
