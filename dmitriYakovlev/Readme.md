@@ -1,0 +1,1 @@
+https://hh.ru/resume/2b6c9eb3ff097130f30039ed1f56656a504742
