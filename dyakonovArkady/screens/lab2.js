@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { SafeAreaView, View, Text, ActivityIndicator, StyleSheet, ScrollView } from 'react-native';
 import axios from 'axios';
 
-const lab2 = () => {
+const Lab2 = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -73,4 +73,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default lab2;
+export default Lab2;
