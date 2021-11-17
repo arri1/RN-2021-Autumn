@@ -1,89 +1,85 @@
 import React, {useState, useMemo, useEffect} from 'react';
-import {View, Text, StyleSheet, ScrollView, Button} from 'react-native';
+import img1 from '../img/6.jpg';
+import img2 from '../img/7.jpg';
+import img3 from '../img/8.jpg';
+import {
+  View,
+  StyleSheet,
+  Button,
+  Image,
+} from 'react-native';
 
-import axios from 'axios';
-
-const sum = n => {
-  return n + n;
+const expensiveFunction = () => {
+  let i = 0;
+  while (i < 60000000) {
+    i++;
+  }
 };
-
 const Lab3 = ({navigation}) => {
-  const [data, setData] = useState([]);
-  const [num, setNum] = useState(1);
-  const [isGreen, setIsGreen] = useState(false);
-
-  const countSum = useMemo(() => sum(num), [num]);
+  const [count, setCount] = useState(0);
+  const [text, setText] = useState('');
+  const [image1, setImg1] = useState(img1);
 
   useEffect(() => {
-    axios
-      .get('https://my-json-server.typicode.com/MidnightYKT/json/posts')
-      .then(({data: newData}) => {
-        setData(newData);
-      })
-      .catch(() => {});
-  }, []);
+    if (count === 2) {
+      setImg1(img2);
+    }
+    if (count === 3) {
+      setImg1(img3);
+      setCount(1);
+    }
+  });
 
-  const content = () => {
-    return (
-      <ScrollView>
-        {data.map(item => {
-          return (
-            <View key={item.id} style={styles.item}>
-              <Text
-                style={{color: isGreen ? 'green' : 'white', fontWeight: 'bold', fontSize: 18}}
-                onPress={() => setIsGreen(!isGreen)}>
-                {item.title}
-              </Text>
-              <Text style={styles.info}>{item.body}</Text>
-              <Text>{countSum}</Text>
-              <Button
-                title="+"
-                style={styles.button}
-                onPress={() => setNum(num + 1)}
-              />
-              <Button
-                title="clear"
-                color="maroon"
-                style={styles.button}
-                onPress={() => setNum(0)}
-              />
-            </View>
-          );
-        })}
-      </ScrollView>
-    );
+  const onPressHandler = () => {
+    const text = expensiveFunction();
+    setCount(count + 1);
+    setText(`${count}`);
+  };
+  const operation = useMemo(expensiveFunction, []);
+
+  const onPressHandlerSecond = () => {
+    const text = operation;
+
+    setCount(count + 1);
+    setText(`${count}`);
   };
 
   return (
-    <View style={styles.mainBlock}>
-      {data ? content() : <ActivityIndicator color={'red'} />}
+    <View style={styles.container}>
+      <View style={styles.fixTo}>
+        <Image style={styles.img} source={image1} />
+      </View>
+      <View style={styles.fixTo}>
+        <Button
+          title="Left button"
+          onPress={onPressHandler}
+        />
+        <Button
+          title="Right button"
+          color="maroon"
+          onPress={onPressHandlerSecond}
+        />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  item: {
-    padding: 10,
-    borderRadius: 15,
-    marginBottom: 10,
-    backgroundColor: '#95A3B3',
-    alignItems: 'center',
-    margin: 15,
+  img: {
+    borderRadius: 20,
+    width: 250,
+    height: 350,
+    marginBottom: 30,
   },
-  mainBlock: {
-    backgroundColor: '#fff',
+  container: {
+    marginTop: 20,
     flex: 1,
+    backgroundColor: '#000',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-  info: {
-    marginTop: 10,
-    fontSize: 15,
-  },
-  button: {
-    marginBottom: 10,
+  fixTo: {
+    flexDirection: 'row',
   },
 });
 
