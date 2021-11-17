@@ -59,10 +59,9 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   img: {
-    marginTop: 5,
     borderRadius: 20,
     width: 350,
-    height: 450,
+    height: 400,
   },
 });
 
