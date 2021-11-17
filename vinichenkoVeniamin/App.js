@@ -7,47 +7,48 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  box: {
+    width: 100,
+    height: 100,
+    backgroundColor: '#5AD2F4'
+  }
+});
 
-const lab1 = ()=> {
-  const [animation, setAnimation] = useState(new Animated.Value(1))
-  const animatedStyles= {
-    opacity: animation
-    }
+const animatedStyles = {
+  opacity: animation
+}
 
-  const handleAnimation = () => {
+const handleAnimation = () => {
+  Animated.timing(animation, {
+    toValue: 0,
+    duration: 500,
+    useNativeDriver: true
+  }).start(() => {
     Animated.timing(animation, {
-      toValue: 0,
+      toValue: 1,
       duration: 500,
-      useNativeDriver:true
-    }).start(() => {
-    Animated.timing(animation, {
-      toValue:1,
-      duration: 500,
-      useNativeDriver:true
+      useNativeDriver: true
     }).start()
-    })}
+  })
+}
 
+const Lab1 = () => {
+  const [animation] = useState(new Animated.Value(1))
+  
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={handleAnimation}>
-        <Animated.View style={{...styles.box, ...animatedStyles}} />
+        <Animated.View style={[styles.box, animatedStyles]} />
       </TouchableWithoutFeedback>
     </View>
   );
 }
 
-const styles = StyleSheet.create(
-  {
-  container:{
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    },
-  box:{
-    width: 100,
-    height: 100,
-    backgroundColor: '#5AD2F4'
-    }
-  });
-  export default lab1;
+export default Lab1;
