@@ -6,107 +6,76 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {StyleSheet,Text,View,Button,TouchableOpacity} from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
-
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
+    container:{
+        flex:1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      text:{
+        color: '#f0f',
+        margin: 20,
+      },
+      button:{
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 20,
+        borderRadius: 5,
+        paddingHorizontal: 27,
+        elevation: 10,
+        backgroundColor: '#808080',
+      }
 });
+
+
+const App = () => {
+  const[color, setColor]=useState('#000000');
+  const[count, setCount]=useState(1)
+  const[name, setName]=useState(' понедельник: СРС день;')
+  useEffect(()=>{
+    if(count==2)
+    {
+      setName('о вторник: 14:00-Анализ данных; 15:50-Анализ данных;')
+    }
+    if(count==3)
+    {
+      setName(' среду: 14:00-Технологии блокчейн; 15:50-Разработка мобильных приложений*\Технологии блокчейн**; 17:40-Разработка мобильных приложений;')
+    }
+    if(count==4)
+    {
+      setName(' четверг: СРС день;')
+    }
+    if(count==5)
+    {
+      setName(' пятницу: 15:50-Основы ОС Linux; 17:40-Основы ОС Linux;')
+    }
+    if(count==6)
+    {
+      setName(' субботу: 9:50-Математическое моделирование; 11:40-Математическое моделирование; 14:00-Проектная деятельность;')
+      setCount(1)
+    }
+    if(count==0)
+        {
+          setName(' понедельник: СРС день;')
+          setCount(5)
+        }
+  })
+    return(
+    <View style={[styles.container,{backgroundColor:color}]}>
+
+      <Text style={styles.text}>Пары в{name}</Text>
+      <Button title='Next' onPress={()=>{setCount(count+1)}}></Button>
+      <Button title='Back' onPress={()=>{setCount(count-1)}}></Button>
+      <TouchableOpacity
+                          style={styles.button}
+                          onPress={() => setColor( '#' + Math.floor(Math.random()*22222222).toString(16))}
+            />
+    </View>
+  )
+}
 
 export default App;
