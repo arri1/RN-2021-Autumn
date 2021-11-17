@@ -7,6 +7,8 @@ import { Provider } from 'react-redux'
 import { store } from './src/app/store'
 import { colors } from './src/constants/colors'
 import GearIcon from './src/components/SVG/GearIcon'
+import Lab3 from "./src/screens/Lab3";
+import Lab4 from './src/screens/Lab4'
 
 const Tab = createBottomTabNavigator()
 
@@ -36,6 +38,18 @@ const App:React.FC = () => {
                                     : colors.darkGray
                                 return <GearIcon color={iconColor}/>
                             }
+                            if (route.name === 'Lab3') {
+                                iconColor = focused
+                                    ? colors.white
+                                    : colors.darkGray
+                                return <GearIcon color={iconColor}/>
+                            }
+                            if (route.name === 'Lab4') {
+                                iconColor = focused
+                                    ? colors.white
+                                    : colors.darkGray
+                                return <GearIcon color={iconColor}/>
+                            }
                         },
                     })}>
                     <Tab.Screen
@@ -45,6 +59,14 @@ const App:React.FC = () => {
                     <Tab.Screen
                         name="Lab2"
                         component={Lab2}
+                    />
+                    <Tab.Screen
+                        name="Lab3"
+                        component={Lab3}
+                    />
+                    <Tab.Screen
+                        name="Lab4"
+                        component={Lab4}
                     />
                 </Tab.Navigator>
             </NavigationContainer>
