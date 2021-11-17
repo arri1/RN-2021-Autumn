@@ -11,24 +11,19 @@ const App = () => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if(count==1) 
-    {
+    if (count==1) {
       setColor('pink');
     }
-    if(count==2)
-    {
+    if (count==2) {
       setColor('#9E9E9E');
     }
-    if(count==3) 
-    {
+    if (count==3) {
       setColor('#4EA077');
     }
-    if(count==4)
-    {
+    if (count==4) {
       setColor('#A04EA0');
     }
-    if(count==5)
-    {
+    if(count==5) {
       setCount(0);
       setColor('white');
     }
