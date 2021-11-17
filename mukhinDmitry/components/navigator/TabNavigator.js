@@ -2,13 +2,14 @@ import React from 'react';
 import { Image, StyleSheet, Text  } from 'react-native';
 import rnLab1 from '../labs/lab1/Lab1';
 import rnLab2 from '../labs/lab2/Lab2';
+import rnLab3 from '../labs/lab3/Lab3';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
     return (
-        <Tab.Navigator screenOptions = {({ route }) => ({
+        <Tab.Navigator initialRouteName="Lab 1" screenOptions = {({ route }) => ({
             headerStyle: {
                 backgroundColor: '#5E5E5E',
             },
@@ -33,7 +34,6 @@ const TabNavigator = () => {
             <Tab.Screen 
                 name="Lab 1" 
                 component={rnLab1} 
-                
                 options={{
                     title: 'Color lightener',
                     headerTitleStyle: {
@@ -58,7 +58,21 @@ const TabNavigator = () => {
                         return <Image source = {require("../../res/img/navbar/tab-2.png")} style={styles.icon} />;
                     },
                 }}
-                />
+            />
+            <Tab.Screen 
+                name="Lab 3"
+                component={rnLab3}
+                options={{
+                    title: 'useMemo vs useCallback',
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                        color: '#FFFFFF'
+                    },
+                    tabBarIcon: () => {
+                        return <Image source = {require("../../res/img/navbar/tab-2.png")} style={styles.icon} />;
+                    },
+                }}
+            />
         </Tab.Navigator>
     )
 }
