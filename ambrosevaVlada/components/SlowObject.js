@@ -13,11 +13,11 @@ const SlowObject = () => {
   const [num, setNum] = useState(0);
 
   const expFunc = () => {
-    for (var i = 0; i < 80000000; i++) ;
+    for (let i = 0; i < 80000000; i++) ;
     return num;  
   }
 
-  const t = expFunc();
+  const funcNum = expFunc();
 
   const doAnim = () => {
 
@@ -64,7 +64,7 @@ const SlowObject = () => {
     <View>
       <TouchableOpacity onPress={() => setNum(num + 1)}>
         <Animated.View style={[anim.getLayout(), styles.circle]}>
-          <Text style={styles.text}>{t}</Text>
+          <Text style={styles.text}>{funcNum}</Text>
         </Animated.View>
       </TouchableOpacity>
       <TouchableOpacity style={[styles.button, {backgroundColor: color}]} onPress={showDiff}>

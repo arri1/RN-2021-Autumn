@@ -14,11 +14,11 @@ const QuickObject = () => {
 
 
   const expFunc = () => {
-    for (var i = 0; i < 80000000; i++) ;
+    for (let i = 0; i < 80000000; i++) ;
     return num;
   }
 
-  const t = useMemo(() => expFunc(), [num]);
+  const funcNum = useMemo(() => expFunc(), [num]);
 
   const doAnim = () => {
     Animated.sequence([
@@ -64,7 +64,7 @@ const QuickObject = () => {
     <View>
       <TouchableOpacity onPress={() => setNum(num + 1)}>
         <Animated.View style={[anim.getLayout(), styles.circle]}>
-          <Text style={styles.text}>{t}</Text>
+          <Text style={styles.text}>{funcNum}</Text>
         </Animated.View>
       </TouchableOpacity>
       <TouchableOpacity style={[styles.button, {backgroundColor: color}]} onPress={showDiff}>
