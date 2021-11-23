@@ -9,7 +9,7 @@ export default Main = ({navigation}) => {
         <View>
             <Text style={styles.btn} title="Задание 1" onPress={()=> navigation.navigate("lab1")}>Задание 1</Text>
             <Text style={styles.btn} title="Задание 2" onPress={()=> navigation.navigate("lab2")}>Задание 2</Text>
-            
+            <Text style={styles.btn} title="Задание 3" onPress={()=> navigation.navigate("lab3")}>Задание 3</Text>
         </View>
     );
 }

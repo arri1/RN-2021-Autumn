@@ -17,6 +17,7 @@ export default Lab1 = () => {
   const [baColor, setdColor] = useState(randomColor)
   const [baColor1, setdColor1] = useState(randomColor)
   return (
+  
     <SafeAreaView style={styles.container}>   
       <View style={[styles.box, {backgroundColor: baColor}]}>
         <Text style={styles.text} onPress={prssBtn}>Менять цвет</Text>
