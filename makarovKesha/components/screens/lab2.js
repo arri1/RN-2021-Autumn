@@ -57,11 +57,11 @@ const Lab2 = () => {
 const styles = StyleSheet.create({
   main: {
     height: '100%',   
-    backgroundColor: '#2F88F0',
+    backgroundColor: '#E1E4E7',
   },
 
   colorCodeBox: {
-    backgroundColor: '#D5E8FC',
+    backgroundColor: '#FFFFFF',
     padding: 30,
     marginVertical: 10,
     marginHorizontal: 70,

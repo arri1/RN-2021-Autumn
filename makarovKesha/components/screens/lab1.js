@@ -32,7 +32,7 @@ const Lab1 = () => {
 const styles = StyleSheet.create({
   main: {
     height: '100%',
-    backgroundColor: '#2F88F0',
+    backgroundColor: '#E1E4E7',
   },
 
   circle: {
