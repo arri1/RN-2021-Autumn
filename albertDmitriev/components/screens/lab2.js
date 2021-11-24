@@ -2,7 +2,7 @@ import React, { useState , useEffect} from "react";
 import { View , Text, ScrollView , StyleSheet, Image} from "react-native";
 import axios from "axios";
 
-export default function Lab2({ router }){
+const Lab2 = ({ router }) => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -55,3 +55,5 @@ const styles = StyleSheet.create({
         height: 150
     }
 })
+
+export default Lab2;
