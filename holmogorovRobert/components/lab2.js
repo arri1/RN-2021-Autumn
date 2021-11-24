@@ -23,7 +23,6 @@ export default Lab2 = () => {
           })
         .catch((error) => {console.error(error);});
   },[]);
-  const [color, setColor] = useState(["red", "green"]);
   const [text, setText] = useState('');
   const onChangeText = (text) => {
     setText(text);
