@@ -21,27 +21,26 @@ const styles = StyleSheet.create({
   }
 });
 
-const animatedStyles = {
-  opacity: animation
-}
-
-const handleAnimation = () => {
-  Animated.timing(animation, {
-    toValue: 0,
-    duration: 500,
-    useNativeDriver: true
-  }).start(() => {
-    Animated.timing(animation, {
-      toValue: 1,
-      duration: 500,
-      useNativeDriver: true
-    }).start()
-  })
-}
-
 const Lab1 = () => {
   const [animation] = useState(new Animated.Value(1))
+  const animatedStyles = {
+    opacity: animation
+  }
   
+  const handleAnimation = () => {
+    Animated.timing(animation, {
+      toValue: 0,
+      duration: 500,
+      useNativeDriver: true
+    }).start(() => {
+      Animated.timing(animation, {
+        toValue: 1,
+        duration: 500,
+        useNativeDriver: true
+      }).start()
+    })
+  }
+
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={handleAnimation}>
