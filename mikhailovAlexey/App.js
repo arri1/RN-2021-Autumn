@@ -1,9 +1,8 @@
 import * as React from 'react';
 import {useState} from 'react';
 import { Text, View, StyleSheet, Button, Animated } from 'react-native';
-
-export default function App() {
-    const [animation, setAnimation] = React.useState(new Animated.Value(0))
+const App = () => {
+  const [animation, setAnimation] = React.useState(new Animated.Value(0))
   const boxInterpolation =  animation.interpolate({
     inputRange: [0, 100],
     outputRange:['orange' , 'blue']
@@ -13,20 +12,20 @@ export default function App() {
   }
   const handleAnimation = () => {
     if (animation.__getValue() == 100)
-     {
-      Animated.timing(animation, {
-        toValue: 0,
-        duration: 500,
-        useNativeDriver: false
-      }).start()
+      {
+        Animated.timing(animation, {
+           toValue: 0,
+           duration: 500,
+           useNativeDriver: false
+        }).start()
       }
       else
       {
-      Animated.timing(animation, {
-        toValue: 100,
-        duration: 500,
-        useNativeDriver: false
-      }).start()
+        Animated.timing(animation, {
+          toValue: 100,
+          duration: 500,
+          useNativeDriver: false
+        }).start()
       }
     }
   return (
@@ -64,3 +63,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   }
 });
+
+export default App;
