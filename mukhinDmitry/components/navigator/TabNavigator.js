@@ -3,6 +3,7 @@ import { Image, StyleSheet, Text  } from 'react-native';
 import rnLab1 from '../labs/lab1/Lab1';
 import rnLab2 from '../labs/lab2/Lab2';
 import rnLab3 from '../labs/lab3/Lab3';
+import rnLab4 from '../labs/lab4/Lab4';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
@@ -64,6 +65,20 @@ const TabNavigator = () => {
                 component={rnLab3}
                 options={{
                     title: 'useMemo vs useCallback',
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                        color: '#FFFFFF'
+                    },
+                    tabBarIcon: () => {
+                        return <Image source = {require("../../res/img/navbar/tab-1.png")} style={styles.icon} />;
+                    },
+                }}
+            />
+            <Tab.Screen 
+                name="Lab 4"
+                component={rnLab4}
+                options={{
+                    title: 'React Redux Store',
                     headerTitleStyle: {
                         fontWeight: 'bold',
                         color: '#FFFFFF'
