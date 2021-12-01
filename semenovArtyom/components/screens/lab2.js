@@ -20,11 +20,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   text: {
-    marginTop: 10,
+    marginTop: 5,
+    fontSize: 18,
   },
 });
 const Lab2 = () => {
