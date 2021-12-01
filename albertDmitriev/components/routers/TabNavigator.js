@@ -6,7 +6,7 @@ import Lab3 from "../screens/lab3";
 
 const Tab = createBottomTabNavigator();
 
-export default function TabNavigator() {
+const TabNavigator = () => {
     return(
         <Tab.Navigator>
             <Tab.Screen name='Lab1' component={Lab1}/>
@@ -15,3 +15,5 @@ export default function TabNavigator() {
         </Tab.Navigator>
     );
 }
+
+export default TabNavigator;
