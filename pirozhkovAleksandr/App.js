@@ -1,11 +1,17 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import TopTabNavigator from './components/routers/TopTabNavigator';
+import {Provider} from 'react-redux';
+import store from './store';
 
-export default function App() {
+const App = () => {
   return (
-    <NavigationContainer>
-      <TopTabNavigator />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <TopTabNavigator />
+      </NavigationContainer>
+    </Provider>
   );
-}
+};
+
+export default App;

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {Shadow} from 'react-native-shadow-2';
 import LinearGradient from 'react-native-linear-gradient';
 import {
@@ -7,26 +7,21 @@ import {
   ActivityIndicator,
   StyleSheet,
   ScrollView,
+  TouchableOpacity,
   SafeAreaView,
   Image,
 } from 'react-native';
-import axios from 'axios';
+
+import {useDispatch, useSelector} from 'react-redux';
+import {checkItem} from '../../store/tasks';
 
 const Lab2 = () => {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get('https://picsum.photos/v2/list?limit=10')
-      .then(({data: newData}) => {
-        setData(newData);
-      })
-      .catch(() => {});
-  }, []);
+  const data = useSelector(state => state.data.value);
+  const dispatch = useDispatch();
 
   const content = () => {
     return (
-      <ScrollView style={{width: '100%'}}>
+      <ScrollView>
         {data.map(item => {
           return (
             <View style={styles.shadowsDiv}>
@@ -35,15 +30,23 @@ const Lab2 = () => {
                 startColor={'#00000040'}
                 finalColor={'#00000000'}
                 offset={[3, 3]}>
-                <View key={item.id} style={styles.item}>
+                <TouchableOpacity
+                  key={item.id}
+                  style={[
+                    styles.item,
+                    item.checked ? {backgroundColor: '#95D133'} : undefined,
+                  ]}
+                  onPress={() => {
+                    dispatch(checkItem(item.id));
+                  }}>
                   <Image
                     style={styles.img}
                     source={{
-                      uri: item.download_url,
+                      uri: item.picture,
                     }}
                   />
-                  <Text style={styles.title}>{item.author}</Text>
-                </View>
+                  <Text style={styles.title}>{item.title}</Text>
+                </TouchableOpacity>
               </Shadow>
             </View>
           );

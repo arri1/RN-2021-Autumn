@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {Neomorph} from 'react-native-neomorph-shadows';
 import LinearGradient from 'react-native-linear-gradient';
-import {LinearTextGradient} from 'react-native-text-gradient';
+import {useDispatch, useSelector} from 'react-redux';
+import {favItem} from '../../store/album';
 import {
   View,
   Text,
@@ -11,25 +12,13 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import axios from 'axios';
-
-const GradientText = ({children, colorsOfGradient}) => {
-  return (
-    <LinearTextGradient
-      locations={[0, 1]}
-      colors={colorsOfGradient}
-      start={{x: 0.5, y: 0.0}}
-      end={{x: 0.5, y: 1.0}}>
-      {children}
-    </LinearTextGradient>
-  );
-};
 
 const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
     justifyContent: 'center',
+    backgroundColor: '#353A45',
   },
   box: {
     borderRadius: 40,
@@ -58,13 +47,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    backgroundColor: '#353A45',
   },
   bottomContainer: {
     height: 104,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    backgroundColor: '#353A45',
   },
   scrollBottom: {
     height: 25,
@@ -73,6 +60,11 @@ const styles = StyleSheet.create({
     height: 10,
   },
   title: {
+    width: '100%',
+    textShadowColor: 'black',
+    textShadowRadius: 5,
+    textShadowOffset: {width: 2, height: 2},
+    color: '#FDD400',
     height: 69,
     fontSize: 25,
     fontFamily: 'chakraPetchBold',
@@ -80,9 +72,14 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   pageText: {
+    width: '100%',
+    textShadowColor: 'black',
+    textShadowRadius: 5,
+    textShadowOffset: {width: 2, height: 2},
+    color: '#FF008A',
     fontSize: 36,
-    color: 'white',
     fontFamily: 'chakraPetchBold',
+    textAlign: 'center',
   },
   image: {
     marginTop: 13,
@@ -117,6 +114,11 @@ const styles = StyleSheet.create({
     height: 63,
   },
   buttonText: {
+    width: '100%',
+    textShadowColor: 'black',
+    textShadowRadius: 5,
+    textShadowOffset: {width: 2, height: 2},
+    color: '#FDD400',
     fontFamily: 'chakraPetchBold',
     fontSize: 18,
     textAlign: 'center',
@@ -124,19 +126,13 @@ const styles = StyleSheet.create({
 });
 
 const Lab2 = () => {
-  const [randImages, setRandImage] = useState([]);
   const [firstEl, setFirst] = useState(0);
   const [lastEl, setLast] = useState(5);
   const [page, setPage] = useState(0);
   const ref = React.useRef(null);
 
-  useEffect(() => {
-    const randImage = async () => {
-      const response = await axios('https://picsum.photos/v2/list');
-      setRandImage(response.data);
-    };
-    randImage();
-  }, []);
+  const data = useSelector(state => state.data.value);
+  const dispatch = useDispatch();
 
   const pageControl = () => {
     return (
@@ -153,9 +149,7 @@ const Lab2 = () => {
               lightShadowColor="#1E2126"
               darkShadowColor="#576178"
               style={styles.buttonShadow}>
-              <GradientText colorsOfGradient={['#FAFF00', '#DF791A']}>
-                <Text style={styles.buttonText}>PREV</Text>
-              </GradientText>
+              <Text style={styles.buttonText}>PREV</Text>
             </Neomorph>
           </TouchableOpacity>
         )}
@@ -164,11 +158,9 @@ const Lab2 = () => {
           darkShadowColor="#576178"
           inner
           style={styles.curPage}>
-          <GradientText colorsOfGradient={['#FF008A', '#9E00FF']}>
-            <Text style={styles.pageText}>{page + 1}</Text>
-          </GradientText>
+          <Text style={styles.pageText}>{page + 1}</Text>
         </Neomorph>
-        {!!(randImages.length / 5 - page - 1) && (
+        {!!(data.length / 5 - page - 1 > 0 ? 1 : 0) && (
           <TouchableOpacity
             onPress={() => {
               setFirst(firstEl + 5);
@@ -180,9 +172,7 @@ const Lab2 = () => {
               lightShadowColor="#1E2126"
               darkShadowColor="#576178"
               style={styles.buttonShadow}>
-              <GradientText colorsOfGradient={['#FAFF00', '#DF791A']}>
-                <Text style={styles.buttonText}>NEXT</Text>
-              </GradientText>
+              <Text style={styles.buttonText}>NEXT</Text>
             </Neomorph>
           </TouchableOpacity>
         )}
@@ -196,7 +186,7 @@ const Lab2 = () => {
         <ScrollView ref={ref}>
           <View style={styles.back}>
             <View style={styles.scrollTop} />
-            {randImages.slice(firstEl, lastEl).map(item => {
+            {data.slice(firstEl, lastEl).map(item => {
               return (
                 <LinearGradient
                   key={item.id}
@@ -210,15 +200,22 @@ const Lab2 = () => {
                     darkShadowColor="#576178"
                     key={item.id}
                     style={styles.boxShadow}>
-                    <GradientText colorsOfGradient={['#FAFF00', '#DF791A']}>
-                      <Text style={styles.title}>{item.author}</Text>
-                    </GradientText>
-                    <Image
-                      style={styles.image}
-                      source={{
-                        uri: item.download_url,
-                      }}
-                    />
+                    <Text style={styles.title}>
+                      {item.author + item.favIcon}
+                    </Text>
+                    <TouchableOpacity
+                      key={item.id}
+                      onPress={() => {
+                        dispatch(favItem(item.id));
+                      }}>
+                      <Image
+                        key={item.id}
+                        style={styles.image}
+                        source={{
+                          uri: item.download_url,
+                        }}
+                      />
+                    </TouchableOpacity>
                   </Neomorph>
                 </LinearGradient>
               );
@@ -232,7 +229,7 @@ const Lab2 = () => {
 
   return (
     <View style={styles.container}>
-      {randImages ? content() : <ActivityIndicator color={'red'} />}
+      {data ? content() : <ActivityIndicator color={'red'} />}
       {pageControl()}
     </View>
   );

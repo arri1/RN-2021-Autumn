@@ -49,10 +49,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     backgroundColor: '#95A3B3',
     alignItems: 'center',
+    margin: 15,
   },
   mainBlock: {
+    backgroundColor:'#000',
     flex: 1,
-    margin: 15,
   },
   title: {
     fontWeight: 'bold',
