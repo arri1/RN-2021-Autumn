@@ -2,6 +2,8 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+
 
 import TabNavigator from "./components/routers/TabNavigator";
 
@@ -22,12 +24,19 @@ const reducer = (state = defaultState, aciton) => {
 
 const store = createStore(reducer)
 
+const client = new ApolloClient({
+    uri: 'https://nefu-server.herokuapp.com/',
+    cache: new InMemoryCache()
+});
+
 const App = () => {
     return(
         <Provider store={store}>
-            <NavigationContainer>
-                <TabNavigator />
-            </NavigationContainer>
+            <ApolloProvider client={client}>
+                <NavigationContainer>
+                    <TabNavigator />
+                </NavigationContainer>
+            </ApolloProvider>
         </Provider>
     )
 }
