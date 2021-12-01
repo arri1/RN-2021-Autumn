@@ -76,7 +76,7 @@ const TabNavigator = () => {
                 }}
             />
             <Tab.Screen 
-                name="Lab 4"
+                name="Lab 4.1"
                 component={rnLab41}
                 options={{
                     title: 'React Redux Store',
