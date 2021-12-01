@@ -1,6 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {useDispatch} from 'react-redux';
+import {loadItems} from '../store/task';
+import axios from 'axios';
 
 import imgHome from '../img/home.jpg';
 import imgNews from '../img/news.jpg';
@@ -9,10 +12,22 @@ import imgExit from '../img/exit.jpg';
 import News from '../screens/News';
 import Arts from '../screens/Arts';
 import Lab3 from '../screens/Lab3';
+import Lab4 from '../screens/Lab4';
 
 const Tab = createBottomTabNavigator();
 
-const Tabs = () => {
+const Tabs = ({navigation}) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (dispatch) {
+      axios
+        .get('https://my-json-server.typicode.com/MidnightYKT/json/posts')
+        .then(({data}) => {
+          dispatch(loadItems(data));
+        })
+        .catch(() => {});
+    }
+  }, [dispatch]);
   return (
     <Tab.Navigator
       screenOptions={{
@@ -96,6 +111,30 @@ const Tabs = () => {
               <Text
                 style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
                 Lab3
+              </Text>
+            </View>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="    "
+        component={Lab4}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <View
+              style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
+              <Image
+                source={imgExit}
+                resizeMode="contain"
+                style={{
+                  width: 25,
+                  height: 25,
+                  tintColor: focused ? '#e32f45' : '#748c94',
+                }}
+              />
+              <Text
+                style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
+                Lab4
               </Text>
             </View>
           ),
