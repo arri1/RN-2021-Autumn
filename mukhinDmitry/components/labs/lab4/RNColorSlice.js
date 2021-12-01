@@ -16,7 +16,6 @@ export const colorSlice = createSlice({
             g = '0' + g
         if (b.length == 1)
             b = '0' + b
-        console.log(r,g,b)
         state.value = '#' + r + g + b
     }
   },
