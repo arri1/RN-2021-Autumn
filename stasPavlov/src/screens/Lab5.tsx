@@ -5,6 +5,8 @@ import MediumText from '../components/customs/text/MediumText'
 import { v4 } from 'uuid'
 import { useQuery } from '@apollo/client'
 import { FIND_MANY_USER } from '../query/user'
+import FullScreenLoader from '../components/customs/FullScreenLoader'
+import { colors } from '../constants/colors'
 
 interface User {
     login: string
@@ -20,8 +22,12 @@ const Lab5 = () => {
         }
     }, [data, loading])
 
+    if (loading) {
+        return <FullScreenLoader />
+    }
+
     return (
-        <ScrollView>
+        <ScrollView style={{backgroundColor: colors.white}}>
             {users.map((user : User) => {
                 return (
                     <View key={v4()} style={{flexDirection: 'row'}}>
