@@ -2,19 +2,10 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   main: {
-    height: 690,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  counterText: {
     width: '100%',
-    textShadowColor: 'black',
-    textShadowRadius: 5,
-    textShadowOffset: {width: 2, height: 2},
-    color: '#FF008A',
-    fontFamily: 'chakraPetchBold',
-    fontSize: 18,
-    textAlign: 'center',
+    height: '100%',
+    alignItems: 'center',
+    backgroundColor: '#353A45',
   },
   buttonShadow: {
     shadowOffset: {width: -7, height: -7},

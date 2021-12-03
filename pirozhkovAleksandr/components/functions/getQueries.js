@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View, ScrollView} from 'react-native';
 import {useQuery} from '@apollo/client';
-import {USER} from '../gqls/users/queries';
+import {GET_USER} from '../gqls/users/queries';
 import {StyleSheet} from 'react-native';
 import {Neomorph} from 'react-native-neomorph-shadows';
 
@@ -14,6 +14,13 @@ const styles = StyleSheet.create({
   },
   main2: {
     width: '100%',
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  scroll: {
+    width: '100%',
+    marginTop: 20,
+    marginBottom: 20,
   },
   counterText: {
     width: '100%',
@@ -49,8 +56,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export const ExchangeRates = () => {
-  const {loading, error, data} = useQuery(USER);
+export const UsersList = () => {
+  const {loading, error, data} = useQuery(GET_USER);
 
   if (loading) {
     return <Text>Loading...</Text>;
@@ -60,23 +67,19 @@ export const ExchangeRates = () => {
   }
 
   return (
-    <View style={styles.main}>
-      <ScrollView style={styles.main2}>
-        {data.findManyUser.map(item => {
-          return (
-            <View key={item.id} style={{alignSelf: 'center'}}>
-              <Neomorph
-                lightShadowColor="#1E2126"
-                darkShadowColor="#576178"
-                style={styles.buttonShadow}>
-                <Text style={styles.buttonText}>
-                  {item.name}:{item.group}
-                </Text>
-              </Neomorph>
-            </View>
-          );
-        })}
-      </ScrollView>
-    </View>
+    <ScrollView style={styles.scroll}>
+      {data.findManyUser.map(item => {
+        return (
+          <View key={item.id} style={{alignSelf: 'center'}}>
+            <Neomorph
+              lightShadowColor="#1E2126"
+              darkShadowColor="#576178"
+              style={styles.buttonShadow}>
+              <Text style={styles.buttonText}>{item.name}</Text>
+            </Neomorph>
+          </View>
+        );
+      })}
+    </ScrollView>
   );
 };

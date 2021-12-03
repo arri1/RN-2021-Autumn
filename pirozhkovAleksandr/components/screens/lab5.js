@@ -1,19 +1,12 @@
 import React from 'react';
 import {View} from 'react-native';
-import {ExchangeRates} from '../functions/getQueries';
-import {styles} from '../styles/lab1Styles';
+import {styles} from '../styles/lab5Styles';
+import TopTabNavigator from '../routers/TopTabNavigatorLab5';
 
 const Lab5 = ({navigation}) => {
   return (
-    <View
-      style={
-        (styles.main,
-        {
-          backgroundColor: '#353A45',
-          alignItems: 'center',
-        })
-      }>
-      <ExchangeRates />
+    <View style={styles.main}>
+      <TopTabNavigator />
     </View>
   );
 };

@@ -1,10 +1,11 @@
 import {gql} from '@apollo/client';
 
-export const USER = gql`
+export const GET_USER = gql`
   query {
-    findManyUser {
+    findManyUser(where: {name: {not: {equals: null}}}) {
       id
       name
+      login
       group
     }
   }
