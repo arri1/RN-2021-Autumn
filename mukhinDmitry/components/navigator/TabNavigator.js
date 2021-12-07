@@ -5,6 +5,7 @@ import rnLab2 from '../labs/lab2/Lab2';
 import rnLab3 from '../labs/lab3/Lab3';
 import rnLab41 from '../labs/lab4/Lab41';
 import rnLab42 from '../labs/lab4/Lab42';
+import rnLab5 from '../labs/lab5/Lab5';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
@@ -100,6 +101,20 @@ const TabNavigator = () => {
                     },
                     tabBarIcon: () => {
                         return <Image source = {require("../../res/img/navbar/tab-1.png")} style={styles.icon} />;
+                    },
+                }}
+            />
+            <Tab.Screen 
+                name="Lab 5"
+                component={rnLab5}
+                options={{
+                    title: 'Apollo Auth',
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                        color: '#FFFFFF'
+                    },
+                    tabBarIcon: () => {
+                        return <Image source = {require("../../res/img/navbar/tab-2.png")} style={styles.icon} />;
                     },
                 }}
             />
