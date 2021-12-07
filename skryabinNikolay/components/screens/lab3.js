@@ -48,13 +48,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingTop: 15,
     paddingBottom: 15,
+    color: 'black',
   },
   button: {
     alignItems: 'center',
-    backgroundColor: 'green',
-    borderRadius: 50,
-    marginLeft: 100,
-    marginRight: 100,
+    backgroundColor: 'orange',
+    borderRadius: 100,
+    marginLeft: 85,
+    marginRight: 85,
     marginBottom: 50,
   },
   message: {
@@ -65,6 +66,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 15,
+    color: 'black',
   },
 });
 
