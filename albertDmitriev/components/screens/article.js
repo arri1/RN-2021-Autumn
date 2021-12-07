@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { Text , SafeAreaView , StyleSheet, Image, ScrollView, TouchableOpacity} from "react-native";
 
 const Article = ({ route }) => {
-    const [imgURL, seimgURL] = useState(route.params.imgurl)
+    const [imgURL, setimgURL] = useState(route.params.imgurl)
     return(
         <SafeAreaView style={styles.container}>
             <ScrollView>
                 <Text style={styles.title}>{route.params.title}</Text>
-                {/* <Text>{imgURL}dsa</Text> */}
                 <Image style={styles.img} source={{uri: imgURL}}/>
                 <Text style={styles.artBody}>{route.params.body}</Text>
                 <TouchableOpacity style={styles.likeBtn}>
@@ -39,13 +38,13 @@ const styles = StyleSheet.create({
     },
     artBody: {
         color: "black",
-        marginBottom: 50
     },
     likeBtn: {
         alignItems: "center",
         padding: 20,
-        backgroundColor: "red",
-        borderRadius: 10
+        backgroundColor: "#56E58F",
+        borderRadius: 10,
+        marginTop: 20
     },
     likeBtnText: {
         fontSize: 20,

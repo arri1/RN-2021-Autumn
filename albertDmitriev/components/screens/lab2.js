@@ -33,18 +33,21 @@ const Lab2 = ({ navigation }) => {
 const styles = StyleSheet.create({
     main: {
         flex: 1,
+        marginTop: 20
     },
     item: {
-        margin: 20,
+        marginHorizontal: 20,
+        marginBottom: 30,
         padding: 10,
-        borderColor: 'black',
-        borderWidth: 2,
-        borderRadius: 10
+        // borderWidth: 1,
+        borderRadius: 15,
+        backgroundColor: "#B3B3B3"
     },
     title: {
         fontWeight: 'bold',
         fontSize: 20,
-        color: 'black'
+        color: 'black',
+        textAlign: "center"
     },
     imgContainer: {
         alignItems: "center"
