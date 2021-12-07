@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { View , Button , StyleSheet } from "react-native";
-import { exp } from "react-native-reanimated";
 
 const Lab1 = ({ route }) => {
     const [bgColor, setBgColor] = useState('white');
