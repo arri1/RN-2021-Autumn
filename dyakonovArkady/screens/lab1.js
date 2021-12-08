@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
-const lab1 = () => {
+const Lab1 = () => {
   const [color, setColor] = useState('#75FFB1');
    
   return (
@@ -16,8 +16,6 @@ const lab1 = () => {
     </SafeAreaView>
   );
 };
-
-export default lab1;
 
 const styles = StyleSheet.create({
   main:{
@@ -40,3 +38,5 @@ const styles = StyleSheet.create({
     color: '#FFFFFF'
   },
 });
+
+export default Lab1;

@@ -1,27 +1,17 @@
-import React, {useState, useEffect, useMemo, useCallback} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import axios from 'axios';
 import {GradientButton, GradientNeomorph} from '../addons/GradientComponents';
 
 import {View, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
 
+import {useDispatch} from 'react-redux';
+import {loadPhoto} from '../../store/photo';
+
 const styles = StyleSheet.create({
   main: {
     height: 690,
     backgroundColor: '#353A45',
-  },
-  label: {
-    shadowOffset: {width: -4, height: -4},
-    shadowOpacity: 1,
-    margin: 5,
-    shadowRadius: 8,
-    borderRadius: 40,
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#353A45',
-    width: 112,
-    height: 50,
   },
   image: {
     alignSelf: 'center',
@@ -69,12 +59,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
-  buttonText: {
-    fontFamily: 'chakraPetchBold',
-    fontSize: 18,
-    textAlign: 'center',
-    color: '#FF008A',
-  },
   box: {
     borderRadius: 30,
     margin: 5,
@@ -96,6 +80,8 @@ const styles = StyleSheet.create({
 });
 
 const Lab3 = () => {
+  const dispatch = useDispatch();
+
   const [url, setUrl] = useState(0);
   const [allImages, setAllImages] = useState([]);
   const [page, setPage] = useState(0);
@@ -104,40 +90,9 @@ const Lab3 = () => {
   );
   const [switched, setSwitch] = useState(0);
   const [album, setAlbum] = useState([]);
+  const [miniAlbum, setMiniAlbum] = useState([]);
   const ref = React.useRef(null);
   const ref2 = React.useRef(null);
-
-  const miniAlbumm = (allImages1, ref1) => {
-    return (
-      <GradientNeomorph styleBox={styles.box2} styleShadow={styles.boxShadow2}>
-        <ScrollView ref={ref1} horizontal={true}>
-          {allImages1.map((item, index) => {
-            return (
-              <TouchableOpacity
-                key={item.id}
-                onPress={() => {
-                  ref.current.scrollTo({
-                    x: index * 320,
-                    y: 0,
-                    animated: true,
-                  });
-                }}>
-                <FastImage
-                  key={item.id}
-                  style={styles.image2}
-                  source={{
-                    uri: item.download_url,
-                    headers: {Authorization: 'token'},
-                    cache: FastImage.cacheControl.immutable,
-                  }}
-                />
-              </TouchableOpacity>
-            );
-          })}
-        </ScrollView>
-      </GradientNeomorph>
-    );
-  };
 
   const albumCall = useCallback(
     ref1 => {
@@ -166,14 +121,51 @@ const Lab3 = () => {
     [allImages],
   );
 
+  const miniAlbumCall = useCallback(
+    ref1 => {
+      return (
+        <GradientNeomorph
+          styleBox={styles.box2}
+          styleShadow={styles.boxShadow2}>
+          <ScrollView ref={ref1} horizontal={true}>
+            {allImages.map((item, index) => {
+              return (
+                <TouchableOpacity
+                  key={item.id}
+                  onPress={() => {
+                    ref.current.scrollTo({
+                      x: index * 320,
+                      y: 0,
+                      animated: true,
+                    });
+                    dispatch(loadPhoto(item.download_url));
+                  }}>
+                  <FastImage
+                    key={item.id}
+                    style={styles.image2}
+                    source={{
+                      uri: item.download_url,
+                      headers: {Authorization: 'token'},
+                      cache: FastImage.cacheControl.immutable,
+                    }}
+                  />
+                </TouchableOpacity>
+              );
+            })}
+          </ScrollView>
+        </GradientNeomorph>
+      );
+    },
+    [allImages, dispatch],
+  );
+
   useEffect(() => {
     setAlbum(albumCall(ref));
   }, [albumCall]);
 
-  const minialbum = useMemo(
-    () => miniAlbumm(allImages, ref2),
-    [allImages, ref2],
-  );
+  useEffect(() => {
+    setMiniAlbum(miniAlbumCall(ref2));
+  }, [miniAlbumCall]);
 
   useEffect(() => {
     axios
@@ -245,7 +237,7 @@ const Lab3 = () => {
       <View>
         {memoUse()}
         {album}
-        {minialbum}
+        {miniAlbum}
         {pageControl()}
       </View>
     </View>

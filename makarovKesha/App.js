@@ -7,6 +7,8 @@ import {
   View,
   Text,
 } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import Tabs from './components/routers/tabs';
 
 const App = () => {
 
@@ -14,17 +16,9 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.main}>
-      <ScrollView>
-
-        <TouchableOpacity
-          style={[ styles.circle, {backgroundColor: color} ]}
-          onPress={() => setColor( '#' + Math.floor(Math.random()*16581375).toString(16) )}>
-        </TouchableOpacity>
-
-        <View style={styles.colorCodeBox}>
-          <Text style = {[styles.mainText, {textTransform: 'uppercase'}]}>{color}</Text>
-        </View>
-      </ScrollView>
+      <NavigationContainer>
+        <Tabs />
+      </NavigationContainer>
     </SafeAreaView>
   );
 };

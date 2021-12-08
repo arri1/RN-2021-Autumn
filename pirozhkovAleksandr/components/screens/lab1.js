@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Neomorph} from 'react-native-neomorph-shadows';
-import {LinearTextGradient} from 'react-native-text-gradient';
 
 import {
   View,
@@ -10,61 +9,21 @@ import {
   ScrollView,
 } from 'react-native';
 
-const GradientText = ({children, colorsOfGradient}) => {
-  return (
-    <LinearTextGradient
-      locations={[0, 1]}
-      colors={colorsOfGradient}
-      start={{x: 0.5, y: 0.0}}
-      end={{x: 0.5, y: 1.0}}>
-      {children}
-    </LinearTextGradient>
-  );
-};
-
 const styles = StyleSheet.create({
   main: {
     height: 690,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  box: {
-    height: 150,
-    width: 200,
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 10,
-    borderRadius: 20,
-  },
-  littleBox: {
-    height: 50,
-    width: 200,
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 10,
-    borderRadius: 15,
-    backgroundColor: '#DBAB84',
-  },
-  text: {
-    fontSize: 20,
-  },
-  counterContainer: {
-    width: 200,
-    borderRadius: 10,
-    alignItems: 'center',
-    backgroundColor: '#DBBD86',
-    marginTop: 10,
-    alignSelf: 'center',
-    fontSize: 20,
-  },
-  image: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 150,
-    right: 0,
+  counterText: {
+    width: '100%',
+    textShadowColor: 'black',
+    textShadowRadius: 5,
+    textShadowOffset: {width: 2, height: 2},
+    color: '#FF008A',
+    fontFamily: 'chakraPetchBold',
+    fontSize: 18,
+    textAlign: 'center',
   },
   buttonShadow: {
     shadowOffset: {width: -7, height: -7},
@@ -79,6 +38,11 @@ const styles = StyleSheet.create({
     height: 63,
   },
   buttonText: {
+    width: '100%',
+    textShadowColor: 'black',
+    textShadowRadius: 5,
+    textShadowOffset: {width: 2, height: 2},
+    color: '#FDD400',
     fontFamily: 'chakraPetchBold',
     fontSize: 18,
     textAlign: 'center',
@@ -97,9 +61,7 @@ const Lab1 = ({navigation, route}) => {
             lightShadowColor="#1E2126"
             darkShadowColor="#576178"
             style={styles.buttonShadow}>
-            <GradientText colorsOfGradient={['#FAFF00', '#DF791A']}>
-              <Text style={styles.buttonText}>Click me</Text>
-            </GradientText>
+            <Text style={styles.buttonText}>Click me</Text>
           </Neomorph>
         </TouchableOpacity>
 
@@ -108,9 +70,7 @@ const Lab1 = ({navigation, route}) => {
             lightShadowColor="#1E2126"
             darkShadowColor="#576178"
             style={styles.buttonShadow}>
-            <GradientText colorsOfGradient={['#FAFF00', '#DF791A']}>
-              <Text style={styles.buttonText}>Click me too</Text>
-            </GradientText>
+            <Text style={styles.buttonText}>Click me too</Text>
           </Neomorph>
         </TouchableOpacity>
 
@@ -120,9 +80,7 @@ const Lab1 = ({navigation, route}) => {
             darkShadowColor="#576178"
             inner
             style={styles.buttonShadow}>
-            <GradientText colorsOfGradient={['#FAFF00', '#DF791A']}>
-              <Text style={styles.buttonText}>{counter}</Text>
-            </GradientText>
+            <Text style={styles.counterText}>{counter}</Text>
           </Neomorph>
         </View>
 
@@ -131,9 +89,7 @@ const Lab1 = ({navigation, route}) => {
             lightShadowColor="#1E2126"
             darkShadowColor="#576178"
             style={styles.buttonShadow}>
-            <GradientText colorsOfGradient={['#FAFF00', '#DF791A']}>
-              <Text style={styles.buttonText}>Add some points</Text>
-            </GradientText>
+            <Text style={styles.buttonText}>Add some points</Text>
           </Neomorph>
         </TouchableOpacity>
 
@@ -142,9 +98,7 @@ const Lab1 = ({navigation, route}) => {
             lightShadowColor="#1E2126"
             darkShadowColor="#576178"
             style={styles.buttonShadow}>
-            <GradientText colorsOfGradient={['#FAFF00', '#DF791A']}>
-              <Text style={styles.buttonText}>Subtract some points</Text>
-            </GradientText>
+            <Text style={styles.buttonText}>Subtract some points</Text>
           </Neomorph>
         </TouchableOpacity>
       </View>
