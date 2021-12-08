@@ -1,31 +1,30 @@
-import React, {useState} from "react";
+import React from "react";
 import {
+  Text,
+  View,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
-  View,
-  Text,
 } from "react-native";
-import { load } from "../../store/tasks";
-import { useSelector, useDispatch} from 'react-redux';
-const Lab1 = () => {
+import { useSelector} from 'react-redux'
 
+const Lab4 = () => {
+  
   const color = useSelector((state) => state.background.value)
-  const dispatch = useDispatch()
-
+  const count = useSelector((state) => state.background.counter)
   return (
     <SafeAreaView style={styles.main}>
       <ScrollView>
 
-        <TouchableOpacity
-          style={[ styles.circle, {backgroundColor: color} ]}
-          onPress={() =>{dispatch(load())}}>
-        </TouchableOpacity>
-
+        <TouchableOpacity style={[ styles.circle, {backgroundColor: color} ]}/>
+        
         <View style={styles.colorCodeBox}>
-          <Text style = {[styles.mainText, {textTransform: 'uppercase'}]}>{color}</Text>
+          <Text style = {[styles.mainText, {textTransform: 'uppercase'}]}>{count}</Text>
         </View>
+        
+
+
       </ScrollView>
     </SafeAreaView>
   );
@@ -47,7 +46,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center',
  },
-
+ 
   colorCodeBox: {
     backgroundColor: '#FFFFFF',
     padding: 20,
@@ -57,11 +56,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-
+  
   mainText: {
     fontSize: 22, 
   },
-
 });
 
-export default Lab1;
+export default Lab4;

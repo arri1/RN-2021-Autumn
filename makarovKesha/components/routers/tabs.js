@@ -4,6 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import lab1 from '../screens/lab1';
 import lab2 from '../screens/lab2';
 import lab3 from '../screens/lab3';
+import lab4 from '../screens/lab4';
 
 const Tab = createBottomTabNavigator();
 
@@ -89,6 +90,29 @@ const TabNavigation = () => {
                     ),
                 }}
             />
+
+            <Tab.Screen 
+                name = "Lab 4" 
+                component = {lab4} 
+                options = {{
+                    tabBarIcon: ({focused}) => (
+                        <View style = {{alignItems: 'center', justifyContent: 'center', top: 3}}>
+                            <Image 
+                                source = {require('../../img/number-4.png')}
+                                resizeMode = "contain"
+                                style={{
+                                    width: 40,
+                                    height: 40,
+                                }}
+                            />
+                            <Text style = {{color: focused ?'#2F88F0' : '#27303E', fontSize: 12}}>
+                                    Redux
+                            </Text>
+                        </View>
+                    ),
+                }}
+            />
+            
         </Tab.Navigator>
     );
 }

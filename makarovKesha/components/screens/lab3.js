@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-
+import { useSelector, useDispatch} from 'react-redux';
+import { increaseCounter } from '../../store/tasks';
 
 const expensiveFunction = () => {
   let i = 0;
@@ -17,12 +18,14 @@ const expensiveFunction = () => {
   return 'Счетчик';
 };
 const Lab3 = () => {
-  const [count, setCount] = useState(0);
+  const count = useSelector((state) => state.background.counter)
+  const dispatch = useDispatch()
+
   const [text, setText] = useState('');
 
   const onPressHandler = () => {
     const text = expensiveFunction();
-    setCount(count + 1);
+    dispatch(increaseCounter())
     setText(`${count} ${text}`);
   };
   const operation = useMemo(expensiveFunction, []);
@@ -30,7 +33,7 @@ const Lab3 = () => {
   const onPressHandlerSecond = () => {
     const text = operation;
 
-    setCount(count + 1);
+    dispatch(increaseCounter())
     setText(`${count} ${text}`);
   };
 
