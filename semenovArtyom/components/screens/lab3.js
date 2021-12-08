@@ -28,11 +28,16 @@ const styles = StyleSheet.create({
         margin: 15,
         },
     box: {
+        display: 'flex',
         height: 100,
         width: 100,
-        margin: 160,
+        marginTop: 160,
         backgroundColor: '#FFFFFF',
+        alignSelf: 'center'
         },
+    text: {
+      fontSize: 18,
+    }
 });
 
 const expensiveFunction = () => {
@@ -66,7 +71,7 @@ const Lab3 = () => {
   return (
     <View>
       <ScrollView style={styles.scroll}>
-        <Text>{text}</Text>
+        <Text style={styles.text}>{text}</Text>
 
         <TouchableOpacity style={styles.button} onPress={onPressHandler} />
         <TouchableOpacity

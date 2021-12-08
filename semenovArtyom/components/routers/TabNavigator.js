@@ -17,17 +17,9 @@ const TabNavigator = () => {
         display: 'flex'
       },
       tabBarIcon: ({focused}) => {
-        let icon;
-        if (icon = focused){
           return <View>
-            <Text style={styles.focusedText}>{route.name}</Text>
+            <Text style={{fontFamily: 'Arial',fontSize: 19,color: focused ? '#00008B' : '#191919'}}>{route.name}</Text>
           </View>
-        }
-        else{
-          return <View>
-            <Text style={styles.text}>{route.name}</Text>
-          </View>
-        }
       },
       headerShown: false,
       tabBarShowLabel: false
@@ -38,18 +30,5 @@ const TabNavigator = () => {
     </Tab.Navigator>
   );
 };
-
-const styles = StyleSheet.create({
-  text: {
-    fontFamily: 'Arial',
-    color: '#191919',
-    fontSize: 19,
-  },
-  focusedText: {
-    fontFamily: 'Arial',
-    color: '#00008B',
-    fontSize: 19,
-  },
-});
 
 export default TabNavigator;

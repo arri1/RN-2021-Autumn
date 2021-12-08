@@ -40,8 +40,9 @@ const styles = StyleSheet.create({
   box: {
     height: 100,
     width: 100,
-    margin: 160,
+    marginTop: 160,
     backgroundColor: '#FFFFFF',
+    alignSelf: 'center'
   },
 });
 export default Lab1;
