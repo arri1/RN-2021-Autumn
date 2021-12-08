@@ -1,22 +1,13 @@
-import React from 'react';
-import {createStore} from 'redux';
+import toDoReducer from './reducers/toDoReducer';
+import backColorReducer from './reducers/backColorReducer';
 
-const initialState = {
-  username: 'GUEST',
-};
+import {combineReducers, createStore} from 'redux';
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'SIGN_UP':
-      return {username: action.username};
-    case 'DROP':
-      return {username: 'GUEST'};
+const combineReducer = combineReducers({
+  toDo: toDoReducer,
+  backColor: backColorReducer,
+});
 
-    default:
-      return state;
-  }
-};
-
-const store = createStore(reducer);
+const store = createStore(combineReducer);
 
 export default store;

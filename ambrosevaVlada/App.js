@@ -8,7 +8,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <TabNavigator></TabNavigator>
+        <TabNavigator />
       </NavigationContainer>
     </Provider>
   );
