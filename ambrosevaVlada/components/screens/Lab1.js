@@ -1,14 +1,10 @@
 import React, {useState, useEffects} from 'react';
-import {
-  Text, 
-  View, 
-  StyleSheet, 
-  Animated, 
-  PanResponder
-} from 'react-native';
+import {Text, View, StyleSheet, Animated, PanResponder} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 
 const Lab1 = () => {
-  const [color, setColor] = useState('#E6D899');
+  const backColor = useSelector(state => state.backColor.color);
+  const dispatch = useDispatch();
   const loc = useState(new Animated.ValueXY({x: 0, y: 0}))[0];
 
   const panResponder = useState(
@@ -22,9 +18,9 @@ const Lab1 = () => {
       },
       onPanResponderMove: (evt, gesture) => {
         if (gesture.dx > 0) {
-          setColor('#FD442E');
+          dispatch({type: 'CHANGE_COLOR', color: '#FD442E'});
         } else if (gesture.dx < 0) {
-          setColor('#AAC284');
+          dispatch({type: 'CHANGE_COLOR', color: '#AAC284'});
         }
         return Animated.event([null, {dx: loc.x, dy: loc.y}], {
           useNativeDriver: false,
@@ -39,7 +35,7 @@ const Lab1 = () => {
   return (
     <View style={styles.container}>
       <Animated.View
-        style={[styles.circle, loc.getLayout(), {backgroundColor: color}]}
+        style={[styles.circle, loc.getLayout(), {backgroundColor: backColor}]}
         {...panResponder.panHandlers}>
         <Text style={styles.text}>L&emsp;&emsp;R</Text>
       </Animated.View>
@@ -68,8 +64,8 @@ const styles = StyleSheet.create({
     fontFamily: 'PTSansNarrow-Bold',
     color: '#FFFFFC',
     fontSize: 24,
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
 });
 
 export default Lab1;
