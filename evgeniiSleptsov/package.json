@@ -15,11 +15,15 @@
     "@react-navigation/native": "^6.0.6",
     "axios": "^0.24.0",
     "react": "17.0.2",
+<<<<<<< HEAD
     "react-native": "0.66.3",
     "react-native-gesture-handler": "^2.1.0",
     "react-native-reanimated": "^2.2.4",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.10.0"
+=======
+    "react-native": "0.66.3"
+>>>>>>> 2c532c523f5cff2f215d1e69beb3fabdc9b4b43e
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
