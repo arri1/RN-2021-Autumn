@@ -1,14 +1,8 @@
 import React, {useEffect} from 'react';
-import axios from 'axios';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import Lab1 from '../screens/lab1';
-import Lab2 from '../screens/lab2';
-import Lab3 from '../screens/lab3';
-import Lab4 from '../screens/lab4';
-import Lab5 from '../screens/lab5';
 import {StyleSheet} from 'react-native';
-import {useDispatch} from 'react-redux';
-import {loadItems} from '../../store/album';
+import SignIn from '../screens/signIn';
+import Registration from '../screens/registration';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -24,9 +18,6 @@ const styles = StyleSheet.create({
   tabItem: {
     margin: 5,
     height: 47,
-    borderRadius: 35,
-    borderColor: '#9E00FF',
-    borderWidth: 3,
   },
   tabLabel: {
     width: '100%',
@@ -43,17 +34,6 @@ const styles = StyleSheet.create({
 });
 
 const TopTabNavigator = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const randImage = async () => {
-      if (dispatch) {
-        const response = await axios('https://picsum.photos/v2/list');
-        dispatch(loadItems(response.data));
-      }
-    };
-    randImage();
-  }, [dispatch]);
-
   return (
     <Tab.Navigator
       screenOptions={{
@@ -62,11 +42,8 @@ const TopTabNavigator = () => {
         tabBarStyle: styles.tabBar,
       }}
       style={{backgroundColor: '#353A45'}}>
-      <Tab.Screen name="Lab5" component={Lab5} />
-      <Tab.Screen name="Lab4" component={Lab4} />
-      <Tab.Screen name="Lab3" component={Lab3} />
-      <Tab.Screen name="Lab2" component={Lab2} />
-      <Tab.Screen name="Lab1" component={Lab1} />
+      <Tab.Screen name="Sign in" component={SignIn} />
+      <Tab.Screen name="Registration" component={Registration} />
     </Tab.Navigator>
   );
 };
