@@ -70,7 +70,7 @@ const Lab3: React.FC = () => {
             <TouchableOpacity style={styles.button} onPress={clearState}>
                 <MediumText>clear state</MediumText>
             </TouchableOpacity>
-            <View>
+            <View style={{alignItems: 'center'}}>
                 <BoldText style={{fontSize: 20}}>useCallback</BoldText>
                 <TextInput style={styles.button} placeholder={'Напишите что-нибудь'} value={text} onChangeText={setText}/>
             </View>

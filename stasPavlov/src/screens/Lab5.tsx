@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import {ScrollView, View} from 'react-native'
+import React from 'react'
+import {ScrollView, StyleSheet, View} from 'react-native'
 import BoldText from '../components/customs/text/BoldText'
 import MediumText from '../components/customs/text/MediumText'
 import { v4 } from 'uuid'
@@ -13,24 +13,39 @@ interface User {
     name: string
 }
 
+const styles = StyleSheet.create({
+    container: {
+        alignItems: 'center',
+        backgroundColor: colors.white,
+    },
+    user: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '90%',
+        backgroundColor: colors.lightLilac,
+        padding: 10,
+        borderRadius: 10,
+        marginBottom: 10,
+    },
+    header: {
+        fontSize: 20,
+        margin: 10
+    }
+})
+
 const Lab5 = () => {
-    const {data, loading, error} = useQuery(FIND_MANY_USER)
-    const [users, setUsers] = useState([])
-    useEffect(() => {
-        if (!loading) {
-            setUsers(data.findManyUser)
-        }
-    }, [data, loading])
+    const {data, loading} = useQuery(FIND_MANY_USER)
 
     if (loading) {
         return <FullScreenLoader />
     }
 
     return (
-        <ScrollView style={{backgroundColor: colors.white}}>
-            {users.map((user : User) => {
+        <ScrollView contentContainerStyle={styles.container}>
+            <BoldText style={styles.header}>User List</BoldText>
+            {data.findManyUser.map((user : User) => {
                 return (
-                    <View key={v4()} style={{flexDirection: 'row'}}>
+                    <View key={v4()} style={styles.user}>
                         <BoldText style={{marginRight: 10}}>{user.login}</BoldText>
                         <MediumText>{user.name}</MediumText>
                     </View>
