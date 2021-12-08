@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, SafeAreaView } from 'react-native';
+import { View, StyleSheet, SafeAreaView, Text } from 'react-native';
+import {  useSelector } from 'react-redux';
 
 import StyledButton from "../common/StyledButton";
 
 const Lab1 = () => {
   const [isPresed, setPressed] = useState(false);
+  const points = useSelector((state) => state.points)
 
   return (
     <SafeAreaView>
@@ -14,7 +16,9 @@ const Lab1 = () => {
           style = {styles.button} 
           onPress = {() => setPressed(!isPresed)}
         />
-        {!!isPresed && (<View style = {styles.rectangle} />)}
+        {isPresed ? (<View style = {styles.rectangle}>
+                            <Text style={styles.points}>{points}</Text>
+                        </View>) : null}
       </View>
     </SafeAreaView>
   );
@@ -45,7 +49,11 @@ const styles = StyleSheet.create({
     height: '50%',
     borderRadius: 10,
     backgroundColor: '#B6CCA1',
+    justifyContent: 'center',
     alignItems: 'center'
+  },
+  points: {
+    fontSize: 200,
   }
 });
 
