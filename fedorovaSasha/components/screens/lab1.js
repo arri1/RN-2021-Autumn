@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 
 const Lab1 = () => {
-  const [color1, setColor1] = useState('#5CBDDB');
-  const [color2, setColor2] = useState('#C446DB');
+  const [color1, setColor1] = useState('#C27E5D');
+  const [color2, setColor2] = useState('#C27E5D');
   const [size, setSize] = useState(26);
 
   return (
@@ -25,21 +25,21 @@ const Lab1 = () => {
         <TouchableOpacity
           style={[styles.countButton, {backgroundColor: color1}]}
           onPress={() => {
-            setColor1('#98DB46');
-            setColor2('#C75CDB');
-            setSize(36);
+            setColor1('#8F401A');
+            setColor2('#78C25D');
+            setSize(size + 3);
           }}>
-          <Text>Increase font size</Text>
+          <Text style={styles.textButton}>Increase font size</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={[styles.countButton, {backgroundColor: color2}]}
           onPress={() => {
-            setColor1('#C75CDB');
-            setColor2('#98DB46');
-            setSize(16);
+            setColor1('#78C25D');
+            setColor2('#8F401A');
+            setSize(size - 3);
           }}>
-          <Text>Reduce font size</Text>
+          <Text style={styles.textButton}>Reduce font size</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
@@ -49,19 +49,22 @@ const Lab1 = () => {
 const styles = StyleSheet.create({
   main: {
     height: '100%',
-    backgroundColor: '#E6AF77',
+    backgroundColor: '#CCF6CF',
   },
   box: {
     margin: 15,
   },
   text: {
-    fontSize: 16,
+    color: '#8F401A',
+  },
+  textButton: {
+    color: '#ffffff',
+    fontSize: 22,
   },
   countButton: {
-    backgroundColor: '#5CBDDB',
     margin: 15,
-    borderRadius: 12,
-    padding: 20,
+    borderRadius: 30,
+    padding: 12,
     justifyContent: 'center',
     alignItems: 'center',
   },
