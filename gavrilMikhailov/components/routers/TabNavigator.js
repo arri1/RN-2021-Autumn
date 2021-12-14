@@ -50,7 +50,7 @@ const TabNavigator = () => {
                 ? require('../../assets/list.bullet.rectangle.portrait.fill.png') 
                 : require('../../assets/list.bullet.rectangle.portrait.png')
             }
-            if (route.route.name === 'Lab 4') {
+            if (route.route.name === 'Lab 3') {
               icon = focused 
                 ? require('../../assets/cup.and.saucer.fill.png') 
                 : require('../../assets/cup.and.saucer.png')
@@ -67,7 +67,7 @@ const TabNavigator = () => {
           component={Posts} 
           options={createScreenOptions('Feed')}/>
         <Tab.Screen
-          name={"Lab 4"}
+          name={"Lab 3"}
           component={Iterations}
           options={createScreenOptions('Iterations')}/>
       </Tab.Navigator>
