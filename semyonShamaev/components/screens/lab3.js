@@ -40,10 +40,8 @@ const Lab3 = () => {
   return (
 
     <View>
-        
     <SafeAreaView style={styles.main}>
       <ScrollView style={styles.scroll}>
-
         <TouchableOpacity style={styles.button} onPress={onPressHandlerState}>
         <Text style = {styles.stateText}>{stateText}</Text></TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={onPressHandlerMemo}>
