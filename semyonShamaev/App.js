@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
  },
 
-  colorBox: {
+  colorCodeBox: {
     backgroundColor: '#17A326',
     padding: 20,
     marginVertical: 10,
