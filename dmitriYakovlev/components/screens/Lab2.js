@@ -3,8 +3,8 @@ import { TouchableOpacity, View, Text, ActivityIndicator, StyleSheet, ScrollView
 import { useDispatch, useSelector } from 'react-redux';
 
 import Zagolovok from '../routers/Zagolovok';
-import { checkItem } from '../store/task';
-import picture from '../images/Lab2.png'
+import { undone } from '../store/task';
+import picture from '../images/Lab2.png';
 
 const Lab2 = () => {
   
@@ -24,13 +24,13 @@ const Lab2 = () => {
                 if (item.id <= 15){
                   if (item.completed === false)
                     return (
-                      <TouchableOpacity key={item.id} style={[styles.item, {backgroundColor: '#0000A1'}]} onPress={() => dispatch(checkItem(item.id))}> 
+                      <TouchableOpacity key={item.id} style={[styles.item, {backgroundColor: '#0000A1'}]} onPress={() => dispatch(undone(item.id))}> 
                         <Text style={styles.text}>{item.title}</Text>
                       </TouchableOpacity>
                     )
                   if (item.completed === true)
                     return (
-                      <TouchableOpacity key={item.id} style={[styles.item, {backgroundColor: '#39BAE8'}]} onPress={() => dispatch(checkItem(item.id))}>
+                      <TouchableOpacity key={item.id} style={[styles.item, {backgroundColor: '#39BAE8'}]} onPress={() => dispatch(undone(item.id))}>
                         <Text style={styles.text}>{item.title}</Text>
                       </TouchableOpacity>
                     )       
@@ -66,7 +66,6 @@ const styles = StyleSheet.create({
     height: 60,
     width: 256,
     alignSelf: 'center',
-    
   },
   container: {
     flex: 1,

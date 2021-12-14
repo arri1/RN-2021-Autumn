@@ -7,7 +7,7 @@ export const dataSlice = createSlice({
     loading: false,
   },
   reducers: {
-    loadItems: (state, action) => {
+    load: (state, action) => {
       state.value = action.payload.map(item => {
         return {
           id: item.id,
@@ -16,7 +16,7 @@ export const dataSlice = createSlice({
         };
       });
     },
-    checkItem: (state, action) => {
+    undone: (state, action) => {
       state.value.map(item => {
         if (item.id === action.payload) {
           item.checked = !item.checked;
@@ -27,6 +27,6 @@ export const dataSlice = createSlice({
   },
 });
 
-export const { loadItems, checkItem } = dataSlice.actions;
+export const { load, undone } = dataSlice.actions;
 
 export default dataSlice.reducer;

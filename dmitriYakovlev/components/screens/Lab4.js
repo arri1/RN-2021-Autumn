@@ -32,59 +32,59 @@ const Lab4 = () => {
 export default Lab4;
 
 const styles = StyleSheet.create({
-    main : {
-      flex: 1,
-      justifyContent: 'flex-start',
-      backgroundColor: 'red',
-      width: '100%',
-    },
-    scroll: {
-      width: 312,
-      borderColor: 'black',
-      borderWidth: .5,
-      alignSelf: 'center',
-      marginBottom: 171,
-      borderRadius: 30,
-      marginTop: 96,
-    },
-    item: {
-      marginTop: 12,
-      marginBottom: 12,
-      borderColor: 'black',
-      height: 60,
-      width: 256,
-      alignSelf: 'center',
-    },
-    head: {
-      alignItems: 'center',
-      marginTop: 18
-    },
-    title: {
-      color: 'black',
-      fontSize: 36,
-      fontFamily: 'Sofia-Regular'
-    },
-    text: {
-      fontSize: 15,
-      fontFamily: 'Sofia-Regular',
-      alignSelf: 'center'
-    },
-    list: {
-      height: 439,
-      width: 312,
-      backgroundColor: '#B9EDF8',
-      opacity: .4,
-      borderColor: 'black',
-      borderWidth: .5,
-      alignSelf: 'center',
-      borderRadius: 30,
-      marginBottom: 95,
-      marginTop: 12,
-      position: 'absolute',
-    },
-    image: {
-      flex: 1,
-      justifyContent: 'center',
-    },
+  main : {
+    flex: 1,
+    justifyContent: 'flex-start',
+    backgroundColor: 'red',
+    width: '100%',
+  },
+  scroll: {
+    width: 312,
+    borderColor: 'black',
+    borderWidth: .5,
+    alignSelf: 'center',
+    marginBottom: 171,
+    borderRadius: 30,
+    marginTop: 96,
+  },
+  item: {
+    marginTop: 12,
+    marginBottom: 12,
+    borderColor: 'black',
+    height: 60,
+    width: 256,
+    alignSelf: 'center',
+  },
+  head: {
+    alignItems: 'center',
+    marginTop: 18
+  },
+  title: {
+    color: 'black',
+    fontSize: 36,
+    fontFamily: 'Sofia-Regular'
+  },
+  text: {
+    fontSize: 15,
+    fontFamily: 'Sofia-Regular',
+    alignSelf: 'center'
+  },
+  list: {
+    height: 439,
+    width: 312,
+    backgroundColor: '#B9EDF8',
+    opacity: .4,
+    borderColor: 'black',
+    borderWidth: .5,
+    alignSelf: 'center',
+    borderRadius: 30,
+    marginBottom: 95,
+    marginTop: 12,
+    position: 'absolute',
+  },
+  image: {
+    flex: 1,
+    justifyContent: 'center',
+  },
 });
   
