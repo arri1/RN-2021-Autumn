@@ -1,9 +1,12 @@
 import React, {useState, useMemo} from 'react';
-import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
+import {Text, StyleSheet, View, TouchableOpacity, SafeAreaView} from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
+import {increaseCounter} from '../../store/tasks';
 
 const Lab3 = () => {
   const [click, setClick] = useState(0);
-  const [text, setText] = useState('');
+  const count = useSelector((state) => state.background.counter)
+  const dispatch = useDispatch()
 
   const regularFunction = () => {
     let i = 0;
@@ -16,33 +19,44 @@ const Lab3 = () => {
   const onPressHandlerRegular = () => {
     const count = regularFunction();
     setClick(click + 1);
+    dispatch(increaseCounter())
+    
   };
   const onPressHandlerMemo = () => {
     const count = Memo;
     setClick(click + 1);
+    dispatch(increaseCounter())
   };
-
+  
   return (
+    <SafeAreaView style={styles.main}>
     <View>
       <View>
         <Text style={styles.message}>Медленный вариант</Text>
-        <Text style={styles.counter}>Лайков❤️ {click}</Text>
+        <Text style={styles.counter}>Лайков❤️</Text>
         <TouchableOpacity onPress={onPressHandlerRegular} style={styles.button}>
-          <Text style={styles.text}>Нажми</Text>
+          <Text style={styles.text}>Нажми</Text> 
+          <Text style={[styles.text, {textTransform: 'uppercase'}]}>{count}</Text>
         </TouchableOpacity>
       </View>
       <View>
         <Text style={styles.message}>Быстрый вариант</Text>
-        <Text style={styles.counter}>Лайков❤️ {click}</Text>
+        <Text style={styles.counter}>Лайков❤️</Text>
         <TouchableOpacity onPress={onPressHandlerMemo} style={styles.button}>
           <Text style={styles.text}>Нажми</Text>
+          <Text style={[styles.text, {textTransform: 'uppercase'}]}>{count}</Text>
         </TouchableOpacity>
       </View>
     </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  main: {
+    height: '100%',   
+    backgroundColor: '#FFFFFF',
+  },
   counter: {
     fontSize: 40,
     textAlign: 'center',
