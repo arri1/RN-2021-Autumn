@@ -12,13 +12,13 @@ const TabNavigator = () => {
     <Tab.Navigator screenOptions={({route}) => ({
       tabBarStyle: { 
         position: 'absolute',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#000000',
         height: 45,
         display: 'flex'
       },
       tabBarIcon: ({focused}) => {
           return <View>
-            <Text style={{fontFamily: 'Arial',fontSize: 19,color: focused ? '#00008B' : '#191919'}}>{route.name}</Text>
+            <Text style={{fontFamily: 'Arial',fontSize: 19,color: '#FFFFFF', opacity: focused ? 1 : 0.5}}>{route.name}</Text>
           </View>
       },
       headerShown: false,

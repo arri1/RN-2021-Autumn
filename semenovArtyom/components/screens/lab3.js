@@ -19,25 +19,33 @@ const randomHex = () => {
 
 const styles = StyleSheet.create({
     button: {
-        height: 40,
-        borderRadius: 20,
-        backgroundColor: '#F5909E',
-        marginTop: 10,
-        },
+      height: 50,
+      borderRadius: 10,
+      backgroundColor: '#BB86FC',
+      marginTop: 10
+    },
     scroll: {
         margin: 15,
-        },
+    },
     box: {
         display: 'flex',
         height: 100,
         width: 100,
-        marginTop: 160,
+        marginTop: 145,
         backgroundColor: '#FFFFFF',
         alignSelf: 'center'
-        },
+    },
     text: {
-      fontSize: 18,
-    }
+      fontSize: 70,
+      color: '#FFFFFF',
+      opacity: 0.6,
+      marginTop: 110,
+      alignSelf: 'flex-end'
+    },
+    main: {
+      height: '100%',
+      backgroundColor: '#121212'
+    },
 });
 
 const expensiveFunction = () => {
@@ -69,17 +77,19 @@ const Lab3 = () => {
   };
 
   return (
-    <View>
+    <View style={styles.main}>
       <ScrollView style={styles.scroll}>
+        <TouchableOpacity style={[styles.box, 
+          {backgroundColor: color}]}
+        />
         <Text style={styles.text}>{text}</Text>
 
-        <TouchableOpacity style={styles.button} onPress={onPressHandler} />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={onPressHandlerSecond}
+        <TouchableOpacity style={styles.button} 
+          onPress={onPressHandler}
         />
-        <TouchableOpacity
-          style={[styles.box, {backgroundColor: color}]}
+        
+        <TouchableOpacity style={styles.button} 
+          onPress={onPressHandlerSecond}
         />
       </ScrollView>
     </View>

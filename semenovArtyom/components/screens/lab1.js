@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   box: {
+    display: 'flex',
     height: 100,
     width: 100,
     marginTop: 160,
