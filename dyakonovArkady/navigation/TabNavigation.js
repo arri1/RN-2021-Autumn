@@ -1,10 +1,11 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Image } from 'react-native';
 
 import Lab1 from '../screens/lab1';
 import Lab2 from '../screens/lab2';
 import Lab3 from '../screens/lab3';
+import Lab4 from '../screens/lab4';
 
 const Tab = createBottomTabNavigator();
 
@@ -88,6 +89,29 @@ const TabNavigation = () => {
                             />
                             <Text style = {{color: focused ?'#53C1DE' : '#748C94', fontSize: 12}}>
                                     LAB 3
+                            </Text>
+                        </View>
+                    ),
+                }}
+            />
+
+            <Tab.Screen 
+                name = "Lab 4" 
+                component = {Lab4} 
+                options = {{
+                    tabBarIcon: ({focused}) => (
+                        <View style = {{alignItems: 'center', justifyContent: 'center', top: 5}}>
+                            <Image 
+                                source = {require('../tabIcons/L4.png')}
+                                resizeMode = "contain"
+                                style={{
+                                    width: 30,
+                                    height: 20,
+                                    tintColor: focused ?'#53C1DE' : '#748C94'
+                                }}
+                            />
+                            <Text style = {{color: focused ?'#53C1DE' : '#748C94', fontSize: 12}}>
+                                    LAB 4
                             </Text>
                         </View>
                     ),
