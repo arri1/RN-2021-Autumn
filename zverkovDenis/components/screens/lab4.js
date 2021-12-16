@@ -24,7 +24,6 @@ const inputText = (id, title, checked) => {
         {title}
       </TextInput>
       <TouchableOpacity
-        key={id}
         onPress={() => {
           dispatch(applyItem(id));
         }}>
@@ -50,7 +49,7 @@ const Lab4 = () => {
       <ScrollView style={styles.scroll}>
         {selectedItems?.map(item => {
           return (
-            <View style={styles.shadowsDiv}>
+            <View key={item.id} style={styles.shadowsDiv}>
               <Shadow
                 distance={2}
                 startColor={'#00000040'}
