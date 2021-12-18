@@ -4,6 +4,7 @@ import { Image, StyleSheet } from 'react-native';
 import Lab1 from '../screens/lab1';
 import Lab2 from '../screens/lab2';
 import Lab3 from '../screens/lab3';
+import Lab4 from '../screens/lab4';
 
 const Tab = createBottomTabNavigator();
 
@@ -47,6 +48,21 @@ const TabNavigator = () => {
                     tabBarIcon: ({focused}) => (
                         <Image 
                             source = {require('../../img/icon3.png')}
+                            style = {styles.icon}
+                        />
+                    ),
+                    tabBarLabel: () => {
+                        return null
+                    },
+                }}
+            />
+            <Tab.Screen 
+                name = "Lab4" 
+                component = {Lab4}
+                options = {{
+                    tabBarIcon: ({focused}) => (
+                        <Image 
+                            source = {require('../../img/icon4.png')}
                             style = {styles.icon}
                         />
                     ),

@@ -1,10 +1,14 @@
 import React, { useState, useMemo } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../../store/history';
 
 const Lab3 = () => {
     const [number, setNumber] = useState(0);
     const [result, setResult] = useState('');
     const [text, setText] = useState(0);
+    const [id, setId] = useState(0);
+    const dispatch = useDispatch();
 
     const getRandomNumber = () => {
         const a = Math.floor((Math.random() * 15) + 5);
@@ -34,6 +38,13 @@ const Lab3 = () => {
         const m = factorialFunction();
         setResult(m);
         setText(`${text} ${m}`);
+        setId(id+1);
+        const data = {
+            "id": id,
+            "number": number,
+            "result": m
+        };
+        dispatch(addItem(data));
     };
 
     const operation = useMemo(mainFunction, []);
@@ -43,6 +54,13 @@ const Lab3 = () => {
         const m = factorialFunction();
         setResult(m);
         setText(`${text} ${m}`);
+        setId(id+1);
+        const data = {
+            "id": id,
+            "number": number,
+            "result": m
+        };
+        dispatch(addItem(data));
     };
 
     return(
@@ -76,7 +94,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#E88F5D',
         width: 200,
         height: 50,
-        borderRadius: 2,
+        borderRadius: 5,
         alignItems:"center",
         justifyContent:"center"
     },
@@ -84,7 +102,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#E88F5D',
         width: 136,
         height: 50,
-        borderRadius: 2,
+        borderRadius: 5,
         alignItems:"center",
         justifyContent:"center",
         marginRight: 40
@@ -93,7 +111,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#E88F5D',
         width: 136,
         height: 50,
-        borderRadius: 2,
+        borderRadius: 5,
         alignItems:"center",
         justifyContent:"center"
     },
