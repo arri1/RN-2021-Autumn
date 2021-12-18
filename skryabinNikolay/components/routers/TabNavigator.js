@@ -1,9 +1,10 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {View, Image} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Lab1 from '../screens/lab1';
 import Lab2 from '../screens/lab2';
 import Lab3 from '../screens/lab3';
+import Lab4 from '../screens/lab4';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,7 +24,7 @@ const TabNavigation = () => {
                 }
             }}
         >
-            <Tab.Screen name = "Lab1" component = {Lab1} 
+            <Tab.Screen name = "Lab1 - useState" component = {Lab1} 
                 options = {{
                     tabBarIcon: ({focused}) => (
                         <View style = {{alignItems: 'center', justifyContent: 'center', top: 3}}>
@@ -36,7 +37,7 @@ const TabNavigation = () => {
                 }}
             />
             
-            <Tab.Screen name = "Lab2" component = {Lab2} 
+            <Tab.Screen name = "Lab2 - useEffect" component = {Lab2} 
                 options = {{
                     tabBarIcon: ({focused}) => (
                         <View style = {{alignItems: 'center', justifyContent: 'center', top: 3}}>
@@ -49,11 +50,24 @@ const TabNavigation = () => {
                 }}
             />
 
-            <Tab.Screen name = "Lab3" component = {Lab3} 
+            <Tab.Screen name = "Lab3 - useMemo" component = {Lab3} 
                 options = {{
                     tabBarIcon: ({focused}) => (
                         <View style = {{alignItems: 'center', justifyContent: 'center', top: 3}}>
                             <Image source = {require('../../icons/number_lab3.png')}
+                                resizeMode = "contain"
+                                style={{width: 60, height: 60,}}
+                            />
+                        </View>
+                    ),
+                }}
+            />
+
+            <Tab.Screen name = "Lab4 - redux" component = {Lab4} 
+                options = {{
+                    tabBarIcon: ({focused}) => (
+                        <View style = {{alignItems: 'center', justifyContent: 'center', top: 3}}>
+                            <Image source = {require('../../icons/number_lab4.png')}
                                 resizeMode = "contain"
                                 style={{width: 60, height: 60,}}
                             />

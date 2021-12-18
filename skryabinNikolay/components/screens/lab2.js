@@ -1,12 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  ActivityIndicator,
-  StyleSheet,
-  ScrollView,
-  SafeAreaView,
-} from 'react-native';
+import {View, Text, ActivityIndicator, StyleSheet, ScrollView, SafeAreaView} from 'react-native';
 import axios from 'axios';
 
 const Lab2 = () => {
@@ -49,7 +42,7 @@ const Lab2 = () => {
 const styles = StyleSheet.create({
   main: {
     height: '100%',
-    backgroundColor: '#53A605',
+    backgroundColor: '#FFFFFF',
   },
   item: {
     padding: 10,
@@ -68,14 +61,17 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: 'black',
   },
   text: {
     marginTop: 10,
     marginLeft: 10,
+    color: 'black',
   },
   email: {
     marginTop: 10,
     textAlign: 'center',
+    color: 'black',
   },
 });
 
