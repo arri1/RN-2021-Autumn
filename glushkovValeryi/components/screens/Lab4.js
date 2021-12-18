@@ -1,46 +1,37 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, SafeAreaView, Text, Switch } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
 import StyledButton from "../common/StyledButton";
 
-const ackermann = (m, n) => {
-    if (m === 0) {
-        return n+1
-    }
-    if (n === 0) {
-        return ackermann((m - 1), 1);
-    }
-    if (m !== 0 && n !== 0) {
-        return ackermann((m-1), ackermann(m, (n-1)))
-    }
-}
-
 const Lab4 = () => {
-  const [isSwitch, setSwitch] = useState(false);
-  const [isPresed, setPressed] = useState(false);
+  const dispatch = useDispatch()
+  const points = useSelector((state) => state.points)
 
-//   drawRect = isPresed
-//   const useMemo = isSwitch
+  const addPoints = (points) => {
+    dispatch({type:"ADD_POINTS", newPoints: points})
+  }
 
-  const acckermanNumberMemo = React.useMemo(() => ackermann(3, 9), [3, 9])
-  const acckermanNumber = isSwitch ?acckermanNumberMemo : ackermann(3, 9)
+  const getPoints = (points) => {
+    dispatch({type:"GET_POINTS", newPoints: points})
+  }
 
   return (
     <SafeAreaView>
       <View style = {styles.content}>
-        <Switch style ={styles.switch}
-            value = {isSwitch}
-            onValueChange = {(value) => setSwitch(value)}
-        />
-        <Text style = {styles.siwtchText}>Use memo</Text>
         <StyledButton
-          text = 'Press On Me'
+          text = 'Add Points'
           style = {styles.button}
-          onPress = {() => setPressed(!isPresed)}
+          onPress = {() => addPoints(5)}
         />
-        {!!isPresed && (<View style = {styles.rectangle}>
-                            <Text>{acckermanNumber}</Text>
-                        </View>)}
+        <View style={styles.pointsArea}>
+          <Text style={styles.points}>{points}</Text>
+        </View>
+        <StyledButton
+          text = 'Get Points'
+          style = {styles.button}
+          onPress = {() => getPoints(5)}
+        />
       </View>
     </SafeAreaView>
   );
@@ -48,12 +39,11 @@ const Lab4 = () => {
 
 const styles = StyleSheet.create({
   button: {
-    marginTop: 10,
-    marginBottom: 50,
+    marginTop: 20,
     borderRadius: 10,
     paddingVertical: 14,
     paddingHorizontal: 10,
-    backgroundColor: '#D7FCD4',
+    backgroundColor: '#B6CCA1',
     color: '#000000',
     width: 360,
     height: 50
@@ -66,17 +56,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#545454',
     alignItems: 'center'
   },
-  rectangle: {
-    width: '90%',
-    height: '50%',
+  pointsArea: {
+    marginTop: 20,
+    width: 360,
+    height: 480,
     borderRadius: 10,
-    backgroundColor: '#B6CCA1',
+    backgroundColor: '#D7FCD4',
     justifyContent: 'center',
     alignItems: 'center'
   },
-  switch: {
-    marginTop: 10,
-  },
+  points: {
+    fontSize: 200,
+  }
 });
 
 export default Lab4;

@@ -7,10 +7,12 @@ import {
   View,
   Text,
 } from "react-native";
-
+import { load } from "../../store/tasks";
+import { useSelector, useDispatch} from 'react-redux';
 const Lab1 = () => {
 
-  const [color, setColor] = useState('#2E1F99');
+  const color = useSelector((state) => state.background.value)
+  const dispatch = useDispatch()
 
   return (
     <SafeAreaView style={styles.main}>
@@ -18,7 +20,7 @@ const Lab1 = () => {
 
         <TouchableOpacity
           style={[ styles.circle, {backgroundColor: color} ]}
-          onPress={() => setColor( '#' + Math.floor(Math.random()*16581375).toString(16) )}>
+          onPress={() =>{dispatch(load())}}>
         </TouchableOpacity>
 
         <View style={styles.colorCodeBox}>

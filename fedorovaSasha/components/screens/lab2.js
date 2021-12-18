@@ -49,15 +49,15 @@ const Lab2 = () => {
 const styles = StyleSheet.create({
   main: {
     height: '100%',
-    backgroundColor: '#5CBDDB',
+    backgroundColor: '#CCF6CF',
   },
   item: {
-    padding: 10,
+    padding: 15,
     borderRadius: 20,
-    marginBottom: 10,
-    borderColor: '#C446DB',
+    marginBottom: 15,
+    borderColor: '#78C25D',
     borderWidth: 2,
-    backgroundColor: '#E6AF77',
+    backgroundColor: '#C27E5D',
   },
   container: {
     flex: 1,
@@ -68,14 +68,18 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: 'bold',
+    color: 'white',
   },
   text: {
-    marginTop: 10,
-    marginLeft: 10,
+    fontSize: 15,
+    marginTop: 15,
+    marginLeft: 15,
+    marginBottom: 15,
+    color: 'white',
   },
   email: {
-    marginTop: 10,
     textAlign: 'right',
+    color: 'white',
   },
 });
 
