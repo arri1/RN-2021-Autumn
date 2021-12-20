@@ -1,2 +1,8 @@
 # RN-2021-Autumn
-https://www.figma.com/file/PihMZ0aOh5zUPDjM1E4kHf/Shamaev?node-id=0%3A1
+Создать проект
+Создать скрин, где интерактивно изменяется стейты, использовать useState
+Создать простой список задач, используя внешние данные, должен использоваться useEffect
+показать использование useMemo
+показать использование redux
+использовать graphql (https://nefu-server.herokuapp.com/)
+readme.md оставить ссылку на фигму, сверстать по фигме. начиная с 3 лабы
