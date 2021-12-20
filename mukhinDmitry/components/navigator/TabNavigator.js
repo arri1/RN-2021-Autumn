@@ -3,6 +3,8 @@ import { Image, StyleSheet, Text  } from 'react-native';
 import rnLab1 from '../labs/lab1/Lab1';
 import rnLab2 from '../labs/lab2/Lab2';
 import rnLab3 from '../labs/lab3/Lab3';
+import rnLab41 from '../labs/lab4/Lab41';
+import rnLab42 from '../labs/lab4/Lab42';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
@@ -69,7 +71,35 @@ const TabNavigator = () => {
                         color: '#FFFFFF'
                     },
                     tabBarIcon: () => {
+                        return <Image source = {require("../../res/img/navbar/tab-1.png")} style={styles.icon} />;
+                    },
+                }}
+            />
+            <Tab.Screen 
+                name="Lab 4.1"
+                component={rnLab41}
+                options={{
+                    title: 'React Redux Store',
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                        color: '#FFFFFF'
+                    },
+                    tabBarIcon: () => {
                         return <Image source = {require("../../res/img/navbar/tab-2.png")} style={styles.icon} />;
+                    },
+                }}
+            />
+            <Tab.Screen 
+                name="Lab 4.2"
+                component={rnLab42}
+                options={{
+                    title: 'React Redux Listener',
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                        color: '#FFFFFF'
+                    },
+                    tabBarIcon: () => {
+                        return <Image source = {require("../../res/img/navbar/tab-1.png")} style={styles.icon} />;
                     },
                 }}
             />

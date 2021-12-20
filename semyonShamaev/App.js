@@ -1,43 +1,58 @@
-import React, { useState } from 'react';
+import React, {useState} from "react";
 import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
-  Text
-} from 'react-native';
+  View,
+  Text,
+} from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import Tabs from './components/routers/tabs';
 
 const App = () => {
-  const [color, setColor] = useState('#752FB1');
+
+  const [color, setColor] = useState('#2E1F99');
 
   return (
-    <SafeAreaView style={[styles.main, {backgroundColor: color}]}>
-      <ScrollView>
-        <TouchableOpacity
-          style={styles.countButton}
-          onPress={() => setColor( '#' + Math.floor(Math.random() * Math.pow(256, 3)).toString(16))}>
-          <Text style = {styles.bText}>Поменять фон</Text>
-        </TouchableOpacity>
-      </ScrollView>
+    <SafeAreaView style={styles.main}>
+      <NavigationContainer>
+        <Tabs />
+      </NavigationContainer>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  main:{
-    height: '100%'
+  main: {
+    height: '100%',
+    backgroundColor: '#8EDFDD',
   },
-  countButton: {
-    backgroundColor: '#5CBDDB',
-    margin: 25,
-    borderRadius: 100,
-    padding: 60,
+
+  circle: {
+    width: 300,
+    height: 300,        
+    borderRadius: 300,
+    marginVertical: 120,
+    marginHorizontal: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+ },
+
+  colorBox: {
+    backgroundColor: '#17A326',
+    padding: 20,
+    marginVertical: 10,
+    marginHorizontal: 70,
+    borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  text: {
-    fontSize: 16,
+
+  mainText: {
+    fontSize: 22, 
   },
+
 });
 
 export default App;
