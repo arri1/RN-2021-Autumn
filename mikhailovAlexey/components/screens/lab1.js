@@ -5,7 +5,7 @@ import {
 
 import styles from '../styles/styles';
 
-const Lab1 = () => {
+const Lab1 = function () {
   const [animation] = React.useState(new Animated.Value(0));
 
   const boxInterpolation = animation.interpolate({
