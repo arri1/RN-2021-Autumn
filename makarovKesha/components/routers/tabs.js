@@ -5,6 +5,8 @@ import lab1 from '../screens/lab1';
 import lab2 from '../screens/lab2';
 import lab3 from '../screens/lab3';
 import lab4 from '../screens/lab4';
+import login from '../screens/lab5/login';
+import signup from '../screens/lab5/signup';
 
 const Tab = createBottomTabNavigator();
 
@@ -84,7 +86,7 @@ const TabNavigation = () => {
                                 }}
                             />
                             <Text style = {{color: focused ?'#2F88F0' : '#27303E', fontSize: 12}}>
-                                    UseMemo
+                                    Memo
                             </Text>
                         </View>
                     ),
@@ -112,6 +114,52 @@ const TabNavigation = () => {
                     ),
                 }}
             />
+            
+
+            <Tab.Screen 
+                name = "Lab 5 signup" 
+                component = {signup} 
+                options = {{
+                    tabBarIcon: ({focused}) => (
+                        <View style = {{alignItems: 'center', justifyContent: 'center', top: 3}}>
+                            <Image 
+                                source = {require('../../img/number-5.png')}
+                                resizeMode = "contain"
+                                style={{
+                                    width: 40,
+                                    height: 40,
+                                }}
+                            />
+                            <Text style = {{color: focused ?'#2F88F0' : '#27303E', fontSize: 12}}>
+                                    SignUp
+                            </Text>
+                        </View>
+                    ),
+                }}
+            />
+
+            <Tab.Screen 
+                name = "Lab 5 login" 
+                component = {login} 
+                options = {{
+                    tabBarIcon: ({focused}) => (
+                        <View style = {{alignItems: 'center', justifyContent: 'center', top: 3}}>
+                            <Image 
+                                source = {require('../../img/number-5.png')}
+                                resizeMode = "contain"
+                                style={{
+                                    width: 40,
+                                    height: 40,
+                                }}
+                            />
+                            <Text style = {{color: focused ?'#2F88F0' : '#27303E', fontSize: 12}}>
+                                    Login
+                            </Text>
+                        </View>
+                    ),
+                }}
+            />
+
             
         </Tab.Navigator>
     );

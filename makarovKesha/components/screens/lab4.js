@@ -16,15 +16,10 @@ const Lab4 = () => {
   return (
     <SafeAreaView style={styles.main}>
       <ScrollView>
-
         <TouchableOpacity style={[ styles.circle, {backgroundColor: color} ]}/>
-        
-        <View style={styles.colorCodeBox}>
-          <Text style = {[styles.mainText, {textTransform: 'uppercase'}]}>{count}</Text>
-        </View>
-        
-
-
+          <View style={styles.colorCodeBox}>
+            <Text style = {[styles.mainText, {textTransform: 'uppercase'}]}>{count}</Text>
+          </View>      
       </ScrollView>
     </SafeAreaView>
   );
