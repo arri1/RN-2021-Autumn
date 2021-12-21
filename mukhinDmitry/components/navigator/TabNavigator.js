@@ -120,34 +120,6 @@ const TabNavigator = () => {
                     },
                 }}
             />
-            <Tab.Screen 
-                name="Lab 5.3"
-                component={rnLab53}
-                options={{
-                    title: 'Apollo: Update user',
-                    headerTitleStyle: {
-                        fontWeight: 'bold',
-                        color: '#FFFFFF'
-                    },
-                    tabBarIcon: () => {
-                        return <Image source = {require("../../res/img/navbar/tab-2.png")} style={styles.icon} />;
-                    },
-                }}
-            />
-            <Tab.Screen 
-                name="Lab 5.4"
-                component={rnLab54}
-                options={{
-                    title: 'Apollo: Update user',
-                    headerTitleStyle: {
-                        fontWeight: 'bold',
-                        color: '#FFFFFF'
-                    },
-                    tabBarIcon: () => {
-                        return <Image source = {require("../../res/img/navbar/tab-1.png")} style={styles.icon} />;
-                    },
-                }}
-            />
         </Tab.Navigator>
     )
 }
