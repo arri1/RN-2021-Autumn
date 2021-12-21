@@ -61,7 +61,7 @@ const SignUp = () => {
   }
 
   return (
-    <SafeAreaView style={styles.Main}>
+    <SafeAreaView style={styles.main}>
       <View>
         <TextInput style = {styles.Input} onChangeText={text => setLogin(text)} value={login} placeholder='Login'/>
         <TextInput style = {styles.Input} onChangeText={text => setPassword(text)} value={password} placeholder='Password'/>
@@ -81,40 +81,40 @@ const SignUp = () => {
 
 const styles = StyleSheet.create({
     Button: {
-      marginTop: 54.9,
-      marginLeft: 54.9,
-      height: 46.54,
-      width: 282.54,
-      borderRadius: 8.72,
+      marginTop: 30,
+      height: 40,
+      width: 200,
+      borderRadius: 20,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: "#5E5E5E",
+      backgroundColor: "#2F88F0",      
+      alignSelf: 'center'
     },
     ButtonText: {
-      lineHeight: 34.91,
-      height: 34.91,
-      marginLeft: 5.81,
+      lineHeight: 35,
+      height: 35,
+      marginLeft: 6,
       color: '#FFFFFF',
       fontSize: 16
     },
     Input: {
-      height: 46.54,
-      width: 369.45,
-      borderRadius: 8.72,
-      marginTop: 11.63,
-      marginLeft: 11.63,
-      padding: 5.81,
-      paddingLeft: 11.63,
-      lineHeight: 34.91,
-      backgroundColor: "#5E5E5E",
+      height: 45,
+      width: 300,
+      borderRadius: 10,
+      marginTop: 10,
+      padding: 6,
+      paddingLeft: 12,
+      lineHeight: 35,
+      backgroundColor: "#AEAEAE",
       color: '#FFFFFF',
-      fontSize: 16
+      fontSize: 16, 
+      alignSelf: 'center',
     },
-    Main: {
-      backgroundColor: "#333333",
+    main: {
+      backgroundColor: "#E1E4E7",
       height: "100%",
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center' 
     }
   });
 
