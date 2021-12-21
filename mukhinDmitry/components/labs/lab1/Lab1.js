@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import {
   SafeAreaView,
   StyleSheet,
@@ -6,37 +7,21 @@ import {
   Text,
   Pressable,
 } from 'react-native';
+import { randomize } from '../lab4/RNSlice';
  
-const colorStep = (bgColor) => {
-  let r = (parseInt(bgColor.substr(1,2),16) + 5).toString(16)
-  let g = (parseInt(bgColor.substr(3,2),16) + 5).toString(16)
-  let b = (parseInt(bgColor.substr(5,2),16) + 5).toString(16)
-  if (r.length == 1)
-    r = '0' + r
-  if (g.length == 1)
-    g = '0' + g
-  if (b.length == 1)
-    b = '0' + b
-  if (r === 'ff' || g === 'ff' || b === 'ff') {
-    r = '00'
-    g = '00'
-    b = '00'
-  }
-  return '#' + r + g + b
-}
-
 const rnLab1 = () => {
-  const [bgColor, setBgColor] = useState('#000000');
+  const bgColor = useSelector((state) => state.rnSlice.value)
+  const dispatch = useDispatch()
   return (
     <SafeAreaView style={styles.rnMain}>
       <View>
         <View style={[styles.rnBox, {backgroundColor: bgColor}]} />
         <Pressable 
-          onPress={() => {setBgColor(colorStep(bgColor))}}
+          onPress={() => {dispatch(randomize())}}
           style = {styles.rnButton}
         >
           <Text style={styles.rnButtonText}>
-            Lighten the box
+            Randomize box color
           </Text>
         </Pressable>
       </View>

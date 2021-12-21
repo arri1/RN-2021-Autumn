@@ -1,31 +1,17 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { randomize } from './RNColorSlice';
+import { useSelector } from 'react-redux'
 import {
   SafeAreaView,
   StyleSheet,
   View,
-  Text,
-  Pressable,
 } from 'react-native';
 
 const rnLab4 = () => {
-  const bgColor = useSelector((state) => state.bgColor.value)
-  const dispatch = useDispatch()
+  const bgColor = useSelector((state) => state.rnSlice.value)
 
   return (
     <SafeAreaView style={styles.rnMain}>
-      <View>
         <View style={[styles.rnBox, {backgroundColor: bgColor}]} />
-        <Pressable 
-          onPress={() => {dispatch(randomize())}}
-          style = {styles.rnButton}
-        >
-          <Text style={styles.rnButtonText}>
-            Randomize the color
-          </Text>
-        </Pressable>
-      </View>
     </SafeAreaView>
   );
 };

@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import colorReducer from './RNColorSlice'
+import rnReducer from './RNSlice'
 
 export default configureStore({
   reducer: {
-    bgColor: colorReducer,
+    rnSlice: rnReducer,
   },
 })

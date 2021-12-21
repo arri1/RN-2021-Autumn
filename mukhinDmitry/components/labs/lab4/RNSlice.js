@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export const colorSlice = createSlice({
-  name: 'bgColor',
+export const rnSlice = createSlice({
+  name: 'rnSlice',
   initialState: {
     value: '#000000',
+    login: '',
   },
   reducers: {
     randomize: (state) => {
@@ -17,10 +18,13 @@ export const colorSlice = createSlice({
         if (b.length == 1)
             b = '0' + b
         state.value = '#' + r + g + b
+    },
+    setLoginValue: (state, action) => {
+      state.login = action.payload
     }
   },
 })
 
-export const { randomize } = colorSlice.actions
+export const { randomize, setLoginValue, getLogin } = rnSlice.actions
 
-export default colorSlice.reducer
+export default rnSlice.reducer
