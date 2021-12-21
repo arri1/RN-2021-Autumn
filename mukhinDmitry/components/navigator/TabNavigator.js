@@ -88,7 +88,7 @@ const TabNavigator = () => {
                         color: '#FFFFFF'
                     },
                     tabBarIcon: () => {
-                        return <Image source = {require("../../res/img/navbar/tab-1.png")} style={styles.icon} />;
+                        return <Image source = {require("../../res/img/navbar/tab-2.png")} style={styles.icon} />;
                     },
                 }}
             />
@@ -102,7 +102,7 @@ const TabNavigator = () => {
                         color: '#FFFFFF'
                     },
                     tabBarIcon: () => {
-                        return <Image source = {require("../../res/img/navbar/tab-2.png")} style={styles.icon} />;
+                        return <Image source = {require("../../res/img/navbar/tab-1.png")} style={styles.icon} />;
                     },
                 }}
             />
@@ -116,7 +116,7 @@ const TabNavigator = () => {
                         color: '#FFFFFF'
                     },
                     tabBarIcon: () => {
-                        return <Image source = {require("../../res/img/navbar/tab-1.png")} style={styles.icon} />;
+                        return <Image source = {require("../../res/img/navbar/tab-2.png")} style={styles.icon} />;
                     },
                 }}
             />
