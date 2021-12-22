@@ -1,53 +1,58 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView  } from 'react-native'
-import { useMutation } from '@apollo/client'
+import {  useMutation } from '@apollo/client'
 import { useFocusEffect } from '@react-navigation/native'
 
 import StyledButton from '../common/StyledButton'
 import { TextInput } from 'react-native-gesture-handler'
-import { AUTH } from '../gqls/Mutations'
-import SignInNavigator from '../routers/SignInNavigator'
+import { REG } from '../gqls/Mutations'
 
-const Lab5 = props => {
+const SignUp = props => {
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
-    const [loginUser] = useMutation(AUTH)
+    const [name, setName] = useState('')
+    const [registerUser] = useMutation(REG)
     const [respose, setResponse] = useState('')
-    const [color, setColor] = useState('')
 
     useFocusEffect(
     React.useCallback(() => {
       return () => {
         setLogin('')
+        setName('')
         setPassword('')
         setResponse('')
       };
     }, [])
     )
 
-    const onLoginPress = () => {
-        loginUser({variables: {login, password}})
+    const onRegisterPress = () => {
+        registerUser({variables: {login, password}})
             .then(({ data }) => {
-                setColor('#96be25')
-                setResponse('authorization succeeded')
+                setResponse('')
+                props.navigation.navigate("SignIn")
                 console.log(data)
+
             })
             .catch(e => {
-                setColor('red')
-                setResponse('authorization failed')
+                setResponse('Registration failed.')
                 console.log(e.message)
             })
     }
 
-    const onRegisterPress = () => {
-        props.navigation.navigate('SignUp')
-        
+    const onCancelPress = () => {
+        props.navigation.navigate("SignIn")
     }
 
     return(
         <KeyboardAvoidingView style = {styles.container} behavior='padding'>
-            <Text style = {{fontSize: 16, color: color, marginBottom: 10}}>{respose}</Text>
+            <Text style = {styles.regMessage}>{respose}</Text>
             <View style = {styles.inputContainer}>
+                <TextInput
+                    placeholder='Name'
+                    style = {styles.input}
+                    value = {name}
+                    onChangeText = {text => setName(text)}
+                />
                 <TextInput
                     placeholder='Login'
                     style = {styles.input}
@@ -64,14 +69,14 @@ const Lab5 = props => {
             </View>
             <View style = {styles.buttonContainer}>
                 <StyledButton
-                    text = 'Login'
+                    text = 'Register'
                     style = {styles.button}
-                    onPress = {onLoginPress}
+                    onPress = {onRegisterPress}
                 />
                 <StyledButton
-                    text = 'Register'
+                    text = 'Cancel'
                     style = {[styles.button, styles.buttonOutline]}
-                    onPress = {onRegisterPress}
+                    onPress = {onCancelPress}
                 />
             </View>
         </KeyboardAvoidingView>
@@ -85,7 +90,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#545454'
     },
-    loginMessage: {
+    regMessage: {
+        color: 'red',
         fontSize: 16,
         marginBottom: 10
     },
@@ -109,6 +115,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#B6CCA1',
         width: 300,
         padding: 15,
+        marginBottom: 10,
         borderRadius: 10,
         alignItems: 'center'
     },
@@ -120,4 +127,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Lab5;
+export default SignUp;
