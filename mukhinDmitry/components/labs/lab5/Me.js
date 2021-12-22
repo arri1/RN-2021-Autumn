@@ -17,7 +17,7 @@ const RNUser = () => {
   const [name, setName] = useState(null)
   const [group, setGroup] = useState(null)
 
-  const [updt, {loading}] = useQuery(GET_ME,{
+  const [updt, {data,loading}] = useQuery(GET_ME,{
     onCompleted: async ({findOneUser}) => {
       setId(findOneUser.id)
       setName(findOneUser.name)

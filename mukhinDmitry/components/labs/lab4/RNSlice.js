@@ -5,6 +5,7 @@ export const rnSlice = createSlice({
   initialState: {
     value: '#000000',
     login: '',
+    token: null,
   },
   reducers: {
     randomize: (state) => {
@@ -21,10 +22,13 @@ export const rnSlice = createSlice({
     },
     setLoginValue: (state, action) => {
       state.login = action.payload
+    },
+    setTokenValue: (state, action) => {
+      state.token = action.payload
     }
   },
 })
 
-export const { randomize, setLoginValue, getLogin } = rnSlice.actions
+export const { randomize, setLoginValue, setTokenValue } = rnSlice.actions
 
 export default rnSlice.reducer

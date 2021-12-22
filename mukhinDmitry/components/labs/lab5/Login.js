@@ -8,22 +8,22 @@ import {
   TextInput,
   ActivityIndicator,
 } from 'react-native'
-import { useDispatch } from 'react-redux'
-import { useAsyncStorage } from '@react-native-async-storage/async-storage'
+import { useDispatch, useSelector } from 'react-redux'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useMutation } from "@apollo/client"
 import { AUTH } from "../../../sql/mutations/RNUser"
-import { setLoginValue } from '../lab4/RNSlice'
+import { setLoginValue, setTokenValue } from '../lab4/RNSlice'
 
 const RNRegister = () => {
   const dispatch = useDispatch()
   const [login, setLogin] = useState(null)
   const [password, setPassword] = useState(null)
-  const { setItem } = useAsyncStorage('token')
   const [state, setState] = useState(0)
 
   const [auth, {loading}] = useMutation(AUTH, {
     onCompleted: async ({authUser}) => {
-      await setItem(authUser.token)
+      console.log(authUser.token)
+      await AsyncStorage.setItem('token', authUser.token)
       setState(1)
       console.log('Login succeded')
       console.log(authUser)
