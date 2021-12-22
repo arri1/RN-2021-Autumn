@@ -93,7 +93,7 @@ const TabNavigator = () => {
                 }}
             />
             <Tab.Screen 
-                name="Lab 5.1"
+                name="SignUp"
                 component={rnLab51}
                 options={{
                     title: 'Apollo: Register',
@@ -107,7 +107,7 @@ const TabNavigator = () => {
                 }}
             />
             <Tab.Screen 
-                name="Lab 5.2"
+                name="LogIn"
                 component={rnLab52}
                 options={{
                     title: 'Apollo: Login',
@@ -121,7 +121,7 @@ const TabNavigator = () => {
                 }}
             />
             <Tab.Screen 
-                name="Lab 5.3"
+                name="Update"
                 component={rnLab53}
                 options={{
                     title: 'Apollo: Update user',
@@ -130,7 +130,7 @@ const TabNavigator = () => {
                         color: '#FFFFFF'
                     },
                     tabBarIcon: () => {
-                        return <Image source = {require("../../res/img/navbar/tab-2.png")} style={styles.icon} />;
+                        return <Image source = {require("../../res/img/navbar/tab-1.png")} style={styles.icon} />;
                     },
                 }}
             />

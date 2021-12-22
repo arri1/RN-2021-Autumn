@@ -68,7 +68,7 @@ const RNUpdate = () => {
 
   return (
     <SafeAreaView style={styles.rnMain}>
-      <View>
+      <View style={styles.rnCenter}>
         <TextInput style = {styles.rnInput} onChangeText={text => setLogin(text)} value={login} placeholder='Login'/>
         <TextInput style = {styles.rnInput} onChangeText={text => setPassword(text)} value={password} placeholder='Password'/>
         <TextInput style = {styles.rnInput} onChangeText={text => setName(text)} value={name} placeholder='Name'/>
@@ -87,9 +87,11 @@ const RNUpdate = () => {
 }
 
 const styles = StyleSheet.create({
+  rnCenter: {
+    alignItems: 'center'
+  },
   rnButton: {
     marginTop: 54.9,
-    marginLeft: 54.9,
     height: 46.54,
     width: 282.54,
     borderRadius: 8.72,
@@ -100,7 +102,6 @@ const styles = StyleSheet.create({
   rnButtonText: {
     lineHeight: 34.91,
     height: 34.91,
-    marginLeft: 5.81,
     color: '#FFFFFF',
     fontSize: 16
   },
@@ -109,7 +110,6 @@ const styles = StyleSheet.create({
     width: 369.45,
     borderRadius: 8.72,
     marginTop: 11.63,
-    marginLeft: 11.63,
     padding: 5.81,
     paddingLeft: 11.63,
     lineHeight: 34.91,
@@ -121,6 +121,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#333333",
     height: "100%",
     justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 
