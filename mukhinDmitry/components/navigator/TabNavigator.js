@@ -3,8 +3,11 @@ import { Image, StyleSheet, Text  } from 'react-native';
 import rnLab1 from '../labs/lab1/Lab1';
 import rnLab2 from '../labs/lab2/Lab2';
 import rnLab3 from '../labs/lab3/Lab3';
-import rnLab41 from '../labs/lab4/Lab41';
-import rnLab42 from '../labs/lab4/Lab42';
+import rnLab4 from '../labs/lab4/Lab4';
+import rnLab51 from '../labs/lab5/Register';
+import rnLab52 from '../labs/lab5/Login';
+import rnLab53 from '../labs/lab5/Update';
+import rnLab54 from '../labs/lab5/Me';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
@@ -37,7 +40,7 @@ const TabNavigator = () => {
                 name="Lab 1" 
                 component={rnLab1} 
                 options={{
-                    title: 'Color lightener',
+                    title: 'Color randomizer',
                     headerTitleStyle: {
                         fontWeight: 'bold',
                         color: '#FFFFFF'
@@ -76,10 +79,10 @@ const TabNavigator = () => {
                 }}
             />
             <Tab.Screen 
-                name="Lab 4.1"
-                component={rnLab41}
+                name="Lab 4"
+                component={rnLab4}
                 options={{
-                    title: 'React Redux Store',
+                    title: 'React Redux Listener',
                     headerTitleStyle: {
                         fontWeight: 'bold',
                         color: '#FFFFFF'
@@ -90,10 +93,38 @@ const TabNavigator = () => {
                 }}
             />
             <Tab.Screen 
-                name="Lab 4.2"
-                component={rnLab42}
+                name="SignUp"
+                component={rnLab51}
                 options={{
-                    title: 'React Redux Listener',
+                    title: 'Apollo: Register',
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                        color: '#FFFFFF'
+                    },
+                    tabBarIcon: () => {
+                        return <Image source = {require("../../res/img/navbar/tab-1.png")} style={styles.icon} />;
+                    },
+                }}
+            />
+            <Tab.Screen 
+                name="LogIn"
+                component={rnLab52}
+                options={{
+                    title: 'Apollo: Login',
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                        color: '#FFFFFF'
+                    },
+                    tabBarIcon: () => {
+                        return <Image source = {require("../../res/img/navbar/tab-2.png")} style={styles.icon} />;
+                    },
+                }}
+            />
+            <Tab.Screen 
+                name="Update"
+                component={rnLab53}
+                options={{
+                    title: 'Apollo: Update user',
                     headerTitleStyle: {
                         fontWeight: 'bold',
                         color: '#FFFFFF'
