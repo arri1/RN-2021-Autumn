@@ -9,17 +9,21 @@ import {
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import Tabs from './components/routers/tabs';
+import { Provider } from "react-redux";
+import store from './store/index';
 
 const App = () => {
 
   const [color, setColor] = useState('#2E1F99');
 
   return (
+    <Provider store={store}>
     <SafeAreaView style={styles.main}>
       <NavigationContainer>
         <Tabs />
       </NavigationContainer>
     </SafeAreaView>
+    </Provider>
   );
 };
 
@@ -28,31 +32,6 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: '#8EDFDD',
   },
-
-  circle: {
-    width: 300,
-    height: 300,        
-    borderRadius: 300,
-    marginVertical: 120,
-    marginHorizontal: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
- },
-
-  colorCodeBox: {
-    backgroundColor: '#17A326',
-    padding: 20,
-    marginVertical: 10,
-    marginHorizontal: 70,
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  mainText: {
-    fontSize: 22, 
-  },
-
 });
 
 export default App;

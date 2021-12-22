@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import img1 from '../../img/1.png'
 import img2 from '../../img/2.jpg'
 import img3 from '../../img/3.jpg'
 import img4 from '../../img/4.png'
 
 const Lab1 = () => {
-     const [bodyColor, setBodyColor] = useState('white');
+     const [bodyColor, setBodyColor] = useState('#FFE6DC');
      const [image, setImage] = useState(img1);
 
      const generateNewImage = () => {
@@ -28,10 +28,12 @@ const Lab1 = () => {
 
           return(
                <View style={[styles.main, {backgroundColor: `${bodyColor}`}]}>
-                    <Text>Just random pics</Text>
+                    <Text style={styles.text}>Just random pics</Text>
                     <Image source = {image} style = {styles.image}/>
                     <View>
-                        <Button title="change" onPress={clicked}/>
+                        <TouchableOpacity style={styles.button} onPress={clicked}>
+                              <Text style={styles.buttonText}>CHANGE</Text>
+                         </TouchableOpacity>
                     </View>
                </View>
           );
@@ -39,15 +41,30 @@ const Lab1 = () => {
 
 const styles = StyleSheet.create({
     image:{
-        width: 200,
-        height: 200,
-        padding: 10,
-        margin: 10
+         width: 350,
+         height: 350,
+         margin: 24
     },
     main:{
          flex: 1,
          alignItems:"center",
          justifyContent:"center"
+    },
+    button:{
+         backgroundColor: '#E88F5D',
+         width: 200,
+         height: 50,
+         borderRadius: 5,
+         alignItems:"center",
+         justifyContent:"center"
+    },
+    text:{
+         fontFamily: "Montserrat",
+         fontSize: 17
+    },
+    buttonText:{
+         fontFamily: "Montserrat",
+         fontSize: 16
     }
 });
 

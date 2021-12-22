@@ -19,7 +19,7 @@ const Lab2 = () => {
             <ScrollView>
                 {data.map(item => {
                     return (
-                        <View key={item.id}>
+                        <View style={styles.block} key={item.id}>
                             <Text style={styles.title}>{item.id}. {item.title}</Text>
                             <Text style={styles.text}>{item.body}</Text>
                         </View>
@@ -38,19 +38,30 @@ const Lab2 = () => {
 
 const styles = StyleSheet.create({
     main:{
-        backgroundColor: '#fdf5e6',
+        backgroundColor: '#FFE6DC',
         flex: 1
     },
     title:{
-        color: '#800000',
+        color: '#000',
         fontFamily: "Montserrat",
-        fontSize: 19
+        fontSize: 16,
+        margin: 15,
+        marginBottom: 0
     },
     text:{
         color: '#000',
         fontFamily: "Montserrat",
         fontSize: 14,
-        margin: 10
+        marginTop: 5,
+        margin: 15,
+        marginBottom: 0
+    },
+    block:{
+        backgroundColor: 'white',
+        borderColor: "black",
+        height: 160,
+        margin: 24,
+        marginBottom: 0
     }
 });
 

@@ -1,34 +1,80 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   View,
   Text,
+  ActivityIndicator,
   StyleSheet,
   ScrollView,
-  ActivityIndicator,
-}
-from 'react-native';
-import axios from 'axios';
+  TouchableOpacity,
+  Image,
+} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {checkItem} from '../store/task';
+
+const styles = StyleSheet.create({
+  item: {
+    padding: 10,
+    borderRadius: 15,
+    marginBottom: 10,
+    backgroundColor: 'white',
+    borderWidth: StyleSheet.hairlineWidth,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  main: {
+    margin: 15,
+    marginBottom: 70,
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'black',
+  },
+  imgs: {
+    height: 150,
+    width: 340,
+    margin: 10,
+    borderColor: '#151E1F',
+    borderWidth: 0.8,
+    borderRadius: 6,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  text: {
+    marginTop: 10,
+  },
+});
 
 const News = ({navigation}) => {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    axios.get('https://my-json-server.typicode.com/MidnightYKT/json/posts')
-      .then(({data: newData}) => {
-        setData(newData);
-      })
-      .catch(() => {});
-  }, []);
-
+  const data = useSelector(state => state.data.value);
+  const dispatch = useDispatch();
+  
   const content = () => {
     return (
-      <ScrollView>
+      <ScrollView style={styles.main}>
         {data.map(item => {
           return (
-            <View key={item.id} style={styles.item}>
+            <TouchableOpacity
+              key={item.id}
+              style={[
+                styles.item,
+                item.checked ? {backgroundColor: '#95A3B3'} : undefined,
+              ]}
+              onPress={() => {
+                dispatch(checkItem(item.id));
+              }}>
               <Text style={styles.title}>{item.title}</Text>
-              <Text style={styles.info}>{item.body}</Text>
-            </View>
+              <Image
+                style={styles.imgs}
+                source={{
+                  uri: item.picture,
+                }}
+              />
+              <Text style={styles.text}>{item.body}</Text>
+            </TouchableOpacity>
           );
         })}
       </ScrollView>
@@ -36,33 +82,10 @@ const News = ({navigation}) => {
   };
 
   return (
-    <View style={styles.mainBlock}>
+    <View style={styles.container}>
       {data ? content() : <ActivityIndicator color={'red'} />}
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  item: {
-    padding: 10,
-    borderRadius: 15,
-    marginBottom: 10,
-    backgroundColor: '#95A3B3',
-    alignItems: 'center',
-    margin: 15,
-  },
-  mainBlock: {
-    backgroundColor:'#000',
-    flex: 1,
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-  info: {
-    marginTop: 10,
-    fontSize: 15,
-  },
-});
 
 export default News;

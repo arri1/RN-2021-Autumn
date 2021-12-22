@@ -1,21 +1,16 @@
 import React from 'react';
-import { 
-  View, 
-  StyleSheet,
-} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 
 import SlowObject from '../SlowObject';
 import QuickObject from '../QuickObject';
 
-
 const Lab3 = () => {
-
   return (
     <View style={styles.container}>
-      <SlowObject/>
-      <QuickObject/>
+      <SlowObject />
+      <QuickObject />
     </View>
-  )
+  );
 };
 
 const styles = StyleSheet.create({
@@ -23,7 +18,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFC',
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
 });
 
