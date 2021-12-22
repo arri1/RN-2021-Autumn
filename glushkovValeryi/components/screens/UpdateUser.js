@@ -15,12 +15,10 @@ const Update = props => {
     const [updateUser] = useMutation(UPDATE_USER, {
         onCompleted: async ({user}) => {
             console.log("from Update")
-            console.log(user.token)
-            await AsyncStorage.setItem('token', user.token)
         },                                  
         onError: ({message}) => {
-            console.log("from Update")
-            console.log(message)
+            console.error("from Update")
+            console.error(message)
         }
     })
 
@@ -36,22 +34,10 @@ const Update = props => {
 
     const onUpdatePress = () => {
         const variables = {
-            data: {
-                group: {set: group},
-                name: {set: name},
-            }
+            group: {set: group},
+            name: {set: name},
         }
-        updateUser(variables)
-            .then(({ data }) => {
-                setResponse('')
-                props.navigation.goBack()
-                console.log(data)
-
-            })
-            .catch(e => {
-                setResponse('Update failed.')
-                console.log(e.message)
-            })
+        updateUser({variables})
     }
 
     const onCancelPress = () => {

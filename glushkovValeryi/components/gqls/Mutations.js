@@ -29,10 +29,8 @@ export const AUTH = gql`
 `
 
 export const UPDATE_USER = gql`
-    mutation updateOne($login: String!, $password: String!, $name: String){
-        updateUser(data: {login: $login, password: $password, name: $name}) {
-            id
-            login
+    mutation updateOne($group: NullableStringFieldUpdateOperationsInput , $name: NullableStringFieldUpdateOperationsInput ){
+        updateUser(data: {group: $group, name: $name}) {
             name
             group
         }
