@@ -2,49 +2,42 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView  } from 'react-native'
 import { useMutation } from '@apollo/client'
 import { useFocusEffect } from '@react-navigation/native'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import StyledButton from '../common/StyledButton'
 import { TextInput } from 'react-native-gesture-handler'
 import { UPDATE_USER } from '../gqls/Mutations'
 
 const Update = props => {
-    const [login, setLogin] = useState('')
-    const [password, setPassword] = useState('')
     const [name, setName] = useState('')
+    const [group, setGroup] = useState('')
     const [respose, setResponse] = useState('')
     const [updateUser] = useMutation(UPDATE_USER, {
-        onCompleted: async ({updateUser}) => {
-            console.log(updateUser.token)
-            localStorage.setItem('token', updateUser.token)
+        onCompleted: async ({user}) => {
+            console.log("from Update")
         },                                  
         onError: ({message}) => {
-            console.log(message)
+            console.error("from Update")
+            console.error(message)
         }
     })
 
     useFocusEffect(
     React.useCallback(() => {
       return () => {
-        setLogin('')
         setName('')
-        setPassword('')
+        setGroup('')
         setResponse('')
       };
     }, [])
     )
 
     const onUpdatePress = () => {
-        updateUser({variables: {login, password, name}})
-            .then(({ data }) => {
-                setResponse('')
-                props.navigation.navigate("SignIn")
-                console.log(data)
-
-            })
-            .catch(e => {
-                setResponse('Update failed.')
-                console.log(e.message)
-            })
+        const variables = {
+            group: {set: group},
+            name: {set: name},
+        }
+        updateUser({variables})
     }
 
     const onCancelPress = () => {
@@ -62,17 +55,10 @@ const Update = props => {
                     onChangeText = {text => setName(text)}
                 />
                 <TextInput
-                    placeholder='Login'
+                    placeholder='Group'
                     style = {styles.input}
-                    value = {login}
-                    onChangeText = {text => setLogin(text)}
-                />
-                <TextInput
-                    placeholder='Password'
-                    style = {styles.input}
-                    secureTextEntry
-                    value = {password}
-                    onChangeText = {text => setPassword(text)}
+                    value = {group}
+                    onChangeText = {text => setGroup(text)}
                 />
             </View>
             <View style = {styles.buttonContainer}>

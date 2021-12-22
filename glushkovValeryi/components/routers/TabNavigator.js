@@ -42,11 +42,11 @@ const TabNavigator = () => {
               }
             })}
         >
+            <Tab.Screen name = "lab5" component = {SignInNavigator} />
             <Tab.Screen name = "lab1" component = {Lab1} />
             <Tab.Screen name = "lab2" component = {Lab2} />
             <Tab.Screen name = "lab3" component = {Lab3} />
             <Tab.Screen name = "lab4" component = {Lab4} />
-            <Tab.Screen name = "lab5" component = {SignInNavigator} />
         </Tab.Navigator>
     );
 }
