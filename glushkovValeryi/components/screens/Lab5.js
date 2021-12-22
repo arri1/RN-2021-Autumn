@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView  } from 'react-native'
 import { useMutation } from '@apollo/client'
 import { useFocusEffect } from '@react-navigation/native'
-import { useDispatch } from 'react-redux';
 
 import StyledButton from '../common/StyledButton'
 import { TextInput } from 'react-native-gesture-handler'
@@ -14,9 +13,11 @@ const Lab5 = props => {
     const [respose, setResponse] = useState('')
     const [color, setColor] = useState('')
     const [loginUser] = useMutation(AUTH, {
-        onCompleted: async ({authUser}) => {
-            console.log(authUser.token)
-            addToken(authUser.token)
+        onCompleted: async ({loginUser}) => {
+            console.log("herer")
+            console.log(loginUser.token)
+            localStorage.setItem('token', loginUser.token)
+            addToken(loginUser.token)
         },                                  
         onError: ({message}) => {
             console.log(message)
@@ -27,10 +28,6 @@ const Lab5 = props => {
         }
     })
 
-    const dispatch = useDispatch()
-    const addToken = (token) => {
-        dispatch({type:"ADD_TOKEN", newToken: token})
-    }
 
     useFocusEffect(
     React.useCallback(() => {

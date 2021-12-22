@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView  } from 'react-native'
 import { useMutation } from '@apollo/client'
 import { useFocusEffect } from '@react-navigation/native'
-import { useDispatch } from 'react-redux';
 
 import StyledButton from '../common/StyledButton'
 import { TextInput } from 'react-native-gesture-handler'
@@ -16,17 +15,12 @@ const SignUp = props => {
     const [registerUser] = useMutation(REG, {
         onCompleted: async ({registerUser}) => {
             console.log(registerUser.token)
-            addToken(registerUser.token)
+            localStorage.setItem('token', registerUser.token)
         },                                  
         onError: ({message}) => {
             console.log(message)
         }
     })
-
-    const dispatch = useDispatch()
-    const addToken = (token) => {
-        dispatch({type:"ADD_TOKEN", newToken: token})
-    }
 
     useFocusEffect(
     React.useCallback(() => {

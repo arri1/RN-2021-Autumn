@@ -1,4 +1,5 @@
-import {ApolloClient, InMemoryCache} from '@apollo/client';
+import {ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import { useSelector } from 'react-redux';
 
 const httpLink = createHttpLink({
@@ -6,7 +7,8 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-    const token = useSelector((state) => state.token)
+    const token = localStorage.getItem('token')
+    console.log(token)
     return {
         headers: {
             ...headers,

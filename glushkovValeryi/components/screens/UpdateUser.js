@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView  } from 'react-native'
 import { useMutation } from '@apollo/client'
 import { useFocusEffect } from '@react-navigation/native'
-import { useDispatch } from 'react-redux';
 
 import StyledButton from '../common/StyledButton'
 import { TextInput } from 'react-native-gesture-handler'
@@ -16,17 +15,12 @@ const Update = props => {
     const [updateUser] = useMutation(UPDATE_USER, {
         onCompleted: async ({updateUser}) => {
             console.log(updateUser.token)
-            addToken(updateUser.token)
+            localStorage.setItem('token', updateUser.token)
         },                                  
         onError: ({message}) => {
             console.log(message)
         }
     })
-
-    const dispatch = useDispatch()
-    const addToken = (token) => {
-        dispatch({type:"ADD_TOKEN", newToken: token})
-    }
 
     useFocusEffect(
     React.useCallback(() => {
@@ -40,7 +34,7 @@ const Update = props => {
     )
 
     const onUpdatePress = () => {
-        updateUser({variables: {login, password}})
+        updateUser({variables: {login, password, name}})
             .then(({ data }) => {
                 setResponse('')
                 props.navigation.navigate("SignIn")
