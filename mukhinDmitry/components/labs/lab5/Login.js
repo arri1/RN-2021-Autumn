@@ -22,11 +22,9 @@ const RNRegister = () => {
 
   const [auth, {loading}] = useMutation(AUTH, {
     onCompleted: async ({authUser}) => {
-      console.log(authUser.token)
       await AsyncStorage.setItem('token', authUser.token)
       setState(1)
       console.log('Login succeded')
-      console.log(authUser)
     },                                  
     onError: ({message}) => {
       console.log(message)
