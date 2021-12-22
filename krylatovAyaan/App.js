@@ -1,44 +1,19 @@
-import React, {useState} from 'react';
-import {Text, View, Button} from 'react-native';
+import React from 'react';
+import lab1 from '../third/component/lab1';
+import {NavigationContainer} from '@react-navigation/native';
+//import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
+//const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 const App = () => {
-  const [count, setCount] = useState(0);
-  var [color] = useState('#476DD5');
-
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-      <Text>dont touch button {count}</Text>
-      <Button
-        color={changeColor(count, color, setCount)}
-        title="Smash me!"
-        onPress={() => {
-          setCount(count + 1);
-          changeColor(count, color, setCount);
-          color = color;
-        }}
-      />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Lab1" component={lab1} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 };
-const changeColor = (count, color, setCount) => {
-  if (count === 0) {
-    color = '#FFBA73';
-  }
-  if (count === 1) {
-    color = '#476DD5';
-  }
-  if (count === 2) {
-    color = '#F13C73';
-  }
-  if (count === 3) {
-    setCount(count - 3);
-    color = '#FFBA73';
-  }
-  return color;
-};
+
 export default App;
