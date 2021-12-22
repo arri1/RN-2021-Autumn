@@ -1,83 +1,116 @@
-import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, SafeAreaView, View  } from 'react-native';
-import { gql, useQuery } from '@apollo/client'
+import React, { useEffect, useState } from 'react'
+import { ScrollView, StyleSheet, Text, SafeAreaView, View, KeyboardAvoidingView  } from 'react-native'
+import { gql, useMutation } from '@apollo/client'
 
-const FIND_MANY_POST = gql`
-    query {
-        findManyPost {
-            id
-            title
-            text
-        }
-    }
-`
+import StyledButton from '../common/StyledButton'
+import { TextInput } from 'react-native-gesture-handler'
+import { REG, AUTH } from '../gqls/Mutations'
+import { color } from 'react-native-reanimated'
 
 const Lab5 = () => {
-    const { loading, error, data } = useQuery(FIND_MANY_POST);
-    
-    if (loading) {
-        return (
-        <SafeAreaView style = {styles.main}>
-                <View style = {styles.scroll}>
-                    <Text style = {styles.statusText}>Loading...</Text>
-                </View>
-            </SafeAreaView>
-        )
-    }
-    if (error) {
-        console.error(error);
-        return (
-            <SafeAreaView style = {styles.main}>
-                <View style = {styles.scroll}>
-                    <Text style = {styles.statusText}>Error!</Text>
-                </View>
-            </SafeAreaView>
-        )
-    }
-    return (
-        <SafeAreaView style = {styles.main}>
-        <View style = {styles.scroll}>
-            <ScrollView style = {styles.content}>
-                { data.findManyPost.map(item => <Text style = {styles.item} key = {item.id}>{ item.title }</Text>) }
-            </ScrollView>
-        </View>
-        </SafeAreaView>
+    const [login, setLogin] = useState('')
+    const [password, setPassword] = useState('')
+    const [registerUser] = useMutation(REG)
+    const [loginUser] = useMutation(AUTH)
+    const [respose, setResponse] = useState('')
+    const [color, setColor] = useState('')
+
+
+    return(
+        <KeyboardAvoidingView style = {styles.container} behavior='padding'>
+            <Text style = {{fontSize: 16, color: color, marginBottom: 10}}>{respose}</Text>
+            <View style = {styles.inputContainer}>
+                <TextInput
+                    placeholder='Login'
+                    style = {styles.input}
+                    value = {login}
+                    onChangeText = {text => setLogin(text)}
+                />
+                <TextInput
+                    placeholder='Password'
+                    style = {styles.input}
+                    secureTextEntry
+                    value = {password}
+                    onChangeText = {text => setPassword(text)}
+                />
+            </View>
+            <View style = {styles.buttonContainer}>
+                <StyledButton
+                    text = 'Login'
+                    style = {styles.button}
+                    onPress = {() => {loginUser({variables: {login, password}})
+                                        .then(({ data }) => {
+                                            setColor('#96be25')
+                                            setResponse('authorization succeeded')
+                                            console.log(data)
+                                        })
+                                        .catch(e => {
+                                            setColor('red')
+                                            setResponse('authorization failed')
+                                            console.log(e.message)
+                                        })
+                }}
+                />
+                <StyledButton
+                    text = 'Register'
+                    style = {[styles.button, styles.buttonOutline]}
+                    onPress = {() => {registerUser({variables: {login, password}})
+                                        .then(({ data }) => {
+                                            setColor('#96be25')
+                                            setResponse('registration succeeded')
+                                            console.log(data)
+                                        })
+                                        .catch(e => {
+                                            setColor('red')
+                                            setResponse('registration failed')
+                                            console.log(e.message)
+                                        })
+                }}
+                />
+            </View>
+        </KeyboardAvoidingView>
     )
 }
 
 const styles = StyleSheet.create({
-    item: {
-        marginTop: '5%',
-        marginBottom: '0%',
-        margin: '5%',
-        padding: 15,
-        height: 50, 
-        width: '90%',
-        backgroundColor: "#D7FCD4",
-        borderRadius: 10,
-        fontSize: 15
-    },
-    content: {
-        backgroundColor: '#545454',
-        width: '100%'
-    },
-    scroll: {
-        width: '100%',
-        height: '85%', 
-        backgroundColor: '#545454',
+    container: {
+        flex: 1,
         justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#545454'
+    },
+    loginMessage: {
+        fontSize: 16,
+        marginBottom: 10
+    },
+    inputContainer: {
+        width: '90%',
+    },
+    input: {
+        backgroundColor: '#D7FCD4',
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        borderRadius: 10,
+        marginTop: 5
+    },
+    buttonContainer: {
+        width: '60%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 25
+    },
+    button: {
+        backgroundColor: '#B6CCA1',
+        width: 300,
+        padding: 15,
+        borderRadius: 10,
         alignItems: 'center'
     },
-    main: {
-        margin: 0,
-        padding: 0,
-        height: '100%', 
-        width: '100%',
+    buttonOutline: {
         backgroundColor: '#545454',
-    },
-    statusText: {
-        textAlign: "center",
-        fontSize: 100,
+        borderColor: '#B6CCA1',
+        borderWidth: 2,
+        marginTop: 5
     }
 });
 
