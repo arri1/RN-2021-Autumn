@@ -1,26 +1,49 @@
 import React from "react";
-import { StyleSheet, View, Text} from "react-native";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-const Stack = createNativeStackNavigator();
+import { StyleSheet, Text, TouchableOpacity} from "react-native";
+import LinearGradient from 'react-native-linear-gradient';
 
 export default Main = ({navigation}) => {
-    return (
-        <View>
-            <Text style={styles.btn} title="Задание 1" onPress={()=> navigation.navigate("lab1")}>Задание 1</Text>
-            <Text style={styles.btn} title="Задание 2" onPress={()=> navigation.navigate("lab2")}>Задание 2</Text>
-            <Text style={styles.btn} title="Задание 3" onPress={()=> navigation.navigate("lab3")}>Задание 3</Text>
-        </View>
+    return (      
+        <LinearGradient colors={['#4A90E0', '#4BFAF1']} style={styles.mainPanel}>  
+            <Text style={styles.textM}>Меню заданий</Text>  
+            <TouchableOpacity onPress={()=> navigation.navigate("lab1")}>
+                <Text style={styles.btn}>Задание 1</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=> navigation.navigate("lab2")}>
+                <Text style={styles.btn}>Задание 2</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=> navigation.navigate("lab3")}>
+                <Text style={styles.btn}>Задание 3</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=> navigation.navigate("lab4")}>
+                <Text style={styles.btn}>Задание 4</Text>
+            </TouchableOpacity>     
+        </LinearGradient>
     );
 }
 
 const styles = StyleSheet.create({
     btn: {
-        marginTop: 10,
-        padding: 5,
-        borderWidth: 1,
-        borderColor: 'black',
-        borderRadius: 50,
+        marginTop: 20,
+        marginHorizontal:20,
+        height:64,
+        width:320,
+        borderWidth: 2,
+        backgroundColor: '#FFFFFF',
+        borderColor: '#C4C4C4',
+        borderRadius: 30,
+        paddingLeft: 30,
+        textAlignVertical:"center",
+        fontSize:26
+    },
+    textM:{
+        marginTop: 20,
         textAlign: 'center',
-    } 
+        fontSize: 32,
+        color: '#FFFFFF'
+    },
+    mainPanel: {
+        flex: 1,
+        alignItems: "center"
+    }
 });

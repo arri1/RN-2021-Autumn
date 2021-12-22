@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Text,
-} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, TouchableOpacity, View, Text} from 'react-native';
 
 const Lab1 = () => {
   const [color1, setColor1] = useState('#98DB46');
@@ -30,7 +23,7 @@ const Lab1 = () => {
             setColor2('#FFA500'); 
             setSize(36);
           }}>
-          <Text>Кнопка №1</Text>
+          <Text style={styles.text}>Кнопка №1</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -40,7 +33,7 @@ const Lab1 = () => {
             setColor2('#98DB46');
             setSize(36);
           }}>
-          <Text>Кнопка №2</Text>
+          <Text style={styles.text}>Кнопка №2</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -50,7 +43,7 @@ const Lab1 = () => {
             setColor1('#FFFF00');
             setSize(36);
           }}>
-          <Text>Кнопка №3</Text>
+          <Text style={styles.text}>Кнопка №3</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
@@ -67,6 +60,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
+    color: 'black',
   },
   countButton: {
     backgroundColor: '#5CBDDB',

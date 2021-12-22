@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {SafeAreaView, StyleSheet, Text, TouchableOpacity} from 'react-native'
+import {SafeAreaView, StyleSheet, TouchableOpacity} from 'react-native'
 import BoldText from '../components/customs/text/BoldText'
 
 const styles = StyleSheet.create({

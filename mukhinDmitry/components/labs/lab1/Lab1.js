@@ -8,10 +8,21 @@ import {
 } from 'react-native';
  
 const colorStep = (bgColor) => {
-  let bgStr = bgColor.substr(1,2)
-  bgStr = (bgStr * 1 + 5).toString()
-  bgStr = bgStr + bgStr + bgStr
-  return "#" + bgStr
+  let r = (parseInt(bgColor.substr(1,2),16) + 5).toString(16)
+  let g = (parseInt(bgColor.substr(3,2),16) + 5).toString(16)
+  let b = (parseInt(bgColor.substr(5,2),16) + 5).toString(16)
+  if (r.length == 1)
+    r = '0' + r
+  if (g.length == 1)
+    g = '0' + g
+  if (b.length == 1)
+    b = '0' + b
+  if (r === 'ff' || g === 'ff' || b === 'ff') {
+    r = '00'
+    g = '00'
+    b = '00'
+  }
+  return '#' + r + g + b
 }
 
 const rnLab1 = () => {

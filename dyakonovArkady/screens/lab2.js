@@ -1,30 +1,42 @@
 import React, {useState, useEffect} from 'react';
-import { SafeAreaView, View, Text, ActivityIndicator, StyleSheet, ScrollView } from 'react-native';
+import { SafeAreaView, View, Text, ActivityIndicator, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+
 import axios from 'axios';
 
+import {useDispatch, useSelector} from 'react-redux';
+import {loadItems, checkItem} from '../store/data';
+
 const Lab2 = () => {
-  const [data, setData] = useState([]);
+  const data = useSelector(state => state.data.value);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    axios
-      .get('https://jsonplaceholder.typicode.com/users')
-      .then(({data: newData}) => {
-        setData(newData);
-      })
-      .catch(() => {});
-  }, []);
+    if (dispatch) {
+      axios
+        .get('https://jsonplaceholder.typicode.com/users')
+        .then(({data}) => {
+          dispatch(loadItems(data));
+        })
+        .catch(() => {});
+    }
+  }, [dispatch]);
 
   const content = () => {
     return (
       <ScrollView>
         {data.map(item => {
           return (
-            <View key={item.id} style={styles.item}>
+            <TouchableOpacity 
+              key={item.id} 
+              style={[styles.item, item.checked ? {backgroundColor: '#248FE0'} : undefined,]} 
+              onPress={() => {
+                dispatch(checkItem(item.id));
+              }}>
               <Text style={styles.text}>{item.username} {item.name}</Text>
-              <Text>Address: {item.address.city}, {item.address.street}, {item.address.suite}</Text>
+              <Text >Address: {item.address.city}, {item.address.street}, {item.address.suite}</Text>
               <Text>email: {item.email}</Text>
               <Text>phone: {item.phone}</Text>
-            </View>
+            </TouchableOpacity>
           );
         })}
       </ScrollView>
@@ -34,7 +46,7 @@ const Lab2 = () => {
   return (
     <SafeAreaView style={[styles.main, {backgroundColor: '#52C0DE'}]}>
       <View style={styles.container}>
-        {data ? content() : <ActivityIndicator color={'red'} />}
+        {data ? content() : <ActivityIndicator color={'#248FE0'} />}
       </View>
     </SafeAreaView>
   );

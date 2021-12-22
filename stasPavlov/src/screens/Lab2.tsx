@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
+import { SafeAreaView, StyleSheet, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
 import {v4} from 'uuid'
 import { Todo } from '../constants/types'
 import { fetchData, todoAdded } from '../features/items-slice'

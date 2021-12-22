@@ -1,11 +1,5 @@
 import React, {useState} from 'react';
-import {
-  Text, 
-  View, 
-  StyleSheet,
-  Animated,
-  TouchableOpacity
-} from 'react-native';
+import {Text, View, StyleSheet, Animated, TouchableOpacity} from 'react-native';
 
 const SlowObject = () => {
   const anim = useState(new Animated.ValueXY({x: 0, y: 0}))[0];
@@ -13,69 +7,67 @@ const SlowObject = () => {
   const [num, setNum] = useState(0);
 
   const expFunc = () => {
-    for (let i = 0; i < 80000000; i++) ;
-    return num;  
-  }
+    for (let i = 0; i < 80000000; i++);
+    return num;
+  };
 
   const funcNum = expFunc();
 
   const doAnim = () => {
-
     Animated.sequence([
-      Animated.timing(anim,
-      {
+      Animated.timing(anim, {
         toValue: {
           x: -100,
-          y: 0
+          y: 0,
         },
         duration: 1500,
-        useNativeDriver: false
-      }
-      ),
-      Animated.timing(anim,
-      {
+        useNativeDriver: false,
+      }),
+      Animated.timing(anim, {
         toValue: {
           x: 100,
-          y: 0
+          y: 0,
         },
         duration: 1000,
-        useNativeDriver: false
-      }
-      ),
-      Animated.timing(anim,
-      {
+        useNativeDriver: false,
+      }),
+      Animated.timing(anim, {
         toValue: {
           x: 0,
-          y: 0
+          y: 0,
         },
         duration: 1500,
-        useNativeDriver: false
-      }
-      )
+        useNativeDriver: false,
+      }),
     ]).start();
-  }
+  };
 
   const showDiff = () => {
-    (color === '#AAC284') ? setColor('#FD442E') : setColor('#AAC284');
+    color === '#AAC284' ? setColor('#FD442E') : setColor('#AAC284');
     doAnim();
-  }
+  };
 
   return (
-    <View>
+    <View style={styles.container}>
       <TouchableOpacity onPress={() => setNum(num + 1)}>
         <Animated.View style={[anim.getLayout(), styles.circle]}>
           <Text style={styles.text}>{funcNum}</Text>
         </Animated.View>
       </TouchableOpacity>
-      <TouchableOpacity style={[styles.button, {backgroundColor: color}]} onPress={showDiff}>
+      <TouchableOpacity
+        style={[styles.button, {backgroundColor: color}]}
+        onPress={showDiff}>
         <Text style={styles.text}>SLOW</Text>
       </TouchableOpacity>
     </View>
-  )
+  );
 };
 
 const styles = StyleSheet.create({
-
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   circle: {
     width: 80,
     height: 80,
@@ -98,7 +90,7 @@ const styles = StyleSheet.create({
     fontFamily: 'PTSansNarrow-Bold',
     color: '#FFFFFC',
     fontSize: 24,
-    textAlign: 'center'
+    textAlign: 'center',
   },
 });
 

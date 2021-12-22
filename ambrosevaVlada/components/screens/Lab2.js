@@ -3,33 +3,51 @@ import {
   ImageBackground,
   ScrollView,
   Text,
-  TextInput,
   TouchableOpacity,
-  Keyboard,
   View,
   StyleSheet,
 } from 'react-native';
 
 import axios from 'axios';
+import {useDispatch, useSelector} from 'react-redux';
 
 const Lab2 = () => {
+  const dispatch = useDispatch();
+
+  const userId = useSelector(state => state.toDo.userId);
+  const tasksId = useSelector(state => state.toDo.tasksId);
+
+  const [refresh, setRefresh] = useState(false);
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    const apiUrl = 'https://jsonplaceholder.typicode.com/todos?userId=1';
-    axios.get(apiUrl).then((resp) => {     
+    const apiUrl = 'https://jsonplaceholder.typicode.com/todos';
+    axios.get(apiUrl).then(resp => {
       setTasks(resp.data);
     });
   }, []);
 
   const getCompletedSign = completed => {
-    return (completed) ? '#21434F' : '#E6D899';
+    return completed ? '#21434F' : '#E6D899';
+  };
+
+  const getSelectedSign = id => {
+    return tasksId.includes(id) ? '#FD442E' : '#E6D899';
+  };
+
+  const selectTask = id => {
+    if (!tasksId.includes(id)) {
+      dispatch({type: 'SELECT_TASK', taskId: id});
+    } else {
+      dispatch({type: 'DESELECT_TASK', taskId: id});
+    }
+    setRefresh(!refresh);
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.textArea}>
-        <Text style={styles.title}>TODAY'S TASKS</Text>
+        <Text style={styles.title}>TODAY'S TASKS of USER {userId}</Text>
       </View>
       <View style={styles.tasksContainer}>
         <ImageBackground
@@ -38,19 +56,25 @@ const Lab2 = () => {
           source={require('../../android/app/src/main/assets/images/bgd.jpg')}>
           <ScrollView style={styles.tasksArea}>
             {tasks.map(item => {
-              return (
-                <View key={item.id} style={styles.taskField}>
-                  <View
-                    style={[
-                      styles.completedField,
-                      {backgroundColor: getCompletedSign(item.completed)}]}>
+              if (item.userId == userId)
+                return (
+                  <View key={item.id}>
+                    <View style={styles.taskField}>
+                      <View
+                        style={[
+                          styles.completedField,
+                          {backgroundColor: getCompletedSign(item.completed)},
+                        ]}></View>
+                      <Text style={styles.text}>{item.title}</Text>
+                      <TouchableOpacity
+                        style={[
+                          styles.selectCircle,
+                          {backgroundColor: getSelectedSign(item.id)},
+                        ]}
+                        onPress={() => selectTask(item.id)}></TouchableOpacity>
+                    </View>
                   </View>
-                  <Text style={styles.text}>{item.title}</Text>
-                  <View
-                    style={styles.redCircle}>                     
-                  </View>
-                </View>
-              );
+                );
             })}
           </ScrollView>
         </ImageBackground>
@@ -82,13 +106,13 @@ const styles = StyleSheet.create({
     minHeight: 493,
   },
   imgBackGround: {
-    height: 493, 
-    width: 393, 
-    marginTop: 0
+    height: 493,
+    width: 393,
+    marginTop: 0,
   },
   title: {
     fontFamily: 'PTSansNarrow-Bold',
-    fontSize: 36,
+    fontSize: 24,
     letterSpacing: -1,
     color: '#121213',
     textAlign: 'right',
@@ -124,11 +148,10 @@ const styles = StyleSheet.create({
     marginLeft: 11,
     marginRight: 11,
   },
-  redCircle: {
+  selectCircle: {
     width: 15,
     height: 15,
     borderRadius: 15 / 2,
-    backgroundColor: '#FD442E',
     marginLeft: 11,
   },
   bottom: {
@@ -139,7 +162,7 @@ const styles = StyleSheet.create({
     bottom: 137,
     padding: 11,
     alignItems: 'center',
-  }
+  },
 });
 
 export default Lab2;
