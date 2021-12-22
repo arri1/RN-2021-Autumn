@@ -6,24 +6,20 @@ import { useDispatch } from 'react-redux';
 
 import StyledButton from '../common/StyledButton'
 import { TextInput } from 'react-native-gesture-handler'
-import { AUTH } from '../gqls/Mutations'
+import { UPDATE_USER } from '../gqls/Mutations'
 
-const Lab5 = props => {
+const Update = props => {
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
+    const [name, setName] = useState('')
     const [respose, setResponse] = useState('')
-    const [color, setColor] = useState('')
-    const [loginUser] = useMutation(AUTH, {
-        onCompleted: async ({authUser}) => {
-            console.log(authUser.token)
-            addToken(authUser.token)
+    const [updateUser] = useMutation(UPDATE_USER, {
+        onCompleted: async ({updateUser}) => {
+            console.log(updateUser.token)
+            addToken(updateUser.token)
         },                                  
         onError: ({message}) => {
             console.log(message)
-            if (message==='GraphQL error: Incorrect password'){
-                console.log('Incorrect password')
-                return  null
-            }
         }
     })
 
@@ -36,38 +32,41 @@ const Lab5 = props => {
     React.useCallback(() => {
       return () => {
         setLogin('')
+        setName('')
         setPassword('')
         setResponse('')
       };
     }, [])
     )
 
-    const onLoginPress = () => {
-        loginUser({variables: {login, password}})
+    const onUpdatePress = () => {
+        updateUser({variables: {login, password}})
             .then(({ data }) => {
-                setColor('#96be25')
-                setResponse('authorization succeeded')
+                setResponse('')
+                props.navigation.navigate("SignIn")
                 console.log(data)
+
             })
             .catch(e => {
-                setColor('red')
-                setResponse('authorization failed')
+                setResponse('Update failed.')
                 console.log(e.message)
             })
     }
 
-    const onRegisterPress = () => {
-        props.navigation.navigate('SignUp')
-    }
-
-    const onUpdatePress = () => {
-        props.navigation.navigate('Update')
+    const onCancelPress = () => {
+        props.navigation.navigate("SignIn")
     }
 
     return(
         <KeyboardAvoidingView style = {styles.container} behavior='padding'>
-            <Text style = {{fontSize: 16, color: color, marginBottom: 10}}>{respose}</Text>
+            <Text style = {styles.regMessage}>{respose}</Text>
             <View style = {styles.inputContainer}>
+                <TextInput
+                    placeholder='Name'
+                    style = {styles.input}
+                    value = {name}
+                    onChangeText = {text => setName(text)}
+                />
                 <TextInput
                     placeholder='Login'
                     style = {styles.input}
@@ -84,19 +83,14 @@ const Lab5 = props => {
             </View>
             <View style = {styles.buttonContainer}>
                 <StyledButton
-                    text = 'Login'
-                    style = {styles.button}
-                    onPress = {onLoginPress}
-                />
-                <StyledButton
-                    text = 'Register'
-                    style = {[styles.button, styles.buttonOutline]}
-                    onPress = {onRegisterPress}
-                />
-                <StyledButton
                     text = 'Update'
-                    style = {[styles.button, styles.buttonOutline]}
+                    style = {styles.button}
                     onPress = {onUpdatePress}
+                />
+                <StyledButton
+                    text = 'Cancel'
+                    style = {[styles.button, styles.buttonOutline]}
+                    onPress = {onCancelPress}
                 />
             </View>
         </KeyboardAvoidingView>
@@ -110,7 +104,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#545454'
     },
-    loginMessage: {
+    regMessage: {
+        color: 'red',
         fontSize: 16,
         marginBottom: 10
     },
@@ -134,6 +129,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#B6CCA1',
         width: 300,
         padding: 15,
+        marginBottom: 10,
         borderRadius: 10,
         alignItems: 'center'
     },
@@ -145,4 +141,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Lab5;
+export default Update;
