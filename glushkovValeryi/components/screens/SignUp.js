@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView  } from 'react-native'
 import { useMutation } from '@apollo/client'
 import { useFocusEffect } from '@react-navigation/native'
-import { useDispatch } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import StyledButton from '../common/StyledButton'
 import { TextInput } from 'react-native-gesture-handler'
@@ -15,18 +15,14 @@ const SignUp = props => {
     const [respose, setResponse] = useState('')
     const [registerUser] = useMutation(REG, {
         onCompleted: async ({registerUser}) => {
+            console.log("from Register")
             console.log(registerUser.token)
-            addToken(registerUser.token)
+            await AsyncStorage.setItem('token', registerUser.token)
         },                                  
         onError: ({message}) => {
             console.log(message)
         }
     })
-
-    const dispatch = useDispatch()
-    const addToken = (token) => {
-        dispatch({type:"ADD_TOKEN", newToken: token})
-    }
 
     useFocusEffect(
     React.useCallback(() => {
@@ -43,7 +39,7 @@ const SignUp = props => {
         registerUser({variables: {login, password}})
             .then(({ data }) => {
                 setResponse('')
-                props.navigation.navigate("SignIn")
+                props.navigation.goBack()
                 console.log(data)
 
             })
