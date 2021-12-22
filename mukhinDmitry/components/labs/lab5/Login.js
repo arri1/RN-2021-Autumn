@@ -10,8 +10,8 @@ import {
 } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { useAsyncStorage } from '@react-native-async-storage/async-storage'
-import { useApolloClient, useMutation } from "@apollo/client"
-import {AUTH} from "../../../sql/mutations/RNUser"
+import { useMutation } from "@apollo/client"
+import { AUTH } from "../../../sql/mutations/RNUser"
 import { setLoginValue } from '../lab4/RNSlice'
 
 const RNRegister = () => {
@@ -20,9 +20,6 @@ const RNRegister = () => {
   const [password, setPassword] = useState(null)
   const { setItem } = useAsyncStorage('token')
   const [state, setState] = useState(0)
-
-  const apollo = useApolloClient()
-  apollo.cache
 
   const [auth, {loading}] = useMutation(AUTH, {
     onCompleted: async ({authUser}) => {

@@ -55,10 +55,14 @@ const RNUpdate = () => {
       updt({
         variables: {
           data: {
-            set:{login},
-            set:{name},
-            set:{group},
-            set:{password},
+            // set:{login},
+            // set:{name},
+            // set:{group},
+            // set:{password},
+            login,
+            name,
+            group,
+            password
           }
         }
       })

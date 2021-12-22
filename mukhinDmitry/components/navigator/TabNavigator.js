@@ -120,6 +120,20 @@ const TabNavigator = () => {
                     },
                 }}
             />
+            {/* <Tab.Screen 
+                name="Lab 5.3"
+                component={rnLab54}
+                options={{
+                    title: 'Apollo: Find Me',
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                        color: '#FFFFFF'
+                    },
+                    tabBarIcon: () => {
+                        return <Image source = {require("../../res/img/navbar/tab-2.png")} style={styles.icon} />;
+                    },
+                }}
+            /> */}
         </Tab.Navigator>
     )
 }

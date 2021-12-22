@@ -8,7 +8,7 @@ import {
   TextInput,
   ActivityIndicator,
 } from 'react-native'
-import { useApolloClient, useMutation } from "@apollo/client"
+import { useMutation } from "@apollo/client"
 import {REG} from "../../../sql/mutations/RNUser"
 
 const RNRegister = () => {
@@ -16,9 +16,7 @@ const RNRegister = () => {
   const [password, setPassword] = useState(null)
   const [name, setName] = useState(null)
 
-  const apollo = useApolloClient()
-
-  const [reg, { data, loading }] = useMutation(REG, {
+  const [reg, { loading }] = useMutation(REG, {
     onCompleted: async () => {
       console.log('Register completed')
     },

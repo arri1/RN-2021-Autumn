@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import { useSelector } from 'react-redux'
 import { useQuery } from "@apollo/client"
-import GET_ME from "../../../sql/quieries/RNUser"
+import { GET_ME } from "../../../sql/quieries/RNUser"
 
 const RNUser = () => {
   const [login, setLogin] = useState(useSelector((state) => state.rnSlice.login))
@@ -17,16 +17,24 @@ const RNUser = () => {
   const [name, setName] = useState(null)
   const [group, setGroup] = useState(null)
 
-  const [{data, error, loading}] = useQuery(GET_ME)                                 
-    if (error) {
-      return (
-        <SafeAreaView style={styles.rnMain}>
-          <Text>something went wrong</Text>
-        </SafeAreaView>
-        )
+  const [updt, {loading}] = useQuery(GET_ME,{
+    onCompleted: async ({findOneUser}) => {
+      setId(findOneUser.id)
+      setName(findOneUser.name)
+      setGroup(findOneUser.group)
+      console.log('user found')
+      console.log(findOneUser)
+    },                                  
+    onError: ({message}) => {
+      console.log(message)
+      if (message==='GraphQL error: Incorrect password'){
+          console.log('Incorrect password')
+          return  null
+      }
+      console.log('Something went wrong')
     }
+  })
     
-
   const isDataCorrect = () => {
     if (login === '') {
       console.log('Null login')
@@ -43,7 +51,6 @@ const RNUser = () => {
     )
 
   const findUserByLogin = () => {
-    console.log('dunno')
     if (isDataCorrect())
       updt({
         variables: {
@@ -57,13 +64,13 @@ const RNUser = () => {
       <View>
         <TextInput style = {styles.rnInput} onChangeText={text => setLogin(text)} value={login} placeholder='Login'/>
         <View style={styles.rnItem}>
-          <Text style = {styles.rnItemText}>id: {data.id}</Text>
+          <Text style = {styles.rnItemText}>id: {id}</Text>
         </View>
         <View style={styles.rnItem}>
-          <Text style = {styles.rnItemText}>name:{data.name}</Text>
+          <Text style = {styles.rnItemText}>name:{name}</Text>
         </View>
         <View style={styles.rnItem}>
-          <Text style = {styles.rnItemText}>group:{data.group}</Text>
+          <Text style = {styles.rnItemText}>group:{group}</Text>
         </View> 
         <Pressable 
           onPress={() => {findUserByLogin()}}
