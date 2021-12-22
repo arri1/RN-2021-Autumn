@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -6,8 +6,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-const Lab1 = () => {
-  const [color, setColor] = useState('#AC99C0');
+const Lab3 = () => {
+  const [color, setColor] = useState('#B39EC8');
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -25,9 +25,29 @@ const Lab1 = () => {
     }
     if (count == 5) {
       setCount(0);
-      setColor('#AC99C0');
+      setColor('#B39EC8');
     }
   })
+
+  const compFunc = () => {
+    let i = 0;
+    while (i < 60000000) {
+      i++;
+    }
+    return true;
+  };
+
+  const operaton = useMemo(compFunc, []);
+
+  const onPressHandler = () => {
+    const bool = compFunc()
+    setCount(count + 1)
+  };
+
+  const onPressHandlerSecond = () => {
+    const bool = operaton;
+    setCount(count + 1)
+  };
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: color }]}>
@@ -40,8 +60,11 @@ const Lab1 = () => {
         5 раз для обнуления
       </Text>
       <Text style={styles.text2}> Вы кликнули: {count} </Text>
-      <TouchableOpacity style={styles.button} onPress={() => setCount(count + 1)}>
-        <Text style={styles.buttonText}> Кликните </Text>
+      <TouchableOpacity style={styles.button} onPress={(onPressHandler)}>
+        <Text style={styles.buttonText}> без useMemo </Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={(onPressHandlerSecond)}>
+        <Text style={styles.buttonText}> с useMemo </Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -55,7 +78,7 @@ const styles = StyleSheet.create({
   },
   text: {
     backgroundColor: '#9D88B4',
-    color: '#ECE7E7',
+    color: 'white',
     textAlign: 'center',
     borderRadius: 5,
     width: 300,
@@ -65,12 +88,13 @@ const styles = StyleSheet.create({
   text2: {
     color: '#4F2967',
     fontSize: 15,
-    margin: 10
+    margin: 5
   },
   button: {
     backgroundColor: '#9D88B4',
     borderRadius: 5,
-    width: 130
+    width: 130,
+    margin: 5
   },
   buttonText: {
     color: 'white',
@@ -79,4 +103,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Lab1;
+export default Lab3;

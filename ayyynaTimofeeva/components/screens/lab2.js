@@ -48,20 +48,20 @@ const Lab2 = () => {
 const styles = StyleSheet.create({
   main: {
     height: '100%',
-    backgroundColor: 'pink',
+    backgroundColor: '#AC99C0'
   },
   item: {
     padding: 20,
     marginBottom: 5,
-    backgroundColor: 'white',
+    backgroundColor: '#9D88B4',
+    borderRadius: 5,
   },
   title: {
     fontSize: 15,
-    fontWeight: 'bold',
-    color: 'black'
+    color: 'white'
   },
   text: {
-    color: 'black'
+    color: 'white'
   }
 });
 
