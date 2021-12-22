@@ -6,6 +6,7 @@ import Lab1 from '../screens/Lab1';
 import Lab2 from '../screens/Lab2';
 import Lab3 from '../screens/Lab3';
 import Lab4 from '../screens/Lab4';
+import NavigationStack from './NavigationStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -70,6 +71,18 @@ const TabNavigator = () => {
           tabBarIcon: () => (
             <View>
               <Text style={styles.text}>LAB4</Text>
+            </View>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="LAB5"
+        component={NavigationStack}
+        options={{
+          headerShown: false,
+          tabBarIcon: () => (
+            <View>
+              <Text style={styles.text}>LAB5</Text>
             </View>
           ),
         }}
