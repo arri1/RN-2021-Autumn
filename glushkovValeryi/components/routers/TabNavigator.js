@@ -6,6 +6,7 @@ import Lab1 from '../screens/Lab1'
 import Lab2 from '../screens/Lab2'
 import Lab3 from '../screens/Lab3'
 import Lab4 from '../screens/Lab4'
+import Lab5 from '../screens/Lab5'
 
 const Tab = createBottomTabNavigator();
 
@@ -45,6 +46,7 @@ const TabNavigator = () => {
             <Tab.Screen name = "lab2" component = {Lab2} />
             <Tab.Screen name = "lab3" component = {Lab3} />
             <Tab.Screen name = "lab4" component = {Lab4} />
+            <Tab.Screen name = "lab5" component = {Lab5} />
         </Tab.Navigator>
     );
 }

@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text, ActivityIndicator, StyleSheet, ScrollView } from 'react-native';
+import { SafeAreaView, View, Text, ActivityIndicator, StyleSheet, ScrollView } from 'react-native';
 import axios from 'axios';
 
-const lab2 = () => {
+const Lab2 = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -32,32 +32,45 @@ const lab2 = () => {
   };
 
   return (
-    <View style={styles.container}>
-      {data ? content() : <ActivityIndicator color={'red'} />}
-    </View>
+    <SafeAreaView style={[styles.main, {backgroundColor: '#52C0DE'}]}>
+      <View style={styles.container}>
+        {data ? content() : <ActivityIndicator color={'red'} />}
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  main:{
+    height: '100%'
+  },
   item: {
+    backgroundColor: '#BCEEEB',
     padding: 10,
     borderRadius: 10,
     marginTop: 5,
+    width: 390,
     marginBottom: 5,
-    borderWidth: StyleSheet.hairlineWidth,
-    backgroundColor: '#BCEEEB'
+    shadowColor: '#000000',
+    shadowOffset: {
+        width: 10,
+        height: 10,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.5,
+    elevation: 5
+
   },
   container: {
-    marginBottom: 75,
+    marginBottom: 80,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#92D6BE'
+    backgroundColor: '#52C0DE'
   },
-
   text: {
     fontSize: 15,
     fontWeight: 'bold',
   },
 });
 
-export default lab2;
+export default Lab2;

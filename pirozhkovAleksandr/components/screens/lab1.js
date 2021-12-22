@@ -1,12 +1,9 @@
 import React, {useState} from 'react';
-
-import toasty from '../../assets/toasty.png';
+import {Neomorph} from 'react-native-neomorph-shadows';
 
 import {
   View,
-  SafeAreaView,
   Text,
-  Image,
   StyleSheet,
   TouchableOpacity,
   ScrollView,
@@ -14,95 +11,98 @@ import {
 
 const styles = StyleSheet.create({
   main: {
-    height: '100%',
+    height: 690,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  box: {
-    height: 150,
-    width: 200,
-    alignSelf: 'center',
+  counterText: {
+    width: '100%',
+    textShadowColor: 'black',
+    textShadowRadius: 5,
+    textShadowOffset: {width: 2, height: 2},
+    color: '#FF008A',
+    fontFamily: 'chakraPetchBold',
+    fontSize: 18,
+    textAlign: 'center',
+  },
+  buttonShadow: {
+    shadowOffset: {width: -7, height: -7},
+    shadowOpacity: 1,
+    marginTop: 16,
+    shadowRadius: 14,
+    borderRadius: 40,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 10,
-    borderRadius: 20,
-  },
-  littleBox: {
-    height: 50,
+    backgroundColor: '#353A45',
     width: 200,
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 10,
-    borderRadius: 15,
-    backgroundColor: '#DBAB84',
+    height: 63,
   },
-  text: {
-    fontSize: 20,
-  },
-  counterContainer: {
-    width: 200,
-    borderRadius: 10,
-    alignItems: 'center',
-    backgroundColor: '#DBBD86',
-    marginTop: 10,
-    alignSelf: 'center',
-    fontSize: 20,
-  },
-  image: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 150,
-    right: 0,
+  buttonText: {
+    width: '100%',
+    textShadowColor: 'black',
+    textShadowRadius: 5,
+    textShadowOffset: {width: 2, height: 2},
+    color: '#FDD400',
+    fontFamily: 'chakraPetchBold',
+    fontSize: 18,
+    textAlign: 'center',
   },
 });
 
 const Lab1 = ({navigation, route}) => {
-  const [color, setColor] = useState('#4A398F');
+  const [color, setColor] = useState('#353A45');
   const [counter, setCounter] = useState(0);
-  const [shouldShow, setShouldShow] = useState(false);
 
   return (
-    <SafeAreaView style={[styles.main, {backgroundColor: color}]}>
-      <ScrollView>
-        <View style={styles.image}>
-          {!!shouldShow && <Image source={toasty} />}
+    <ScrollView style={{backgroundColor: color}}>
+      <View style={styles.main}>
+        <TouchableOpacity onPress={() => setColor('#555C70')}>
+          <Neomorph
+            lightShadowColor="#1E2126"
+            darkShadowColor="#576178"
+            style={styles.buttonShadow}>
+            <Text style={styles.buttonText}>Click me</Text>
+          </Neomorph>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => setColor('#353A45')}>
+          <Neomorph
+            lightShadowColor="#1E2126"
+            darkShadowColor="#576178"
+            style={styles.buttonShadow}>
+            <Text style={styles.buttonText}>Click me too</Text>
+          </Neomorph>
+        </TouchableOpacity>
+
+        <View>
+          <Neomorph
+            lightShadowColor="#1E2126"
+            darkShadowColor="#576178"
+            inner
+            style={styles.buttonShadow}>
+            <Text style={styles.counterText}>{counter}</Text>
+          </Neomorph>
         </View>
 
-        <TouchableOpacity
-          style={[styles.box, {backgroundColor: '#58DB5A'}, {marginTop: 90}]}
-          onPress={() => setColor('#458F46')}>
-          <Text style={styles.text}>Click me</Text>
+        <TouchableOpacity onPress={() => setCounter(counter + 1)}>
+          <Neomorph
+            lightShadowColor="#1E2126"
+            darkShadowColor="#576178"
+            style={styles.buttonShadow}>
+            <Text style={styles.buttonText}>Add some points</Text>
+          </Neomorph>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={[styles.box, {backgroundColor: '#836EDB'}]}
-          onPress={() => setColor('#4A398F')}>
-          <Text style={styles.text}>Click me too</Text>
+        <TouchableOpacity onPress={() => setCounter(counter - 1)}>
+          <Neomorph
+            lightShadowColor="#1E2126"
+            darkShadowColor="#576178"
+            style={styles.buttonShadow}>
+            <Text style={styles.buttonText}>Subtract some points</Text>
+          </Neomorph>
         </TouchableOpacity>
-
-        <View style={styles.counterContainer}>
-          <Text style={styles.text}>{counter}</Text>
-        </View>
-
-        <TouchableOpacity
-          style={styles.littleBox}
-          onPress={() => setCounter(counter + 1)}>
-          <Text style={styles.text}>Add some points</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.littleBox}
-          onPress={() => setCounter(counter - 1)}>
-          <Text style={styles.text}>Subtract some points</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.littleBox, {backgroundColor: '#B16FDB'}]}
-          onPress={() => setShouldShow(!shouldShow)}>
-          <Text style={styles.text}>Toasty</Text>
-        </TouchableOpacity>
-      </ScrollView>
-    </SafeAreaView>
+      </View>
+    </ScrollView>
   );
 };
 

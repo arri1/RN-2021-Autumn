@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   pointsArea: {
     marginTop: 20,
     width: 360,
-    height: 480,
+    height: 410,
     borderRadius: 10,
     backgroundColor: '#D7FCD4',
     justifyContent: 'center',

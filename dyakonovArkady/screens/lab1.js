@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
-const lab1 = () => {
+const Lab1 = () => {
   const [color, setColor] = useState('#75FFB1');
    
   return (
@@ -17,8 +17,6 @@ const lab1 = () => {
   );
 };
 
-export default lab1;
-
 const styles = StyleSheet.create({
   main:{
     height: '100%'
@@ -27,8 +25,8 @@ const styles = StyleSheet.create({
     height: 100,
     margin: 100,
     marginTop: '50%',
-    borderRadius: 100,
-    backgroundColor: '#9AFF8F'
+    borderRadius: 10,
+    backgroundColor: '#54A9F5'
   },
   bText: 
   { 
@@ -36,6 +34,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
     marginTop: '16%',
-    width: 200
+    width: 200,
+    color: '#FFFFFF'
   },
 });
+
+export default Lab1;
