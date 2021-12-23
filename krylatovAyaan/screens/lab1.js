@@ -3,7 +3,6 @@ import {Text, View, Button, StyleSheet} from 'react-native';
 
 const Lab1 = () => {
   const [count, setCount] = useState(0);
-  //const [setColor] = useState('#FFBA73');
   var [color] = useState('#476DD5');
 
   return (
@@ -22,16 +21,16 @@ const Lab1 = () => {
   );
 };
 const changeColor = (count, color, setCount) => {
-  if (count == 0) {
+  if (count === 0) {
     color = '#FFBA73';
   }
-  if (count == 1) {
+  if (count === 1) {
     color = '#476DD5';
   }
-  if (count == 2) {
+  if (count === 2) {
     color = '#F13C73';
   }
-  if (count == 3) {
+  if (count === 3) {
     setCount(count - 3);
     color = '#FFBA73';
   }

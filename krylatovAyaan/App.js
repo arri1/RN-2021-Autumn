@@ -1,5 +1,6 @@
 import React from 'react';
-import lab1 from '../third/component/lab1';
+import lab1 from './screens/lab1';
+import lab2 from './screens/lab2';
 import {NavigationContainer} from '@react-navigation/native';
 //import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -11,6 +12,7 @@ const App = () => {
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen name="Lab1" component={lab1} />
+        <Tab.Screen name="Lab2" component={lab2} />
       </Tab.Navigator>
     </NavigationContainer>
   );
