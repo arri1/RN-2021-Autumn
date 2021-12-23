@@ -10,6 +10,7 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = () => {
   return (
     <Tab.Navigator
+      headerMode="none"
       screenOptions={{
         tabBarLabelStyle: {
           color: '#5CBDDB',
@@ -32,6 +33,7 @@ const TabNavigator = () => {
           name=" "
           component={Lab1}
           options={{
+            headerShown: false,
             tabBarIcon: ({focused}) => {
               return (
                 <Image
@@ -46,6 +48,7 @@ const TabNavigator = () => {
           name="  "
           component={Lab2}
           options={{
+            headerShown: false,
             tabBarIcon: ({focused}) => {
               return (
                 <Image
@@ -60,6 +63,7 @@ const TabNavigator = () => {
           name="   "
           component={Lab3}
           options={{
+            headerShown: false,
             tabBarIcon: ({focused}) => {
               return (
                 <Image
