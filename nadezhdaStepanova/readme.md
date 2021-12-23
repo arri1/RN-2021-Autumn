@@ -1,0 +1,1 @@
+Ссылка на фигму: https://www.figma.com/file/LHaWxjUBwtcKLdUbufD9YM/myFigmaLab3?node-id=0%3A1
