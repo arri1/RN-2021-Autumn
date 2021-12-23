@@ -15,8 +15,8 @@ const Lab1 = () => {
       <ScrollView>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => setColor( '#' + Math.floor(Math.random()*12581375).toString(15) )}>
-          <Text style = {styles.bText}>Poke me</Text>
+          onPress={() => setColor( '#' + Math.floor(Math.random()*12581375).toString(20) )}>
+          <Text style = {styles.bText}>PushMe</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
@@ -31,6 +31,8 @@ const styles = StyleSheet.create({
     height: 150,
     margin: 125,
     marginTop: '50%',
+    borderColor: '#C446DB',
+    borderWidth: 2,
     borderRadius: 100,
     backgroundColor: '#FF0000'
   },
@@ -39,8 +41,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 30,
-    marginTop: '20%',
-    width: 150
+    marginTop: '40%',
+    color: '#FFFFFF',
+    width: 140
+    
   },
 });
 
