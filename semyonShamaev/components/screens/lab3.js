@@ -1,4 +1,6 @@
 import React, {useState, useMemo} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {increaseCounter} from '../../store/tasks';
 import {    
   SafeAreaView,
   View,
@@ -18,34 +20,29 @@ const counterFunction = () => {
 };
 
 const Lab3 = () => {
-  const [memoCount, setMemoCount] = useState(0);
-  const [memoText, setMemoText] = useState('0');
+  const count = useSelector((state) => state.background.counter)
 
-  const [stateCount, setStateCount] = useState(0);
-  const [stateText, setStateText] = useState('0');
+  const dispatch = useDispatch()
 
   const onPressHandlerState = () => {
-    const stateText = operation;
-    setStateCount(stateCount + 1);
-    setStateText(`${stateCount} ${stateText}`);
+    const count = operation;
+    dispatch(increaseCounter())
   };
 
   const onPressHandlerMemo = () => {
-    const memoText = counterFunction();
-    setMemoCount(memoCount + 1);
-    setMemoText(`${memoCount} ${memoText}`);
+    const count = counterFunction();
+    dispatch(increaseCounter())
   };
   const operation = useMemo(counterFunction, []);
 
   return (
-
-    <View>
+    <View>       
     <SafeAreaView style={styles.main}>
       <ScrollView style={styles.scroll}>
         <TouchableOpacity style={styles.button} onPress={onPressHandlerState}>
-        <Text style = {styles.stateText}>{stateText}</Text></TouchableOpacity>
+        <Text style = {styles.count}>{count}</Text></TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={onPressHandlerMemo}>
-        <Text style = {styles.memoText}>{memoText}</Text></TouchableOpacity>
+        <Text style = {styles.count}>{count}</Text></TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
     </View>
@@ -68,14 +65,7 @@ const styles = StyleSheet.create({
     scroll: {
       margin: 15,
     },
-    memoText: {
-        fontWeight: 'normal',
-        textAlign: 'center',
-        fontSize: 40,
-        marginTop: 100,
-        color: '#FFFFFF'
-    },
-    stateText: {
+    count: {
       fontWeight: 'normal',
       textAlign: 'center',
       fontSize: 40,
