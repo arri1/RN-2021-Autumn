@@ -11,12 +11,13 @@ import {
 
 import axios from 'axios';
 
+
 const Lab2 = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     axios
-      .get('https://picsum.photos/v2/list?page=2&limit=100')
+      .get('https://picsum.photos/v2/list?limit=10')
       .then(({data: newData}) => {
         setData(newData);
       })
@@ -29,7 +30,7 @@ const Lab2 = () => {
       <ScrollView style={{width: '100%'}, {marginBottom: 80}}>
         {data.map(item => {
           return (
-            <View style={styles.colorBox}>
+            <View style={styles.colorCodeBox}>
                 <View key={item.id}>
                   <Image
                     style={styles.img}
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#E1E4E7',
   },
 
-  colorBox: {
+  colorCodeBox: {
     backgroundColor: '#FFFFFF',
     padding: 30,
     marginVertical: 10,

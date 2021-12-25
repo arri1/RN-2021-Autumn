@@ -7,8 +7,9 @@ import {
   Text
 } from 'react-native';
 
+
 const Lab1 = () => {
-  const [color, setColor] = useState('#752FB1');
+  const [color, setColor] = useState('#E1E4E7');
 
   return (
     <SafeAreaView style={[styles.main, {backgroundColor: color}]}>
@@ -28,9 +29,9 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   countButton: {
-    backgroundColor: '#5CBDDB',
+    backgroundColor: '#C4C4C4',
     margin: 25,
-    borderRadius: 100,
+    borderRadius: 20,
     padding: 60,
     justifyContent: 'center',
     alignItems: 'center',
