@@ -6,16 +6,8 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-
-const randomHex = () => {
-    const letters = "0123456789ABCDEF";
-    let color = "#";
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    expensiveFunction();
-    return color;
-  };
+import { useSelector, useDispatch} from 'react-redux';
+import { changeColor } from "../../store/box";
 
 const styles = StyleSheet.create({
     button: {
@@ -55,25 +47,26 @@ const expensiveFunction = () => {
   }
   return 'likes';
 };
+
 const Lab3 = () => {
   const [count, setCount] = useState(0);
   const [text, setText] = useState('');
-  const [color, setColor] = useState('#FFFFFF');
+  const color = useSelector(state => state.boxColor.value);
+  const dispatch = useDispatch();
 
   const onPressHandler = () => {
-    const text = randomHex();
+    const text = expensiveFunction();
     setCount(count + 1);
     setText(`${count}`);
-    setColor(text);
+    dispatch(changeColor());
   };
-  const operation = useMemo(randomHex, [color]);
+  const operation = useMemo(expensiveFunction, []);
 
   const onPressHandlerSecond = () => {
     const text = operation;
-
     setCount(count + 1);
     setText(`${count}`);
-    setColor(text);
+    dispatch(changeColor());
   };
 
   return (

@@ -7,18 +7,17 @@ import {
   View,
   Text,
 } from 'react-native';
-import { useSelector, useDispatch} from 'react-redux';
-import { changeColor } from "../../store/background";
+import { useSelector} from 'react-redux';
 
-const Lab1 = () => {
+const Lab4 = () => {
   const color = useSelector(state => state.backgroundColor.value);
-  const dispatch = useDispatch();
+  const boxcolor = useSelector(state => state.boxColor.value);
+
   return (
     <SafeAreaView style={[styles.main, {backgroundColor: color}]}>
       <ScrollView>
         <TouchableOpacity
-          style={styles.box}
-          onPress={() =>  dispatch(changeColor())}
+          style={[styles.box, {backgroundColor: boxcolor}]}
         />
       </ScrollView>
     </SafeAreaView>
@@ -34,8 +33,7 @@ const styles = StyleSheet.create({
     height: 100,
     width: 100,
     marginTop: 160,
-    backgroundColor: '#FFFFFF',
     alignSelf: 'center'
   },
 });
-export default Lab1;
+export default Lab4;
