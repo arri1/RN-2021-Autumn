@@ -1,1 +1,0 @@
-Figma https://www.figma.com/file/cveHBkcC2yHYEhYRWEPuHw/evgeniiSleptsov?node-id=0%3A1# 
