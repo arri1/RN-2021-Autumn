@@ -2,10 +2,8 @@ import React from 'react';
 import lab1 from './screens/lab1';
 import lab2 from './screens/lab2';
 import {NavigationContainer} from '@react-navigation/native';
-//import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-//const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const App = () => {
   return (
