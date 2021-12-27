@@ -29,7 +29,7 @@ const TopTabNavigator = () => {
 
 const styles = StyleSheet.create({
   main: {
-    height: 345,
+    height: 450,
   },
 
   tabNav: {

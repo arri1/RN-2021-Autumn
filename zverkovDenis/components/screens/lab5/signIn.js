@@ -6,19 +6,25 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useMutation} from '@apollo/client';
 import {AUTH} from '../../gqls/qwery/mutations';
+import {UPDATE_USER} from '../../gqls/qwery/mutations';
 
 const SignIn = ({navigation}) => {
   const [login, onChangeLogin] = useState(null);
   const [password, onChangePassword] = useState(null);
-  const [name, setName] = useState(null);
+  const [name, onChangeName] = useState(null);
+  const [group, onChangeGroup] = useState(null);
   const [authorized, setAuthorized] = useState(false);
 
   const [authorization] = useMutation(AUTH, {
-    onCompleted: ({authUser}) => {
+    onCompleted: async ({authUser}) => {
+      console.log('Authorization OK');
       setAuthorized(true);
-      setName(authUser.user.name);
+      onChangeGroup(authUser.user.group);
+      onChangeName(authUser.user.name);
+      await AsyncStorage.setItem('token', authUser.token);
     },
   });
 
@@ -28,22 +34,53 @@ const SignIn = ({navigation}) => {
     });
   };
 
+  const [updateUser] = useMutation(UPDATE_USER, {
+    onCompleted: ({updateUser}) => {
+      console.log('Update OK');
+    },
+    onError: ({message}) => {
+      console.log(message);
+    },
+  });
+
+  const onUpdate = () => {
+    updateUser({
+      variables: {
+        data: {
+          group: {set: group},
+          name: {set: name},
+        },
+      },
+    });
+  };
+
+  const signOut = () => {
+    onChangeLogin(null);
+    onChangePassword(null);
+    onChangeName(null);
+    onChangeGroup(null);
+    setAuthorized(false);
+    AsyncStorage.setItem('token', '');
+  };
+
   return (
     <View>
       {!authorized && (
         <View style={styles.viewBox}>
+          <Text style={styles.labelText}>Login:</Text>
           <TextInput
             onChangeText={onChangeLogin}
             value={login}
-            placeholder={'Login'}
             style={[styles.inputText, styles.text]}
           />
+
+          <Text style={styles.labelText}>Password:</Text>
           <TextInput
             onChangeText={onChangePassword}
             value={password}
-            placeholder={'Password'}
             style={[styles.inputText, styles.text]}
           />
+
           <TouchableOpacity
             style={styles.signInButton}
             onPress={onAuthorization}>
@@ -52,13 +89,36 @@ const SignIn = ({navigation}) => {
         </View>
       )}
       {!!authorized && (
-        <View style={[styles.viewBox, {alignItems: 'center'}]}>
-          <Text
+        <View style={[styles.viewBox]}>
+          <View
             style={{
-              fontSize: 20,
+              alignItems: 'center',
             }}>
-            Hello, {name}!
-          </Text>
+            <Text style={styles.labelText}>Edit profile: {login}</Text>
+          </View>
+
+          <Text style={styles.labelText}>Name:</Text>
+          <TextInput
+            onChangeText={onChangeName}
+            value={name}
+            placeholder={'Name'}
+            style={[styles.inputText, styles.text]}
+          />
+
+          <Text style={styles.labelText}>Group:</Text>
+          <TextInput
+            onChangeText={onChangeGroup}
+            value={group}
+            placeholder={'Group'}
+            style={[styles.inputText, styles.text]}
+          />
+
+          <TouchableOpacity style={styles.signInButton} onPress={onUpdate}>
+            <Text style={styles.text}>Save</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.signInButton} onPress={signOut}>
+            <Text style={styles.text}>Sign out</Text>
+          </TouchableOpacity>
         </View>
       )}
     </View>
@@ -77,6 +137,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     margin: 5,
     marginTop: 10,
+  },
+
+  labelText: {
+    fontSize: 20,
+    marginLeft: 5,
   },
 
   text: {

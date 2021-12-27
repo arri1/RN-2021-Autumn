@@ -30,22 +30,24 @@ const SingUp = ({navigation}) => {
     <View>
       {!registrated && (
         <View style={styles.viewBox}>
+          <Text style={styles.labelText}>Name:</Text>
           <TextInput
             onChangeText={onChangeName}
             value={name}
-            placeholder={'Name'}
             style={[styles.inputText, styles.text]}
           />
+
+          <Text style={styles.labelText}>Login:</Text>
           <TextInput
             onChangeText={onChangeLogin}
             value={login}
-            placeholder={'Login'}
             style={[styles.inputText, styles.text]}
           />
+
+          <Text style={styles.labelText}>Password:</Text>
           <TextInput
             onChangeText={onChangePassword}
             value={password}
-            placeholder={'Password'}
             style={[styles.inputText, styles.text]}
           />
 
@@ -80,6 +82,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 1,
     margin: 5,
+  },
+
+  labelText: {
+    fontSize: 20,
+    marginLeft: 5,
   },
 
   text: {
