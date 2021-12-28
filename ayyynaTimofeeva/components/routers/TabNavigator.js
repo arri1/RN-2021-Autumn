@@ -2,6 +2,7 @@ import React from 'react';
 import Lab1 from '../screens/lab1';
 import Lab2 from '../screens/lab2';
 import Lab3 from '../screens/lab3';
+import Lab4 from '../screens/lab4';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -48,14 +49,26 @@ const TabNavigator = () => {
                     )
                 }}
             />
+            <Tab.Screen
+                name="Lab4"
+                component={Lab4}
+                options={{
+                    tabBarIcon: ({ focused }) => (
+                        <Image
+                            source={require('../../images/4.png')}
+                            style={styles.icon}
+                        />
+                    )
+                }}
+            />
         </Tab.Navigator>
     );
 };
 
 const styles = StyleSheet.create({
     icon: {
-        width: 35,
-        height: 35
+        width: 30,
+        height: 30
     }
 });
 
