@@ -59,13 +59,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   title: {
-    fontSize: 15,
+    fontSize: 17,
     color: 'black',
     fontFamily: 'Gotham pro',
     opacity: 1,
   },
   text: {
-    fontSize: 17,
     color: 'black',
     fontFamily: 'Roboto',
   },
