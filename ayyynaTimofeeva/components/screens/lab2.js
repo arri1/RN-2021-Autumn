@@ -6,30 +6,42 @@ import {
   StyleSheet,
   ScrollView,
   SafeAreaView,
+  TouchableOpacity
 } from 'react-native';
 import axios from 'axios';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { loadItems, checkItem } from "../../store/postData";
+
 const Lab2 = () => {
-  const [data, setData] = useState([]);
+  const data = useSelector(state => state.posts.value);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    axios
-      .get('https://jsonplaceholder.typicode.com/posts')
-      .then(({ data: newData }) => {
-        setData(newData);
-      })
-      .catch(() => { });
-  }, []);
+    if (dispatch) {
+      axios
+        .get('https://jsonplaceholder.typicode.com/posts')
+        .then(({ data }) => {
+          dispatch(loadItems(data));
+        })
+        .catch(() => { });
+    }
+  }, [dispatch]);
 
   const content = () => {
     return (
       <ScrollView>
         {data.map(item => {
           return (
-            <View key={item.id} style={styles.item}>
+            <TouchableOpacity
+              key={item.id}
+              style={[styles.item, item.checked ? { backgroundColor: '#4F2967' } : undefined,]}
+              onPress={() => {
+                dispatch(checkItem(item.id));
+              }}>
               <Text style={styles.title}>{item.title}</Text>
               <Text style={styles.text}>{item.body}</Text>
-            </View>
+            </TouchableOpacity>
           );
         })}
       </ScrollView>
