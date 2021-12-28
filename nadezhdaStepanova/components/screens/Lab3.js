@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
    button: {
     margin: 10,
-    height: 33,
+    height: 40,
     borderColor: '#C446DB',
     borderWidth: 2,
     borderRadius: 60,
