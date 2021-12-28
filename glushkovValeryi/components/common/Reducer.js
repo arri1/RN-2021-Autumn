@@ -1,6 +1,6 @@
 const defaultState = {
     points: 0,
-    token: ''
+    isLoggedIn: false 
 }
 
 const Reducer = (state = defaultState, aciton) => {
@@ -9,8 +9,8 @@ const Reducer = (state = defaultState, aciton) => {
             return {...state, points: state.points + aciton.newPoints}
         case "GET_POINTS":
             return {...state, points: state.points - aciton.newPoints}
-        case "ADD_TOKEN":
-            return {...state, token: aciton.newToken}
+        case "SET_LOGGED":
+            return {...state, isLoggedIn: aciton.loggedIn}
         default:
             return state
     }

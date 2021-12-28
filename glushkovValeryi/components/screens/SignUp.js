@@ -54,7 +54,7 @@ const SignUp = props => {
     }
 
     return(
-        <KeyboardAvoidingView style = {styles.container} behavior='padding'>
+        <KeyboardAvoidingView style = {styles.container} behavior='height'>
             <Text style = {styles.regMessage}>{respose}</Text>
             <View style = {styles.inputContainer}>
                 <TextInput

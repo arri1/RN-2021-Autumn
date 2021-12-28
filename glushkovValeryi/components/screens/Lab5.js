@@ -4,98 +4,70 @@ import { useMutation } from '@apollo/client'
 import { useFocusEffect } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
 import StyledButton from '../common/StyledButton'
-import { TextInput } from 'react-native-gesture-handler'
-import { AUTH } from '../gqls/Mutations'
+import { ScrollView, TextInput } from 'react-native-gesture-handler'
+import { UPDATE_USER } from '../gqls/Mutations'
 
 const Lab5 = props => {
-    const [login, setLogin] = useState('')
-    const [password, setPassword] = useState('')
+    const [name, setName] = useState('')
+    const [group, setGroup] = useState('')
     const [respose, setResponse] = useState('')
-    const [color, setColor] = useState('')
-    const [loginUser] = useMutation(AUTH, {
-        onCompleted: async ({authUser}) => {
-            console.log("from Login")
-            console.log(authUser.token)
-            await AsyncStorage.setItem('token', authUser.token)
+    const [updateUser] = useMutation(UPDATE_USER, {
+        onCompleted: async ({user}) => {
+            console.log("from Update")
         },                                  
         onError: ({message}) => {
-            console.log(message)
-            if (message==='GraphQL error: Incorrect password'){
-                console.log('Incorrect password')
-                return  null
-            }
+            console.error("from Update")
+            console.error(message)
         }
     })
 
     useFocusEffect(
     React.useCallback(() => {
       return () => {
-        setLogin('')
-        setPassword('')
+        setName('')
+        setGroup('')
         setResponse('')
       };
     }, [])
     )
 
-    const onLoginPress = () => {
-        loginUser({variables: {login, password}})
-            .then(({ data }) => {
-                setColor('#96be25')
-                setResponse('authorization succeeded')
-                console.log(data)
-            })
-            .catch(e => {
-                setColor('red')
-                setResponse('authorization failed')
-                console.log(e.message)
-            })
-    }
-
-    const onRegisterPress = () => {
-        props.navigation.navigate('SignUp')
-    }
-
     const onUpdatePress = () => {
-        props.navigation.navigate('Update')
+        const variables = {
+            group: {set: group},
+            name: {set: name},
+        }
+        updateUser({variables})
+    }
+
+    const onCancelPress = () => {
+        props.navigation.navigate("SignIn")
     }
 
     return(
         <KeyboardAvoidingView style = {styles.container} behavior='padding'>
-            <Text style = {{fontSize: 16, color: color, marginBottom: 10}}>{respose}</Text>
-            <View style = {styles.inputContainer}>
-                <TextInput
-                    placeholder='Login'
-                    style = {styles.input}
-                    value = {login}
-                    onChangeText = {text => setLogin(text)}
-                />
-                <TextInput
-                    placeholder='Password'
-                    style = {styles.input}
-                    secureTextEntry
-                    value = {password}
-                    onChangeText = {text => setPassword(text)}
-                />
-            </View>
-            <View style = {styles.buttonContainer}>
-                <StyledButton
-                    text = 'Login'
-                    style = {styles.button}
-                    onPress = {onLoginPress}
-                />
-                <StyledButton
-                    text = 'Register'
-                    style = {[styles.button, styles.buttonOutline]}
-                    onPress = {onRegisterPress}
-                />
-                <StyledButton
-                    text = 'Update'
-                    style = {[styles.button, styles.buttonOutline]}
-                    onPress = {onUpdatePress}
-                />
-            </View>
+                <Text style = {styles.regMessage}>{respose}</Text>
+                <View style = {styles.inputContainer}>
+                    <TextInput
+                        placeholder='Name'
+                        style = {styles.input}
+                        value = {name}
+                        onChangeText = {text => setName(text)}
+                    />
+                    <TextInput
+                        placeholder='Group'
+                        style = {styles.input}
+                        value = {group}
+                        onChangeText = {text => setGroup(text)}
+                    />
+                </View>
+                <View style = {styles.buttonContainer}>
+                    <StyledButton
+                        text = 'Update'
+                        style = {styles.button}
+                        onPress = {onUpdatePress}
+                    />
+                </View>
         </KeyboardAvoidingView>
     )
 }
@@ -107,7 +79,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#545454'
     },
-    loginMessage: {
+    regMessage: {
+        color: 'red',
         fontSize: 16,
         marginBottom: 10
     },
@@ -131,14 +104,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#B6CCA1',
         width: 300,
         padding: 15,
+        marginBottom: 10,
         borderRadius: 10,
         alignItems: 'center'
-    },
-    buttonOutline: {
-        backgroundColor: '#545454',
-        borderColor: '#B6CCA1',
-        borderWidth: 2,
-        marginTop: 5
     }
 });
 
