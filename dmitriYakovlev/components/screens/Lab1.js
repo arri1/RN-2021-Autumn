@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
+import { StyleSheet, Text, TouchableHighlight, View, ImageBackground } from "react-native";
+
+import picture from '../images/Lab1.png';
 
 const Colour = () => {
   const b = "0123456789ABCDEF";
@@ -20,49 +22,100 @@ const Lab1 = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <TouchableHighlight onPress={onPress} style={{backgroundColor: backColor, borderRadius:100}}  >
-        <View style={styles.button }>
-          <Text style={{fontSize:30}}>Нажми меня!</Text>
+    <View style={styles.main}>
+      <ImageBackground source={picture} resizeMode="cover" style={styles.image}>
+        <View style={styles.cont1}>
+          <Text style={styles.head}>FIRST WORK</Text>
         </View>
-      </TouchableHighlight>
-      <View style={styles.countContainer}>
-        <Text style={styles.countText}>
-          Счет нажатия кнопки: {count}
-        </Text>
-        <Text style={styles.colorContainer}>
-          Номер цвета: {backColor}
-        </Text>
-      </View>
+        <TouchableHighlight onPress={onPress} style={styles.button,{backgroundColor: backColor, borderRadius:100, marginTop: 33, marginLeft: 55, marginRight: 55}} >
+          <View style={styles.button}>
+            <Text style={{fontSize:36, fontFamily: 'Sofia-Regular', color: 'white'}}>PRESS ME</Text>
+          </View>
+        </TouchableHighlight>
+        <View style={styles.countContainer}>
+          <View style={styles.countButton}> 
+          </View>
+          <View style={styles.clone}>
+            <Text style={styles.countText}>
+              {count}
+            </Text>
+          </View>
+          <View style={styles.colorButton}>
+          </View>
+          <View style={styles.clone}>
+            <Text style={styles.colorContainer}>
+                {backColor}
+            </Text>
+          </View>
+        </View>
+      </ImageBackground>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  main: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: "center",
-    backgroundColor: '#CCCCCC',
-    paddingHorizontal: 10
+    justifyContent: 'flex-start',
+  },
+  image: {
+    flex: 1,
+    justifyContent: 'flex-start',
+  },
+  head: {
+    fontSize: 36,
+    fontFamily: 'Sofia-Regular',
+    textAlign: 'center',
+  },
+  cont1: {
+    marginTop: 18,
   },
   button: {
     alignItems: "center",
     justifyContent: 'flex-start',
-    padding: 30
+    padding: 30,
   },
   countContainer: {
     alignItems: "center",
-    padding: 10
+    padding: 10,
   },
   countText: {
     color: "#000000",
-    fontSize: 28
+    fontSize: 24,
+    fontFamily: 'Sofia-Regular',
+    textAlign: 'center',
   },
   colorContainer: {
-    alignItems: 'flex-end',
-    fontSize: 30
-  }
+    color: "#000000",
+    fontSize: 24,
+    fontFamily: 'Sofia-Regular',
+    textAlign: 'center',
+  },
+  countButton: {
+    width: 250,
+    height: 66,
+    marginTop: 150,
+    borderRadius: 30,
+    backgroundColor: '#B9EDF8',
+    opacity: .4,
+    paddingTop: 14,
+    borderColor: 'black',
+    borderWidth: .5,
+  },
+  colorButton: {
+    width: 250,
+    height: 66,
+    marginTop: 40,
+    borderRadius: 30,
+    paddingTop: 14,
+    backgroundColor: '#B9EDF8',
+    opacity: .4,
+    borderColor: 'black',
+    borderWidth: .5,
+  },
+  clone: {
+    marginTop: -53
+  },
 });
 
 export default Lab1
