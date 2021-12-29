@@ -4,26 +4,46 @@ import {
   StyleSheet,
   Alert,
   Text,
-  Pressable,
   TextInput,
   View,
+  TouchableOpacity
 } from 'react-native';
+
 import { useSelector } from 'react-redux';
 
+import { useMutation } from "@apollo/client";
+import { AUTH_QUERY } from "../../apollo/apollo";
+
 const Login = () => {
-  const [email, onChangeEmail] = useState("");
-  const [password, onChangePassword] = useState("");
+
+  const [email, onChangeEmail] = useState('');
+  const [password, onChangePassword] = useState('');
+  
   const state = useSelector(state => state)
 
+  const [authQuery, { data, loading }] = useMutation(AUTH_QUERY, {
+    onCompleted: async () => {
+      console.info('Auth done')
+    },
+    onError: ({message}) => {
+      Alert.alert('Ошибка', message, [
+        { text: "Ok", onPress: () => {} }
+      ])
+    }
+  })
+
   const didTapButton = () => {
-    Alert.alert('Далее', `Почта: ${email}\nПароль: ${password}`, [
-      { text: "Ok", onPress: () => {} }
-    ])
+    authQuery({
+      variables: {
+        email,
+        password
+      }
+    })
   }
 
+
   const isValidEmail = () => {
-    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    return regex.test(email)
+    return email.length > 6
   }
 
   const isValidPassword = () => {
@@ -48,20 +68,21 @@ const Login = () => {
           secureTextEntry={true}
           placeholder={"Пароль"}
           placeholderTextColor="#787A91"/>
-        <Pressable 
+        <TouchableOpacity 
           style={[
             styles.submitButton, 
             isDisabled ? styles.disabledBackground : styles.normalBackground
           ]}
+          activeOpacity={0.7}
           disabled={isDisabled}
-          onPress={didTapButton}>
+          onPress={() => didTapButton()}>
             <Text style={[
               styles.submitButtonText,
               isDisabled ? styles.disabledText : styles.normalText
             ]}>
               Sign In
             </Text>
-        </Pressable>
+        </TouchableOpacity>
         <Text style={styles.watchLabel}>
           {state.value ? "I'm watching you." : ''}
         </Text>
