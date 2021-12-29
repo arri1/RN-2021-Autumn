@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     },
     Input: {
       height: 60,
-      width: 258,
+      width: 250,
       borderRadius: 10,
       marginTop: 10,
       padding: 6,
