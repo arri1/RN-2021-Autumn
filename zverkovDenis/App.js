@@ -1,16 +1,20 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import TabNavigator from './components/routers/TabNavigator';
+import SignRouter from './components/routers/SignRouter';
 import store from './store';
+import client from './components/apollo/apollo';
 import {Provider} from 'react-redux';
+import {ApolloProvider} from '@apollo/client';
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <NavigationContainer>
-        <TabNavigator />
-      </NavigationContainer>
-    </Provider>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <NavigationContainer>
+          <SignRouter />
+        </NavigationContainer>
+      </Provider>
+    </ApolloProvider>
   );
 };
 

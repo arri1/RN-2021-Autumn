@@ -24,14 +24,13 @@ const Lab2 = () => {
       <ScrollView>
         {data.map(item => {
           return (
-            <View style={styles.shadowsDiv}>
+            <View key={item.id} style={styles.shadowsDiv}>
               <Shadow
                 distance={2}
                 startColor={'#00000040'}
                 finalColor={'#00000000'}
                 offset={[3, 3]}>
                 <TouchableOpacity
-                  key={item.id}
                   style={[
                     styles.item,
                     item.checked ? {backgroundColor: '#95D133'} : undefined,
