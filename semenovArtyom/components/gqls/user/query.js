@@ -5,6 +5,8 @@ export const USER = gql`
     user {
       id
       login
+      name
+      group
     }
   }
 `;

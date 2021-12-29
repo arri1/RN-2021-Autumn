@@ -6,6 +6,7 @@ import store from './store/index';
 import client from './components/apollo';
 import {ApolloProvider} from '@apollo/client';
 import NavigationStack from './components/routers/Lab5';
+import { AsyncStorage } from '@react-native-async-storage/async-storage';
 
 
 const App = () => {

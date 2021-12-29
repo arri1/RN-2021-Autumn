@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {
   Text,
   TextInput,
@@ -8,37 +8,46 @@ import {
 } from 'react-native';
 import {USER} from '../gqls/user/query';
 import {SIGN_IN, SIGN_UP} from '../gqls/user/mutations';
+import {useDispatch} from 'react-redux';
+import {useMutation} from '@apollo/client';
+import { AsyncStorage } from 'react-native';
 
-import {useQuery, useMutation, useApolloClient} from '@apollo/client';
-
-const Lab5 = props => {
+const Lab51 = props => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
 
-  const apollo = useApolloClient();
+  const dispatch = useDispatch();
 
   const [user] = useMutation(SIGN_IN, {
-    onCompleted: ({authUser}) => {
-      apollo.writeQuery({query: USER, data: {user: authUser.user}});
+    onCompleted: async ({authUser}) => {
+      dispatch({type: 'SIGN_IN', signedIn: true});
+      await AsyncStorage.setItem('token', authUser.token);
       props.navigation.navigate('Main');
+    },
+    onError: ({message}) => {
+      setMessage(message);
     },
   });
 
   const signIn = () => {
-    user({
-      variables: {
-        data: {
-          login,
-          password,
+    if (login != '' && password != '') {
+      user({
+        variables: {
+          data: {
+            login,
+            password,
+          },
         },
-      },
-    });
+      });
+    }
   };
 
   const [newUser] = useMutation(SIGN_UP, {
     onCompleted: ({registerUser}) => {},
     onError: ({message}) => {
-      console.log(message);
+      if (message === 'Unique constraint failed on the fields: (`login`)')
+        setMessage('Login is already used');
     },
   });
 
@@ -117,4 +126,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Lab5;
+export default Lab51;

@@ -63,7 +63,7 @@ const Lab52 = props => {
   };
 
   const back = () => {
-    props.navigation.navigate('Login');
+    props.navigation.navigate('Profile');
   };
 
   const createPost = () => {
@@ -117,20 +117,15 @@ const Lab52 = props => {
             <Text></Text>
           )}
         </ScrollView>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={[styles.button, {marginTop:80}]}>
           <Text style={styles.buttonText} onPress={createPost}>
             Post
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
-          onPress={deletePost}>
-          <Text style={styles.buttonText}>Delete</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
           onPress={back}>
-          <Text style={styles.buttonText}>Logout</Text>
+          <Text style={styles.buttonText}>Profile</Text>
         </TouchableOpacity>
     </View>
   );
