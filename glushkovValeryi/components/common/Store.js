@@ -1,6 +1,6 @@
 import { createStore } from "redux"
-import PointsReducer from "./PointsReducer";
+import Reducer from "./Reducer";
 
-const Store = createStore(PointsReducer) 
+const Store = createStore(Reducer) 
 
 export default Store;
