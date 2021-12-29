@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, ScrollView, StyleSheet, Text, SafeAreaView, TextInput, TouchableOpacity} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {applyItem, changeTitle} from '../store/data';
+import {applyItem, changeTitle} from '../../store/data';
 
 const Lab4 = () => {
   const data = useSelector(state => state.data.value);
