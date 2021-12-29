@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
+  AsyncStorage,
 } from 'react-native';
 import {USER} from '../gqls/user/query';
 import {SIGN_IN, SIGN_UP} from '../gqls/user/mutation';
@@ -16,31 +17,39 @@ import {useQuery, useMutation, useApolloClient} from '@apollo/client';
 const Lab5 = props => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const [pswVisible, setPswVisible] = useState(true);
 
   const apollo = useApolloClient();
 
   const [user] = useMutation(SIGN_IN, {
-    onCompleted: ({authUser}) => {
-      apollo.writeQuery({query: USER, data: {user: authUser.user}});
-      props.navigation.navigate('UserPage');
+    onCompleted: async ({authUser}) => {
+      await AsyncStorage.setItem('token', authUser.token);
+      props.navigation.navigate('UserScreen');
+    },
+    onError: ({message}) => {
+      setMessage(message);
     },
   });
 
   const signIn = () => {
-    user({
-      variables: {
-        data: {
-          login,
-          password,
+    if (login != '' && password != '') {
+      user({
+        variables: {
+          data: {
+            login,
+            password,
+          },
         },
-      },
-    });
+      });
+    }
   };
 
   const [newUser] = useMutation(SIGN_UP, {
     onCompleted: ({registerUser}) => {},
     onError: ({message}) => {
-      console.log(message);
+      if (message === 'Unique constraint failed on the fields: (`login`)')
+        setMessage('Login is already used');
     },
   });
 
@@ -59,10 +68,11 @@ const Lab5 = props => {
     <View style={styles.container}>
       <View style={styles.boxArea}>
         <ImageBackground
+          resizeMode={'contain'}
           style={styles.imgBackGround}
           imageStyle={{borderRadius: 40}}
-          source={require('../../android/app/src/main/assets/images/bgd2.jpg')}>
-          <View style={styles.inputArea}>
+          source={require('../../android/app/src/main/assets/images/bgd.jpg')}>
+          <View style={styles.area}>
             <View style={styles.inputField}>
               <TextInput
                 style={styles.text}
@@ -73,18 +83,26 @@ const Lab5 = props => {
               <TextInput
                 style={styles.text}
                 placeholder="Password"
+                secureTextEntry={pswVisible}
                 onChangeText={text => setPassword(text)}></TextInput>
+              <TouchableOpacity
+                style={[
+                  styles.selectCircle,
+                  {backgroundColor: pswVisible ? '#E6D899' : '#FD442E'},
+                ]}
+                onPress={() => setPswVisible(!pswVisible)}></TouchableOpacity>
             </View>
+            <TouchableOpacity style={styles.button} onPress={signIn}>
+              <Text style={styles.buttonText}>SIGN IN</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.button, {backgroundColor: '#FD442E'}]}
+              onPress={createUser}>
+              <Text style={styles.buttonText}>SIGN UP</Text>
+            </TouchableOpacity>
           </View>
+          <Text style={[styles.text, {textAlign: 'center'}]}>{message}</Text>
         </ImageBackground>
-        <TouchableOpacity style={styles.button} onPress={signIn}>
-          <Text style={styles.buttonText}>SIGN IN</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.button, {backgroundColor: '#FD442E'}]}
-          onPress={createUser}>
-          <Text style={styles.buttonText}>SIGN UP</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );
@@ -92,26 +110,22 @@ const Lab5 = props => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF',
     flex: 1,
+    backgroundColor: '#FFF',
   },
   boxArea: {
-    marginTop: 88,
-    height: '100%',
-    width: 393,
-    backgroundColor: '#21434F',
-    borderRadius: 40,
-    alignItems: 'center',
-  },
-  inputArea: {
-    width: '100%',
-    alignItems: 'center',
-    bottom: 0,
+    marginTop: '20%',
     position: 'absolute',
+    width: '100%',
+    height: '100%',
+  },
+  area: {
+    alignItems: 'center',
   },
   imgBackGround: {
-    width: 393,
-    height: 405,
+    alignItems: 'center',
+    height: '100%',
+    width: '100%',
   },
   buttonText: {
     fontFamily: 'PTSansNarrow-Bold',
@@ -119,6 +133,13 @@ const styles = StyleSheet.create({
     letterSpacing: -1,
     color: '#FFF',
     textAlign: 'center',
+  },
+  selectCircle: {
+    width: 15,
+    height: 15,
+    borderRadius: 15 / 2,
+    backgroundColor: '#FD442E',
+    marginLeft: 11,
   },
   text: {
     width: 250,
@@ -147,7 +168,7 @@ const styles = StyleSheet.create({
     height: 56,
     borderRadius: 5,
     backgroundColor: '#AAC284',
-    marginTop: 14,
+    marginBottom: 14,
     justifyContent: 'center',
     alignItems: 'center',
   },

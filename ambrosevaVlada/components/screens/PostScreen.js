@@ -8,6 +8,7 @@ import {
   View,
   StyleSheet,
 } from 'react-native';
+
 import {POST, FIND_MANY_POST} from '../gqls/post/query';
 import {CREATE_ONE_POST, DELETE_ONE_POST} from '../gqls/post/mutation';
 import {USER} from '../gqls/user/query';
@@ -23,6 +24,7 @@ const UserPage = props => {
 
   const [userId, setUserId] = useState('');
   const [userLogin, setUserLogin] = useState('');
+  const [loadingg, setLoading] = useState(false);
 
   const {user} = useQuery(USER, {
     onCompleted: ({user}) => {
@@ -63,8 +65,8 @@ const UserPage = props => {
     });
   };
 
-  const goHome = () => {
-    props.navigation.navigate('Home');
+  const goToScreen = () => {
+    props.navigation.navigate('UserScreen');
   };
 
   const createPost = () => {
@@ -86,61 +88,60 @@ const UserPage = props => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={{marginTop: 14, marginLeft: 29}}
-        onPress={goHome}>
+      <TouchableOpacity style={styles.navigation} onPress={goToScreen}>
         <Text style={[styles.text, {opacity: 0.5}]}>Go back</Text>
       </TouchableOpacity>
-      <Text style={styles.title}>WELCOME, {userLogin}</Text>
-      <View style={styles.boxArea}></View>
-      <ImageBackground
-        style={styles.imgBackGround}
-        imageStyle={{borderRadius: 40}}
-        source={require('../../android/app/src/main/assets/images/bgd2.jpg')}
-      />
-      <View style={styles.inputArea}>
-        <View style={styles.inputField}>
-          <TextInput
-            style={styles.text}
-            placeholder="Post title"
-            onChangeText={text => setTitle(text)}>
-            {title}
-          </TextInput>
-        </View>
-        <View style={styles.inputField}>
-          <TextInput
-            style={styles.text}
-            placeholder="Text"
-            onChangeText={text => setText(text)}>
-            {text}
-          </TextInput>
-        </View>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText} onPress={createPost}>
-            POST
-          </Text>
-        </TouchableOpacity>
-        <ScrollView style={styles.postsArea}>
-          {data != null ? (
-            data.findManyPost.map(item => {
-              return (
-                <TouchableOpacity
-                  key={item.id}
-                  style={styles.inputField}
-                  onPress={() => selectPost(item.id)}>
-                  <Text style={styles.text}>{item.title}</Text>
-                </TouchableOpacity>
-              );
-            })
-          ) : (
-            <Text></Text>
-          )}
-        </ScrollView>
-        <TouchableOpacity
-          style={[styles.button, {backgroundColor: '#FD442E'}]}
-          onPress={deletePost}>
-          <Text style={styles.buttonText}>DELETE</Text>
-        </TouchableOpacity>
+      <View style={styles.boxArea}>
+        <ImageBackground
+          resizeMode={'contain'}
+          style={styles.imgBackGround}
+          imageStyle={{borderRadius: 40}}
+          source={require('../../android/app/src/main/assets/images/bgd.jpg')}>
+          <View style={styles.inputArea}>
+            <View style={styles.inputField}>
+              <TextInput
+                style={styles.text}
+                placeholder="Post title"
+                onChangeText={text => setTitle(text)}>
+                {title}
+              </TextInput>
+            </View>
+            <View style={styles.inputField}>
+              <TextInput
+                style={styles.text}
+                placeholder="Text"
+                onChangeText={text => setText(text)}>
+                {text}
+              </TextInput>
+            </View>
+            <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText} onPress={createPost}>
+                POST
+              </Text>
+            </TouchableOpacity>
+            <ScrollView style={styles.postsArea}>
+              {data != null ? (
+                data.findManyPost.map(item => {
+                  return (
+                    <TouchableOpacity
+                      key={item.id}
+                      style={styles.inputField}
+                      onPress={() => selectPost(item.id)}>
+                      <Text style={styles.text}>{item.title}</Text>
+                    </TouchableOpacity>
+                  );
+                })
+              ) : (
+                <Text></Text>
+              )}
+            </ScrollView>
+            <TouchableOpacity
+              style={[styles.button, {backgroundColor: '#FD442E'}]}
+              onPress={deletePost}>
+              <Text style={styles.buttonText}>DELETE</Text>
+            </TouchableOpacity>
+          </View>
+        </ImageBackground>
       </View>
     </View>
   );
@@ -151,28 +152,28 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     flex: 1,
   },
+  navigation: {
+    marginTop: 14,
+    marginLeft: 29,
+    position: 'absolute',
+  },
   boxArea: {
-    marginTop: 225,
+    marginTop: '20%',
+    position: 'absolute',
+    width: '100%',
     height: '100%',
-    width: 393,
-    backgroundColor: '#21434F',
-    borderRadius: 40,
   },
   postsArea: {
     minHeight: 196,
     maxHeight: 196,
   },
   inputArea: {
-    width: '100%',
     alignItems: 'center',
-    position: 'absolute',
-    top: 140,
   },
   imgBackGround: {
-    width: 393,
-    top: 225,
-    height: 405,
-    position: 'absolute',
+    alignItems: 'center',
+    height: '100%',
+    width: '100%',
   },
   buttonText: {
     fontFamily: 'PTSansNarrow-Bold',
@@ -205,7 +206,7 @@ const styles = StyleSheet.create({
     paddingLeft: 42,
     borderRadius: 5,
     backgroundColor: '#FFFFFC',
-    marginTop: 14,
+    marginBottom: 14,
     shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.25,
     shadowColor: 'black',
@@ -217,7 +218,7 @@ const styles = StyleSheet.create({
     height: 56,
     borderRadius: 5,
     backgroundColor: '#AAC284',
-    marginTop: 14,
+    marginBottom: 14,
     justifyContent: 'center',
     alignItems: 'center',
   },
