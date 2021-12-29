@@ -7,6 +7,7 @@ import { Image } from 'react-native';
 import Login from "../screens/Login"
 import Posts from "../screens/Posts"
 import Iterations from "../screens/Iterations"
+import Eye from "../screens/Eye";
 
 const Tab = createBottomTabNavigator()
 
@@ -55,6 +56,11 @@ const TabNavigator = () => {
                 ? require('../../assets/cup.and.saucer.fill.png') 
                 : require('../../assets/cup.and.saucer.png')
             }
+            if (route.route.name === 'Lab 4') {
+              icon = focused 
+                ? require('../../assets/wand.and.stars.inverse.png') 
+                : require('../../assets/wand.and.rays.inverse.png')
+            }
             return <Image source={icon}/>
          },
         })}>
@@ -70,6 +76,10 @@ const TabNavigator = () => {
           name={"Lab 3"}
           component={Iterations}
           options={createScreenOptions('Iterations')}/>
+        <Tab.Screen
+          name={"Lab 4"}
+          component={Eye}
+          options={createScreenOptions('Eye')}/>
       </Tab.Navigator>
     </NavigationContainer>
   )
