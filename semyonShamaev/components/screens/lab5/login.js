@@ -1,131 +1,151 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
-  View,
   Text,
-  Pressable,
+  View,
   TextInput,
-  ActivityIndicator,
-} from 'react-native'
-import {AUTH} from "../../graphQL/mutations"
-import {useMutation} from "@apollo/client"
-import {useAsyncStorage} from '@react-native-async-storage/async-storage'
+  StyleSheet,
+  TouchableOpacity,
+  ToastAndroid,
+} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useMutation} from '@apollo/client';
+import {AUTH, UPDATE_USER} from '../../graphQL/mutations';
+import Tabs from '../../routers/tabs';
 
-const Login = () => {
-  const [login, setLogin] = useState(null)
-  const [password, setPassword] = useState(null)
-  const { setItem } = useAsyncStorage('token')
-  const [state, setState] = useState(0)
+const Login = ({navigation}) => {
+  const [login, onChangeLogin] = useState(null);
+  const [password, onChangePassword] = useState(null);
+  const [name, onChangeName] = useState(null);
+  const [group, onChangeGroup] = useState(null);
+  const [authorized, setAuthorized] = useState(false);
 
-  const [auth, {loading}] = useMutation(AUTH, {
+  const [authorization] = useMutation(AUTH, {
     onCompleted: async ({authUser}) => {
-      await setItem(authUser.token)
-      setState(1)
-      console.log(authUser)
-    },                                  
+      setAuthorized(true);
+      onChangeGroup(authUser.user.group);
+      onChangeName(authUser.user.name);
+      onChangeLogin(authUser.user.login);
+      await AsyncStorage.setItem('token', authUser.token);
+      if (authUser.user.group != null)
+        await AsyncStorage.setItem('group', authUser.user.group);
+      else await AsyncStorage.setItem('group', '');
+      await AsyncStorage.setItem('name', authUser.user.name);
+      await AsyncStorage.setItem('login', authUser.user.login);
+      await AsyncStorage.setItem('password', password);
+    },
     onError: ({message}) => {
-      if (message==='GraphQL error: Incorrect password'){
-          return  null
+      console.log(message);
+      if (message === 'Incorrect password') {
+        ToastAndroid.show('Неверный пароль', ToastAndroid.SHORT);
+        return null;
       }
-    }
-  })
-
-  const isDataCorrect = () => {
-    if (login === '') {
-      return false
-    }
-    if (password === '') {
-      return false
-    }
-    return true
-  }
-
-  const onAuth = () => {
-    if (isDataCorrect())
-      auth({
-        variables: {     
-            login,
-            password
-        }
-      })
-  }
-
-  if (loading)
-    return (
-      <SafeAreaView style={styles.Main}>
-        <ActivityIndicator color="#82D2FF" backgroundColor="#333333"/>
-      </SafeAreaView>
-    )
-
-  if (state) {
-    return (
-      <SafeAreaView style={styles.Main}>
-        <View>
-          <Text style={styles.ButtonText}>
-            Successful login
-          </Text>
-        </View>
-      </SafeAreaView>
-    );
-  }
-  else {
-    return (
-      <SafeAreaView style={styles.main}>
-        <View>
-          <TextInput style = {styles.Input} onChangeText={text => setLogin(text)} value={login} placeholder='Login'/>
-          <TextInput style = {styles.Input} onChangeText={text => setPassword(text)} value={password} placeholder='Password'/>
-          <Pressable 
-            onPress={() => {onAuth()}}
-            style = {styles.Button}
-          >
-            <Text style={styles.ButtonText}>
-              Login
-            </Text>
-          </Pressable>
-        </View>
-      </SafeAreaView>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-    Button: {
-        marginTop: 20,
-        height: 40,
-        width: 130,
-        borderRadius: 10,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: "#C4C4C4",      
-        alignSelf: 'center'
-      },
-      ButtonText: {
-        lineHeight: 35,
-        height: 35,
-        marginLeft: 6,
-        color: '#000000',
-        fontSize: 18
-      },
-    Input: {
-        height: 60,
-        width: 250,
-        borderRadius: 10,
-        marginTop: 20,
-        padding: 6,
-        paddingLeft: 12,
-        lineHeight: 35,
-        backgroundColor: "#AEAEAE",
-        color: '#FFFFFF',
-        fontSize: 18, 
-        alignSelf: 'center'
-      },
-    main: {
-        backgroundColor: "#E1E4E7",
-        height: "100%",
-        justifyContent: 'center',
-        alignItems: 'center',        
-    }
+      ToastAndroid.show('Неверный логин или пароль', ToastAndroid.SHORT);
+    },
   });
 
-export default Login
+  const onAuthorization = () => {
+    authorization({
+      variables: {login, password},
+    });
+  };
+
+  const [updateUser] = useMutation(UPDATE_USER, {
+    onCompleted: ({updateUser}) => {
+      ToastAndroid.show('Data saved', ToastAndroid.SHORT);
+    },
+    onError: ({message}) => {
+      console.log(message);
+    },
+  });
+
+  const onUpdate = () => {
+    updateUser({
+      variables: {
+        data: {
+          group: {set: group},
+          name: {set: name},
+          password: {set: password},
+          login: {set: login},
+        },
+      },
+    });
+  };
+
+  return (
+    <View style={styles.main}>
+      {!authorized && (
+        <View>
+          <View style={styles.viewBox}>
+            <View style={styles.viewInput}>
+              <Text style={styles.labelText}>Login:</Text>
+              <TextInput
+                onChangeText={onChangeLogin}
+                value={login}
+                style={[styles.inputText, styles.text, {width: '81%'}]}
+              />
+            </View>
+
+            <View style={styles.viewInput}>
+              <Text style={styles.labelText}>Password:</Text>
+              <TextInput
+                onChangeText={onChangePassword}
+                value={password}
+                style={[styles.inputText, styles.text]}
+              />
+            </View>
+          </View>
+          <TouchableOpacity style={styles.button} onPress={onAuthorization}>
+            <Text style={styles.text}>Log in</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+      {!!authorized && <Tabs />}
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  main: {
+    height: '100%',
+    backgroundColor: '#E1E4E7',
+  },
+  
+  viewBox: {
+    margin: 15,
+  },
+
+  viewInput: {
+    marginTop: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  inputText: {
+    width: '69%',
+    paddingLeft: 15,
+    borderRadius: 20,
+    marginLeft: 15,
+    backgroundColor: '#AEAEAE',
+    alignContent: 'flex-start',
+  },
+
+  labelText: {
+    fontSize: 20,
+    color: '#000000',
+  },
+
+  text: {
+    fontSize: 16,
+    color: '#FFFFFF',
+  },
+
+  button: {
+    backgroundColor: '#000000',
+    margin: 15,
+    borderRadius: 20,
+    padding: 10,
+    alignItems: 'center',
+  },
+});
+
+export default Login;

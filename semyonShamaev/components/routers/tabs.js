@@ -1,18 +1,33 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import login from '../screens/lab5/login';
-import registration from '../screens/lab5/registration';
 import lab1 from '../screens/lab1';
 import lab2 from '../screens/lab2';
 import lab3 from '../screens/lab3';
 import lab4 from '../screens/lab4';
+import lab5 from '../screens/lab5/lab5';
+
+import axios from 'axios';
+import {useDispatch} from 'react-redux';
+import {loadItems} from '../../store/tasks';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
+    const dispatch = useDispatch();
 
+    useEffect(() => {
+      if (dispatch) {
+        axios
+          .get('https://jsonplaceholder.typicode.com/comments?postId=1&postId=2')
+          .then(({data}) => {
+            dispatch(loadItems(data));
+          })
+          .catch(() => {});
+      }
+    }, [dispatch]);
+    
     return(
         <Tab.Navigator
             screenOptions = {{
@@ -29,49 +44,6 @@ const TabNavigation = () => {
                 }
             }}
         >
-            <Tab.Screen 
-                name = "Lab 5 login" 
-                component = {login} 
-                options = {{
-                    tabBarIcon: ({focused}) => (
-                        <View style = {{alignItems: 'center', justifyContent: 'center', top: 3}}>
-                            <Image 
-                                source = {require('../../img/L.png')}
-                                resizeMode = "contain"
-                                style={{
-                                    width: 40,
-                                    height: 40,
-                                }}
-                            />
-                            <Text style = {{color: focused ?'#2F88F0' : '#27303E', fontSize: 12}}>
-                                    Login
-                            </Text>
-                        </View>
-                    ),
-                }}
-            />
-
-            <Tab.Screen 
-                name = "Lab 5 registration" 
-                component = {registration} 
-                options = {{
-                    tabBarIcon: ({focused}) => (
-                        <View style = {{alignItems: 'center', justifyContent: 'center', top: 3}}>
-                            <Image 
-                                source = {require('../../img/R.png')}
-                                resizeMode = "contain"
-                                style={{
-                                    width: 40,
-                                    height: 40,
-                                }}
-                            />
-                            <Text style = {{color: focused ?'#2F88F0' : '#27303E', fontSize: 12}}>
-                                    SignUp
-                            </Text>
-                        </View>
-                    ),
-                }}
-            />
 
             <Tab.Screen 
                 name = "Lab 1" 
@@ -161,7 +133,28 @@ const TabNavigation = () => {
                 }}
             />
 
-            
+            <Tab.Screen 
+                name = "Lab 5" 
+                component = {lab5} 
+                options = {{
+                    tabBarIcon: ({focused}) => (
+                        <View style = {{alignItems: 'center', justifyContent: 'center', top: 3}}>
+                            <Image 
+                                source = {require('../../img/5.png')}
+                                resizeMode = "contain"
+                                style={{
+                                    width: 40,
+                                    height: 40,
+                                }}
+                            />
+                            <Text style = {{color: focused ?'#2F88F0' : '#27303E', fontSize: 12}}>
+                                    GraphQL
+                            </Text>
+                        </View>
+                    ),
+                }}
+            />
+
         </Tab.Navigator>
     );
 }
