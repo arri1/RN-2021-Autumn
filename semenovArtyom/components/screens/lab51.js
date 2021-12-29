@@ -20,7 +20,7 @@ const Lab5 = props => {
   const [user] = useMutation(SIGN_IN, {
     onCompleted: ({authUser}) => {
       apollo.writeQuery({query: USER, data: {user: authUser.user}});
-      props.navigation.navigate('UserPage');
+      props.navigation.navigate('Main');
     },
   });
 

@@ -63,7 +63,7 @@ const Lab52 = props => {
   };
 
   const back = () => {
-    props.navigation.navigate('Home');
+    props.navigation.navigate('Login');
   };
 
   const createPost = () => {
@@ -85,13 +85,7 @@ const Lab52 = props => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={{marginTop: 14, marginLeft: 29}}
-        onPress={back}>
-        <Text style={[styles.text, {opacity: 0.5 , color: '#FFFFFF'}]}>Back</Text>
-      </TouchableOpacity>
-      <Text style={[styles.title, {marginBottom: 10}]}>{userLogin}</Text>
-        <View style={styles.inputField}>
+        <View style={[styles.inputField, {marginTop: 30}]}>
           <TextInput
             style={styles.text}
             placeholder="Post title"
@@ -133,6 +127,11 @@ const Lab52 = props => {
           onPress={deletePost}>
           <Text style={styles.buttonText}>Delete</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={back}>
+          <Text style={styles.buttonText}>Logout</Text>
+        </TouchableOpacity>
     </View>
   );
 };
@@ -151,7 +150,7 @@ const styles = StyleSheet.create({
   },
   postsArea: {
     minHeight: 196,
-    maxHeight: 196,
+    maxHeight: 250,
   },
   text: {
     width: 250,
@@ -183,6 +182,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#BB86FC',
     marginTop: 10,
+    marginBottom: 0,
     margin: 15,
     alignItems: 'center',
     justifyContent: 'center'

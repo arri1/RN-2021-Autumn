@@ -5,14 +5,14 @@ import { Provider } from "react-redux";
 import store from './store/index';
 import client from './components/apollo';
 import {ApolloProvider} from '@apollo/client';
+import NavigationStack from './components/routers/Lab5';
 
 
 const App = () => {
     return (
       <ApolloProvider client={client}>
         <Provider store={store}>
-          <NavigationContainer>
-            <TabNavigator />
+          <NavigationContainer><NavigationStack/>
           </NavigationContainer>
         </Provider>
       </ApolloProvider>

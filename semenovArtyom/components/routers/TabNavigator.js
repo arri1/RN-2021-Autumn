@@ -10,7 +10,7 @@ import p2 from '../../img/2.png'
 import p3 from '../../img/3.png'
 import p4 from '../../img/4.png'
 import p5 from '../../img/5.png'
-import Lab5 from './Lab5';
+import Lab5 from '../screens/lab52';
 
 const Tab = createBottomTabNavigator();
 

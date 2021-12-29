@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import Lab51 from '../screens/lab51';
 import Lab52 from '../screens/lab52';
+import TabNavigator from './TabNavigator';
 
 const Stack = createStackNavigator();
 
@@ -12,8 +13,8 @@ const Lab5 = () => {
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name="Home" component={Lab51} />
-      <Stack.Screen name="UserPage" component={Lab52} />
+      <Stack.Screen name="Login" component={Lab51} />
+      <Stack.Screen name="Main" component={TabNavigator} />
     </Stack.Navigator>
   );
 };
