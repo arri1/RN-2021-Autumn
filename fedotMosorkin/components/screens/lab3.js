@@ -23,19 +23,14 @@ const Lab3 = () => {
   };
 
   return (
-    <View>
+    <View style={styles.main}>
       <View>
-        <Text style={styles.message}>Клик без useMemo()</Text>
         <Text style={styles.counter}>Кликов {click}</Text>
         <TouchableOpacity onPress={onPressHandlerRegular} style={styles.button}>
-          <Text style={styles.text}>Клик</Text>
+          <Text style={styles.text}>Без useMemo</Text>
         </TouchableOpacity>
-      </View>
-      <View>
-        <Text style={styles.message}>Клик с useMemo()</Text>
-        <Text style={styles.counter}>Кликов {click}</Text>
         <TouchableOpacity onPress={onPressHandlerMemo} style={styles.button}>
-          <Text style={styles.text}>Клик</Text>
+          <Text style={styles.text}>useMemo</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -43,25 +38,26 @@ const Lab3 = () => {
 };
 
 const styles = StyleSheet.create({
+  main: {
+    flex: 1,
+    backgroundColor: '#7B47E9',
+  },
   counter: {
     fontSize: 30,
     textAlign: 'center',
-    paddingTop: 20,
-    paddingBottom: 20,
+    marginTop: 150,
+    marginBottom: 20,
+    color: 'white',
   },
   button: {
     alignItems: 'center',
-    backgroundColor: 'lightgreen',
+    justifyContent: 'center',
+    backgroundColor: '#34C759',
     borderRadius: 10,
+    width: 121,
+    height: 53,
     marginLeft: 150,
-    marginRight: 150,
     marginBottom: 50,
-  },
-  message: {
-    paddingTop: 50,
-    fontSize: 25,
-    textAlign: 'center',
-    color: 'green',
   },
   text: {
     fontSize: 15,
