@@ -8,22 +8,25 @@ import {
   TextInput,
   ActivityIndicator,
 } from 'react-native';
-import {useAsyncStorage} from '@react-native-async-storage/async-storage';
+import {useDispatch} from 'react-redux';
 import {useMutation} from '@apollo/client';
 import {AUTH} from '../gqls/Mutations';
+import {checkLoad} from '../store/task';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = props => {
   const [login, setLogin] = useState(null);
   const [password, setPassword] = useState(null);
-  const {setItem} = useAsyncStorage('token');
   const [state, setState] = useState(0);
+  const dispatch = useDispatch();
 
-  const [auth, {loading}] = useMutation(AUTH, {
+  const [auth] = useMutation(AUTH, {
     onCompleted: async ({authUser}) => {
-      await setItem(authUser.token);
       setState(1);
+      await AsyncStorage.setItem('token', authUser.token);
       console.log('Login succeded');
       console.log(authUser);
+      dispatch(checkLoad(true));
     },
     onError: ({message}) => {
       console.log(message);
@@ -47,13 +50,6 @@ const Login = props => {
     return true;
   };
 
-  if (loading)
-    return (
-      <SafeAreaView style={styles.Main}>
-        <ActivityIndicator color="#82D2FF" backgroundColor="#333333" />
-      </SafeAreaView>
-    );
-
   const onAuth = () => {
     if (isDataCorrect())
       auth({
@@ -64,47 +60,37 @@ const Login = props => {
       });
   };
 
-  if (state) {
-    return (
-      <SafeAreaView style={styles.main}>
-        <View>
-          <Text style={styles.buttonTextOpen}>Добро пожаловать {login}!</Text>
-        </View>
-      </SafeAreaView>
-    );
-  } else {
-    return (
-      <SafeAreaView style={styles.main}>
-        <View>
-          <Text style={styles.textOpen}>Вход</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={text => setLogin(text)}
-            value={login}
-            placeholder="Login"
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={text => setPassword(text)}
-            value={password}
-            placeholder="Password"
-          />
-          <Pressable
-            onPress={() => {
-              onAuth();
-            }}
-            style={styles.button}>
-            <Text style={styles.buttonText}>Войти</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => props.navigation.navigate('Sign')}
-            style={styles.buttonOpen}>
-            <Text style={styles.buttonText}>Регистрация</Text>
-          </Pressable>
-        </View>
-      </SafeAreaView>
-    );
-  }
+  return (
+    <SafeAreaView style={styles.main}>
+      <View>
+        <Text style={styles.textOpen}>Вход</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={text => setLogin(text)}
+          value={login}
+          placeholder="Login"
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={text => setPassword(text)}
+          value={password}
+          placeholder="Password"
+        />
+        <Pressable
+          onPress={() => {
+            onAuth();
+          }}
+          style={styles.button}>
+          <Text style={styles.buttonText}>Войти</Text>
+        </Pressable>
+        <Pressable
+          onPress={() => props.navigation.navigate('Sign')}
+          style={styles.buttonOpen}>
+          <Text style={styles.buttonText}>Регистрация</Text>
+        </Pressable>
+      </View>
+    </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({

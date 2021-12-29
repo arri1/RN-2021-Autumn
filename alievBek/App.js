@@ -4,19 +4,13 @@ import Tabs from './navigation/tabs';
 import store from './store';
 import {Provider} from 'react-redux';
 import {ApolloProvider, ApolloClient, InMemoryCache} from '@apollo/client';
-
-const client = new ApolloClient({
-  uri: 'https://nefu-server.herokuapp.com/',
-  cache: new InMemoryCache(),
-});
+import client from './gqls/apollo/apollo';
 
 const App = () => {
   return (
     <ApolloProvider client={client}>
       <Provider store={store}>
-        <NavigationContainer>
-          <Tabs />
-        </NavigationContainer>
+        <Tabs />
       </Provider>
     </ApolloProvider>
   );
