@@ -52,15 +52,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   circle: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
+    width: 121,
+    height: 121,
+    borderRadius: 121 / 2,
     backgroundColor: '#E6D899',
     justifyContent: 'center',
     alignItems: 'center',
   },
   text: {
-    width: 120,
     fontFamily: 'PTSansNarrow-Bold',
     color: '#FFFFFC',
     fontSize: 24,
