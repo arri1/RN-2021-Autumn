@@ -1,17 +1,16 @@
 /**
- * Metro configuration for React Native
- * https://github.com/facebook/react-native
+ * Metro configuration for React Native With Apollo Client Workaround
+ * https://github.com/apollographql/apollo-client/blob/main/CHANGELOG.md#apollo-client-354-2021-11-19
  *
  * @format
  */
 
-module.exports = {
-  transformer: {
-    getTransformOptions: async () => ({
-      transform: {
-        experimentalImportSupport: false,
-        inlineRequires: true,
-      },
-    }),
-  },
+const { getDefaultConfig } = require("metro-config");
+const { resolver: defaultResolver } = getDefaultConfig.getDefaultValues();
+exports.resolver = {
+  ...defaultResolver,
+  sourceExts: [
+    ...defaultResolver.sourceExts,
+    "cjs",
+  ],
 };
