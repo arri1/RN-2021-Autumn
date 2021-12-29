@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {USER} from '../gqls/user/query';
 import {SIGN_IN, SIGN_UP} from '../gqls/user/mutation';
+import {useDispatch} from 'react-redux';
 
 import {useQuery, useMutation, useApolloClient} from '@apollo/client';
 
@@ -20,10 +21,14 @@ const Lab5 = props => {
   const [message, setMessage] = useState('');
   const [pswVisible, setPswVisible] = useState(true);
 
+  const dispatch = useDispatch();
+  //const signedIn = useSelector(state => state.toDo.signedIn);
+
   const apollo = useApolloClient();
 
   const [user] = useMutation(SIGN_IN, {
     onCompleted: async ({authUser}) => {
+      dispatch({type: 'SIGN_IN', signedIn: true});
       await AsyncStorage.setItem('token', authUser.token);
       props.navigation.navigate('UserScreen');
     },
@@ -70,7 +75,6 @@ const Lab5 = props => {
         <ImageBackground
           resizeMode={'contain'}
           style={styles.imgBackGround}
-          imageStyle={{borderRadius: 40}}
           source={require('../../android/app/src/main/assets/images/bgd.jpg')}>
           <View style={styles.area}>
             <View style={styles.inputField}>
@@ -114,7 +118,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
   },
   boxArea: {
-    marginTop: '20%',
+    marginTop: '30%',
     position: 'absolute',
     width: '100%',
     height: '100%',

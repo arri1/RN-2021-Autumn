@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {USER} from '../gqls/user/query';
 import {UPDATE_USER} from '../gqls/user/mutation';
+import {useDispatch} from 'react-redux';
 
 import {useQuery, useMutation, useApolloClient} from '@apollo/client';
 
@@ -22,6 +23,8 @@ const UserPage = props => {
   const apollo = useApolloClient();
 
   const [id, setId] = useState('');
+
+  const dispatch = useDispatch();
 
   const {user} = useQuery(USER, {
     onCompleted: ({user}) => {
@@ -47,8 +50,9 @@ const UserPage = props => {
       });
   };
 
-  const goHome = () => {
-    props.navigation.navigate('Home');
+  const logOut = () => {
+    dispatch({type: 'SIGN_IN', signedIn: false});
+    apollo.resetStore();
   };
 
   const goToPosts = () => {
@@ -58,11 +62,6 @@ const UserPage = props => {
   return (
     <View style={styles.container}>
       <View style={styles.navigation}>
-        <TouchableOpacity
-          style={{marginTop: 14, marginLeft: 29}}
-          onPress={goHome}>
-          <Text style={[styles.text, {opacity: 0.5}]}>Home</Text>
-        </TouchableOpacity>
         <TouchableOpacity
           style={{marginTop: 14, marginLeft: 29}}
           onPress={goToPosts}>
@@ -110,6 +109,9 @@ const UserPage = props => {
             </View>
             <TouchableOpacity style={styles.button} onPress={editUser}>
               <Text style={styles.buttonText}>EDIT</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={logOut}>
+              <Text style={styles.buttonText}>LOGOUT</Text>
             </TouchableOpacity>
           </View>
         </ImageBackground>
