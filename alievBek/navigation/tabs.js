@@ -8,11 +8,17 @@ import axios from 'axios';
 import imgHome from '../img/home.jpg';
 import imgNews from '../img/news.jpg';
 import imgExit from '../img/exit.jpg';
+import imgStory from '../img/story.jpg';
+import imgUser from '../img/user.jpg';
 
+
+import Login from '../screens/Login';
+import Sign from '../screens/Sign';
 import News from '../screens/News';
 import Arts from '../screens/Arts';
 import Lab3 from '../screens/Lab3';
 import Lab4 from '../screens/Lab4';
+import Lab5 from './Lab5';
 
 const Tab = createBottomTabNavigator();
 
@@ -46,13 +52,13 @@ const Tabs = ({navigation}) => {
       }}>
       <Tab.Screen
         name=" "
-        component={Arts}
+        component={Lab5}
         options={{
           tabBarIcon: ({focused}) => (
             <View
               style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
               <Image
-                source={imgHome}
+                source={imgUser}
                 resizeMode="contain"
                 style={{
                   width: 25,
@@ -62,14 +68,14 @@ const Tabs = ({navigation}) => {
               />
               <Text
                 style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
-                HOME
+                Login
               </Text>
             </View>
           ),
         }}
       />
       <Tab.Screen
-        name="  "
+        name="   "
         component={News}
         options={{
           tabBarIcon: ({focused}) => (
@@ -86,14 +92,38 @@ const Tabs = ({navigation}) => {
               />
               <Text
                 style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
-                NEWS
+                News
               </Text>
             </View>
           ),
         }}
       />
       <Tab.Screen
-        name="   "
+        name="    "
+        component={Arts}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <View
+              style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
+              <Image
+                source={imgHome}
+                resizeMode="contain"
+                style={{
+                  width: 25,
+                  height: 25,
+                  tintColor: focused ? '#e32f45' : '#748c94',
+                }}
+              />
+              <Text
+                style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
+                Arts
+              </Text>
+            </View>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="     "
         component={Lab3}
         options={{
           tabBarIcon: ({focused}) => (
@@ -117,14 +147,14 @@ const Tabs = ({navigation}) => {
         }}
       />
       <Tab.Screen
-        name="    "
+        name="      "
         component={Lab4}
         options={{
           tabBarIcon: ({focused}) => (
             <View
               style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
               <Image
-                source={imgExit}
+                source={imgStory}
                 resizeMode="contain"
                 style={{
                   width: 25,
