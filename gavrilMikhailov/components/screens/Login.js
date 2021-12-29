@@ -8,10 +8,12 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import { useSelector } from 'react-redux';
 
 const Login = () => {
   const [email, onChangeEmail] = useState("");
   const [password, onChangePassword] = useState("");
+  const state = useSelector(state => state)
 
   const didTapButton = () => {
     Alert.alert('Далее', `Почта: ${email}\nПароль: ${password}`, [
@@ -60,6 +62,9 @@ const Login = () => {
               Sign In
             </Text>
         </Pressable>
+        <Text style={styles.watchLabel}>
+          {state.value ? "I'm watching you." : ''}
+        </Text>
       </View>
     </SafeAreaView>
   )
@@ -109,6 +114,10 @@ const styles = StyleSheet.create({
   },
   normalText: {
     color: "#141E61"
+  },
+  watchLabel: {
+    marginTop: 40,
+    color: "#787A91"
   }
 });
 
