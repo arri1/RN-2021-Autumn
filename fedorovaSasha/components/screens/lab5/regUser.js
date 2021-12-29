@@ -36,7 +36,7 @@ const RegUser = ({navigation}) => {
             <TextInput
               onChangeText={onChangeName}
               value={name}
-              style={[styles.inputText, styles.text]}
+              style={[styles.inputText, styles.text, {width: '80%'}]}
             />
           </View>
           <View style={styles.viewInput}>
@@ -44,7 +44,7 @@ const RegUser = ({navigation}) => {
             <TextInput
               onChangeText={onChangeLogin}
               value={login}
-              style={[styles.inputText, styles.text]}
+              style={[styles.inputText, styles.text, {width: '81%'}]}
             />
           </View>
 
@@ -83,17 +83,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#CCF6CF',
   },
   viewBox: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    margin: 15,
   },
   viewInput: {
-    marginTop: 15,
+    marginBottom: 15,
     flexDirection: 'row',
     alignItems: 'center',
   },
 
   inputText: {
-    width: 200,
+    width: '71%',
     paddingLeft: 15,
     borderRadius: 20,
     marginLeft: 15,
@@ -115,10 +114,8 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#78C25D',
-    marginTop: 15,
     borderRadius: 20,
     padding: 10,
-    width: 300,
     alignItems: 'center',
   },
 });

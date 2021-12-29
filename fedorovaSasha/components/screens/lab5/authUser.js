@@ -10,6 +10,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useMutation} from '@apollo/client';
 import {AUTH, UPDATE_USER} from '../../apollo/mutations';
+import TabNavigator from '../../routers/TabNavigator';
 
 const AuthUser = ({navigation}) => {
   const [login, onChangeLogin] = useState(null);
@@ -25,6 +26,20 @@ const AuthUser = ({navigation}) => {
       onChangeName(authUser.user.name);
       onChangeLogin(authUser.user.login);
       await AsyncStorage.setItem('token', authUser.token);
+      if (authUser.user.group != null)
+        await AsyncStorage.setItem('group', authUser.user.group);
+      else await AsyncStorage.setItem('group', '');
+      await AsyncStorage.setItem('name', authUser.user.name);
+      await AsyncStorage.setItem('login', authUser.user.login);
+      await AsyncStorage.setItem('password', password);
+    },
+    onError: ({message}) => {
+      console.log(message);
+      if (message === 'Incorrect password') {
+        ToastAndroid.show('Неверен пароль', ToastAndroid.SHORT);
+        return null;
+      }
+      ToastAndroid.show('Что то пошло не так', ToastAndroid.SHORT);
     },
   });
 
@@ -67,82 +82,38 @@ const AuthUser = ({navigation}) => {
 
   return (
     <View style={styles.main}>
+      {!!authorized && (
+        <TouchableOpacity style={styles.button} onPress={signOut}>
+          <Text style={styles.textButton}>Log out</Text>
+        </TouchableOpacity>
+      )}
       {!authorized && (
-        <View style={styles.viewBox}>
-          <View style={styles.viewInput}>
-            <Text style={styles.labelText}>Login:</Text>
-            <TextInput
-              onChangeText={onChangeLogin}
-              value={login}
-              style={[styles.inputText, styles.text]}
-            />
-          </View>
+        <View>
+          <View style={styles.viewBox}>
+            <View style={styles.viewInput}>
+              <Text style={styles.labelText}>Login:</Text>
+              <TextInput
+                onChangeText={onChangeLogin}
+                value={login}
+                style={[styles.inputText, styles.text, {width: '81%'}]}
+              />
+            </View>
 
-          <View style={styles.viewInput}>
-            <Text style={styles.labelText}>Password:</Text>
-            <TextInput
-              onChangeText={onChangePassword}
-              value={password}
-              style={[styles.inputText, styles.text]}
-            />
+            <View style={styles.viewInput}>
+              <Text style={styles.labelText}>Password:</Text>
+              <TextInput
+                onChangeText={onChangePassword}
+                value={password}
+                style={[styles.inputText, styles.text]}
+              />
+            </View>
           </View>
-
           <TouchableOpacity style={styles.button} onPress={onAuthorization}>
             <Text style={styles.text}>Log in</Text>
           </TouchableOpacity>
         </View>
       )}
-      {!!authorized && (
-        <View style={[styles.viewBox]}>
-          <Text style={styles.labelText}>Сhange data</Text>
-          <View style={styles.viewInput}>
-            <Text style={styles.labelText}>Login:</Text>
-            <TextInput
-              onChangeText={onChangeLogin}
-              value={login}
-              placeholder={'Login'}
-              style={[styles.inputText, styles.text]}
-            />
-          </View>
-
-          <View style={styles.viewInput}>
-            <Text style={styles.labelText}>Password:</Text>
-            <TextInput
-              onChangeText={onChangePassword}
-              value={password}
-              placeholder={'Password'}
-              style={[styles.inputText, styles.text]}
-            />
-          </View>
-
-          <View style={styles.viewInput}>
-            <Text style={styles.labelText}>Name:</Text>
-            <TextInput
-              onChangeText={onChangeName}
-              value={name}
-              placeholder={'Name'}
-              style={[styles.inputText, styles.text]}
-            />
-          </View>
-
-          <View style={styles.viewInput}>
-            <Text style={styles.labelText}>Group:</Text>
-            <TextInput
-              onChangeText={onChangeGroup}
-              value={group}
-              placeholder={'Group'}
-              style={[styles.inputText, styles.text]}
-            />
-          </View>
-
-          <TouchableOpacity style={styles.button} onPress={onUpdate}>
-            <Text style={styles.textButton}>Save</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={signOut}>
-            <Text style={styles.textButton}>Log out</Text>
-          </TouchableOpacity>
-        </View>
-      )}
+      {!!authorized && <TabNavigator />}
     </View>
   );
 };
@@ -153,8 +124,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#CCF6CF',
   },
   viewBox: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    margin: 15,
   },
   viewInput: {
     marginTop: 15,
@@ -163,11 +133,12 @@ const styles = StyleSheet.create({
   },
 
   inputText: {
-    width: 200,
+    width: '71%',
     paddingLeft: 15,
     borderRadius: 20,
     marginLeft: 15,
     backgroundColor: '#C27E5D',
+    alignContent: 'flex-start',
   },
 
   labelText: {
@@ -185,10 +156,9 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#78C25D',
-    marginTop: 15,
+    margin: 15,
     borderRadius: 20,
     padding: 10,
-    width: 300,
     alignItems: 'center',
   },
 });

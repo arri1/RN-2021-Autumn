@@ -29,6 +29,7 @@ const TopTabNavigator = () => {
 const styles = StyleSheet.create({
   main: {
     height: '100%',
+    backgroundColor: '#CCF6CF',
   },
   tabBar: {
     margin: 15,
