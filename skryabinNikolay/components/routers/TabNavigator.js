@@ -5,6 +5,7 @@ import Lab1 from '../screens/lab1';
 import Lab2 from '../screens/lab2';
 import Lab3 from '../screens/lab3';
 import Lab4 from '../screens/lab4';
+import Lab5 from '../routers/RootNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -68,6 +69,19 @@ const TabNavigation = () => {
                     tabBarIcon: ({focused}) => (
                         <View style = {{alignItems: 'center', justifyContent: 'center', top: 3}}>
                             <Image source = {require('../../icons/number_lab4.png')}
+                                resizeMode = "contain"
+                                style={{width: 60, height: 60,}}
+                            />
+                        </View>
+                    ),
+                }}
+            />
+
+            <Tab.Screen name = "Lab5 - graphql add new profile" component = {Lab5} 
+                options = {{
+                    tabBarIcon: ({focused}) => (
+                        <View style = {{alignItems: 'center', justifyContent: 'center', top: 3}}>
+                            <Image source = {require('../../icons/number_lab5.png')}
                                 resizeMode = "contain"
                                 style={{width: 60, height: 60,}}
                             />
