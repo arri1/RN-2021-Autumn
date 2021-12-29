@@ -1,0 +1,49 @@
+{
+  "name": "skryabinnikolay",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@react-navigation/bottom-tabs": "^6.0.9",
+    "@react-navigation/native": "^6.0.6",
+    "@reduxjs/toolkit": "^1.7.0",
+    "@types/react-redux": "^7.1.20",
+    "axios": "^0.24.0",
+    "react": "^17.0.2",
+    "react-native": "^0.66.1",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-screens": "^3.9.0",
+    "react-native-shadow": "^1.2.2",
+    "react-navigation": "^4.4.4",
+    "react-redux": "^7.2.6",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/runtime": "^7.12.5",
+    "@react-native-community/eslint-config": "^2.0.0",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^27.3.1",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.26.1",
+    "jest": "^27.3.1",
+    "metro-react-native-babel-preset": "^0.66.0",
+    "prettier": "2.4.1",
+    "react-native-codegen": "^0.0.0",
+    "react-test-renderer": "17.0.2",
+    "redux-devtools": "^3.7.0",
+    "redux-devtools-extension": "^2.13.9"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}

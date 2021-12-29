@@ -1,18 +1,17 @@
-
 import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  Text
-} from 'react-native';
 
-const App: () => Node = () => {
-  
+import { Provider } from 'react-redux'
+import store from './store'
+
+import { NavigationContainer } from '@react-navigation/native';
+import TabNavigation from './navigation/TabNavigation';
+
+export default function App () {
   return (
-    <SafeAreaView>
-      <Text>Hello World!</Text>
-    </SafeAreaView>
+    <Provider store={store}>
+      <NavigationContainer>
+        <TabNavigation />  
+      </NavigationContainer>
+    </Provider>
   );
-};
-
-export default App;
+}

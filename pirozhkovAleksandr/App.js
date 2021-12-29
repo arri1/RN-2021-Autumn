@@ -1,57 +1,21 @@
-import React from 'react';
-import type {Node} from 'react';
-import Background from './back.jpg';
-import Saitama from './saitama.png';
-import SaitamaOk from './saitamaOk.png';
-import Punch from './punch.gif';
+import * as React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import TopTabNavigator from './components/routers/TopTabNavigator';
+import {Provider} from 'react-redux';
+import store from './store';
+import client from './components/utils/apollo';
+import {ApolloProvider} from '@apollo/client';
 
-
-import{
-  View,
-	SafeAreaView,
-	Text,
-  Image,
-  StyleSheet,
-  ImageBackground, 
-}from 'react-native';
-
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 18,
-    marginTop: -165,
-    marginLeft: 275,
-  },
-  image: {
-    marginTop: '70%',
-    marginLeft: '10%',
-    alignSelf: 'center',
-  },
-  back:{
-    height:'100%',
-  }  
-});
-
-const App: () => Node = () => {
+const App = () => {
   return (
- 
-    <View>
-      
-      <ImageBackground source={Background} style={styles.back}>
-      <Image 
-      style={styles.image} 
-      source={SaitamaOk}
-      height={200}
-      width={240}
-       />
-      <Text style={styles.text}>Hello{"\n"}world!</Text>
-      </ImageBackground>
-    </View>
-    
-    
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <NavigationContainer>
+          <TopTabNavigator />
+        </NavigationContainer>
+      </Provider>
+    </ApolloProvider>
   );
 };
-
-
-
 
 export default App;
