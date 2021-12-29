@@ -1,38 +1,23 @@
 import React from 'react';
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import TabNavigator from './TabNavigator';
 import Addnewprofile from '../screens/lab5/addnewprofile';
 import Login from '../screens/lab5/login';
-import Setting from '../screens/lab5/setting';
 
-const Tab = createMaterialTopTabNavigator();
+const Stack = createNativeStackNavigator();
 
-function MyTabs() {
+const RootNavigator = () => {
   return (
-    <Tab.Navigator
-      initialRouteName="Lab5"
-      screenOptions={{
-        tabBarActiveTintColor: '#FFFFFF',
-        tabBarLabelStyle: {fontSize: 14},
-        tabBarStyle: {backgroundColor: 'orange'},
-      }}
-    >
-      <Tab.Screen
-        name="Add new profile"
-        component={Addnewprofile}
-        options={{ tabBarLabel: 'Add new profile' }}
+    <Stack.Navigator initialRouteName="Login">
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="AddProfile" component={Addnewprofile} />
+      <Stack.Screen
+        name="TabNavigation"
+        component={TabNavigator}
+        options={{headerShown: false}}
       />
-      <Tab.Screen
-        name="Login"
-        component={Login}
-        options={{ tabBarLabel: 'Login' }}
-      />
-      <Tab.Screen
-        name="Setting"
-        component={Setting}
-        options={{ tabBarLabel: 'Setting' }}
-      />  
-    </Tab.Navigator>
+    </Stack.Navigator>
   );
-}
+};
 
-export default MyTabs;
+export default RootNavigator;

@@ -62,6 +62,11 @@ const Addnewprofile = ({navigation}) => {
             onPress={onRegistration}>
             <Text style={styles.text}>Добавить новый профиль</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.signButton}
+            onPress={()=>{navigation.replace("Login");}}>
+            <Text style={styles.text}>Назад</Text>
+          </TouchableOpacity>
         </View>
       )}
       {!!registrated && (
@@ -74,6 +79,11 @@ const Addnewprofile = ({navigation}) => {
             }}>
             Успешно добавлен профиль, {nickname}❤️
           </Text>
+          <TouchableOpacity
+            style={styles.signButton}
+            onPress={()=>{navigation.replace("Login");}}>
+            <Text style={styles.text}>Назад</Text>
+          </TouchableOpacity>
         </View>
       )}
     </View>
@@ -123,4 +133,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Addnewprofile;
+export default Addnewprofile; 

@@ -17,9 +17,18 @@ const Login = ({navigation}) => {
     onCompleted: async ({authUser}) => {
       console.log('Authorization OK');
       setAuthorized(true);
+      navigation.replace("TabNavigation");
       onChangeGroup(authUser.user.group);
       onChangeName(authUser.user.name);
       await AsyncStorage.setItem('token', authUser.token);
+      if (authUser.user.group!=null)
+        await AsyncStorage.setItem('group', authUser.user.group);
+      else
+        await AsyncStorage.setItem('group', '');
+      if (authUser.user.name!=null)
+        await AsyncStorage.setItem('name', authUser.user.name);
+      else
+        await AsyncStorage.setItem('name', '');
     },
   });
 
@@ -92,6 +101,11 @@ const Login = ({navigation}) => {
             style={styles.signButton}
             onPress={onAuthorization}>
             <Text style={styles.text}>Авторизоваться</Text>
+          </TouchableOpacity>      
+          <TouchableOpacity
+            style={styles.signButton}
+            onPress={()=>{navigation.replace("AddProfile");}}>
+            <Text style={styles.text}>Регистрация</Text>
           </TouchableOpacity>
         </View>
       )}

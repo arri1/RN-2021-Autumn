@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Text,View, StyleSheet,TouchableOpacity, SafeAreaView} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, SafeAreaView} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useMutation} from '@apollo/client';
 import {AUTH} from '../../gqls/mutations';
@@ -12,7 +12,16 @@ const Setting = ({navigation}) => {
   const [name, onChangeName] = useState(null);
   const [group, onChangeGroup] = useState(null);
   const [authorized, setAuthorized] = useState(false);
+  const [got, setGot] = useState(false);
 
+  const Items = async () => {
+    if (!got) {
+      onChangeName(await AsyncStorage.getItem('name'));
+      onChangeGroup(await AsyncStorage.getItem('group'));
+      setGot(true);
+    }
+  };
+  Items();
   const [authorization] = useMutation(AUTH, {
     onCompleted: async ({authUser}) => {
       console.log('Authorization OK');
@@ -43,7 +52,6 @@ const onUpdate = () => {
     variables: {
       data: {
         group: {set: group},
-        password: {set: password},
         name: {set: name},
       },
     },
@@ -79,18 +87,10 @@ return (
             <Text style={styles.ConText}>Настройки профиля: {login}</Text>
           </View>
 
-          <Text style={styles.ConText}>Профиль:</Text>
+          <Text style={styles.ConText}>Имя:</Text>
           <TextInput
             onChangeText={onChangeName}
             value={name}
-            theme={textInputTheme}
-            placeholder={''}
-            style={[styles.inputText, styles.text, styles.textInputStyle]}
-          />
-          <Text style={styles.ConText}>Пароль:</Text>
-          <TextInput
-            onChangeText={onChangePassword}
-            value={password}
             theme={textInputTheme}
             placeholder={''}
             style={[styles.inputText, styles.text, styles.textInputStyle]}
@@ -105,6 +105,9 @@ return (
           />
           <TouchableOpacity style={styles.signButton} onPress={onUpdate}>
             <Text style={styles.text}>Сохранить изменения</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.signButton} onPress={()=>{navigation.replace("Login");}}>
+            <Text style={styles.text}>Выйти</Text>
           </TouchableOpacity>
         </View>
       )}
