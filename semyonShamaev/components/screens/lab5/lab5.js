@@ -60,7 +60,7 @@ const Lab5 = () => {
           onChangeText={onChangeLogin}
           value={login}
           placeholder={'Login'}
-          style={[styles.inputText, styles.text, {width: '78%'}]}
+          style={[styles.inputText, styles.text, {width: '93%'}]}
         />
       </View>
 
@@ -80,7 +80,7 @@ const Lab5 = () => {
           onChangeText={onChangeName}
           value={name}
           placeholder={'Name'}
-          style={[styles.inputText, styles.text, {width: '78%'}]}
+          style={[styles.inputText, styles.text, {width: '93%'}]}
         />
       </View>
 
@@ -102,16 +102,16 @@ const styles = StyleSheet.create({
   },
   viewInput: {
     marginTop: 15,
-    marginLeft: 15,
-    flexDirection: 'row',
+    marginLeft: 0,
+    flexDirection: 'column',
     alignItems: 'center',
   },
 
   inputText: {
-    width: '67%',
+    width: '93%',
     paddingLeft: 15,
     borderRadius: 20,
-    marginLeft: 15,
+    marginLeft: 0,
     backgroundColor: '#AEAEAE',
   },
 
@@ -126,14 +126,15 @@ const styles = StyleSheet.create({
   },
   textButton: {
     fontSize: 16,
-    color: '#000000',
+    color: '#FFFFFF',
   },
   button: {
-    backgroundColor: '#AEAEAE',
+    backgroundColor: '#000000',
     margin: 15,
     borderRadius: 20,
     padding: 10,
     alignItems: 'center',
+    marginVertical: 30,
   },
 });
 

@@ -81,7 +81,7 @@ const Login = ({navigation}) => {
               <TextInput
                 onChangeText={onChangeLogin}
                 value={login}
-                style={[styles.inputText, styles.text, {width: '81%'}]}
+                style={[styles.inputText, styles.text, {width: '100%'}]}
               />
             </View>
 
@@ -109,22 +109,22 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: '#E1E4E7',
   },
-  
+
   viewBox: {
     margin: 15,
   },
 
   viewInput: {
     marginTop: 15,
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
   },
 
   inputText: {
-    width: '69%',
-    paddingLeft: 15,
+    width: '100%',
+    paddingLeft: 0,
     borderRadius: 20,
-    marginLeft: 15,
+    marginLeft: 0,
     backgroundColor: '#AEAEAE',
     alignContent: 'flex-start',
   },

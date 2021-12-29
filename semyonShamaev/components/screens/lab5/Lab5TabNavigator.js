@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
     height: 40,
   },
   tabLabel: {
-    color: 'white',
+    marginVertical: -12,
+    color: '#000000',
     alignSelf: 'center',
     textAlignVertical: 'center',
     fontSize: 12,

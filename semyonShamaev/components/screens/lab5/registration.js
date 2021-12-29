@@ -35,7 +35,7 @@ const Registration = ({navigation}) => {
             <TextInput
               onChangeText={onChangeName}
               value={name}
-              style={[styles.inputText, styles.text, {width: '80%'}]}
+              style={[styles.inputText, styles.text, {width: '100%'}]}
             />
           </View>
           <View style={styles.viewInput}>
@@ -43,7 +43,7 @@ const Registration = ({navigation}) => {
             <TextInput
               onChangeText={onChangeLogin}
               value={login}
-              style={[styles.inputText, styles.text, {width: '81%'}]}
+              style={[styles.inputText, styles.text, {width: '100%'}]}
             />
           </View>
 
@@ -76,21 +76,24 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: '#E1E4E7',
   },
+
   viewBox: {
     margin: 15,
   },
+
   viewInput: {
-    marginBottom: 15,
-    flexDirection: 'row',
+    marginTop: 15,
+    flexDirection: 'column',
     alignItems: 'center',
   },
 
   inputText: {
-    width: '69%',
-    paddingLeft: 15,
+    width: '100%',
+    paddingLeft: 10,
     borderRadius: 20,
-    marginLeft: 15,
+    marginLeft: 10,
     backgroundColor: '#AEAEAE',
+    alignContent: 'flex-start',
   },
 
   labelText: {
@@ -100,14 +103,17 @@ const styles = StyleSheet.create({
 
   text: {
     fontSize: 16,
-    color: 'white',
+    color: '#FFFFFF',
   },
 
   button: {
+    width: '100%',
     backgroundColor: '#000000',
+    margin: 0,
     borderRadius: 20,
     padding: 10,
     alignItems: 'center',
+    marginVertical: 30,
   },
 });
 
