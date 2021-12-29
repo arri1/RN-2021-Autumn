@@ -13,7 +13,7 @@ import {useMutation} from "@apollo/client"
 import {AUTH} from "../../graphQL/mutations"
 
 
-const Register = () => {
+const Login = ({navigation}) => {
   const [login, setLogin] = useState(null)
   const [password, setPassword] = useState(null)
   const { setItem } = useAsyncStorage('token')
@@ -24,7 +24,8 @@ const Register = () => {
       await setItem(authUser.token)
       setState(1)
       console.log('Login succeded')
-      console.log(authUser)
+      console.log(authUser)      
+      navigation.replace('TabNavigation')
     },                                  
     onError: ({message}) => {
       console.log(message)
@@ -138,4 +139,4 @@ const styles = StyleSheet.create({
     }
   });
 
-export default Register 
+export default Login 
