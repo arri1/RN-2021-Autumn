@@ -34,7 +34,7 @@ const UserPage = props => {
   const [updateUser] = useMutation(UPDATE_USER);
 
   const editUser = () => {
-    if (password != '' && name != '' && login != '')
+    if (name != '' && login != '')
       updateUser({
         variables: {
           data: {
