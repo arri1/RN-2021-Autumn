@@ -24,3 +24,14 @@ export const GET_POSTS = gql`
     }
   }
 `;
+
+export const USER = gql`
+  query {
+    user {
+      id
+      name
+      group
+      login
+    }
+  }
+`;

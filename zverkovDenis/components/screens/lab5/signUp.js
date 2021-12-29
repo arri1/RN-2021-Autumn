@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {useMutation} from '@apollo/client';
+import LinearGradient from 'react-native-linear-gradient';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {REG} from '../../gqls/qwery/mutations';
 
 const SingUp = ({navigation}) => {
@@ -25,9 +27,11 @@ const SingUp = ({navigation}) => {
     registration({
       variables: {login, password, name},
     });
+
+    AsyncStorage.clear();
   };
   return (
-    <View>
+    <LinearGradient colors={['#6991F5', '#ffffff']}>
       {!registrated && (
         <View style={styles.viewBox}>
           <Text style={styles.labelText}>Name:</Text>
@@ -66,18 +70,25 @@ const SingUp = ({navigation}) => {
             }}>
             Welcome, {name}!
           </Text>
+          <TouchableOpacity
+            style={styles.signInButton}
+            onPress={() => navigation.navigate('SignIn')}>
+            <Text style={styles.text}>Sign in</Text>
+          </TouchableOpacity>
         </View>
       )}
-    </View>
+    </LinearGradient>
   );
 };
 const styles = StyleSheet.create({
   viewBox: {
     height: '100%',
+    margin: 10,
     justifyContent: 'center',
   },
 
   inputText: {
+    backgroundColor: '#ffffff',
     borderColor: 'black',
     borderRadius: 5,
     borderWidth: 1,

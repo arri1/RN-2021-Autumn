@@ -1,7 +1,7 @@
 import React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {View, StyleSheet} from 'react-native';
-import UserProfile from '../screens/lab5/userProfile';
+import UserProfile from '../screens/lab5/editUser';
 import Posts from '../screens/lab5/posts';
 
 const Tab = createMaterialTopTabNavigator();
