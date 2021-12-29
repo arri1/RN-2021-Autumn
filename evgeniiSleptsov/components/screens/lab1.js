@@ -4,23 +4,69 @@ import {
 } from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
+  main: {
     flex: 1,
+  },
+  container: {
     alignItems: 'center',
     justifyContent: 'center',
+    width: 323,
+    height: 258,
+    marginLeft: 44,
+    marginTop: 96,
+    backgroundColor: '#5AC8FA',
+    borderRadius: 30,
   },
   text: {
-    color: '#f0f',
-    margin: 20,
+    color: 'black',
+    margin: 12,
+    fontFamily: 'rye',
   },
-  button: {
+  textContainer: {
+    color: 'black',
+    margin: 18,
+    fontFamily: 'rye',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 20,
-    borderRadius: 5,
-    paddingHorizontal: 27,
-    elevation: 10,
-    backgroundColor: '#808080',
+  },
+  button: {
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 121,
+    height: 53,
+    backgroundColor: '#5AC8FA',
+    borderRadius: 10,
+    marginTop: 20,
+  },
+  button1: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 50,
+    height: 26,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    backgroundColor: '#5AC8FA',
+  },
+  button2: {
+    marginLeft: 21,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 50,
+    height: 26,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    backgroundColor: '#5AC8FA',
+  },
+  container1: {
+    marginTop: 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
@@ -51,20 +97,35 @@ const Lab1 = () => {
     }
   });
   return (
-    <View style={[styles.container, { backgroundColor: color }]}>
-
-      <Text style={styles.text}>
-        Пары в
-        {name}
-      </Text>
-      <Button title="Next" onPress={() => { setCount(count + 1); }} />
-      <Button title="Back" onPress={() => { setCount(count - 1); }} />
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => setColor(`#${Math.floor(Math.random() * 22222222).toString(16)}`)}
-      />
-    </View>
-  );
-};
+    <View style={[styles.main, {backgroundColor: color}]}>
+          <View style={styles.container}>
+            <Text style={styles.textContainer}>Есть такая пословица: {name}</Text>
+          </View>
+          <View style={styles.container1}>
+            <TouchableOpacity
+              style={styles.button1}
+              onPress={() => {
+                setCount(count - 1);
+              }}>
+              <Text>Назад</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button2}
+              onPress={() => {
+                setCount(count + 1);
+              }}>
+              <Text>След</Text>
+            </TouchableOpacity>
+          </View>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() =>
+              setColor('#' + Math.floor(Math.random() * 21341241).toString(16))
+            }>
+            <Text style={styles.text}>Цвет</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    };
 
 export default Lab1;

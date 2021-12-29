@@ -23,6 +23,7 @@ const Lab3 = () => {
   };
 
   return (
+
     <View>
       <View>
         <Text style={styles.counter}>Кликов {click}</Text>
@@ -33,6 +34,7 @@ const Lab3 = () => {
       <View>
         <TouchableOpacity onPress={onPressHandlerMemo} style={styles.button}>
           <Text style={styles.text}>Клик c UseMemo</Text>
+
         </TouchableOpacity>
       </View>
     </View>
@@ -40,26 +42,29 @@ const Lab3 = () => {
 };
 
 const styles = StyleSheet.create({
+
+  main: {
+    flex: 1,
+    backgroundColor: '#2F42B2',
+  },
   counter: {
     fontSize: 30,
     textAlign: 'center',
-    paddingTop: 20,
-    paddingBottom: 20,
+    marginTop: 150,
+    marginBottom: 20,
+    color: 'black',
   },
   button: {
     alignItems: 'center',
-    backgroundColor: 'lightgreen',
+    justifyContent: 'center',
+    backgroundColor: '#5AC8FA',
     borderRadius: 10,
+    width: 121,
+    height: 53,
     marginLeft: 150,
-    marginRight: 150,
     marginBottom: 50,
   },
-  message: {
-    paddingTop: 50,
-    fontSize: 25,
-    textAlign: 'center',
-    color: 'green',
-  },
+
   text: {
     fontSize: 15,
   },
