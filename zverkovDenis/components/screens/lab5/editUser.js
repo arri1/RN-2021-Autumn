@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LinearGradient from 'react-native-linear-gradient';
-import {useMutation, useQuery} from '@apollo/client';
+import {useQuery, useMutation, useApolloClient} from '@apollo/client';
 import {USER} from '../../gqls/qwery/queries';
 import {UPDATE_USER} from '../../gqls/qwery/mutations';
 
@@ -70,13 +70,17 @@ const SignIn = ({navigation}) => {
       ToastAndroid.show("Passwords don't match", ToastAndroid.SHORT);
     }
   };
-
+  const apollo = useApolloClient();
   const signOut = () => {
     onChangeMess('');
     onChangeLogin('');
     onChangeName('');
     onChangeGroup('');
     AsyncStorage.clear();
+
+    apollo.resetStore().catch(() => {
+      console.log('asd');
+    });
     navigation.replace('SignIn');
   };
 
