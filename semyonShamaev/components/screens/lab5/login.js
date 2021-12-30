@@ -16,13 +16,11 @@ const Login = ({navigation}) => {
   const [login, onChangeLogin] = useState(null);
   const [password, onChangePassword] = useState(null);
   const [name, onChangeName] = useState(null);
-  const [group, onChangeGroup] = useState(null);
   const [authorized, setAuthorized] = useState(false);
 
   const [authorization] = useMutation(AUTH, {
     onCompleted: async ({authUser}) => {
       setAuthorized(true);
-      onChangeGroup(authUser.user.group);
       onChangeName(authUser.user.name);
       onChangeLogin(authUser.user.login);
       await AsyncStorage.setItem('token', authUser.token);
@@ -109,17 +107,14 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: '#E1E4E7',
   },
-
   viewBox: {
     margin: 15,
   },
-
   viewInput: {
     marginTop: 15,
     flexDirection: 'column',
     alignItems: 'center',
   },
-
   inputText: {
     width: '100%',
     paddingLeft: 0,
@@ -128,17 +123,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#AEAEAE',
     alignContent: 'flex-start',
   },
-
   labelText: {
     fontSize: 20,
     color: '#000000',
   },
-
   text: {
     fontSize: 16,
     color: '#FFFFFF',
   },
-
+  textButton: {
+    fontSize: 16,
+    color: '#FFFFFF',
+  },
   button: {
     backgroundColor: '#000000',
     margin: 15,

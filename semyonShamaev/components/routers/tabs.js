@@ -30,6 +30,9 @@ const TabNavigation = () => {
     
     return(
         <Tab.Navigator
+            tabBarOptions={{
+                keyboardHidesTabBar: true
+            }}    
             screenOptions = {{
                 tabBarShowLabel: false,
                 tabBarStyle: {

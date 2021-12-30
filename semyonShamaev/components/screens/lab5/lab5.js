@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import RNRestart from 'react-native-restart'; 
 import {
   Text,
   View,
@@ -47,10 +48,17 @@ const Lab5 = () => {
     });
   };
 
-  getItems();
+  const signOut = () => {
+    RNRestart.Restart();
+  };
 
+  getItems();
+  
   return (
     <View style={[styles.viewBox]}>
+        <TouchableOpacity style={styles.button} onPress={signOut}>
+          <Text style={styles.textButton}>Log out</Text>
+        </TouchableOpacity>
       <Text style={[styles.labelText, {marginTop: 15, textAlign: 'center'}]}>
         Сhange data
       </Text>
@@ -106,7 +114,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
   },
-
   inputText: {
     width: '93%',
     paddingLeft: 15,

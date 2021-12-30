@@ -51,8 +51,8 @@ const Lab3 = () => {
 
 const styles = StyleSheet.create({
     main: {
-        height: '100%',   
-        backgroundColor: '#E1E4E7',
+      height: '100%',   
+      backgroundColor: '#E1E4E7',
     },
     button: {
       width: 260,
