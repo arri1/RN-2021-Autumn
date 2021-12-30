@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text,View, StyleSheet,TouchableOpacity, SafeAreaView} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, SafeAreaView} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useMutation} from '@apollo/client';
 import {AUTH} from '../../gqls/mutations';
