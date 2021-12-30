@@ -16,6 +16,7 @@ const TabNavigation = () => {
         <Tab.Navigator
             screenOptions = {{
                 tabBarHideOnKeyboard: true,
+                tabBarShowLabel: false,
                 tabBarStyle: {
                     position: 'absolute',
                     bottom: 5,
