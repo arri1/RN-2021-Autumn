@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { Image, StyleSheet } from 'react-native';
 import Lab1 from '../screens/lab1';
 import Lab2 from '../screens/lab2';
 import Lab3 from '../screens/lab3';
 import Lab4 from '../screens/lab4';
+import Lab5 from '../screens/lab5';
+import Registration from '../lab5/registration';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,7 +14,7 @@ const TabNavigator = () => {
     return (
         <Tab.Navigator>
             <Tab.Screen 
-                name = "Lab1" 
+                name = "Lab1"
                 component = {Lab1} 
                 options = {{
                     tabBarIcon: ({focused}) => (
@@ -63,6 +65,21 @@ const TabNavigator = () => {
                     tabBarIcon: ({focused}) => (
                         <Image 
                             source = {require('../../img/icon4.png')}
+                            style = {styles.icon}
+                        />
+                    ),
+                    tabBarLabel: () => {
+                        return null
+                    },
+                }}
+            />
+            <Tab.Screen 
+                name = "Lab5" 
+                component = {Lab5}
+                options = {{
+                    tabBarIcon: ({focused}) => (
+                        <Image 
+                            source = {require('../../img/icon5.png')}
                             style = {styles.icon}
                         />
                     ),
