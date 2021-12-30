@@ -12,17 +12,17 @@ import { useSelector} from 'react-redux';
 const Lab4 = () => {
   const color = useSelector(state => state.backgroundColor.value);
   const boxcolor = useSelector(state => state.boxColor.value);
+    return (
+      <SafeAreaView>
+        <SafeAreaView style={[styles.main, {backgroundColor:color}]}>
+          <TouchableOpacity
+            style={[styles.box, {backgroundColor: boxcolor}]}
+          />
+          </SafeAreaView>
+      </SafeAreaView>
+    );
+  };
 
-  return (
-    <SafeAreaView style={[styles.main, {backgroundColor: color}]}>
-      <ScrollView>
-        <TouchableOpacity
-          style={[styles.box, {backgroundColor: boxcolor}]}
-        />
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
 
 const styles = StyleSheet.create({
   main: {

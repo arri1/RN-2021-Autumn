@@ -14,7 +14,9 @@ const styles = StyleSheet.create({
       height: 50,
       borderRadius: 10,
       backgroundColor: '#BB86FC',
-      marginTop: 10
+      marginTop: 10,
+      alignItems: 'center',
+      justifyContent: 'center'
     },
     scroll: {
         margin: 15,
@@ -38,6 +40,10 @@ const styles = StyleSheet.create({
       height: '100%',
       backgroundColor: '#121212'
     },
+    buttonText: {
+      fontSize: 19,
+      color: '#000000'
+    }
 });
 
 const expensiveFunction = () => {
@@ -79,11 +85,11 @@ const Lab3 = () => {
 
         <TouchableOpacity style={styles.button} 
           onPress={onPressHandler}
-        />
+        ><Text style={styles.buttonText}>Slow</Text></TouchableOpacity>
         
         <TouchableOpacity style={styles.button} 
           onPress={onPressHandlerSecond}
-        />
+        ><Text style={styles.buttonText}>Fast</Text></TouchableOpacity>
       </ScrollView>
     </View>
   );

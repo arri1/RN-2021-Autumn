@@ -3,15 +3,21 @@ import {NavigationContainer} from '@react-navigation/native';
 import TabNavigator from './components/routers/TabNavigator';
 import { Provider } from "react-redux";
 import store from './store/index';
+import client from './components/apollo';
+import {ApolloProvider} from '@apollo/client';
+import NavigationStack from './components/routers/Lab5';
+import { AsyncStorage } from '@react-native-async-storage/async-storage';
+
 
 const App = () => {
-  return (
-    <Provider store={store}>
-      <NavigationContainer>
-        <TabNavigator />
-      </NavigationContainer>
-    </Provider>
-  );
+    return (
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+          <NavigationContainer><NavigationStack/>
+          </NavigationContainer>
+        </Provider>
+      </ApolloProvider>
+    );
 };
 
 export default App;
