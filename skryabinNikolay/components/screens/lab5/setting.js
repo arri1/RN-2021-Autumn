@@ -51,8 +51,8 @@ const onUpdate = () => {
   updateUser({
     variables: {
       data: {
-        group: {set: group},
         name: {set: name},
+        password: {set: password},
       },
     },
   });
@@ -95,10 +95,10 @@ return (
             placeholder={''}
             style={[styles.inputText, styles.text, styles.textInputStyle]}
           />
-          <Text style={styles.ConText}>Группу:</Text>
+          <Text style={styles.ConText}>Пароль:</Text>
           <TextInput
-            onChangeText={onChangeGroup}
-            value={group}
+            onChangeText={onChangePassword}
+            value={password}
             theme={textInputTheme}
             placeholder={''}
             style={[styles.inputText, styles.text, styles.textInputStyle]}
