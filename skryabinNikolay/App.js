@@ -10,9 +10,9 @@ const App = () => {
   return (
     <ApolloProvider client={client}>
       <Provider store={store}>
-      <NavigationContainer>
-          <RootNavigator />
-      </NavigationContainer>
+      	<NavigationContainer>
+          <RootNavigator/>
+      	</NavigationContainer>
       </Provider>
    </ApolloProvider>
   );
