@@ -1,8 +1,17 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity} from "react-native";
 import LinearGradient from 'react-native-linear-gradient';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useQuery, useMutation} from "@apollo/client"
+import {USER_NAME} from "./graphQL/query";
 
 export default Main = ({navigation}) => {
+    const {client} = useQuery(USER_NAME);
+    const  exitAcc = async () => {
+        await AsyncStorage.clear();  
+        client.clearStore();   
+        navigation.navigate("firstscreen");  
+    }
     return (      
         <LinearGradient colors={['#4A90E0', '#4BFAF1']} style={styles.mainPanel}>  
             <Text style={styles.textM}>Меню заданий</Text>  
@@ -17,6 +26,12 @@ export default Main = ({navigation}) => {
             </TouchableOpacity>
             <TouchableOpacity onPress={()=> navigation.navigate("lab4")}>
                 <Text style={styles.btn}>Задание 4</Text>
+            </TouchableOpacity> 
+            <TouchableOpacity onPress={()=> navigation.navigate("lab5")}>
+                <Text style={styles.btn}>Задание 5</Text>
+            </TouchableOpacity>  
+            <TouchableOpacity onPress={exitAcc}>
+                <Text style={styles.btn}>Выйти</Text>
             </TouchableOpacity>     
         </LinearGradient>
     );
