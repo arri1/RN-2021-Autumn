@@ -9,6 +9,7 @@ import {ApolloProvider} from '@apollo/client';
 import SignIn from './components/screens/signIn';
 import SignUp from './components/screens/reg';
 import FirstScreen from './components/screens/firstScreen';
+import AddPost from './components/screens/addPost';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -31,6 +32,11 @@ const App = () => {
               name="SignUp"
               component={SignUp}
               options={{title: 'Регистрация'}}
+            />
+            <Stack.Screen
+              name="AddPost"
+              component={AddPost}
+              options={{title: 'Добавить пост'}}
             />
             <Stack.Screen
               name="Tabs"

@@ -136,6 +136,11 @@ const Lab5 = ({navigation}) => {
                 <Text style={styles.textBtn}>Изменить пароль</Text>
               </TouchableOpacity>
               <TouchableOpacity
+                style={styles.item}
+                onPress={() => navigation.navigate('Добавить пост')}>
+                <Text style={styles.text}>Добавить пост</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
                 style={[styles.btn, {marginTop: 50, backgroundColor: 'brown'}]}
                 onPress={logOut}>
                 <Text style={styles.textBtn}>Выйти</Text>
