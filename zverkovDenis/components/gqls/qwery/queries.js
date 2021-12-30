@@ -13,7 +13,11 @@ export const GET_USER = gql`
 
 export const GET_POSTS = gql`
   query {
-    findManyPost(where: {text: {not: {equals: ""}}}) {
+    findManyPost(
+      where: {
+        AND: {user: {name: {not: {equals: null}}}, text: {not: {equals: ""}}}
+      }
+    ) {
       id
       title
       text

@@ -5,16 +5,23 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  ToastAndroid,
   StyleSheet,
 } from 'react-native';
 import {FIND_MANY_POST, USER} from '../../gqls/qwery/queries';
-import {CREATE_ONE_POST, DELETE_ONE_POST} from '../../gqls/qwery/mutations';
+import {
+  CREATE_ONE_POST,
+  DELETE_ONE_POST,
+  UPDATE_ONE_POST,
+} from '../../gqls/qwery/mutations';
 import LinearGradient from 'react-native-linear-gradient';
 import {useQuery, useMutation} from '@apollo/client';
 
 const MyPosts = props => {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
+  const [titleUpdate, setTitleUpdate] = useState('');
+  const [textUpdate, setTextUpdate] = useState('');
   const [postId, setPostId] = useState('');
 
   const [isPostEdit, setPostEdit] = useState(false);
@@ -77,8 +84,49 @@ const MyPosts = props => {
     });
   };
 
-  const selectPost = id => {
+  const [updPost] = useMutation(UPDATE_ONE_POST, {
+    onCompleted: ({updateOnePost}) => {
+      console.log(' POST EDIT!');
+      ToastAndroid.show('Redacted !', ToastAndroid.SHORT);
+    },
+    onError: ({message}) => {
+      console.log('DONT POST EDIT!');
+      console.log(message);
+    },
+  });
+
+  const postEditValidate = () => {
+    if (titleUpdate === '') {
+      ToastAndroid.show('Title empty !', ToastAndroid.SHORT);
+      return false;
+    }
+    if (textUpdate === '') {
+      ToastAndroid.show('Text empty !', ToastAndroid.SHORT);
+      return false;
+    }
+    return true;
+  };
+
+  const updatePost = () => {
+    if (postEditValidate()) {
+      updPost({
+        variables: {
+          where: {
+            id: postId,
+          },
+          data: {
+            title: {set: titleUpdate},
+            text: {set: textUpdate},
+          },
+        },
+      });
+    }
+  };
+
+  const selectPost = (id, title, text) => {
     setPostId(id);
+    setTitleUpdate(title);
+    setTextUpdate(text);
     setPostEdit(true);
   };
 
@@ -86,29 +134,27 @@ const MyPosts = props => {
     <LinearGradient style={styles.main} colors={['#6991F5', '#ffffff']}>
       <View>
         {!isPostEdit ? (
-          <View>
+          <View style={[styles.viewBox]}>
             <View style={[styles.inputText, {marginTop: 30}]}>
               <TextInput
                 style={styles.text}
                 placeholder="Title"
-                onChangeText={text => setTitle(text)}>
-                {title}
-              </TextInput>
+                onChangeText={setTitle}
+                value={title}
+              />
             </View>
 
             <View style={styles.inputText}>
               <TextInput
                 style={styles.text}
                 placeholder="Text"
-                onChangeText={text => setText(text)}>
-                {text}
-              </TextInput>
+                onChangeText={setText}
+                value={text}
+              />
             </View>
 
-            <TouchableOpacity style={styles.addButton}>
-              <Text style={styles.text} onPress={createPost}>
-                Add Post
-              </Text>
+            <TouchableOpacity style={styles.addButton} onPress={createPost}>
+              <Text style={styles.text}>Add Post</Text>
             </TouchableOpacity>
 
             <ScrollView style={styles.postsViev}>
@@ -118,7 +164,9 @@ const MyPosts = props => {
                     <TouchableOpacity
                       key={item.id}
                       style={styles.post}
-                      onPress={() => selectPost(item.id)}>
+                      onPress={() =>
+                        selectPost(item.id, item.title, item.text)
+                      }>
                       <Text style={styles.text}>{item.title}</Text>
                     </TouchableOpacity>
                   );
@@ -133,37 +181,31 @@ const MyPosts = props => {
             <View style={[styles.inputText, {marginTop: 30}]}>
               <TextInput
                 style={styles.text}
-                placeholder="Title"
-                onChangeText={text => setTitle(text)}>
-                {title}
-              </TextInput>
+                onChangeText={setTitleUpdate}
+                value={titleUpdate}
+              />
             </View>
 
             <View style={styles.inputText}>
               <TextInput
                 style={styles.text}
-                placeholder="Text"
-                onChangeText={text => setText(text)}>
-                {text}
-              </TextInput>
+                onChangeText={setTextUpdate}
+                value={textUpdate}
+              />
             </View>
 
-            <TouchableOpacity style={styles.addButton}>
-              <Text style={styles.text} onPress={() => setPostEdit(false)}>
-                Update Post
-              </Text>
+            <TouchableOpacity style={styles.addButton} onPress={updatePost}>
+              <Text style={styles.text}>Update Post</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.addButton}>
-              <Text style={styles.text} onPress={() => setPostEdit(false)}>
-                Cansel
-              </Text>
+            <TouchableOpacity
+              style={styles.addButton}
+              onPress={() => setPostEdit(false)}>
+              <Text style={styles.text}>Cansel</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.addButton}>
-              <Text style={styles.text} onPress={deletePost}>
-                Delite post
-              </Text>
+            <TouchableOpacity style={styles.addButton} onPress={deletePost}>
+              <Text style={styles.text}>Delite post</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -185,6 +227,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
+  viewBox: {
+    height: '100%',
+    marginHorizontal: 10,
+  },
+
   text: {
     fontSize: 15,
   },
@@ -197,11 +244,13 @@ const styles = StyleSheet.create({
     margin: 5,
     marginTop: 10,
   },
+
   postsViev: {
     fontSize: 18,
     marginTop: 5,
     padding: 10,
   },
+
   post: {
     backgroundColor: '#ffffff',
     fontSize: 18,

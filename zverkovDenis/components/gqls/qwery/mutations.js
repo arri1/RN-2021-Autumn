@@ -57,3 +57,12 @@ export const DELETE_ONE_POST = gql`
     }
   }
 `;
+
+export const UPDATE_ONE_POST = gql`
+  mutation ($where: PostWhereUniqueInput!, $data: PostUpdateInput!) {
+    updateOnePost(where: $where, data: $data) {
+      title
+      text
+    }
+  }
+`;

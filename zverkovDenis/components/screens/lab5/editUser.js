@@ -79,7 +79,7 @@ const SignIn = ({navigation}) => {
     AsyncStorage.clear();
 
     apollo.resetStore().catch(() => {
-      console.log('asd');
+      console.log('Out');
     });
     navigation.replace('SignIn');
   };
@@ -161,9 +161,7 @@ const SignIn = ({navigation}) => {
                 onPress={updatePass}>
                 <Text style={styles.text}>Update password</Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.signInButton}
-                onPress={() => onCancel()}>
+              <TouchableOpacity style={styles.signInButton} onPress={onCancel}>
                 <Text style={styles.text}>Cancel</Text>
               </TouchableOpacity>
             </View>
