@@ -5,6 +5,7 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  ToastAndroid,
 } from 'react-native';
 import {useMutation} from '@apollo/client';
 import LinearGradient from 'react-native-linear-gradient';
@@ -12,9 +13,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {REG} from '../../gqls/qwery/mutations';
 
 const SingUp = ({navigation}) => {
-  const [login, onChangeLogin] = useState(null);
-  const [password, onChangePassword] = useState(null);
-  const [name, onChangeName] = useState(null);
+  const [login, onChangeLogin] = useState('');
+  const [password, onChangePassword] = useState('');
+  const [name, onChangeName] = useState('');
   const [registrated, setRegistrated] = useState(false);
 
   const [registration] = useMutation(REG, {
@@ -23,13 +24,32 @@ const SingUp = ({navigation}) => {
     },
   });
 
-  const onRegistration = () => {
-    registration({
-      variables: {login, password, name},
-    });
-
-    AsyncStorage.clear();
+  const validate = () => {
+    if (name === '') {
+      ToastAndroid.show('Name field empty', ToastAndroid.SHORT);
+      return false;
+    }
+    if (login === '') {
+      ToastAndroid.show('Login field empty', ToastAndroid.SHORT);
+      return false;
+    }
+    if (password === '') {
+      ToastAndroid.show('Password field empty', ToastAndroid.SHORT);
+      return false;
+    }
+    return true;
   };
+
+  const onRegistration = () => {
+    if (validate()) {
+      registration({
+        variables: {login, password, name},
+      });
+
+      AsyncStorage.clear();
+    }
+  };
+
   return (
     <LinearGradient colors={['#6991F5', '#ffffff']}>
       {!registrated && (
@@ -83,7 +103,7 @@ const SingUp = ({navigation}) => {
 const styles = StyleSheet.create({
   viewBox: {
     height: '100%',
-    margin: 10,
+    marginHorizontal: 10,
     justifyContent: 'center',
   },
 

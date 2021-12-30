@@ -3,6 +3,7 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import {View, StyleSheet} from 'react-native';
 import UserProfile from '../screens/lab5/editUser';
 import Posts from '../screens/lab5/posts';
+import MyPosts from '../screens/lab5/myPosts';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -19,6 +20,7 @@ const TopTabNavigatorMain = () => {
           },
         }}>
         <Tab.Screen name="Posts" component={Posts} />
+        <Tab.Screen name="MyPosts" component={MyPosts} />
         <Tab.Screen name="Profile" component={UserProfile} />
       </Tab.Navigator>
     </View>

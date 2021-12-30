@@ -28,7 +28,10 @@ const TabNavigator = () => {
   }, [dispatch]);
 
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarHideOnKeyboard: true,
+      }}>
       <Tab.Screen
         name="Lab1"
         component={Lab1}
