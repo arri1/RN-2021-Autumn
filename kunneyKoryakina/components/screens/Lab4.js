@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
     text: {
       marginTop: 10,
       marginLeft: 10,
+      color: 'black',
     },
     email: {
       marginTop: 10,

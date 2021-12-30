@@ -1,13 +1,16 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {View, Image, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet, Text} from 'react-native';
 import React, {useEffect} from 'react';
 import Lab1 from '../screens/Lab1';
 import Lab2 from '../screens/Lab2';
 import Lab3 from '../screens/Lab3';
 import Lab4 from '../screens/Lab4';
+import Lab5 from '../screens/Lab5';
 import axios from 'axios';
 import {useDispatch} from 'react-redux';
 import {loadItems} from '../../store/tasks';
+import Post from '../screens/posts';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -95,7 +98,37 @@ const TabNavigator = () => {
               },
             }}
           />
-      </Tab.Navigator>
+          <Tab.Screen
+            name="Lab5"
+            component={Lab5}
+            options={{
+              headerShown: false,
+              tabBarIcon: ({focused}) => {
+                return (
+                  <Image source={require('./NavigatorImg/5.png')} style={styles.icon2}/>
+                );
+                },
+            }}
+          />
+          <Tab.Screen 
+            name = "Lab 5 posts" 
+            component = {Post} 
+            options = {{
+              tabBarIcon: ({focused}) => (
+                <View style = {{alignItems: 'center', justifyContent: 'center', top: 3}}>
+                  <Image 
+                    source = {require('./NavigatorImg/5.png')}
+                    resizeMode = "contain"
+                    style={{width: 40, height: 40,}}
+                  />
+                  <Text style = {{color: focused ?'#2F88F0' : '#27303E', fontSize: 12}}>
+                      posts
+                  </Text>
+                </View>
+              ),
+             }}
+          />      
+       </Tab.Navigator>
     );
 };
 
@@ -103,6 +136,10 @@ const styles = StyleSheet.create({
   icon: {
     width: 35,
     height: 35,
+  },
+  icon2: {
+    width: 100,
+    height: 100,
   },
 });
 
