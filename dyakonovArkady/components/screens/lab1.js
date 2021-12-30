@@ -22,6 +22,8 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   button:{
+    alignContent: 'center',
+    justifyContent: 'center',
     height: 100,
     margin: 100,
     marginTop: '50%',
@@ -33,8 +35,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 18,
-    marginTop: '16%',
-    width: 200,
     color: '#FFFFFF'
   },
 });

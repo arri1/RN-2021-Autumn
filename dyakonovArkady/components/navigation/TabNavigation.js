@@ -6,14 +6,17 @@ import Lab1 from '../screens/lab1';
 import Lab2 from '../screens/lab2';
 import Lab3 from '../screens/lab3';
 import Lab4 from '../screens/lab4';
+import Lab5 from '../screens/lab5/lab5';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
     return(
         <Tab.Navigator
+            
             screenOptions = {{
                 tabBarShowLabel: false,
+                "tabBarHideOnKeyboard":"true",
                 tabBarStyle: {
                     position: 'absolute',
                     bottom: 10,
@@ -33,7 +36,7 @@ const TabNavigation = () => {
                     tabBarIcon: ({focused}) => (
                         <View style = {{alignItems: 'center', justifyContent: 'center', top: 5}}>
                             <Image 
-                                source = {require('../tabIcons/L1.png')}
+                                source = {require('../../tabIcons/L1.png')}
                                 resizeMode = "contain"
                                 style={{
                                     width: 30,
@@ -56,7 +59,7 @@ const TabNavigation = () => {
                     tabBarIcon: ({focused}) => (
                         <View style = {{alignItems: 'center', justifyContent: 'center', top: 5}}>
                             <Image 
-                                source = {require('../tabIcons/L2.png')}
+                                source = {require('../../tabIcons/L2.png')}
                                 resizeMode = "contain"
                                 style={{
                                     width: 30,
@@ -79,7 +82,7 @@ const TabNavigation = () => {
                     tabBarIcon: ({focused}) => (
                         <View style = {{alignItems: 'center', justifyContent: 'center', top: 5}}>
                             <Image 
-                                source = {require('../tabIcons/L3.png')}
+                                source = {require('../../tabIcons/L3.png')}
                                 resizeMode = "contain"
                                 style={{
                                     width: 30,
@@ -102,7 +105,7 @@ const TabNavigation = () => {
                     tabBarIcon: ({focused}) => (
                         <View style = {{alignItems: 'center', justifyContent: 'center', top: 5}}>
                             <Image 
-                                source = {require('../tabIcons/L4.png')}
+                                source = {require('../../tabIcons/L4.png')}
                                 resizeMode = "contain"
                                 style={{
                                     width: 30,
@@ -118,7 +121,31 @@ const TabNavigation = () => {
                 }}
             />
 
+            <Tab.Screen 
+                name = "Lab 5" 
+                component = {Lab5} 
+                options = {{
+                    tabBarIcon: ({focused}) => (
+                        <View style = {{alignItems: 'center', justifyContent: 'center', top: 5}}>
+                            <Image 
+                                source = {require('../../tabIcons/L5.png')}
+                                resizeMode = "contain"
+                                style={{
+                                    width: 30,
+                                    height: 20,
+                                    tintColor: focused ?'#53C1DE' : '#748C94'
+                                }}
+                            />
+                            <Text style = {{color: focused ?'#53C1DE' : '#748C94', fontSize: 12}}>
+                                    LAB 5
+                            </Text>
+                        </View>
+                    ),
+                }}
+            />
+
         </Tab.Navigator>
+        
     );
 }
 

@@ -4,7 +4,7 @@ import { SafeAreaView, View, Text, ActivityIndicator, StyleSheet, ScrollView, To
 import axios from 'axios';
 
 import {useDispatch, useSelector} from 'react-redux';
-import {loadItems, checkItem} from '../store/data';
+import {loadItems, checkItem} from '../../store/data';
 
 const Lab2 = () => {
   const data = useSelector(state => state.data.value);
