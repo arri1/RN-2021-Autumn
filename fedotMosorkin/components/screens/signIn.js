@@ -55,6 +55,7 @@ const SignIn = ({navigation}) => {
         <Text style={styles.labelText}>Пароль:</Text>
         <TextInput
           onChangeText={text => setPassword(text)}
+          secureTextEntry={true}
           value={password}
           style={[styles.inputText, styles.text]}
         />
