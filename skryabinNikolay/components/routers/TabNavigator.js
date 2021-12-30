@@ -14,6 +14,7 @@ const TabNavigation = () => {
     const isLoggedIn = useSelector((state) => state.isLoggedIn)
     return(
         <Tab.Navigator
+            tabBarOptions = {{keyboardHidesTabBar: true}}    
             screenOptions = {{
                 tabBarShowLabel: false,
                 tabBarStyle: {
@@ -24,6 +25,7 @@ const TabNavigation = () => {
                     elevation: 0,
                     borderRadius: 10,
                     height: 70,
+                    flex: 1,
                 }
             }}
         >
