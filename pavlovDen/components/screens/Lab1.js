@@ -1,30 +1,49 @@
 import React, { useState } from 'react';
-import { StyleSheet, Button, SafeAreaView } from 'react-native';
-
-const colArr = ["red", "orange", "yellow", "green", "blue", "indigo", "violet", "white"];
-const Colour = () => {
-    colNum = Math.floor(Math.random() * colArr.length);
-    return colArr[colNum];
-};
+import {
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  Text
+} from 'react-native';
 
 const Lab1 = () => {
-    const [backColor, setColor] = useState(Colour())
-    return (
-        <SafeAreaView style={{ ...styles.main, backgroundColor: backColor }}>
-            <Button
-                title="TAP ME"
-                onPress={() => setColor(Colour())}
-            />
-        </SafeAreaView>
-    );
+  const [color, setColor] = useState('#5CBDDB');
+
+  return (
+    <SafeAreaView style={[styles.main, {backgroundColor: color}]}>
+      <ScrollView>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => setColor( '#' + Math.floor(Math.random()*12581375).toString(20) )}>
+          <Text style = {styles.bText}>Tap Me</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({
-    main: {
-        height: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
+  main:{
+    height: '100%'
+  },
+  button: {
+      height: 50,
+      margin: 150,
+      backgroundColor: '#484f58',
+      borderRadius: 15,
+      marginTop: '50%',
+  },
+  bText:
+  {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 20,
+    marginTop: '10%',
+    color: '#FFFFFF',
+
+
+  },
 });
 
 export default Lab1;
