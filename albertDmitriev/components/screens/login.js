@@ -5,6 +5,8 @@ import {
   TouchableOpacity,
   StyleSheet,
   TextInput,
+  View,
+  Alert,
 } from 'react-native';
 import {AUTH} from '../gqls/users/mutations';
 import {useMutation} from '@apollo/client';
@@ -28,18 +30,22 @@ const Login = ({navigation}) => {
       navigation.replace('TabNavigator');
     },
     onError: ({message}) => {
-      console.log(message);
-      if (message === 'GraphQL error: Incorrect password') {
-        showMessage({
-          message: 'Неверен пароль',
-          type: 'danger',
-        });
+      console.log(message + '1111111111');
+      if (message === 'Incorrect password') {
+        Alert.alert('Ошибка', 'Неверный пароль', [
+          {
+            text: 'Ok',
+            style: 'cancel',
+          },
+        ]);
         return null;
       }
-      showMessage({
-        message: 'Что то пошло не так',
-        type: 'danger',
-      });
+      Alert.alert('Ошибка', 'Что-то пошло не так', [
+        {
+          text: 'Ok',
+          style: 'cancel',
+        },
+      ]);
     },
   });
 
@@ -51,23 +57,25 @@ const Login = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Login page</Text>
-      <TextInput
-        style={styles.inputField}
-        value={login}
-        onChangeText={text => setLogin(text)}
-        placeholder="Введите логин"
-      />
-      <TextInput
-        style={styles.inputField}
-        value={password}
-        secureTextEntry={true}
-        onChangeText={text => setPassword(text)}
-        placeholder="Введите пароль"
-      />
-      <TouchableOpacity style={styles.logBtn} onPress={onSignInBtnClicked}>
-        <Text>Войти</Text>
-      </TouchableOpacity>
+      <View style={styles.loginForm}>
+        <Text style={styles.title}>Авторизация</Text>
+        <TextInput
+          style={styles.inputField}
+          value={login}
+          onChangeText={text => setLogin(text)}
+          placeholder="Введите логин"
+        />
+        <TextInput
+          style={styles.inputField}
+          value={password}
+          secureTextEntry={true}
+          onChangeText={text => setPassword(text)}
+          placeholder="Введите пароль"
+        />
+        <TouchableOpacity style={styles.logBtn} onPress={onSignInBtnClicked}>
+          <Text style={styles.logBtnText}>Войти</Text>
+        </TouchableOpacity>
+      </View>
       <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
         <Text style={{textDecorationLine: 'underline', marginTop: 50}}>
           Нет аккаунта? Зарегистрируйтесь
@@ -84,16 +92,39 @@ const Login = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {alignItems: 'center', flex: 1, margin: 15},
-  logBtn: {
-    backgroundColor: 'green',
+  loginForm: {
+    backgroundColor: 'white',
     alignItems: 'center',
-    paddingVertical: 20,
-    paddingHorizontal: 30,
+    width: '100%',
+    borderRadius: 10,
+    paddingHorizontal: 50,
+    paddingBottom: 30,
+  },
+  title: {
+    fontWeight: 'bold',
+    color: 'black',
+    marginTop: 20,
+    marginBottom: 10,
+    fontSize: 26,
+  },
+  logBtn: {
+    backgroundColor: '#3B71F3',
+    alignItems: 'center',
+    marginTop: 20,
+    marginBottom: 5,
+    padding: 15,
+    borderRadius: 5,
+    width: '80%',
+  },
+  logBtnText: {
+    color: 'white',
+    fontWeight: 'bold',
   },
   inputField: {
-    backgroundColor: 'white',
-    width: 200,
+    backgroundColor: '#E6F5FF',
+    width: '80%',
     marginVertical: 10,
+    borderRadius: 5,
   },
 });
 

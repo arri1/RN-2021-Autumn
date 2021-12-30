@@ -132,9 +132,16 @@ const Profile = ({navigation}) => {
           {!updateMode && (
             <View style={styles.userInfo}>
               <View style={styles.userInfoInner}>
-                <Text style={styles.userInfoInnerString}>Логин: {login}</Text>
-                <Text style={styles.userInfoInnerString}>Имя: {name}</Text>
-                <Text style={styles.userInfoInnerString}>Группа: {group}</Text>
+                <View style={styles.userInfoInnerLeft}>
+                  <Text style={[styles.userInfoInnerLeftString]}>Логин: </Text>
+                  <Text style={styles.userInfoInnerLeftString}>Имя: </Text>
+                  <Text style={styles.userInfoInnerLeftString}>Группа: </Text>
+                </View>
+                <View style={styles.userInfoInnerRight}>
+                  <Text style={styles.userInfoInnerRightString}>{login}</Text>
+                  <Text style={styles.userInfoInnerRightString}>{name}</Text>
+                  <Text style={styles.userInfoInnerRightString}>{group}</Text>
+                </View>
               </View>
               <TouchableOpacity style={styles.btn} onPress={changeMode}>
                 <Text style={{color: 'white'}}>Редактировать</Text>
@@ -154,7 +161,7 @@ const Profile = ({navigation}) => {
             </View>
           )}
           {updateMode && (
-            <View>
+            <View style={styles.userInfo}>
               <Text>Логин:</Text>
               <TextInput
                 value={login}
@@ -186,7 +193,7 @@ const Profile = ({navigation}) => {
         </View>
       )}
       {passUpdateMode && (
-        <View>
+        <View style={styles.userInfo}>
           <Text>Введите новый пароль:</Text>
           <TextInput
             style={styles.txtInput}
@@ -200,12 +207,12 @@ const Profile = ({navigation}) => {
             onChangeText={text => setConfirmPassword(text)}
           />
           <TouchableOpacity style={styles.btn} onPress={changePass}>
-            <Text>Изменить пароль</Text>
+            <Text style={{color: 'white'}}>Изменить пароль</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btn}
             onPress={() => setPassUpdateMode(false)}>
-            <Text>Отмена</Text>
+            <Text style={{color: 'white'}}>Отмена</Text>
           </TouchableOpacity>
         </View>
       )}
@@ -234,13 +241,25 @@ const styles = StyleSheet.create({
     width: 300,
   },
   userInfoInner: {
+    flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
     borderRadius: 10,
     width: 300,
     paddingTop: 10,
   },
-  userInfoInnerString: {
+  userInfoInnerLeft: {
+    flex: 1,
+  },
+  userInfoInnerRight: {flex: 1},
+  userInfoInnerLeftString: {
+    textAlign: 'right',
+    color: 'black',
+    fontSize: 20,
+    marginBottom: 15,
+  },
+  userInfoInnerRightString: {
+    textAlign: 'left',
     color: 'black',
     fontSize: 20,
     marginBottom: 15,
@@ -251,10 +270,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   btn: {
-    backgroundColor: 'gray',
-    padding: 10,
-    marginTop: 20,
+    backgroundColor: '#3B71F3',
     alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 5,
+    padding: 15,
+    borderRadius: 5,
+    width: '80%',
   },
 });
 
