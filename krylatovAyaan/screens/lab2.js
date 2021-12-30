@@ -6,30 +6,43 @@ import {
   StyleSheet,
   ScrollView,
   SafeAreaView,
+  TouchableOpacity,
 } from 'react-native';
 import axios from 'axios';
+import {useDispatch, useSelector} from 'react-redux';
+import {loadItems, checkItem} from '../posts/posData';
 
 const Lab2 = () => {
-  const [data, setData] = useState([]);
+  const data = useSelector(state => state.posts.value);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    axios
-      .get('https://jsonplaceholder.typicode.com/users/1/todos')
-      .then(({data: newData}) => {
-        setData(newData);
-      })
-      .catch(() => {});
-  }, []);
-
+    if (dispatch) {
+      axios
+        .get('https://jsonplaceholder.typicode.com/todos')
+        .then(({data}) => {
+          dispatch(loadItems(data));
+        })
+        .catch(() => {});
+    }
+  }, [dispatch]);
   const Todo = () => {
     return (
       <ScrollView>
         {data.map(item => {
           return (
-            <View key={item.id} style={styles.item}>
+            <TouchableOpacity
+              key={item.id}
+              style={[
+                styles.item,
+                item.checked ? {backgroundColor: '#476DD5'} : undefined,
+              ]}
+              onPress={() => {
+                dispatch(checkItem(item.id));
+              }}>
               <Text style={styles.title}>{item.title}</Text>
               <Text style={styles.text}>{item.body}</Text>
-            </View>
+            </TouchableOpacity>
           );
         })}
       </ScrollView>
@@ -57,15 +70,15 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     backgroundColor: '#FFBA73',
     borderRadius: 10,
+    margin: 10,
   },
   title: {
-    fontSize: 17,
-    color: 'black',
+    left: 5,
+    fontSize: 12,
     fontFamily: 'Gotham pro',
     opacity: 1,
   },
   text: {
-    color: 'black',
     fontFamily: 'Roboto',
   },
 });
