@@ -4,6 +4,7 @@ import Lab1 from '../screens/lab1';
 import Lab3 from '../screens/lab3';
 import Lab2StackNavigator from './Lab2StackNavigator';
 import Lab4 from '../screens/lab4';
+import Profile from '../screens/profile';
 import AntDesignIcons from 'react-native-vector-icons/AntDesign';
 import {useDispatch} from 'react-redux';
 import {loadPosts} from '../../redux/postSlice';
@@ -61,7 +62,17 @@ const TabNavigator = () => {
         options={{
           tabBarLabel: 'Lab 4',
           tabBarIcon: ({color, size}) => (
-            <AntDesignIcons name="save" color={color} size={size} />
+            <AntDesignIcons name="star" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarLabel: 'Профиль',
+          tabBarIcon: ({color, size}) => (
+            <AntDesignIcons name="user" color={color} size={size} />
           ),
         }}
       />

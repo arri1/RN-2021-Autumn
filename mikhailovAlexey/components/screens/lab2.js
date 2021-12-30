@@ -1,25 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, ScrollView } from 'react-native';
-import axios from 'axios';
+import React from 'react';
+import {
+  View,
+  Text,
+  ActivityIndicator,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkItem } from '../../store/tasks';
 
 import styles from '../styles/styles';
 
 const Lab2 = function () {
-  const [persons, setPersons] = useState([]);
-
-  useEffect(() => {
-    axios.get('https://jsonplaceholder.typicode.com/users').then((res) => {
-      const per = res.data;
-      setPersons(per);
-    }).catch(() => {});
-  });
-
-  return (
-    <ScrollView>
-      <View style={[styles.container, styles.containerBackgroundColor]}>
-        <View style={{ height: 10 }} />
-        {persons.map((item) => (
-          <View key={item.id} style={styles.boxSize}>
+  const data = useSelector((state) => state.data.value);
+  const dispatch = useDispatch();
+  const content = () => (
+    <View style={[styles.container]}>
+      <ScrollView style={styles.scroll}>
+        {data.map((item) => (
+          <TouchableOpacity
+            key={item.id}
+            style={[
+              styles.boxSize,
+              item.checked ? { backgroundColor: '#2C2B2B' } : undefined,
+            ]}
+            onPress={() => {
+              dispatch(checkItem(item.id));
+            }}
+          >
             <Text style={styles.boxTextStyle}>
               Name :
               {item.name}
@@ -33,13 +41,19 @@ const Lab2 = function () {
               {item.website}
             </Text>
             <Text style={styles.boxTextStyle}>
-              Company :
-              { item.company.name}
+              Phone :
+              {item.phone }
             </Text>
-          </View>
+          </TouchableOpacity>
         ))}
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
+  );
+
+  return (
+    <View style={styles.container}>
+      {data ? content() : <ActivityIndicator color="red" />}
+    </View>
   );
 };
 

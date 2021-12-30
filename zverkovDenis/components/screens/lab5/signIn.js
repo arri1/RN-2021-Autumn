@@ -5,6 +5,7 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  ToastAndroid,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LinearGradient from 'react-native-linear-gradient';
@@ -21,6 +22,14 @@ const SignIn = ({navigation}) => {
 
       await AsyncStorage.setItem('token', authUser.token);
       navigation.replace('TabNavigator');
+    },
+    onError: ({message}) => {
+      console.log(message);
+      if (message === 'Incorrect password') {
+        ToastAndroid.show('Incorrect password', ToastAndroid.SHORT);
+        return null;
+      }
+      ToastAndroid.show('Error', ToastAndroid.SHORT);
     },
   });
 
@@ -71,7 +80,7 @@ const SignIn = ({navigation}) => {
 const styles = StyleSheet.create({
   viewBox: {
     height: '100%',
-    margin: 10,
+    marginHorizontal: 10,
     justifyContent: 'center',
   },
 

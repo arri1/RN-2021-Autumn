@@ -31,6 +31,7 @@ const RegUser = ({navigation}) => {
     <View style={styles.main}>
       {!registrated && (
         <View style={styles.viewBox}>
+          <Text style={styles.title}>Registration</Text>
           <View style={styles.viewInput}>
             <Text style={styles.labelText}>Name:</Text>
             <TextInput
@@ -53,25 +54,41 @@ const RegUser = ({navigation}) => {
             <TextInput
               onChangeText={onChangePassword}
               value={password}
-              style={[styles.inputText, styles.text]}
+              style={[styles.inputText, styles.text, {width: '70.5%'}]}
             />
           </View>
 
           <TouchableOpacity style={styles.button} onPress={onRegistration}>
             <Text style={styles.text}>Register</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              navigation.push('Authorization');
+            }}>
+            <Text style={styles.text}>Authorization</Text>
+          </TouchableOpacity>
         </View>
       )}
       {!!registrated && (
-        <View style={{alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={styles.labelText}>
+        <View style={styles.viewBox}>
+          <Text style={[styles.labelText, {textAlign: 'center'}]}>
             {name}, you have successfully registered!
           </Text>
-          <Image
-            source={require('../../icons/clap.jpg')}
-            resizeMode="contain"
-            style={{marginTop: 15, borderRadius: 20}}
-          />
+          <View style={styles.img}>
+            <Image
+              source={require('../../icons/clap.jpg')}
+              resizeMode="contain"
+              style={{borderRadius: 20}}
+            />
+          </View>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              navigation.push('Authorization');
+            }}>
+            <Text style={styles.text}>Authorization</Text>
+          </TouchableOpacity>
         </View>
       )}
     </View>
@@ -90,32 +107,38 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-
+  title: {
+    marginBottom: 15,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 30,
+    color: '#8F401A',
+  },
   inputText: {
-    width: '71%',
-    paddingLeft: 15,
+    padding: 15,
     borderRadius: 20,
     marginLeft: 15,
-    backgroundColor: '#C27E5D',
+    backgroundColor: '#78C25D',
   },
 
   labelText: {
     fontSize: 20,
     color: '#8F401A',
   },
-
+  img: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 15,
+  },
   text: {
     fontSize: 16,
     color: 'white',
   },
-  textButton: {
-    fontSize: 16,
-    color: 'white',
-  },
   button: {
-    backgroundColor: '#78C25D',
+    backgroundColor: '#C27E5D',
+    marginBottom: 15,
     borderRadius: 20,
-    padding: 10,
+    padding: 15,
     alignItems: 'center',
   },
 });

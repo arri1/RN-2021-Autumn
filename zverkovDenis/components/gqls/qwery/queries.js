@@ -13,7 +13,11 @@ export const GET_USER = gql`
 
 export const GET_POSTS = gql`
   query {
-    findManyPost(where: {text: {not: {equals: ""}}}) {
+    findManyPost(
+      where: {
+        AND: {user: {name: {not: {equals: null}}}, text: {not: {equals: ""}}}
+      }
+    ) {
       id
       title
       text
@@ -32,6 +36,27 @@ export const USER = gql`
       name
       group
       login
+    }
+  }
+`;
+
+export const POST = gql`
+  query {
+    post {
+      id
+      title
+      text
+    }
+  }
+`;
+
+export const FIND_MANY_POST = gql`
+  query ($where: PostWhereInput!) {
+    findManyPost(where: $where) {
+      id
+      title
+      text
+      userId
     }
   }
 `;
