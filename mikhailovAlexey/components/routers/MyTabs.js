@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {
-  Image, StatusBar,
+  Image, StatusBar, TouchableOpacity, Text
 } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import axios from 'axios';
@@ -23,7 +23,7 @@ import noneIcon from '../icons/none.png';
 
 const Tab = createBottomTabNavigator();
 
-const MyTabs = () => {
+const MyTabs = ({navigation}) => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (dispatch) {
@@ -43,13 +43,23 @@ const MyTabs = () => {
         tabBarStyle: styles.navBarBox,
         headerStyle: {
           backgroundColor: '#454545',
-          height: 60,
+          height: 70,
         },
         headerTitleStyle: {
           fontSize: 24,
           fontFamily: 'Montserrat-Regular',
           color: 'white',
         },
+        headerRight: () => (
+            <TouchableOpacity
+              onPress={() => navigation.replace('Login')}
+              style={[styles.button, {marginRight: 10}]}
+            >
+                <Text style={styles.buttonText}>
+                    LOG OUT
+                </Text>
+            </TouchableOpacity>
+          ),
       }}
     >
       <Tab.Screen

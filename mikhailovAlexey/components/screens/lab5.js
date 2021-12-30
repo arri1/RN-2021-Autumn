@@ -41,13 +41,12 @@ const Lab5 = () => {
           </View>
         ))}
       </ScrollView>
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <TextInput onChangeText={(text) => setTxt(text)} placeholder="Write here" placeholderTextColor="#fff" style={styles.textArea} />
-
+      <View style={{ flexDirection: 'row', alignItems: 'center', width: 370}}>
+        <TextInput onChangeText={(text) => setTxt(text)} placeholder="Write here" placeholderTextColor="#fff" style={[styles.textArea, {width: 250}]} />
         <TouchableOpacity
           onPress={search}
           style={[styles.button, {
-            backgroundColor: '#2C2B2B', marginLeft: 20, height: 50, borderWidth: 1, borderColor: 'white',
+            backgroundColor: '#454545', marginLeft: 20, width: 100, height: 50, borderWidth: 1, borderColor: 'white',
           }]}
         >
           <Text style={{ color: 'white' }}>Search</Text>
