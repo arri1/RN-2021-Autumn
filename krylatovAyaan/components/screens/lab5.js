@@ -28,7 +28,7 @@ const Lab5 = ({navigation}) => {
       setId(user.id);
     },
     onError: () => {
-      console.log('Что-то не так');
+      console.log('Все плохо');
     },
   });
 
@@ -46,7 +46,7 @@ const Lab5 = ({navigation}) => {
 
   const [deleteItem] = useMutation(DELETE_ONE_POST, {
     onCompleted: ({deleteOnePost}) => {
-      alert('Пост был удален!');
+      alert('Удален');
     },
     onError: ({message}) => {
       console.log(message);
@@ -66,7 +66,7 @@ const Lab5 = ({navigation}) => {
   return (
     <View style={styles.main}>
       <View style={styles.view1}>
-        <Text style={styles.title}>Welcome, {login}</Text>
+        <Text style={styles.title}>Welcome user:, {login}</Text>
         <TouchableOpacity
           style={styles.editButton}
           onPress={() => navigation.navigate('Update')}>
@@ -102,17 +102,14 @@ const Lab5 = ({navigation}) => {
 
 const styles = StyleSheet.create({
   main: {
-    backgroundColor: '#FFE6DC',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
   title: {
-    fontFamily: 'Montserrat',
     fontSize: 17,
   },
   link: {
-    fontFamily: 'Montserrat',
     fontSize: 17,
     color: 'red',
   },
@@ -122,14 +119,12 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#000',
-    fontFamily: 'Montserrat',
     fontSize: 16,
     margin: 15,
     marginBottom: 0,
   },
   text: {
     color: '#000',
-    fontFamily: 'Montserrat',
     fontSize: 14,
     marginTop: 5,
     margin: 15,
@@ -143,6 +138,7 @@ const styles = StyleSheet.create({
     margin: 24,
     marginBottom: 0,
     alignItems: 'center',
+    borderRadius: 10,
   },
   newPostImage: {
     width: 40,

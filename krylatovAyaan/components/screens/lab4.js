@@ -12,7 +12,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {applyItem, changeTitle} from '../posts/posData';
 
 const Lab4 = () => {
-  const data = useSelector(state => state.posts.value);
+  const data = useSelector(state => state.data.value);
   const selectedItems = data?.filter(item => item.checked);
   const dispatch = useDispatch();
 

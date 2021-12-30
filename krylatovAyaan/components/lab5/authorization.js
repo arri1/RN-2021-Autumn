@@ -73,6 +73,7 @@ const Authorization = ({navigation}) => {
       />
       <TextInput
         style={styles.box}
+        secureTextEntry={true}
         placeholder="Пароль"
         value={password}
         type={password}
@@ -90,7 +91,6 @@ const Authorization = ({navigation}) => {
 
 const styles = StyleSheet.create({
   main: {
-    backgroundColor: '#FFE6DC',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',

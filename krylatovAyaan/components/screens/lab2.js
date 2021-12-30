@@ -13,7 +13,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {loadItems, checkItem} from '../posts/posData';
 
 const Lab2 = () => {
-  const data = useSelector(state => state.posts.value);
+  const data = useSelector(state => state.data.value);
   const dispatch = useDispatch();
 
   useEffect(() => {
