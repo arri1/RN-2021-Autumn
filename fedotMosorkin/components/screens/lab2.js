@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {
   View,
   ActivityIndicator,
@@ -35,11 +35,7 @@ const Lab2 = () => {
     );
   };
 
-  return (
-    <View style={styles.container}>
-      {data ? content() : <ActivityIndicator color={'red'} />}
-    </View>
-  );
+  return <View>{data ? content() : <ActivityIndicator color={'red'} />}</View>;
 };
 
 const styles = StyleSheet.create({
@@ -63,6 +59,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 32,
     marginTop: 20,
+    color: '#FFFFFF',
   },
   text: {
     fontSize: 20,

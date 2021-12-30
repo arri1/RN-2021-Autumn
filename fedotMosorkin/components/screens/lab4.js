@@ -1,11 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   Text,
   StyleSheet,
   View,
-  TextInput,
   TouchableOpacity,
-  Image,
   ScrollView,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
@@ -60,6 +58,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     alignSelf: 'center',
     fontSize: 32,
+    color: '#FFFFFF',
   },
 });
 

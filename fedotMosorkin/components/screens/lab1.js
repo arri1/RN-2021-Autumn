@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
-    margin: 12,
+    margin: 14,
     fontFamily: 'rye',
   },
   textContainer: {
@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
     margin: 18,
     fontFamily: 'rye',
     alignItems: 'center',
-    justifyContent: 'center',
   },
   button: {
     alignSelf: 'center',

@@ -50,17 +50,17 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   button: {
+    alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#34C759',
     borderRadius: 10,
-    width: 121,
-    height: 53,
-    marginLeft: 150,
+    width: 323,
+    height: 100,
     marginBottom: 50,
   },
   text: {
-    fontSize: 15,
+    fontSize: 30,
   },
 });
 
