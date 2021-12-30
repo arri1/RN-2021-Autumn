@@ -15,7 +15,7 @@ const Lab2 = () => {
   });
 
   return (
-    <ScrollView style={styles.from}>
+    <ScrollView>
       {data.map(item => (
         <Text style={styles.item} key={item.id}>
           {item.title}
@@ -27,14 +27,16 @@ const Lab2 = () => {
 
 const styles = StyleSheet.create({
   item: {
-    marginTop: '5%',
-    marginBottom: '0%',
-    margin: '5%',
-    width: '90%',
+    marginTop: 15,
+    marginBottom: 10,
+    margin: 20,
+    width: 350,
     padding: 15,
     height: 50,
-    backgroundColor: '#CCCCFF',
+    backgroundColor: '#E6E6FA',
     fontSize: 15,
+    borderWidth: 2,
+    borderColor: '#444586',
   },
 });
 
