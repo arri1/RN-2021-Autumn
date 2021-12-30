@@ -104,16 +104,19 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: '#E1E4E7',
   },
+  
   viewBox: {
     height: '100%',
     backgroundColor: '#E1E4E7',
   },
+
   viewInput: {
     marginTop: 15,
     marginLeft: 0,
     flexDirection: 'column',
     alignItems: 'center',
   },
+
   inputText: {
     width: '93%',
     paddingLeft: 15,
@@ -131,10 +134,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#FFFFFF',
   },
+
   textButton: {
     fontSize: 16,
     color: '#FFFFFF',
   },
+
   button: {
     backgroundColor: '#000000',
     margin: 15,

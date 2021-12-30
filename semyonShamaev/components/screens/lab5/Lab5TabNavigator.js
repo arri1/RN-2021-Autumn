@@ -31,12 +31,15 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: '#FFFFFF',
   },
+  
   tabBar: {
     backgroundColor: '#AEAEAE',
   },
+
   tabItem: {
     height: 40,
   },
+
   tabLabel: {
     marginVertical: -12,
     color: '#000000',

@@ -107,34 +107,41 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: '#E1E4E7',
   },
+
   viewBox: {
     margin: 15,
   },
+
   viewInput: {
     marginTop: 15,
     flexDirection: 'column',
     alignItems: 'center',
   },
+
   inputText: {
     width: '100%',
-    paddingLeft: 0,
+    paddingLeft: 10,
     borderRadius: 20,
-    marginLeft: 0,
+    marginLeft: 10,
     backgroundColor: '#AEAEAE',
     alignContent: 'flex-start',
   },
+
   labelText: {
     fontSize: 20,
     color: '#000000',
   },
+  
   text: {
     fontSize: 16,
     color: '#FFFFFF',
   },
+
   textButton: {
     fontSize: 16,
     color: '#FFFFFF',
   },
+
   button: {
     backgroundColor: '#000000',
     margin: 15,
