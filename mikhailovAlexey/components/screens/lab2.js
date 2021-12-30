@@ -7,11 +7,11 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkItem } from '../store/tasks';
+import { checkItem } from '../../store/tasks';
 
 import styles from '../styles/styles';
 
-const Lab2 = () => {
+const Lab2 = function () {
   const data = useSelector((state) => state.data.value);
   const dispatch = useDispatch();
   const content = () => (
