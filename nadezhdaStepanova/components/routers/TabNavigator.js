@@ -1,10 +1,11 @@
 import React, {useEffect} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Image} from 'react-native';
+import {View, Image, StyleSheet} from 'react-native';
 import Lab1 from '../screens/Lab1';
 import Lab2 from '../screens/Lab2';
 import Lab3 from '../screens/Lab3';
 import Lab4 from '../screens/Lab4';
+import Lab5 from '../screens/Lab5/Lab5';
 import axios from 'axios';
 import {useDispatch} from 'react-redux';
 import {loadItems} from '../../store/tasks';
@@ -63,7 +64,6 @@ const TabNavigator = () => {
           }}
         />
 
-
       <Tab.Screen
           name="  "
           component={Lab2}
@@ -95,7 +95,6 @@ const TabNavigator = () => {
             },
           }}
         />
-
       <Tab.Screen 
         name="    " 
         component={Lab4}
@@ -111,8 +110,24 @@ const TabNavigator = () => {
           },
         }}
          />
+        <Tab.Screen 
+        name="     " 
+        component={Lab5}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({focused}) => {
+            return (
+              <Image
+              style={{alignItems: 'center', justifyContent: 'center', top: 25 }}
+                source={require('./NavigatorImg/user.png')}
+              />
+            );
+          },
+        }}
+         />
     </Tab.Navigator>
   );
 };
+
 
 export default TabNavigator;

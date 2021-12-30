@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 const Lab1 = () => {
-  const [color, setColor] = useState('#752FB1');
+  const [color, setColor] = useState('#5CBDDB');
 
   return (
     <SafeAreaView style={[styles.main, {backgroundColor: color}]}>
