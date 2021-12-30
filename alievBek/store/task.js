@@ -5,6 +5,7 @@ export const dataSlice = createSlice({
   initialState: {
     value: null,
     loading: false,
+    isLoggedIn: false,
   },
   reducers: {
     loadItems: (state, action) => {
@@ -27,9 +28,12 @@ export const dataSlice = createSlice({
       });
       state.value = newValue;
     },
+    checkLoad: (state, action) => {
+      state.isLoggedIn = action.payload;
+    },
   },
 });
 
-export const {loadItems, checkItem} = dataSlice.actions;
+export const {loadItems, checkItem, checkLoad} = dataSlice.actions;
 
 export default dataSlice.reducer;
