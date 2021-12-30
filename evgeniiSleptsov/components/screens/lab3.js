@@ -23,14 +23,17 @@ const Lab3 = () => {
   };
 
   return (
-    <View style={styles.main}>
+
+    <View>
       <View>
         <Text style={styles.counter}>Кликов {click}</Text>
         <TouchableOpacity onPress={onPressHandlerRegular} style={styles.button}>
-          <Text style={[styles.text, {color: 'white'}]}>Без useMemo</Text>
+          <Text style={styles.text}>Клик без UseMemo</Text>
         </TouchableOpacity>
+      </View>
+      <View>
         <TouchableOpacity onPress={onPressHandlerMemo} style={styles.button}>
-          <Text style={[styles.text, {color: 'white'}]}>useMemo</Text>
+          <Text style={styles.text}>Клик c UseMemo</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -38,6 +41,7 @@ const Lab3 = () => {
 };
 
 const styles = StyleSheet.create({
+
   main: {
     flex: 1,
     backgroundColor: '#2F42B2',
@@ -59,6 +63,7 @@ const styles = StyleSheet.create({
     marginLeft: 150,
     marginBottom: 50,
   },
+
   text: {
     fontSize: 15,
   },
