@@ -1,53 +1,55 @@
-import React, { useState } from 'react';
-import { 
-  StyleSheet, 
-  Text, 
-  View, 
-  Animated, 
-  TouchableWithoutFeedback
-} from 'react-native';
+import React from 'react'
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+import {NavigationContainer} from '@react-navigation/native'
+import Lab1 from './screens/Lab1'
+import Lab2 from './screens/Lab2'
+import { StyleSheet, View, Text, Image } from 'react-native';
 
+
+const Tab = createBottomTabNavigator()
+
+const App = () => {
+  return (
+      <NavigationContainer>
+          <Tab.Navigator
+              headerMode="none"
+              screenOptions={({route}) => ({
+                  headerShown: false,    
+              })}>
+              <Tab.Screen
+                  name="Lab1"
+                  component={Lab1}
+                  options={{
+                    headerShown: false,
+                    tabBarIcon: () => (
+                      <View>
+                        <Image  source={require('./assets/icons/icon.png')}/>
+                      </View>
+                    ),
+                  }}
+              />
+              <Tab.Screen
+                  name="Lab2"
+                  component={Lab2}
+                  options={{
+                    headerShown: false,
+                    tabBarIcon: () => (
+                      <View>
+                        <Image  source={require('./assets/icons/icon.png')}/>
+                      </View>
+                    ),
+                  }}
+              />
+          </Tab.Navigator>
+      </NavigationContainer>
+  )
+}
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  text: {
+    fontFamily: 'Montserrat',
+    color: '#121213',
+    fontSize: 18,
   },
-  box: {
-    width: 100,
-    height: 100,
-    backgroundColor: '#5AD2F4'
-  }
 });
 
-const Lab1 = () => {
-  const [animation] = useState(new Animated.Value(1))
-  const animatedStyles = {
-    opacity: animation
-  }
-  
-  const handleAnimation = () => {
-    Animated.timing(animation, {
-      toValue: 0,
-      duration: 500,
-      useNativeDriver: true
-    }).start(() => {
-      Animated.timing(animation, {
-        toValue: 1,
-        duration: 500,
-        useNativeDriver: true
-      }).start()
-    })
-  }
-
-  return (
-    <View style={styles.container}>
-      <TouchableWithoutFeedback onPress={handleAnimation}>
-        <Animated.View style={[styles.box, animatedStyles]} />
-      </TouchableWithoutFeedback>
-    </View>
-  );
-}
-
-export default Lab1;
+export default App
