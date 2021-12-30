@@ -11,7 +11,7 @@ import {
 import {useApolloClient, useMutation} from "@apollo/client"
 import {REG} from "../../graphQL/mutations"
 
-const SignUp = () => {
+const SignUp = ({navigation}) => {
   const [login, setLogin] = useState(null)
   const [password, setPassword] = useState(null)
   const [name, setName] = useState(null)
@@ -72,6 +72,14 @@ const SignUp = () => {
         >
           <Text style={styles.ButtonText}>
             Register
+          </Text>
+        </Pressable>
+        <Pressable 
+          onPress={() => {navigation.replace('Login')}}
+          style = {styles.Button}
+        >
+          <Text style={styles.ButtonText}>
+            Back
           </Text>
         </Pressable>
       </View>

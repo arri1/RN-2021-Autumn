@@ -35,9 +35,11 @@ const SignIn = ({navigation}) => {
 
   const onUpdate = () => {
     onChangeMess('saved!');
+    ToastAndroid.show('Saved', ToastAndroid.SHORT);
     updateUser({
       variables: {
         data: {
+          group: {set: group},
           name: {set: name},
         },
       },

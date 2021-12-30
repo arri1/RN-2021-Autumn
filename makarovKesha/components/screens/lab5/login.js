@@ -91,6 +91,15 @@ const Login = ({navigation}) => {
               Login
             </Text>
           </Pressable>
+          <Pressable 
+            onPress={() => {
+              navigation.replace('Signup')}}
+            style = {styles.Button}
+          >
+            <Text style={styles.ButtonText}>
+              SignUp
+            </Text>
+          </Pressable>
         </View>
       </SafeAreaView>
     );

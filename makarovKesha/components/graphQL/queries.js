@@ -1,4 +1,4 @@
-import {gql} from '@apollo/client';
+import { gql } from '@apollo/client';
 
 export const GET_USER = gql`
   query {
@@ -7,22 +7,41 @@ export const GET_USER = gql`
       name
       login
       group
-      password
     }
   }
 `;
 
-export const GET_POSTS = gql`
+export const POST = gql`
   query {
-    findManyPost(where: {text: {not: {equals: ""}}}) {
+    post {
+      id
+      title
+      text
+    }
+  }
+`;
+
+export const SHOW_POST = gql`
+  query {
+    findOnePost(where: {text: {not: {equals: ""}}}) {
       id
       title
       text
       user {
         id
         name
-        password
       }
+    }
+  }
+`;
+
+export const FIND_MANY_POST = gql`
+  query ($where: PostWhereInput!) {
+    findManyPost(where: $where) {
+      id
+      title
+      text
+      userId
     }
   }
 `;
