@@ -11,8 +11,8 @@ const App = () => {
     <ApolloProvider client={client}>
       <Provider store={store}>
       	<NavigationContainer>
-          <RootNavigator/>
-      	</NavigationContainer>
+          <RootNavigator />
+     	</NavigationContainer>
       </Provider>
    </ApolloProvider>
   );
