@@ -51,7 +51,7 @@ const Registration = ({navigation}) => {
           </View>
 
           <TouchableOpacity style={styles.button} onPress={onRegistration}>
-            <Text style={styles.text}>Регистрация</Text>
+            <Text style={styles.text}>Зарегистрироваться</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.backBtn} onPress={()=>navigation.replace('Login')}>
@@ -84,10 +84,12 @@ const styles = StyleSheet.create({
   },
   viewInput: {
     marginTop: 15,
+
   },
   inputText: {
     width: 300,
-    borderRadius: 10,  
+    borderRadius: 10, 
+    padding: 10, 
     backgroundColor: '#64C9FA',
   },
   labelText: {

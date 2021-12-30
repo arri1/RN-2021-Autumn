@@ -64,7 +64,7 @@ const Login = ({navigation}) => {
         </View>
 
         <TouchableOpacity style={styles.button} onPress={onAuthorization}>
-          <Text style={styles.text}>Ввойти</Text>
+          <Text style={styles.text}>Войти</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.regBtn} onPress={()=>navigation.replace('Registration')}>
@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
   inputText: {
     width: 300,
     borderRadius: 10,  
+    padding: 10,
     backgroundColor: '#64C9FA',
   },
   labelText: {

@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
   inputText: {
     width: 380,
     borderRadius: 10,  
+    padding: 10,
     backgroundColor: '#64C9FA',
   },
   labelText: {

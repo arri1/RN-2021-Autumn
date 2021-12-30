@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
         width: 100,
         marginBottom: 5,
+        justifyContent: 'center',
       },
       itemSt: {
         backgroundColor: '#BCEEEB',
