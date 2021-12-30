@@ -7,7 +7,7 @@ import {
   View,
   StyleSheet,
 } from 'react-native';
-import {POST, FIND_MANY_POST, USER} from '../../gqls/qwery/queries';
+import {FIND_MANY_POST, USER} from '../../gqls/qwery/queries';
 import {CREATE_ONE_POST, DELETE_ONE_POST} from '../../gqls/qwery/mutations';
 import LinearGradient from 'react-native-linear-gradient';
 import {useQuery, useMutation} from '@apollo/client';
@@ -16,6 +16,8 @@ const MyPosts = props => {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [postId, setPostId] = useState('');
+
+  const [isPostEdit, setPostEdit] = useState(false);
 
   const [userId, setUserId] = useState('');
   const [userLogin, setUserLogin] = useState('');
@@ -45,20 +47,6 @@ const MyPosts = props => {
     },
   });
 
-  const [delPost] = useMutation(DELETE_ONE_POST, {
-    onCompleted: ({deleteOnePost}) => {},
-  });
-
-  const deletePost = () => {
-    delPost({
-      variables: {
-        where: {
-          id: postId,
-        },
-      },
-    });
-  };
-
   const createPost = () => {
     if (title != '' && text != '') {
       post({
@@ -72,53 +60,113 @@ const MyPosts = props => {
       });
     }
   };
+
+  const [delPost] = useMutation(DELETE_ONE_POST, {
+    onCompleted: ({deleteOnePost}) => {
+      setPostEdit(false);
+    },
+  });
+
+  const deletePost = () => {
+    delPost({
+      variables: {
+        where: {
+          id: postId,
+        },
+      },
+    });
+  };
+
   const selectPost = id => {
     setPostId(id);
+    setPostEdit(true);
   };
 
   return (
     <LinearGradient style={styles.main} colors={['#6991F5', '#ffffff']}>
       <View>
-        <View style={[styles.inputText, {marginTop: 30}]}>
-          <TextInput
-            style={styles.text}
-            placeholder="Title"
-            onChangeText={text => setTitle(text)}>
-            {title}
-          </TextInput>
-        </View>
+        {!isPostEdit ? (
+          <View>
+            <View style={[styles.inputText, {marginTop: 30}]}>
+              <TextInput
+                style={styles.text}
+                placeholder="Title"
+                onChangeText={text => setTitle(text)}>
+                {title}
+              </TextInput>
+            </View>
 
-        <View style={styles.inputText}>
-          <TextInput
-            style={styles.text}
-            placeholder="Text"
-            onChangeText={text => setText(text)}>
-            {text}
-          </TextInput>
-        </View>
+            <View style={styles.inputText}>
+              <TextInput
+                style={styles.text}
+                placeholder="Text"
+                onChangeText={text => setText(text)}>
+                {text}
+              </TextInput>
+            </View>
 
-        <TouchableOpacity style={styles.addButton}>
-          <Text style={styles.text} onPress={createPost}>
-            Add Post
-          </Text>
-        </TouchableOpacity>
+            <TouchableOpacity style={styles.addButton}>
+              <Text style={styles.text} onPress={createPost}>
+                Add Post
+              </Text>
+            </TouchableOpacity>
 
-        <ScrollView style={styles.postsViev}>
-          {data != null ? (
-            data.findManyPost.map(item => {
-              return (
-                <TouchableOpacity
-                  key={item.id}
-                  style={styles.post}
-                  onPress={() => selectPost(item.id)}>
-                  <Text style={styles.text}>{item.title}</Text>
-                </TouchableOpacity>
-              );
-            })
-          ) : (
-            <Text></Text>
-          )}
-        </ScrollView>
+            <ScrollView style={styles.postsViev}>
+              {data != null ? (
+                data.findManyPost.map(item => {
+                  return (
+                    <TouchableOpacity
+                      key={item.id}
+                      style={styles.post}
+                      onPress={() => selectPost(item.id)}>
+                      <Text style={styles.text}>{item.title}</Text>
+                    </TouchableOpacity>
+                  );
+                })
+              ) : (
+                <Text></Text>
+              )}
+            </ScrollView>
+          </View>
+        ) : (
+          <View style={[styles.viewBox]}>
+            <View style={[styles.inputText, {marginTop: 30}]}>
+              <TextInput
+                style={styles.text}
+                placeholder="Title"
+                onChangeText={text => setTitle(text)}>
+                {title}
+              </TextInput>
+            </View>
+
+            <View style={styles.inputText}>
+              <TextInput
+                style={styles.text}
+                placeholder="Text"
+                onChangeText={text => setText(text)}>
+                {text}
+              </TextInput>
+            </View>
+
+            <TouchableOpacity style={styles.addButton}>
+              <Text style={styles.text} onPress={() => setPostEdit(false)}>
+                Update Post
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.addButton}>
+              <Text style={styles.text} onPress={() => setPostEdit(false)}>
+                Cansel
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.addButton}>
+              <Text style={styles.text} onPress={deletePost}>
+                Delite post
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     </LinearGradient>
   );
