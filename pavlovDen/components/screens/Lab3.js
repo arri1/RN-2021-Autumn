@@ -1,5 +1,5 @@
-import React, {useState, useMemo} from 'react';
-import { View, ScrollView, Text, TouchableOpacity, StyleSheet, } from 'react-native';
+import React, { useState, useMemo } from 'react';
+import { View, ScrollView, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const expensiveFunction = () => {
   let i = 0;

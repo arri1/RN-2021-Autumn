@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {Text, StyleSheet, ScrollView} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Text, StyleSheet, ScrollView } from 'react-native';
 import axios from 'axios';
 
 const Lab2 = () => {
