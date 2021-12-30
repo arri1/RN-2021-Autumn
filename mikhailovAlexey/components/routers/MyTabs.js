@@ -1,20 +1,39 @@
-import React from 'react';
-import { Image } from 'react-native';
+import React, { useEffect } from 'react';
+import {
+  View, Image, StatusBar,
+} from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { loadItems } from '../../store/tasks';
 
 import styles from '../styles/styles';
 
 import Lab1 from '../screens/lab1';
 import Lab2 from '../screens/lab2';
 import Lab3 from '../screens/lab3';
+import Lab4 from '../screens/lab4';
 
 import homeIcon from '../icons/Home.png';
 import dataIcon from '../icons/mess.png';
 import timeIcon from '../icons/clock.png';
+import checkIcon from '../icons/checked.png';
 
 const Tab = createBottomTabNavigator();
 
-const MyTabs = function () {
+const MyTabs = () =>{
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (dispatch) {
+      axios
+        .get('https://jsonplaceholder.typicode.com/users')
+        .then(({ data }) => {
+          dispatch(loadItems(data));
+        })
+        .catch(() => {});
+    }
+  }, [dispatch]);
+  StatusBar.setHidden(true);
   return (
     <Tab.Navigator
       screenOptions={{
@@ -70,6 +89,22 @@ const MyTabs = function () {
           tabBarIcon: ({ focused }) => (
             <Image
               source={timeIcon}
+              style={{
+                width: 50,
+                height: 50,
+                tintColor: focused ? 'white' : '#FFD232',
+              }}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Checked"
+        component={Lab4}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <Image
+              source={checkIcon}
               style={{
                 width: 50,
                 height: 50,
