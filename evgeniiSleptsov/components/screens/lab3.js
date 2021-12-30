@@ -34,7 +34,6 @@ const Lab3 = () => {
       <View>
         <TouchableOpacity onPress={onPressHandlerMemo} style={styles.button}>
           <Text style={styles.text}>Клик c UseMemo</Text>
-
         </TouchableOpacity>
       </View>
     </View>
@@ -52,7 +51,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 150,
     marginBottom: 20,
-    color: 'black',
+    color: 'white',
   },
   button: {
     alignItems: 'center',

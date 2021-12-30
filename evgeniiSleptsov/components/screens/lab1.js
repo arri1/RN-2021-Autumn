@@ -99,7 +99,7 @@ const Lab1 = () => {
   return (
     <View style={[styles.main, {backgroundColor: color}]}>
           <View style={styles.container}>
-            <Text style={styles.textContainer}>Есть такая пословица: {name}</Text>
+            <Text style={styles.textContainer}>Расписание {name}</Text>
           </View>
           <View style={styles.container1}>
             <TouchableOpacity

@@ -5,10 +5,15 @@ import Lab1 from '../components/screens/lab1';
 import Lab2 from '../components/screens/lab2';
 import Lab3 from '../components/screens/lab3';
 import Lab4 from '../components/screens/lab4';
+import Lab5 from '../components/screens/lab5';
+import Registration from '../components/screens/reg';
+import Auth from '../components/screens/signIn';
 import axios from 'axios';
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {loadItems} from '../store/reducer';
+import client from '../components/apollo/apollo'
+import {ApolloProvider} from "@apollo/client"
 
 const Tab = createBottomTabNavigator();
 
@@ -87,10 +92,24 @@ const Tabs = () => {
                 source={require('../components/icons/4.png')}
                 style={styles.img}
               />
-            </View>
-          ),
-        }}
-      />
+             </View>
+            ),
+          }}
+        />
+       <Tab.Screen
+        name="Lab5"
+        component={Lab5}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <View>
+              <Image
+                source={require('../components/icons/5.png')}
+                style={styles.img}
+              />
+              </View>
+            ),
+          }}
+        />
     </Tab.Navigator>
   );
 };
