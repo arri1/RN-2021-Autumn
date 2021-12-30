@@ -103,7 +103,7 @@ const Tabs = () => {
           tabBarIcon: ({focused}) => (
             <View>
               <Image
-                source={require('../components/icons/4.png')}
+                source={require('../components/icons/5.png')}
                 style={styles.img}
               />
               </View>

@@ -27,10 +27,10 @@ const Lab3 = () => {
       <View>
         <Text style={styles.counter}>Кликов {click}</Text>
         <TouchableOpacity onPress={onPressHandlerRegular} style={styles.button}>
-          <Text style={styles.text}>Без useMemo</Text>
+          <Text style={[styles.text, {color: 'white'}]}>Без useMemo</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={onPressHandlerMemo} style={styles.button}>
-          <Text style={styles.text}>useMemo</Text>
+          <Text style={[styles.text, {color: 'white'}]}>useMemo</Text>
         </TouchableOpacity>
       </View>
     </View>

@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   inputField: {
-    borderRadius: 20,
+    borderRadius: 10,
     margin: 20,
   },
 
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   signInButton: {
     backgroundColor: '#5AC8FA',
     margin: 20,
-    borderRadius: 30,
+    borderRadius: 10,
     borderColor: '#5AC8FA',
     padding: 10,
     height: 50,

@@ -168,21 +168,21 @@ export default Lab5 = ({navigation}) => {
           )}
           {updateMode && (
             <View>
-              <Text>Логин:</Text>
+              <Text style={{color: 'white'}}>Логин:</Text>
               <TextInput
                 value={login}
                 style={styles.txtInput}
                 placeholder="введите имя"
                 onChangeText={text => setLogin(text)}
               />
-              <Text>Имя:</Text>
+              <Text style={{color: 'white'}}>Имя:</Text>
               <TextInput
                 value={name}
                 style={styles.txtInput}
                 placeholder="введите имя"
                 onChangeText={text => setName(text)}
               />
-              <Text>Группа:</Text>
+              <Text style={{color: 'white'}}>Группа:</Text>
               <TextInput
                 value={group}
                 style={styles.txtInput}
@@ -200,18 +200,18 @@ export default Lab5 = ({navigation}) => {
       )}
       {passUpdateMode && (
         <View>
-          <Text>Введите новый пароль:</Text>
+          <Text style={{color: 'white'}}>Введите новый пароль:</Text>
           <TextInput
             style={styles.txtInput}
             onChangeText={text => setPassword(text)}
           />
           <TouchableOpacity style={styles.btn} onPress={changePass}>
-            <Text>Изменить пароль</Text>
+            <Text style={{color: 'white'}}>Изменить пароль</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btn}
             onPress={() => setPassUpdateMode(false)}>
-            <Text>Отмена</Text>
+            <Text style={{color: 'white'}}>Отмена</Text>
           </TouchableOpacity>
         </View>
       )}
@@ -237,7 +237,8 @@ const styles = StyleSheet.create({
   userInfo: {
     alignItems: 'center',
     borderRadius: 10,
-    width: 300,
+    width: 323,
+    height: 200,
   },
   userInfoInner: {
     alignItems: 'center',
@@ -252,8 +253,9 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   txtInput: {
-    backgroundColor: 'black',
+    backgroundColor: '#5AC8FA',
     width: 200,
+    height: 50,
     marginBottom: 10,
     color: 'white',
     borderRadius: 10,
