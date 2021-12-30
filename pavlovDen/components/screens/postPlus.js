@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
         width: 300,
         margin: 30,
         backgroundColor: '#484f58',
+        color: 'white',
     },
     box: {
         backgroundColor: '#484f58',
@@ -125,6 +126,7 @@ const styles = StyleSheet.create({
         margin: 24,
         marginBottom: 0,
         borderRadius: 10,
+        color: 'white',
     },
     boxText: {
         backgroundColor: '#484f58',

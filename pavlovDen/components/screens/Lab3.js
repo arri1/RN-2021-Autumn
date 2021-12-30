@@ -66,7 +66,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 20,
-    color: 'white'
+    color: 'white',
+    marginBottom: 30,
   },
   bText: {
     fontWeight: 'bold',
