@@ -45,8 +45,6 @@ const Lab3 = () => {
 const styles = StyleSheet.create({
   main: {
     backgroundColor: '#5CBDDB',
-    padding: 10,
-    borderRadius: 10,
     width: "100%",
     height: "100%",
   },
