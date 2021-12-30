@@ -7,6 +7,8 @@ import lab2 from '../screens/lab2';
 import lab3 from '../screens/lab3';
 import lab4 from '../screens/lab4';
 import lab5 from '../screens/lab5/lab5';
+import Posts from '../screens/lab5/posts';
+import MyPosts from '../screens/lab5/myPosts';
 
 import axios from 'axios';
 import {useDispatch} from 'react-redux';
@@ -150,6 +152,50 @@ const TabNavigation = () => {
                             />
                             <Text style = {{color: focused ?'#2F88F0' : '#27303E', fontSize: 12}}>
                                     GraphQL
+                            </Text>
+                        </View>
+                    ),
+                }}
+            />
+
+            <Tab.Screen 
+                name = "MyPosts" 
+                component = {MyPosts} 
+                options = {{
+                    tabBarIcon: ({focused}) => (
+                        <View style = {{alignItems: 'center', justifyContent: 'center', top: 3}}>
+                            <Image 
+                                source = {require('../../img/5.png')}
+                                resizeMode = "contain"
+                                style={{
+                                    width: 40,
+                                    height: 40,
+                                }}
+                            />
+                            <Text style = {{color: focused ?'#2F88F0' : '#27303E', fontSize: 12}}>
+                                    MyPosts
+                            </Text>
+                        </View>
+                    ),
+                }}
+            />
+
+            <Tab.Screen 
+                name = "Posts" 
+                component = {Posts} 
+                options = {{
+                    tabBarIcon: ({focused}) => (
+                        <View style = {{alignItems: 'center', justifyContent: 'center', top: 3}}>
+                            <Image 
+                                source = {require('../../img/5.png')}
+                                resizeMode = "contain"
+                                style={{
+                                    width: 40,
+                                    height: 40,
+                                }}
+                            />
+                            <Text style = {{color: focused ?'#2F88F0' : '#27303E', fontSize: 12}}>
+                                    posts
                             </Text>
                         </View>
                     ),

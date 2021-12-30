@@ -7,6 +7,7 @@ export const REG = gql`
       user {
         id
         name
+        group
         login
       }
     }
@@ -20,6 +21,7 @@ export const AUTH = gql`
       user {
         id
         name
+        group
         login
       }
     }
@@ -31,7 +33,36 @@ export const UPDATE_USER = gql`
     updateUser(data: $data) {
       id
       name
+      group
       login
+    }
+  }
+`;
+
+export const CREATE_ONE_POST = gql`
+  mutation ($data: PostCreateInput!) {
+    createOnePost(data: $data) {
+      id
+      title
+      text
+    }
+  }
+`;
+
+export const DELETE_ONE_POST = gql`
+  mutation ($where: PostWhereUniqueInput!) {
+    deleteOnePost(where: $where) {
+      title
+      text
+    }
+  }
+`;
+
+export const UPDATE_ONE_POST = gql`
+  mutation ($where: PostWhereUniqueInput!, $data: PostUpdateInput!) {
+    updateOnePost(where: $where, data: $data) {
+      title
+      text
     }
   }
 `;
