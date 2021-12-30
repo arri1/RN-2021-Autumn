@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 150,
     marginBottom: 20,
-    color: 'black',
+    color: 'white',
   },
   button: {
     alignItems: 'center',

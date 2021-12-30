@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     alignSelf: 'center',
     fontSize: 32,
+    color: 'white',
   },
 });
 
