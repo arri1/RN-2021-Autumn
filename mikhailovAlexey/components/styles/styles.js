@@ -108,6 +108,17 @@ const styles = StyleSheet.create({
   scroll: {
     margin : 15,
   },
+  textArea: {
+    width: 370,
+    backgroundColor: '#454545',
+    borderRadius: 5,
+    paddingLeft: 20,
+    color: 'white',
+    textAlign: 'left',
+    fontSize: 20,
+    fontFamily: 'Montserrat-Regular',
+  },
+
 });
 
 export default styles;

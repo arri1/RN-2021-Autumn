@@ -3,7 +3,7 @@ import {
   View, ScrollView, Text, TouchableOpacity,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkItem } from '../../store/tasks';
+import { checkItem } from '../store/tasks';
 
 import styles from '../styles/styles';
 
@@ -14,9 +14,11 @@ const Lab4 = () => {
   const checked = selectedItems?.length;
   return (
     <View style={styles.container}>
-      <View style={[styles.boxSize, {height: 35, width: 250, top: 10}]}>
+      <View style={[styles.boxSize, { height: 35, width: 250, top: 10 }]}>
         <Text style={styles.boxTextStyle}>
-          length of checked items: {checked}
+          length of checked items:
+          {' '}
+          {checked}
         </Text>
       </View>
       <ScrollView style={styles.scroll}>
@@ -52,6 +54,6 @@ const Lab4 = () => {
       </ScrollView>
     </View>
   );
-};
+}
 
 export default Lab4;

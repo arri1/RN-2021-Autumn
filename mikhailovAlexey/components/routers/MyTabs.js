@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import {
-  View, Image, StatusBar,
+  Image, StatusBar, TouchableOpacity, Text
 } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { loadItems } from '../../store/tasks';
+import { loadItems } from '../store/tasks';
 
 import styles from '../styles/styles';
 
@@ -13,15 +13,17 @@ import Lab1 from '../screens/lab1';
 import Lab2 from '../screens/lab2';
 import Lab3 from '../screens/lab3';
 import Lab4 from '../screens/lab4';
+import Lab5 from '../screens/lab5';
 
 import homeIcon from '../icons/Home.png';
 import dataIcon from '../icons/mess.png';
 import timeIcon from '../icons/clock.png';
 import checkIcon from '../icons/checked.png';
+import noneIcon from '../icons/none.png';
 
 const Tab = createBottomTabNavigator();
 
-const MyTabs = () =>{
+const MyTabs = ({navigation}) => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (dispatch) {
@@ -41,13 +43,23 @@ const MyTabs = () =>{
         tabBarStyle: styles.navBarBox,
         headerStyle: {
           backgroundColor: '#454545',
-          height: 60,
+          height: 70,
         },
         headerTitleStyle: {
           fontSize: 24,
           fontFamily: 'Montserrat-Regular',
           color: 'white',
         },
+        headerRight: () => (
+            <TouchableOpacity
+              onPress={() => navigation.replace('Login')}
+              style={[styles.button, {marginRight: 10}]}
+            >
+                <Text style={styles.buttonText}>
+                    LOG OUT
+                </Text>
+            </TouchableOpacity>
+          ),
       }}
     >
       <Tab.Screen
@@ -114,8 +126,24 @@ const MyTabs = () =>{
           ),
         }}
       />
+      <Tab.Screen
+        name="Search"
+        component={Lab5}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <Image
+              source={noneIcon}
+              style={{
+                width: 50,
+                height: 50,
+                tintColor: focused ? 'white' : '#FFD232',
+              }}
+            />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
-};
+}
 
 export default MyTabs;
