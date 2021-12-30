@@ -6,7 +6,8 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     backgroundColor: '#FFD232',
-    height: 1120
+    height: '100%',
+    width: '100%',
   },
   containerBackgroundColor: {
     backgroundColor: '#FFD232',
@@ -24,7 +25,8 @@ const styles = StyleSheet.create({
   },
   boxSize: {
     backgroundColor: '#FF8B03',
-    width: 380,
+    borderRadius: 5,
+    width: 370,
     margin: 5,
     height: 100,
     justifyContent: 'center',
@@ -103,6 +105,21 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Montserrat-Regular'
   },
+  scroll: {
+    margin : 15,
+  },
+  textArea: {
+    width: 250,
+    backgroundColor: '#2C2B2B',
+    borderRadius: 5,
+    borderColor: 'white',
+    borderWidth: 1,
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 14,
+    fontFamily: 'Montserrat-Regular',
+  },
+
 });
 
 export default styles;

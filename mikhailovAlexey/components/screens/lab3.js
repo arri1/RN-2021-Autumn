@@ -15,29 +15,29 @@ const expensiveFunction = () => {
 };
 
 const setTime = () => {
-  const left = [];
+  let left = []
   const deadline = new Date('January 1, 2022 00:00:00');
-  const time = deadline - new Date();
-  left.days = time > 0 ? Math.floor(time / 1000 / 60 / 60 / 24) : 0;
-  left.hours = time > 0 ? Math.floor(time / 1000 / 60 / 60) % 24 : 0;
-  left.minutes = time > 0 ? Math.floor(time / 1000 / 60) % 60 : 0;
-  left.seconds = time > 0 ? Math.floor(time / 1000) % 60 : 0;
-  return left;
-};
+  const time = deadline - new Date()
+  left['days'] = time > 0 ? Math.floor(time / 1000 / 60 / 60 / 24) : 0;
+  left['hours'] = time > 0 ? Math.floor(time / 1000 / 60 / 60) % 24 : 0;
+  left['minutes'] = time > 0 ? Math.floor(time / 1000 / 60) % 60 : 0;
+  left['seconds'] = time > 0 ? Math.floor(time / 1000) % 60 : 0;
+  return left
+}
 
-const Lab3 = function () {
-  const [value, setValue] = useState();
+const Lab3 = () => {
+  const [value,setValue] = useState();
   const operation = useMemo(() => expensiveFunction(), []);
-  const left = setTime();
+  const left = setTime()
 
   const onPressHandler = () => {
     const x = expensiveFunction();
-    setValue({});
+    setValue({})
   };
 
   const onPressHandlerSecond = () => {
     const x = operation;
-    setValue({});
+    setValue({})
   };
 
   return (
@@ -52,7 +52,7 @@ const Lab3 = function () {
         <View style={{ flexDirection: 'row' }}>
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
             <Text style={[styles.boxTextStyle, { fontSize: 50 }]}>
-              {left.days}
+              {left['days']}
             </Text>
             <Text style={[styles.boxTextStyle, { fontSize: 15 }]}>
               Day
@@ -63,29 +63,29 @@ const Lab3 = function () {
           </Text>
           <View style={{ alignItems: 'center' }}>
             <Text style={[styles.boxTextStyle, { fontSize: 50 }]}>
-              {left.hours}
+              {left['hours']}
             </Text>
             <Text style={[styles.boxTextStyle, { fontSize: 15 }]}>
               Hours
             </Text>
           </View>
-          <Text style={[styles.boxTextStyle, { fontSize: 30, top: 12 }]}>
+          <Text style={[styles.boxTextStyle, { fontSize: 30 , top: 12 }]}>
             :
           </Text>
           <View style={{ alignItems: 'center' }}>
             <Text style={[styles.boxTextStyle, { fontSize: 50 }]}>
-              {left.minutes}
+              {left['minutes']}
             </Text>
             <Text style={[styles.boxTextStyle, { fontSize: 15 }]}>
               Minutes
             </Text>
           </View>
-          <Text style={[styles.boxTextStyle, { fontSize: 30, top: 12 }]}>
+          <Text style={[styles.boxTextStyle, { fontSize: 30 , top: 12 }]}>
             :
           </Text>
           <View style={{ alignItems: 'center' }}>
             <Text style={[styles.boxTextStyle, { fontSize: 50 }]}>
-              {left.seconds}
+              {left['seconds']}
             </Text>
             <Text style={[styles.boxTextStyle, { fontSize: 15 }]}>
               Seconds

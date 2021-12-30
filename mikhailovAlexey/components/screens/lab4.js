@@ -1,23 +1,28 @@
 import React from 'react';
 import {
-  View,
-  Text,
-  ActivityIndicator,
-  ScrollView,
-  TouchableOpacity,
+  View, ScrollView, Text, TouchableOpacity,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkItem } from '../store/tasks';
 
 import styles from '../styles/styles';
 
-const Lab2 = () => {
+const Lab4 = () => {
   const data = useSelector((state) => state.data.value);
+  const selectedItems = data?.filter((item) => item.checked);
   const dispatch = useDispatch();
-  const content = () => (
-    <View style={[styles.container]}>
+  const checked = selectedItems?.length;
+  return (
+    <View style={styles.container}>
+      <View style={[styles.boxSize, { height: 35, width: 250, top: 10 }]}>
+        <Text style={styles.boxTextStyle}>
+          length of checked items:
+          {' '}
+          {checked}
+        </Text>
+      </View>
       <ScrollView style={styles.scroll}>
-        {data.map((item) => (
+        {selectedItems?.map((item) => (
           <TouchableOpacity
             key={item.id}
             style={[
@@ -49,12 +54,6 @@ const Lab2 = () => {
       </ScrollView>
     </View>
   );
+}
 
-  return (
-    <View style={styles.container}>
-      {data ? content() : <ActivityIndicator color="red" />}
-    </View>
-  );
-};
-
-export default Lab2;
+export default Lab4;

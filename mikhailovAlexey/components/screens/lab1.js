@@ -5,7 +5,7 @@ import {
 
 import styles from '../styles/styles';
 
-const Lab1 = function () {
+const Lab1 = () => {
   const [animation] = React.useState(new Animated.Value(0));
 
   const boxInterpolation = animation.interpolate({
@@ -44,6 +44,7 @@ const Lab1 = function () {
       <View>
         <TouchableOpacity style={styles.button} title="UPDATE" onPress={handleAnimation}>
           <Text style={styles.buttonText}>UPDATE</Text>
+          
         </TouchableOpacity>
       </View>
     </Animated.View>
