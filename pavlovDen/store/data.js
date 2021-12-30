@@ -11,9 +11,7 @@ export const dataSlice = createSlice({
       state.value = action.payload.map(item => {
         return {
           id: item.id,
-          title: item.name,
-          body: item.body,
-          email: item.email,
+          title: item.title,
           checked: false,
         };
       });
@@ -27,28 +25,9 @@ export const dataSlice = createSlice({
       });
       state.value = newValue;
     },
-    changeTitle: (state, action) => {
-      const newValue = state.value.map(item => {
-        if (item.id === action.payload[0]) {
-          item.title = action.payload[1];
-          item.body = action.payload[2];
-        }
-        return item;
-      });
-      state.value = newValue;
-    },
-    applyItem: (state, action) => {
-      const newValue = state.value.map(item => {
-        if (item.id === action.payload) {
-          item.checked = !item.checked;
-        }
-        return item;
-      });
-      state.value = newValue;
-    },
   },
 });
 
-export const {loadItems, checkItem, changeTitle, applyItem} = dataSlice.actions;
+export const {loadItems, checkItem} = dataSlice.actions;
 
 export default dataSlice.reducer;

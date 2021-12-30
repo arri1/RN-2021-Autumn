@@ -1,88 +1,68 @@
 import React, {useState} from 'react';
 import {
-  SafeAreaView,
-  View,
-  ScrollView,
-  StyleSheet,
-  TextInput,
   Text,
+  StyleSheet,
+  View,
+  TextInput,
   TouchableOpacity,
+  Image,
+  ScrollView,
 } from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
-import {applyItem, changeTitle} from '../../store/data';
+import {useDispatch, useSelector} from 'react-redux';
+import {checkItem} from '../../store/data';
 
 const Lab4 = () => {
   const data = useSelector(state => state.data.value);
-  const selectedItems = data?.filter(item => item.checked);
   const dispatch = useDispatch();
-
+  const selectedItems = data?.filter(item => item.checked);
   return (
-    <SafeAreaView style={styles.main}>
-      <View style={styles.container}>
-        <ScrollView>
-          {selectedItems?.map(item => {
-            return (
-              <TouchableOpacity
-                key={item.id}
-                onPress={() => {
-                  dispatch(applyItem(item.id));
-                }}>
-                <View style={styles.item} key={item.id}>
-                  <TextInput
-                    style={[styles.text]}
-                    onChangeText={text => {
-                      dispatch(changeTitle([item.id, text, item.body]));
-                    }}>
-                    {item.title}
-                  </TextInput>
-                  <TextInput
-                    multiline={true}
-                    style={[styles.text]}
-                    onChangeText={text => {
-                      dispatch(changeTitle([item.id, item.title, text]));
-                    }}>
-                    {item.body}
-                  </TextInput>
-                  <Text style={styles.email}>{item.email}</Text>
-                </View>
-              </TouchableOpacity>
-            );
-          })}
-        </ScrollView>
-      </View>
-    </SafeAreaView>
+    <View style={styles.main}>
+      <ScrollView>
+        <Text style={styles.title}>Done Task</Text>
+        {selectedItems?.map(item => {
+          return item.checked ? (
+            <TouchableOpacity
+              key={item.id}
+              style={[styles.item]}
+              onPress={() => {
+                dispatch(checkItem(item.id));
+              }}>
+              <Text style={styles.text}>{item.title}</Text>
+            </TouchableOpacity>
+          ) : undefined;
+        })}
+      </ScrollView>
+    </View>
   );
 };
+
 const styles = StyleSheet.create({
-    main: {
-      height: '100%',
-      backgroundColor: '#5CBDDB',
-    },
-    item: {
-      padding: 10,
-      borderRadius: 20,
-      marginBottom: 10,
-      borderColor: '#C446DB',
-      borderWidth: 2,
-      backgroundColor: '#E6AF77',
-    },
-    container: {
-      flex: 1,
-      margin: 15,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    title: {
-      fontSize: 18,
-      fontWeight: 'bold',
-    },
-    text: {
-      marginTop: 10,
-      marginLeft: 10,
-    },
-    email: {
-      marginTop: 10,
-      textAlign: 'right',
-    },
-  });
+  main: {
+    flex: 1,
+    backgroundColor: '#30363d',
+  },
+  text: {
+    fontSize: 20,
+    color: 'white',
+  },
+  item: {
+    marginTop: 24,
+    marginLeft: 44,
+    padding: 15,
+    height: 100,
+    width: 323,
+    backgroundColor: '#484f58',
+    borderRadius: 30,
+    fontSize: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    marginTop: 20,
+    alignSelf: 'center',
+    fontSize: 32,
+    color: 'white',
+  },
+});
+
 export default Lab4;

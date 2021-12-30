@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Button, SafeAreaView } from 'react-native';
 
-const colArr = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
+const colArr = ["red", "orange", "yellow", "green", "blue", "indigo", "violet", "white"];
 const Colour = () => {
     colNum = Math.floor(Math.random() * colArr.length);
     return colArr[colNum];

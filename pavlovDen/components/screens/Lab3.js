@@ -44,7 +44,7 @@ const Lab3 = () => {
 
 const styles = StyleSheet.create({
   main: {
-    backgroundColor: '#0AA3F2',
+    backgroundColor: '#30363d',
     padding: 0,
     borderRadius: 0,
     width: "100%",
@@ -52,13 +52,13 @@ const styles = StyleSheet.create({
 
   },
    button: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#484f58',
     paddingHorizontal: 15   ,
     paddingVertical: 15,
     borderRadius: 15,
-    marginLeft: 100,
-    marginRight: 100,
-    marginBottom: 25,
+    marginLeft: 50,
+    marginRight: 50,
+    marginBottom: 20,
 
   },
   text: {
@@ -66,13 +66,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 20,
-    color: '#000000'
+    color: 'white'
   },
   bText: {
     fontWeight: 'bold',
     textAlign: 'center',
     fontSize: 20,
-    color: '#000000'
+    color: 'white'
   },
 });
 

@@ -16,7 +16,7 @@ const TabNavigator = () => {
   useEffect(() => {
     if (dispatch) {
       axios
-        .get('https://jsonplaceholder.typicode.com/comments?postId=1&postId=2')
+        .get('https://my-json-server.typicode.com/zereckt/den1/tasks')
         .then(({data}) => {
           dispatch(loadItems(data));
         })
@@ -29,20 +29,13 @@ const TabNavigator = () => {
       headerMode="none"
       screenOptions={{
         tabBarLabelStyle: {
-          color: '#5CBDDB',
-          fontSize: 20,
-          height: 55,
-          fontWeight: 'bold',
-          textAlignVertical: 'center',
+          height: 80
         },
         tabBarItemStyle: {
-          margin: 10,
-          height: 50,
-          borderRadius: 50,
-          backgroundColor: '#FFFFFF',
+          backgroundColor: '#484f58',
         },
         tabBarStyle: {
-          height: 70,
+          height: 80
         },
       }}>
 
@@ -55,7 +48,7 @@ const TabNavigator = () => {
             tabBarIcon: ({focused}) => {
               return (
                 <Image
-                style={{alignItems: 'center', justifyContent: 'center', top: 25, height: 25, width: 25  }}
+                style={{alignItems: 'center', justifyContent: 'center', top: 40, height: 50, width: 50  }}
                   source={require('./NavigatorImg/1.png')}
                 />
               );
@@ -72,7 +65,7 @@ const TabNavigator = () => {
             tabBarIcon: ({focused}) => {
               return (
                 <Image
-                style={{alignItems: 'center', justifyContent: 'center', top: 25, height: 25, width: 25  }}
+                style={{alignItems: 'center', justifyContent: 'center', top: 40, height: 50, width: 50  }}
                   source={require('./NavigatorImg/2.png')}
                 />
               );
@@ -88,7 +81,7 @@ const TabNavigator = () => {
             tabBarIcon: ({focused}) => {
               return (
                 <Image
-                style={{alignItems: 'center', justifyContent: 'center', top: 25, height: 25, width: 25  }}
+                style={{alignItems: 'center', justifyContent: 'center', top: 40, height: 50, width: 50  }}
                   source={require('./NavigatorImg/3.png')}
                 />
               );
@@ -104,13 +97,13 @@ const TabNavigator = () => {
           tabBarIcon: ({focused}) => {
             return (
               <Image
-              style={{alignItems: 'center', justifyContent: 'center', top: 25, height: 25, width: 25 }}
+              style={{alignItems: 'center', justifyContent: 'center', top: 40, height: 50, width: 50 }}
                 source={require('./NavigatorImg/4.png')}
               />
             );
           },
         }}
-         />
+      />
     </Tab.Navigator>
   );
 };
