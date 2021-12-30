@@ -131,7 +131,7 @@ const MyPosts = props => {
   };
 
   return (
-    <LinearGradient style={styles.main} colors={['#6991F5', '#ffffff']}>
+    <LinearGradient style={styles.main} colors={['#E1E4E7', '#FFFFFF']}>
       <View>
         {!isPostEdit ? (
           <View style={[styles.viewBox]}>
@@ -217,11 +217,11 @@ const MyPosts = props => {
 const styles = StyleSheet.create({
   main: {height: '100%'},
   addButton: {
-    backgroundColor: '#A8C75A',
+    backgroundColor: '#FFFFFF',
     height: 45,
     margin: 10,
     borderRadius: 15,
-    borderColor: '#A8452F',
+    borderColor: '#000000',
     borderWidth: StyleSheet.hairlineWidth,
     padding: 10,
     alignItems: 'center',
@@ -237,9 +237,9 @@ const styles = StyleSheet.create({
   },
 
   inputText: {
-    borderColor: 'black',
+    borderColor: '#000000',
     borderRadius: 5,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#000000',
     borderWidth: 1,
     margin: 5,
     marginTop: 10,
@@ -252,11 +252,11 @@ const styles = StyleSheet.create({
   },
 
   post: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#FFFFFF',
     fontSize: 18,
     marginTop: 5,
     padding: 10,
-    borderColor: 'black',
+    borderColor: '#000000',
     borderWidth: 1,
     borderRadius: 15,
   },

@@ -17,7 +17,7 @@ const Posts = ({navigation}) => {
 
   const content = () => {
     return (
-      <LinearGradient style={styles.main} colors={['#6991F5', '#ffffff']}>
+      <LinearGradient style={styles.main} colors={['#E1E4E7', '#ffffff']}>
         <ScrollView>
           <View>
             {data.findManyPost.map(item => {
