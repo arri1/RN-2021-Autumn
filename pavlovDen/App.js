@@ -1,12 +1,15 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import TabNavigator from './components/routers/TabNavigator';
+import store from './store';
+import {Provider} from 'react-redux';
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <TabNavigator />
-    </NavigationContainer>
+    <Provider store={store}>
+        <NavigationContainer>
+          <TopTabNavigator />
+        </NavigationContainer>
+    </Provider>
   );
 };
 
