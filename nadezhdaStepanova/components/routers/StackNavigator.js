@@ -1,16 +1,21 @@
 import React from 'react';
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {createStackNavigator} from '@react-navigation/stack';
 import {View, StyleSheet} from 'react-native';
-import AuthUser from './authUser';
-import RegUser from './regUser';
+import AuthUser from '../screens/Lab5/authUser';
+import RegUser from '../screens/Lab5/regUser';
+import TabNavigator from './TabNavigator';
 
-const Tab = createMaterialTopTabNavigator();
+const Stack = createStackNavigator();
 
-const TopTabNavigator = () => {
+const signOut = () => {
+  AsyncStorage.setItem('token', '');
+};
+
+const StackNavigator = () => {
   return (
     <View style={styles.main}>
-      <Tab.Navigator
-        headerMode="none"
+      <Stack.Navigator
+        headerShown="false"
         screenOptions={{
           tabBarLabelStyle: styles.tabLabel,
           tabBarItemStyle: styles.tabItem,
@@ -20,11 +25,10 @@ const TopTabNavigator = () => {
             elevation: 5,
           },
         }}>
-        <Tab.Screen name="Authorization"  component={AuthUser} options={{
-          headerShown: false}}/>
-        <Tab.Screen name="Registration" component={RegUser} options={{
-          headerShown: false}} />
-      </Tab.Navigator>
+        <Stack.Screen name="Authorization"  component={AuthUser} options={{headerShown: false}}/>
+        <Stack.Screen name="Registration" component={RegUser} options={{headerShown: false}}/>
+        <Stack.Screen name="TabNavigator" component={TabNavigator} options={{headerShown: false}}/>
+      </Stack.Navigator>
     </View>
   );
 };
@@ -42,6 +46,7 @@ const styles = StyleSheet.create({
   tabItem: {
     height: 50,
   },
+  
   tabLabel: {
     color: 'white',
     alignSelf: 'center',
@@ -50,4 +55,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TopTabNavigator;
+export default StackNavigator;

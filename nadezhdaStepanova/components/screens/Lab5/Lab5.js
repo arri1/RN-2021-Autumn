@@ -52,13 +52,14 @@ const Lab5 = () => {
   };
 
   const signOut = () => {
-    onChangeLogin(null);
-    onChangePassword(null);
-    onChangeName(null);
-    onChangeGroup(null);
-    AsyncStorage.setItem('signed', false);
+    AsyncStorage.setItem('group', '');
+    AsyncStorage.setItem('name', '');
+    AsyncStorage.setItem('login', '');
+    AsyncStorage.setItem('password', '');
     AsyncStorage.setItem('token', '');
-  };
+    navigation.replace('Authorization');
+  }; 
+
   getItems();
   return (
     <View style={[styles.viewBox]}>
@@ -96,7 +97,7 @@ const Lab5 = () => {
       </View>
 
       <View style={styles.viewInput}>
-        <Text style={styles.labelText}>Group:</Text>
+        <Text style={styles.labelText}>Add Post:</Text>
         <TextInput
           onChangeText={onChangeGroup}
           value={group}
@@ -106,7 +107,7 @@ const Lab5 = () => {
       </View>
 
       <TouchableOpacity style={styles.button} onPress={onUpdate}>
-        <Text style={styles.textButton}>Save</Text>
+        <Text style={styles.text}>Save</Text>
       </TouchableOpacity>
     </View>
   );
@@ -127,10 +128,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-
+  title: {
+    marginBottom: 15,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 30,
+    color: '#8F401A',
+  },
   inputText: {
-    width: '69%',
-    paddingLeft: 15,
+    padding: 15,
     borderRadius: 20,
     marginLeft: 15,
     backgroundColor: '#C27E5D',
@@ -145,11 +151,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'white',
   },
-  textButton: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: 'white',
+  img: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 15,
   },
+
   button: {
     backgroundColor: '#78C25D',
     margin: 15,

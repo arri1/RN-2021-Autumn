@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import TopTabNavigator from './components/screens/Lab5/Lab5TabNavigator';
+import StackNavigator from './components/routers/StackNavigator';
 import store from './store';
 import {Provider} from 'react-redux';
 import {ApolloProvider} from '@apollo/client';
@@ -12,7 +12,7 @@ const App = () => {
     <Provider store={store}>
       <ApolloProvider client={client}>
       <NavigationContainer>
-        <TopTabNavigator />
+        <StackNavigator />
       </NavigationContainer>
       </ApolloProvider>
     </Provider>  
