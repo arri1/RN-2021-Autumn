@@ -5,6 +5,7 @@ import Lab1 from '../screens/Lab1';
 import Lab2 from '../screens/Lab2';
 import Lab3 from '../screens/Lab3';
 import Lab4 from '../screens/Lab4';
+import Lab6 from '../screens/postPlus';
 import axios from 'axios';
 import {useDispatch} from 'react-redux';
 import {loadItems} from '../../store/data';
@@ -104,6 +105,18 @@ const TabNavigator = () => {
           },
         }}
       />
+        <Tab.Screen
+            name="      "
+            component={Lab6}
+            options={{
+                tabBarIcon: ({ focused }) => (
+                    <Image
+                        style={{alignItems: 'center', justifyContent: 'center', top: 40, height: 50, width: 50 }}
+                        source={require('./NavigatorImg/6.png')}
+                    />
+                )
+            }}
+        />
     </Tab.Navigator>
   );
 };
