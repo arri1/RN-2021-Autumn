@@ -50,14 +50,6 @@ const Lab5 = () => {
     });
   };
 
-  const signOut = () => {
-    onChangeLogin(null);
-    onChangePassword(null);
-    onChangeName(null);
-    onChangeGroup(null);
-    AsyncStorage.setItem('signed', false);
-    AsyncStorage.setItem('token', '');
-  };
   getItems();
   return (
     <View style={[styles.viewBox]}>
@@ -105,7 +97,7 @@ const Lab5 = () => {
       </View>
 
       <TouchableOpacity style={styles.button} onPress={onUpdate}>
-        <Text style={styles.textButton}>Save</Text>
+        <Text style={styles.text}>Save</Text>
       </TouchableOpacity>
     </View>
   );
@@ -129,10 +121,10 @@ const styles = StyleSheet.create({
 
   inputText: {
     width: '69%',
-    paddingLeft: 15,
+    padding: 15,
     borderRadius: 20,
     marginLeft: 15,
-    backgroundColor: '#C27E5D',
+    backgroundColor: '#78C25D',
   },
 
   labelText: {
@@ -144,12 +136,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'white',
   },
-  textButton: {
-    fontSize: 16,
-    color: 'white',
-  },
   button: {
-    backgroundColor: '#78C25D',
+    backgroundColor: '#C27E5D',
     margin: 15,
     borderRadius: 20,
     padding: 10,
