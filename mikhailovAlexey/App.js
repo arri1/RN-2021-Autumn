@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import store from './components/store';
 import MainScreen from './components/routers/mainScreen';
 
-
 import {
   ApolloClient,
   InMemoryCache,

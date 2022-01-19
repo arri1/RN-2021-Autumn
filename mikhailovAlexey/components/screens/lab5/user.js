@@ -13,7 +13,7 @@ import Loading from './loading';
 import { getUser } from '../../gql/queries';
 import { DELPOST } from '../../gql/mutations';
 
-function User({ route, navigation }) {
+const User = ({ route, navigation }) => {
   const { login } = route.params;
   const [mode, setMode] = React.useState(false);
 
@@ -28,7 +28,9 @@ function User({ route, navigation }) {
       headerRight: () => (mode
         ? (
           <TouchableOpacity
-            onPress={() => navigation.navigate('CreatePost', { id: data.findOneUser.id })}
+            onPress={() => navigation.navigate('CreatePost', {
+              id: data.findOneUser.id,
+            })}
             style={styles.topRightButton}
           >
             <Text style={[styles.buttonText, {
@@ -56,58 +58,128 @@ function User({ route, navigation }) {
       variables: { where: { id: postid } },
     });
   };
-  // <TouchableOpacity style={styles.postEditButton} ><Text style={{fontSize: 16}}>E</Text></TouchableOpacity>
   const adminButtons = (post) => (
     <View style={{ right: 5 }}>
-      <TouchableOpacity style={[styles.postEditButton, { right: 0 }]} onPress={() => deletePost(post.id)}><Text style={{ fontSize: 16 }}>D</Text></TouchableOpacity>
+      <TouchableOpacity
+        style={[styles.postEditButton, {
+          right: 0,
+        }]}
+        onPress={() => deletePost(post.id)}
+      >
+        <Text style={{ fontSize: 16 }}>
+          D
+        </Text>
+      </TouchableOpacity>
     </View>
   );
   return (
     loading ? Loading()
       : (
         <View style={[styles.container, { zIndex: 1 }]}>
-          <View style={[styles.boxSize, { height: 120, backgroundColor: '#454545' }]}>
-            <Text style={styles.boxTextStyle}>
+          <View style={[styles.boxSize, {
+            height: 140, backgroundColor: '#454545',
+          }]}
+          >
+            <Text style={[styles.boxTextStyle, styles.boldText, {
+              fontSize: 20,
+            }]}
+            >
               UserData :
             </Text>
-            <Text style={styles.boxTextStyle}>
-              id :
-              {data.findOneUser.id}
-            </Text>
-            <Text style={styles.boxTextStyle}>
-              login :
-              {data.findOneUser.login}
-            </Text>
-            <Text style={styles.boxTextStyle}>
-              name :
-              {data.findOneUser.name === null ? 'empty' : data.findOneUser.name }
-            </Text>
-            <Text style={styles.boxTextStyle}>
-              group :
-              {data.findOneUser.group === null ? 'empty' : data.findOneUser.group }
-            </Text>
-          </View>
-          <Text style={[styles.boxTextStyle, { fontSize: 30 }]}>Posts</Text>
-          <ScrollView style={styles.scroll}>
-            {data.findOneUser.posts.length > 0 ? data.findOneUser.posts.map((post) => (
-              <View key={post.title} style={[styles.boxSize, { height: 75 }]}>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={[styles.boxTextStyle, styles.boldText]}>
+                id :
+              </Text>
+              <Text style={styles.boxTextStyle}>
+                { data.findOneUser.id}
+              </Text>
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={[styles.boxTextStyle, styles.boldText]}>
+                login :
+              </Text>
+              <Text style={styles.boxTextStyle}>
+                {data.findOneUser.login}
+              </Text>
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={[styles.boxTextStyle, styles.boldText]}>
+                name :
+              </Text>
+              <Text style={styles.boxTextStyle}>
                 {
-                  mode ? adminButtons(post) : null
+                  data.findOneUser.name === null
+                    ? 'empty'
+                    : data.findOneUser.name
                 }
-                <Text style={styles.boxTextStyle}>
-                  login :
-                  {login}
+              </Text>
+            </View>
+            <View style={{
+              flexDirection: 'row',
+            }}
+            >
+              <Text
+                style={[styles.boxTextStyle, styles.boldText]}
+              >
+                group :
+              </Text>
+              <Text style={styles.boxTextStyle}>
+                {
+                  data.findOneUser.group === null
+                    ? 'empty'
+                    : data.findOneUser.group
+                }
+              </Text>
+            </View>
+          </View>
+          <Text style={[styles.boxTextStyle, styles.boldText, {
+            fontSize: 30,
+            color: '#454545',
+          }]}
+          >
+            Posts
+          </Text>
+          <ScrollView style={styles.scroll}>
+            {data.findOneUser.posts.length > 0
+              ? data.findOneUser.posts.map((post) => (
+                <View
+                  key={post.title}
+                  style={[styles.boxSize, { height: 75 }]}
+                >
+                  {mode ? adminButtons(post) : null}
+                  <View style={{flexDirection: 'row'}}>
+                    <Text style={[styles.boxTextStyle, styles.boldText]}>
+                      login :
+                    </Text>
+                    <Text style={styles.boxTextStyle}>
+                      {login}
+                    </Text>
+                  </View>
+                  <View style={{flexDirection: 'row'}}>
+                    <Text style={[styles.boxTextStyle, styles.boldText]}>
+                      title :
+                    </Text>
+                    <Text style={styles.boxTextStyle}>
+                      {post.title}
+                    </Text>
+                  </View>
+                  <View style={{flexDirection: 'row'}}>
+                    <Text style={[styles.boxTextStyle, styles.boldText]}>
+                      text :
+                    </Text>
+                    <Text style={styles.boxTextStyle}>
+                      {post.text}
+                    </Text>
+                  </View>
+                </View>
+              )) : (
+                <Text style={[styles.boxTextStyle, styles.boldText, {
+                  color: "#454545"
+                }]}
+                >
+                  This user nothing posted yet
                 </Text>
-                <Text style={styles.boxTextStyle}>
-                  title :
-                  {post.title}
-                </Text>
-                <Text style={styles.boxTextStyle}>
-                  text :
-                  {post.text === null ? 'empty' : post.text }
-                </Text>
-              </View>
-            )) : <Text>This user nothing posted yet</Text>}
+              )}
           </ScrollView>
         </View>
       )

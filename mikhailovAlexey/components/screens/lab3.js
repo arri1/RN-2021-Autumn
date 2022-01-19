@@ -43,14 +43,23 @@ const Lab3 = () => {
   return (
     <View style={[styles.container]}>
       <View style={{ height: 10 }} />
-      <View style={[styles.boxSize, {height: 141, alignItems: 'center'}]}>
+      <View style={[styles.boxSize, {
+        height: 141, alignItems: 'center'
+      }]}
+      >
         <View>
-          <Text style={[styles.boxTextStyle, { fontSize: 20 }]}>
+          <Text style={[styles.boxTextStyle, { 
+            fontSize: 20 
+          }]}
+          >
             Until to New Year left:
           </Text>
         </View>
         <View style={{ flexDirection: 'row' }}>
-          <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+          <View style={{ 
+            alignItems: 'center', justifyContent: 'center' 
+          }}
+          >
             <Text style={[styles.boxTextStyle, { fontSize: 50 }]}>
               {left['days']}
             </Text>
@@ -93,11 +102,25 @@ const Lab3 = () => {
           </View>
         </View>
       </View>
-      <TouchableOpacity style={[styles.memoButton, styles.memoButtonLeft, { backgroundColor: '#555' }]} onPress={onPressHandler}>
+      <TouchableOpacity 
+        style={[
+          styles.memoButton, styles.memoButtonLeft, { 
+            backgroundColor: '#555' 
+          }
+        ]} 
+        onPress={onPressHandler}
+        >
         <Text style={styles.buttonText}>SLOW</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={[styles.memoButton, styles.memoButtonRight]} onPressIn={onPressHandlerSecond}>
-        <Text style={styles.buttonText}>FAST</Text>
+      <TouchableOpacity 
+        style={[
+          styles.memoButton, styles.memoButtonRight
+        ]} 
+        onPressIn={onPressHandlerSecond}
+      >
+        <Text style={styles.buttonText}>
+          FAST
+        </Text>
       </TouchableOpacity>
     </View>
   );

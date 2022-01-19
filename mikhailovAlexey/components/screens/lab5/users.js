@@ -12,7 +12,7 @@ import Loading from './loading';
 
 import { getUsers } from '../../gql/queries';
 
-const Users = ({ navigation }) => {
+function Users({ navigation }) {
   React.useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -31,7 +31,7 @@ const Users = ({ navigation }) => {
             }}
           />
           <TouchableOpacity
-            onPress={search}
+            onPress={() => search()}
             style={{
               marginLeft: 10,
               height: 35,
@@ -43,7 +43,10 @@ const Users = ({ navigation }) => {
             }}
           >
             <Text style={[styles.buttonText, {
-              color: 'black', fontSize: 24, margin: 0, padding: 0,
+              color: 'black',
+              fontSize: 24,
+              margin: 0,
+              padding: 0,
             }]}
             >
               O
@@ -69,27 +72,49 @@ const Users = ({ navigation }) => {
     <View style={styles.container}>
       <ScrollView style={styles.scroll}>
         {data.findManyUser.map((user) => (
-          <TouchableOpacity key={user.login} style={[styles.boxSize, { height: 50 }]} onPress={() => navigation.navigate('User', { login: user.login })}>
-            <Text style={styles.boxTextStyle}>
-              login :
-              {user.login}
-            </Text>
-            <Text style={styles.boxTextStyle}>
-              name :
-              {user.name === null ? 'empty' : user.name }
-            </Text>
+          <TouchableOpacity
+            key={user.login}
+            style={[styles.boxSize, {
+              height: 60,
+            }]}
+            onPress={() => navigation.navigate('User', {
+              login: user.login,
+            })}
+          >
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={[styles.boxTextStyle, styles.boldText]}>
+                login :
+              </Text>
+              <Text style={styles.boxTextStyle}>
+                {user.login}
+              </Text>
+            </View>
+            <View style={{
+              flexDirection: 'row',
+            }}
+            >
+              <Text style={[styles.boxTextStyle, styles.boldText]}>
+                name :
+              </Text>
+              <Text style={styles.boxTextStyle}>
+                {user.name === null ? 'empty' : user.name }
+              </Text>
+            </View>
           </TouchableOpacity>
         ))}
       </ScrollView>
       <View style={[styles.boxSize, {
-        marginTop: 10, height: 50,
+        marginTop: 10, height: 50, alignItems: 'center',
       }]}
       >
-        <Text style={[styles.boxTextStyle, { textAlign: 'center' }]}>
-          Count of users:
-          {' '}
-          {data.findManyUser.length}
-        </Text>
+        <View style={{flexDirection: 'row'}}>
+          <Text style={[styles.boxTextStyle, styles.boldText]}>
+            Count of users:
+          </Text>
+          <Text style={styles.boxTextStyle}>
+            {data.findManyUser.length}
+          </Text>
+        </View>
       </View>
     </View>
   );

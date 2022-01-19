@@ -29,9 +29,11 @@ const reg = ({ navigation }) => {
   });
 
   const submit = () => {
-    console.log(`YES ${login}`);
     register({
-      variables: { login, password, group, name },
+      variables:
+        { 
+          login, password, group, name 
+        },
     });
   };
 
@@ -41,16 +43,57 @@ const reg = ({ navigation }) => {
     }
     >
       <View style={{ alignItems: 'center' }}>
-        <TouchableOpacity onPress={() => navigation.replace('Login')} style={styles.button}>
-          <Text style={styles.buttonText}>BACK</Text>
+        <TouchableOpacity
+          onPress={() => navigation.replace('Login')}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>
+            BACK
+          </Text>
         </TouchableOpacity>
-        <TextInput onChangeText={(text) => setLogin(text)} placeholder="LOGIN" placeholderTextColor="#fff" style={[styles.textArea, { marginVertical: 5 }]} />
-        <TextInput onChangeText={(text) => setGroup(text)} placeholder="GROUP" placeholderTextColor="#fff" style={[styles.textArea, { marginVertical: 5 }]} />
-        <TextInput onChangeText={(text) => setName(text)} placeholder="NAME" placeholderTextColor="#fff" style={[styles.textArea, { marginVertical: 5 }]} />
-        <TextInput onChangeText={(text) => setPassword(text)} placeholder="PASSWORD" placeholderTextColor="#fff" style={[styles.textArea, { marginVertical: 5 }]} />
-        <View style={{ marginVertical: 5 }}>
-          <TouchableOpacity onPress={submit} style={styles.button}>
-            <Text style={styles.buttonText}>SUBMIT</Text>
+        <TextInput
+          onChangeText={(text) => setLogin(text)}
+          placeholder="LOGIN"
+          placeholderTextColor="#fff"
+          style={[styles.textArea, { 
+            marginVertical: 5 
+          }]}
+        />
+        <TextInput
+          onChangeText={(text) => setGroup(text)}
+          placeholder="GROUP"
+          placeholderTextColor="#fff"
+          style={[styles.textArea, { 
+            marginVertical: 5 
+          }]}
+        />
+        <TextInput
+          onChangeText={(text) => setName(text)}
+          placeholder="NAME"
+          placeholderTextColor="#fff"
+          style={[styles.textArea, { 
+            marginVertical: 5 
+          }]}
+        />
+        <TextInput
+          onChangeText={(text) => setPassword(text)}
+          placeholder="PASSWORD"
+          placeholderTextColor="#fff"
+          style={[styles.textArea, { 
+            marginVertical: 5 
+          }]}
+        />
+        <View style={{ 
+          marginVertical: 5 
+        }}
+        >
+          <TouchableOpacity
+            onPress={submit}
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>
+              SUBMIT
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

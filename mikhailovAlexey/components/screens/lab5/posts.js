@@ -7,9 +7,7 @@ import {
 } from '@apollo/client';
 
 import styles from '../../styles/styles';
-
 import Loading from './loading';
-
 import { getPosts } from '../../gql/queries';
 
 const Posts = ({ navigation }) => {
@@ -43,7 +41,10 @@ const Posts = ({ navigation }) => {
             }}
           >
             <Text style={[styles.buttonText, {
-              color: 'black', fontSize: 24, margin: 0, padding: 0,
+              color: 'black',
+              fontSize: 24,
+              margin: 0,
+              padding: 0,
             }]}
             >
               O
@@ -70,31 +71,57 @@ const Posts = ({ navigation }) => {
     <View style={styles.container}>
       <ScrollView style={styles.scroll}>
         {data.findManyPost.map((post) => (
-          <TouchableOpacity key={post.id} style={[styles.boxSize, { height: 75 }]} onPress={() => navigation.navigate('User', { login: post.user.login })}>
-            <Text style={styles.boxTextStyle}>
-              userLogin :
-              {post.user.login}
-            </Text>      
-            <Text style={styles.boxTextStyle}>
-              title :
-              {post.title}
-            </Text>
-            <Text style={styles.boxTextStyle}>
-              text :
-              {post.text === null ? 'empty' : post.text }
-            </Text>
+          <TouchableOpacity
+            key={post.id}
+            style={[styles.boxSize, {
+              height: 75,
+            }]}
+            onPress={() => navigation.navigate('User', {
+              login: post.user.login,
+            })}
+          >
+            <View style={{flexDirection: 'row'}}>
+              <Text style={[styles.boxTextStyle, styles.boldText]}>
+                userLogin :
+              </Text>
+              <Text style={styles.boxTextStyle}>
+                {post.user.login}
+              </Text>
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={[styles.boxTextStyle, styles.boldText]}>
+                title :
+              </Text>
+              <Text style={styles.boxTextStyle}>
+                {post.title}
+              </Text>
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={[styles.boxTextStyle, styles.boldText]}>
+                text :
+              </Text>
+              <Text style={styles.boxTextStyle}>
+                {post.text === null ? 'empty' : post.text }
+              </Text>
+            </View>
           </TouchableOpacity>
         ))}
       </ScrollView>
-      <View style={[styles.boxSize, {
-        marginTop: 10, height: 50, borderWidth: 1, borderColor: 'white',
-      }]}
+      <View
+        style={[styles.boxSize, {
+          marginTop: 10,
+          height: 50,
+          alignItems: 'center',
+        }]}
       >
-        <Text style={[styles.boxTextStyle, { textAlign: 'center' }]}>
-          Count of posts:
-          {' '}
-          {data.findManyPost.length}
-        </Text>
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={[styles.boxTextStyle, styles.boldText]}>
+            Count of posts:
+          </Text>
+          <Text style={styles.boxTextStyle}>
+            {data.findManyPost.length}
+          </Text>
+        </View>
       </View>
     </View>
   );

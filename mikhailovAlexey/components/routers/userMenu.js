@@ -28,7 +28,10 @@ const UserMenu = ({ navigation }) => {
           color: 'white',
         },
         headerLeft: () => (
-          <TouchableOpacity style={{ marginRight: 10 }} onPress={() => navigation.replace('Menu')}>
+          <TouchableOpacity 
+            style={{ marginRight: 10 }} 
+            onPress={() => navigation.replace('Menu')}
+          >
             <Text style={
               {
                 fontSize: 24,
@@ -50,12 +53,24 @@ const UserMenu = ({ navigation }) => {
           headerLeft: () => (<Text></Text>),
         }}
       />
-      <Stack.Screen name="User" component={User} />
-      <Stack.Screen name="Users" component={Users} />
-      <Stack.Screen name="Posts" component={Posts} />
-      <Stack.Screen name="CreatePost" component={CreatePost} />
+      <Stack.Screen 
+        name="User" 
+        component={User} 
+      />
+      <Stack.Screen 
+        name="Users" 
+        component={Users} 
+      />
+      <Stack.Screen 
+        name="Posts" 
+        component={Posts} 
+      />
+      <Stack.Screen 
+        name="CreatePost" 
+        component={CreatePost} 
+      />
     </Stack.Navigator>
   );
-}
+};
 
 export default UserMenu;

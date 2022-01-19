@@ -10,8 +10,11 @@ const styles = StyleSheet.create({
   containerBackgroundColor: {
     backgroundColor: '#FFD232',
   },
+  boldText: {
+    fontFamily: 'Montserrat-Bold',
+  },
   box: {
-    backgroundColor: '#FF8B03',
+    backgroundColor: '#454545',
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: "center",
@@ -22,7 +25,7 @@ const styles = StyleSheet.create({
     marginVertical: 20
   },
   boxSize: {
-    backgroundColor: '#FF8B03',
+    backgroundColor: '#454545',
     borderRadius: 5,
     width: 370,
     margin: 5,
@@ -46,7 +49,7 @@ const styles = StyleSheet.create({
   navBarIcon : {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: "#FF8B03",
+    backgroundColor: "#454545",
     width: 40,
     height: 40,
     borderRadius: 5,
@@ -62,7 +65,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 40,
     borderRadius: 5,
-    backgroundColor: '#FF8B03',
+    backgroundColor: '#454545',
     elevation: 4,
   },
   buttonText: {
@@ -93,7 +96,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 40,
     borderRadius: 5,
-    backgroundColor: '#FF8B03',
+    backgroundColor: '#454545',
     elevation: 4,
     top: 195,
   },

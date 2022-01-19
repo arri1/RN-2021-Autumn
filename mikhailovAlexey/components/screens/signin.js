@@ -1,27 +1,23 @@
 import React from 'react';
 import {
-  View, Text, TouchableOpacity, TextInput,
+  Text, View, TouchableOpacity, TextInput,
 } from 'react-native';
-import {
-  useMutation,
-} from '@apollo/client';
-import styles from '../../styles/styles';
+import { useMutation } from '@apollo/client';
+import styles from '../styles/styles';
+import { AUTH } from '../gql/mutations';
 
-import Loading from './loading';
+import { auth } from '../store/tasks';
 
-import { CREPOST } from '../../gql/mutations';
-
-const CreatePost = ({ navigation, route }) => {
-  const { id } = route.params;
-  const [title, setTitle] = React.useState('');
-  const [text, setText] = React.useState('');
-  const [post] = useMutation(CREPOST, {
-    onCompleted: ({ createOnePost }) => {
-      navigation.goBack();
+const signIn = ({ navigation }) => {
+  const [login, setLogin] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [log] = useMutation(AUTH, {
+    onCompleted: ({ authUser }) => {
+      auth.dispatch({ type: 'setUser', login});
+      navigation.replace('TabNavigator');
     },
     onError: ({ message }) => {
       console.log(message);
-      console.log(id);
       if (message === 'Incorrect password') {
         console.log('Неверен пароль');
         return null;
@@ -29,27 +25,17 @@ const CreatePost = ({ navigation, route }) => {
       console.log('Что то пошло не так');
     },
   });
+
   const submit = () => {
-    post({
-      variables: { 
-        data: { 
-          title, 
-          text, 
-          user: { 
-            connect: { 
-              id 
-            } 
-          } 
-        } 
-      },
+    log({
+      variables: { login, password },
     });
   };
 
   return (
     <View style={
       [styles.container, { 
-        flex: 1, 
-        justifyContent: 'center' 
+        flex: 1, justifyContent: 'center' 
       }]
     }
     >
@@ -58,23 +44,23 @@ const CreatePost = ({ navigation, route }) => {
           style={[styles.boxTextStyle, styles.boldText, { 
             textAlign: 'center', 
             fontSize: 30, 
-            marginBottom: 15,
-            color: "#454545" 
-        }]}
+            marginBottom: 15, 
+            color: "#454545"
+          }]}
         >
-          New Post
+          Welcome
         </Text>
         <TextInput 
-          onChangeText={(text) => setTitle(text)} 
-          placeholder="Title" 
+          onChangeText={(text) => setLogin(text)} 
+          placeholder="LOGIN" 
           placeholderTextColor="#fff" 
           style={[styles.textArea, { 
             marginVertical: 5 
           }]} 
-        />
+          />
         <TextInput 
-          onChangeText={(text) => setText(text)} 
-          placeholder="Text" 
+          onChangeText={(text) => setPassword(text)} 
+          placeholder="PASSWORD" 
           placeholderTextColor="#fff" 
           style={[styles.textArea, { 
             marginVertical: 5 
@@ -86,7 +72,7 @@ const CreatePost = ({ navigation, route }) => {
             marginTop: 15, 
             justifyContent: 'space-between' 
           }}
-          >
+        >
           <TouchableOpacity 
             onPress={submit} 
             style={[styles.button]}
@@ -95,10 +81,20 @@ const CreatePost = ({ navigation, route }) => {
               SUBMIT
             </Text>
           </TouchableOpacity>
+          <TouchableOpacity 
+            onPress={() => 
+              navigation.replace('Signup')
+            } 
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>
+              CREATE
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
   );
-}
+};
 
-export default CreatePost;
+export default signIn;
