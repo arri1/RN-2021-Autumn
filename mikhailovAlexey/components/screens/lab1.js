@@ -2,8 +2,8 @@ import React from 'react';
 import {
   Text, View, Animated, TouchableOpacity,
 } from 'react-native';
-
 import styles from '../styles/styles';
+import { auth } from '../store/tasks'
 
 const Lab1 = () => {
   const [animation] = React.useState(new Animated.Value(0));
@@ -38,13 +38,21 @@ const Lab1 = () => {
 
   return (
     <Animated.View style={{
-      flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: boxInterpolation,
+      flex: 1, 
+      justifyContent: 'center', 
+      alignItems: 'center', 
+      backgroundColor: boxInterpolation,
     }}
     >
       <View>
-        <TouchableOpacity style={styles.button} title="UPDATE" onPress={handleAnimation}>
-          <Text style={styles.buttonText}>UPDATE</Text>
-          
+        <TouchableOpacity 
+          style={styles.button} 
+          title="UPDATE" 
+          onPress={handleAnimation}
+        >
+          <Text style={styles.buttonText}>
+            UPDATE
+          </Text>
         </TouchableOpacity>
       </View>
     </Animated.View>

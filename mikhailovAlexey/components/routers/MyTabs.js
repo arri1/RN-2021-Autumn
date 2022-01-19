@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import {
-  View, Image, StatusBar,
+  Image, StatusBar
 } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { loadItems } from '../../store/tasks';
+import { loadItems } from '../store/tasks';
 
 import styles from '../styles/styles';
 
@@ -13,15 +13,17 @@ import Lab1 from '../screens/lab1';
 import Lab2 from '../screens/lab2';
 import Lab3 from '../screens/lab3';
 import Lab4 from '../screens/lab4';
+import Lab5 from './userMenu';
 
 import homeIcon from '../icons/Home.png';
 import dataIcon from '../icons/mess.png';
 import timeIcon from '../icons/clock.png';
 import checkIcon from '../icons/checked.png';
+import menuIcon from '../icons/menu.png';
 
 const Tab = createBottomTabNavigator();
 
-const MyTabs = () =>{
+const MyTabs = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (dispatch) {
@@ -41,7 +43,7 @@ const MyTabs = () =>{
         tabBarStyle: styles.navBarBox,
         headerStyle: {
           backgroundColor: '#454545',
-          height: 60,
+          height: 56,
         },
         headerTitleStyle: {
           fontSize: 24,
@@ -114,8 +116,26 @@ const MyTabs = () =>{
           ),
         }}
       />
+      <Tab.Screen
+        name="UserMenu"
+        component={Lab5}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <Image
+              source={menuIcon}
+              style={{
+                borderRadius: 5,
+                width: 50,
+                height: 50,
+                tintColor: focused ? 'white' : '#FFD232',
+              }}
+            />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
-};
+}
 
 export default MyTabs;

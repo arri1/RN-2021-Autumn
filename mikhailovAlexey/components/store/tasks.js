@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
+import { createStore } from 'redux'
 
 export const dataSlice = createSlice({
   name: 'data',
@@ -30,6 +31,17 @@ export const dataSlice = createSlice({
     },
   },
 });
+
+const user = (state = 'user', action) => {
+  switch (action.type) {
+    case 'setUser':
+      return action.login
+    default:
+      return state
+  }
+}
+
+export const auth = createStore(user)
 
 export const {loadItems, checkItem} = dataSlice.actions;
 
