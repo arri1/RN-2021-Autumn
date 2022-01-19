@@ -27,3 +27,22 @@ export const AUTH = gql`
     }
   }
 `;
+
+export const CREPOST = gql`
+  mutation ($data: PostCreateInput!) {
+    createOnePost(data: $data) {
+      id
+      title
+      text
+    }
+  }
+`;
+
+export const DELPOST = gql`
+  mutation ($where: PostWhereUniqueInput!) {
+    deleteOnePost(where: $where) {
+      title
+      text
+    }
+  }
+`;

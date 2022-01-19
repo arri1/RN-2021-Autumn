@@ -43,7 +43,7 @@ const Lab3 = () => {
   return (
     <View style={[styles.container]}>
       <View style={{ height: 10 }} />
-      <View style={[styles.memoBoxSize]}>
+      <View style={[styles.boxSize, {height: 141, alignItems: 'center'}]}>
         <View>
           <Text style={[styles.boxTextStyle, { fontSize: 20 }]}>
             Until to New Year left:

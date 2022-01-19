@@ -1,15 +1,15 @@
 import React from 'react';
 import {
-  Text, View,
+  Text, View, TouchableOpacity
 } from 'react-native';
 
 const MenuPost = () => {
   return (
       <View style={{
-        top: 10,
-      flex: 1, justifyContent: 'center', alignItems: 'center', width: 200, height: 100, position: 'absolute'
+        backgroundColor: 'white',
+        left: 150, top: 150, zIndex: 1, justifyContent: 'center', alignItems: 'center', width: 200, height: 200, position: 'absolute'
     }}>
-        <Text>Loading...</Text>
+        <TouchableOpacity><Text>Loadingaaaa...</Text></TouchableOpacity>
       </View>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {
-  Image, StatusBar, TouchableOpacity, Text
+  Image, StatusBar
 } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import axios from 'axios';
@@ -13,17 +13,17 @@ import Lab1 from '../screens/lab1';
 import Lab2 from '../screens/lab2';
 import Lab3 from '../screens/lab3';
 import Lab4 from '../screens/lab4';
-import Lab5 from '../screens/lab5';
+import Lab5 from './userMenu';
 
 import homeIcon from '../icons/Home.png';
 import dataIcon from '../icons/mess.png';
 import timeIcon from '../icons/clock.png';
 import checkIcon from '../icons/checked.png';
-import noneIcon from '../icons/none.png';
+import menuIcon from '../icons/menu.png';
 
 const Tab = createBottomTabNavigator();
 
-const MyTabs = ({navigation}) => {
+const MyTabs = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (dispatch) {
@@ -43,23 +43,13 @@ const MyTabs = ({navigation}) => {
         tabBarStyle: styles.navBarBox,
         headerStyle: {
           backgroundColor: '#454545',
-          height: 70,
+          height: 56,
         },
         headerTitleStyle: {
           fontSize: 24,
           fontFamily: 'Montserrat-Regular',
           color: 'white',
         },
-        headerRight: () => (
-            <TouchableOpacity
-              onPress={() => navigation.replace('Login')}
-              style={[styles.button, {marginRight: 10}]}
-            >
-                <Text style={styles.buttonText}>
-                    LOG OUT
-                </Text>
-            </TouchableOpacity>
-          ),
       }}
     >
       <Tab.Screen
@@ -127,13 +117,15 @@ const MyTabs = ({navigation}) => {
         }}
       />
       <Tab.Screen
-        name="Search"
+        name="UserMenu"
         component={Lab5}
         options={{
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <Image
-              source={noneIcon}
+              source={menuIcon}
               style={{
+                borderRadius: 5,
                 width: 50,
                 height: 50,
                 tintColor: focused ? 'white' : '#FFD232',

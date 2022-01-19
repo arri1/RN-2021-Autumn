@@ -2,8 +2,8 @@ import React from 'react';
 import {
   Text, View, Animated, TouchableOpacity,
 } from 'react-native';
-
 import styles from '../styles/styles';
+import { auth } from '../store/tasks'
 
 const Lab1 = () => {
   const [animation] = React.useState(new Animated.Value(0));
@@ -20,6 +20,7 @@ const Lab1 = () => {
   };
 
   const handleAnimation = () => {
+    console.log(auth.getState())
     if (animation.__getValue() === 100) {
       Animated.timing(animation, {
         toValue: 0,

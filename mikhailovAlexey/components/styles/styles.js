@@ -1,6 +1,4 @@
-import {StyleSheet} from 'react-native';
-
-
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -41,7 +39,7 @@ const styles = StyleSheet.create({
   },
   navBarBox: {
     top: 0,
-    height: 75,
+    height: 70,
     backgroundColor: '#454545',
     color: 'white',
   },
@@ -49,8 +47,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: "#FF8B03",
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     borderRadius: 5,
   },
   navBarIconText : {
@@ -72,6 +70,21 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'white',
   },
+  menuButton: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: 370,
+    height: 120,
+    borderRadius: 5,
+    backgroundColor: '#454545',
+    elevation: 4,
+    margin: 6,
+  },
+  menuButtonText: {
+    fontFamily: 'Montserrat-Regular',
+    fontSize: 50,
+    color: 'white',
+  },
   memoButton: {
     zIndex: -1,
     position: 'absolute',
@@ -90,21 +103,6 @@ const styles = StyleSheet.create({
   memoButtonRight: {
     right: 15,
   },
-  memoBoxSize: {
-    backgroundColor: '#FF8B03',
-    alignItems: "center",
-    width: 380,
-    margin: 5,
-    height: 170,
-    borderRadius: 5,
-    justifyContent: 'center',
-    elevation: 4,
-  },
-  memoBoxTextStyle: {
-    color: "white",
-    fontSize: 16,
-    fontFamily: 'Montserrat-Regular'
-  },
   scroll: {
     margin : 15,
   },
@@ -117,8 +115,29 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontSize: 20,
     fontFamily: 'Montserrat-Regular',
+    lineHeight: 5,
   },
-
+  topRightButton: {
+    marginRight: 5,
+    height: 35,
+    width: 100,
+    borderRadius: 5,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  postEditButton: {
+    width: 25, 
+    height: 25, 
+    backgroundColor: 'white', 
+    zIndex: 1, 
+    position:'absolute', 
+    right: 30, 
+    top: 0,
+    borderRadius: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
 export default styles;
