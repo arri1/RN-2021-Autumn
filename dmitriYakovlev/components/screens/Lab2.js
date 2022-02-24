@@ -73,9 +73,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontSize: 15,
+    fontSize: 18,
     fontFamily: 'Sofia-Regular',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    color: 'white'
   },
   image: {
     flex: 1,

@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   title2: {
     fontSize: 18,
     textAlign: 'center',
-    color: 'black',
+    color: 'white',
     fontFamily: 'Sofia-Regular',
   },
   button: {
