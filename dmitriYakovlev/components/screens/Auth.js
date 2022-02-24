@@ -9,13 +9,16 @@ import picture from '../images/Lab4.png';
 const Auth = ({navigation}) => {
     const [login, setLogin] = useState(null);
     const [password, setPassword] = useState(null);
-    
+
+
     const [authUser] = useMutation(AUTH_USER, {
+        // функция выполнения запроса
         onCompleted: async ({authUser}) => {
             await AsyncStorage.setItem('token', authUser.token);
             navigation.navigate("tab");
             setLogin(authUser.user.name);
           },
+          // при ошибке запроса
           onError: ({message}) => {
             console.log(message);
             if (message === 'Incorrect password') {
@@ -26,6 +29,7 @@ const Auth = ({navigation}) => {
           },
     });
 
+    // функция проверяет авторизацию пользователя
     const submit = () => {
         if (login != null && password != null){
             authUser({

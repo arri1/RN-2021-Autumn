@@ -5,6 +5,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import picture from '../images/Lab2.png';
 
 const First = ({navigation}) => {
+
+    //функция отправляет пользователя или на авторизацию или на основную страницу, если он не вышел из аккаунта
     const check =  async () => {
         if (await AsyncStorage.getItem('token')){
             navigation.navigate("tab")
@@ -12,6 +14,7 @@ const First = ({navigation}) => {
             navigation.navigate("auth")
         }
     }
+
     return ( 
         <View style={styles.main}>
             <ImageBackground source={picture} resizeMode='cover' style={styles.image}>

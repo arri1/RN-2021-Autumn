@@ -54,10 +54,12 @@ const Reg = ({navigation}) => {
     const [name,setName] = useState(null)
 
     const [registrate] = useMutation(REGISTER_USER, {
+        // функция выполнения запроса при регистрации
         onCompleted: () => {
           console.log('Регистрация прошла успешно');
           navigation.navigate('auth');
         },
+        // если возникла ошибка
         onError: ({message}) => {
           console.log(message);
           if (message === 'Unique constraint failed on the fields: (`login`)') {
@@ -67,6 +69,8 @@ const Reg = ({navigation}) => {
           console.log('Что то пошло не так');
         },
       });
+
+    // функция регистрации
     const submit = () => {
         console.log('YES ' + login);
         registrate({

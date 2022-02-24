@@ -10,6 +10,7 @@ const Stack = createNativeStackNavigator();
 
 export default App = () =>{
   StatusBar.setHidden(true);
+  // для навигации 
   return (
     <Stack.Navigator screenOptions={{headerShown:false}}>
       <Stack.Screen

@@ -24,12 +24,14 @@ const Lab5 = ({navigation}) => {
       onError: () => {},
     });
 
+    // функция выхода из аккаунта
     const  exitAcc = async () => {
         await AsyncStorage.clear();  
         client.clearStore();   
         navigation.navigate("first");  
     }
 
+    // функция изменяет имя или группу пользователя
     const onPressUpdate = () => {
         update({
             variables:{
@@ -44,12 +46,14 @@ const Lab5 = ({navigation}) => {
     };
 
     const [update] = useMutation(UPDATE_USER, {
+        // функция выполнении запроса
         onCompleted: () => {
             Alert.alert("Изменения сохранены","успешно", [{
                 text:"OK",
                 style: "cancel"
             }]);
         },
+        // если в запросе возникла ошибка
         onError: () => {
             Alert.alert("Ошибка","не удалось сохранить значения", [{
                 text:"OK",
