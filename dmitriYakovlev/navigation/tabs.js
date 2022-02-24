@@ -10,11 +10,13 @@ import Lab1 from '../components/screens/Lab1'
 import Lab2 from '../components/screens/Lab2'
 import Lab3 from '../components/screens/Lab3'
 import Lab4 from '../components/screens/Lab4'
+import Lab5 from '../components/screens/Lab5';
 
 import play from '../components/images/play.png';
 import plus from '../components/images/plus.png';
 import copy from '../components/images/copy.png';
 import log from '../components/images/log.png';
+import profile from '../components/images/user.png';
 
 const Tab = createBottomTabNavigator();
 
@@ -56,6 +58,10 @@ const Tabs = () => {
       <Tab.Screen name="ЛАБ 4" component={Lab4} 
         options={{
           tabBarIcon:() => <Image source={log} style={styles.icon}/>
+      }}/>
+      <Tab.Screen name="ЛАБ 5" component={Lab5} 
+        options={{
+          tabBarIcon:() => <Image source={profile} style={styles.icon}/>
       }}/>
     </Tab.Navigator>
   );
