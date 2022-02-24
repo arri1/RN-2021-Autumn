@@ -9,18 +9,6 @@ import picture from '../images/Lab4.png';
 const Auth = ({navigation}) => {
     const [login, setLogin] = useState(null);
     const [password, setPassword] = useState(null);
-  
-    const check =  async () => {
-        if (await AsyncStorage.getItem('token')){
-            if(username !== null && password !== null && name !== null) {
-                setUser(username);
-                setPassword(password);
-                navigation.navigate("tab")
-            }
-        } else {
-            navigation.navigate("auth")
-        }
-    }
     
     const [authUser] = useMutation(AUTH_USER, {
         onCompleted: async ({authUser}) => {
