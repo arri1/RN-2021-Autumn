@@ -1,17 +1,39 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
 import lab1 from '../screens/lab1';
 import lab2 from '../screens/lab2';
 import lab3 from '../screens/lab3';
 import lab4 from '../screens/lab4';
+import lab5 from '../screens/lab5/lab5';
+import Posts from '../screens/lab5/posts';
+import MyPosts from '../screens/lab5/myPosts';
+
+import axios from 'axios';
+import {useDispatch} from 'react-redux';
+import {loadItems} from '../../store/tasks';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+      if (dispatch) {
+        axios
+          .get('https://jsonplaceholder.typicode.com/comments?postId=1&postId=2')
+          .then(({data}) => {
+            dispatch(loadItems(data));
+          })
+          .catch(() => {});
+      }
+    }, [dispatch]);
+    
     return(
         <Tab.Navigator
             screenOptions = {{
+                tabBarHideOnKeyboard: true,
                 tabBarShowLabel: false,
                 tabBarStyle: {
                     position: 'absolute',
@@ -25,9 +47,10 @@ const TabNavigation = () => {
                 }
             }}
         >
+
             <Tab.Screen 
                 name = "Lab 1" 
-                component = {lab1} 
+                component = {lab1}
                 options = {{
                     tabBarIcon: ({focused}) => (
                         <View style = {{alignItems: 'center', justifyContent: 'center', top: 3}}>
@@ -84,7 +107,7 @@ const TabNavigation = () => {
                                 }}
                             />
                             <Text style = {{color: focused ?'#2F88F0' : '#27303E', fontSize: 12}}>
-                                    UseMemo
+                                    Memo
                             </Text>
                         </View>
                     ),
@@ -112,7 +135,73 @@ const TabNavigation = () => {
                     ),
                 }}
             />
-            
+
+            <Tab.Screen 
+                name = "Lab 5" 
+                component = {lab5} 
+                options = {{
+                    tabBarIcon: ({focused}) => (
+                        <View style = {{alignItems: 'center', justifyContent: 'center', top: 3}}>
+                            <Image 
+                                source = {require('../../img/5.png')}
+                                resizeMode = "contain"
+                                style={{
+                                    width: 40,
+                                    height: 40,
+                                }}
+                            />
+                            <Text style = {{color: focused ?'#2F88F0' : '#27303E', fontSize: 12}}>
+                                    GraphQL
+                            </Text>
+                        </View>
+                    ),
+                }}
+            />
+
+            <Tab.Screen 
+                name = "MyPosts" 
+                component = {MyPosts} 
+                options = {{
+                    tabBarIcon: ({focused}) => (
+                        <View style = {{alignItems: 'center', justifyContent: 'center', top: 3}}>
+                            <Image 
+                                source = {require('../../img/5.png')}
+                                resizeMode = "contain"
+                                style={{
+                                    width: 40,
+                                    height: 40,
+                                }}
+                            />
+                            <Text style = {{color: focused ?'#2F88F0' : '#27303E', fontSize: 12}}>
+                                    MyPosts
+                            </Text>
+                        </View>
+                    ),
+                }}
+            />
+
+            <Tab.Screen 
+                name = "Posts" 
+                component = {Posts} 
+                options = {{
+                    tabBarIcon: ({focused}) => (
+                        <View style = {{alignItems: 'center', justifyContent: 'center', top: 3}}>
+                            <Image 
+                                source = {require('../../img/5.png')}
+                                resizeMode = "contain"
+                                style={{
+                                    width: 40,
+                                    height: 40,
+                                }}
+                            />
+                            <Text style = {{color: focused ?'#2F88F0' : '#27303E', fontSize: 12}}>
+                                    posts
+                            </Text>
+                        </View>
+                    ),
+                }}
+            />
+
         </Tab.Navigator>
     );
 }
