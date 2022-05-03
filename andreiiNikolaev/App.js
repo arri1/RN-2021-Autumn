@@ -17,10 +17,8 @@ export default function App() {
     <View style={styles.container}>
       <Header />   
       <View style={styles.elementStyle}>
-       <View style={styles.colorBox}>
-         <Text style={{backgroundColor: randomRgb(), width: 300, height: 300, borderRadius: 5 }}></Text>
-       </View>
-       <Button title ="Random color" onPress={() => {setColors([...colors, randomRgb()]);  }}/>
+        <Text style={{backgroundColor: randomRgb(), width: 300, height: 300, borderRadius: 5, marginVertical: 40 }}></Text>
+        <Button title ="Random color" onPress={() => {setColors([...colors, randomRgb()]);  }}/>
       </View>   
     </View>  
   );
@@ -30,10 +28,7 @@ const styles = StyleSheet.create({
   container: {
      flex: 1,
      backgroundColor: 'aqua',
-  },
-  colorBox: {
-   marginVertical: 40,
-  },
+  }, 
   elementStyle: {
     top: 60,
     alignItems: 'center',
