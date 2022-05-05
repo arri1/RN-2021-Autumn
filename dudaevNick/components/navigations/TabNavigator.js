@@ -1,13 +1,29 @@
-import React from 'react';
+import { Font } from 'expo';
+import React, {useEffect} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {StyleSheet, Text, View} from 'react-native';
-
 import Lab1 from '../screens/Lab1';
+import Lab2 from '../screens/Lab2';
+import {useDispatch} from 'react-redux';
+import {loadItems} from '../../store/data';
+import axios from 'axios';
 
 
 const Tab = createBottomTabNavigator();
-
+  
 const TabNavigator = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (dispatch) {
+      axios
+        .get('https://my-json-server.typicode.com/dudaev24/den/task')
+        .then(({data}) => {
+          dispatch(loadItems(data));
+        })
+        .catch(() => {});
+    }
+  }, [dispatch]);
+
   return (
     <Tab.Navigator
       headerMode="none"
@@ -33,6 +49,18 @@ const TabNavigator = () => {
           tabBarIcon: () => (
             <View>
               <Text style={styles.text}>LAB1</Text>
+            </View>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="LAB2"
+        component={Lab2}
+        options={{
+          headerShown: false,
+          tabBarIcon: () => (
+            <View>
+              <Text style={styles.text}>LAB2</Text>
             </View>
           ),
         }}
