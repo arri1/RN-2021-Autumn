@@ -5,6 +5,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import Lab1 from '../screens/Lab1';
 import Lab2 from '../screens/Lab2';
 import Lab3 from '../screens/Lab3';
+import Lab4 from '../screens/Lab4';
 import {useDispatch} from 'react-redux';
 import {loadItems} from '../../store/data';
 import axios from 'axios';
@@ -76,6 +77,19 @@ const TabNavigator = () => {
           tabBarIcon: () => (
             <View>
               <Text style={styles.text}>LAB3</Text>
+            </View>
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name="LAB4"
+        component={Lab4}
+        options={{
+          headerShown: false,
+          tabBarIcon: () => (
+            <View>
+              <Text style={styles.text}>LAB4</Text>
             </View>
           ),
         }}
