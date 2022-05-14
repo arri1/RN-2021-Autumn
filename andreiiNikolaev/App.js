@@ -1,5 +1,5 @@
-import React,{useState} from 'react';
 import {StyleSheet,Text, Button, View} from 'react-native';
+import React,{useState} from 'react';
 import Header from './components/Header';
 
 export default function App() {
