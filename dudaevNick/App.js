@@ -1,18 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
-import { Font } from 'expo';
+
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import TabNavigator from './components/navigations/TabNavigator';
+import TopTabNavigator from './components/screens/Lab5';
 import store from './store';
 import {Provider} from 'react-redux';
-
+import {ApolloProvider} from '@apollo/client';
+import client from './components/apollo/apollo';
 
 const App = () => {
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <TabNavigator />
-      </NavigationContainer>
+      <ApolloProvider client={client}>
+        <NavigationContainer>
+          <TopTabNavigator />
+        </NavigationContainer>
+      </ApolloProvider>
     </Provider>
   );
 };
