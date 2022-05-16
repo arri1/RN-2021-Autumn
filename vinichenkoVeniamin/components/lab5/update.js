@@ -101,7 +101,7 @@ const Update = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     view: {
-        backgroundColor: '#FFE6DC',
+        backgroundColor: '#E8EAED',
         flex:1
     },
     main: {
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
         color: 'red'
     },
     button:{
-        backgroundColor: '#E88F5D',
+        backgroundColor: '#5AD2F4',
         width: 200,
         height: 50,
         borderRadius: 5,
