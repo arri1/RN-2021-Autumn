@@ -8,13 +8,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: 'gray',
+        backgroundColor: '#E8EAED',
     },
     task: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '90%',
-        backgroundColor: 'purple',
+        backgroundColor: '#5AD2F4',
         padding: 10,
         borderRadius: 10,
         marginBottom: 10,
