@@ -5,6 +5,7 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import {useMutation} from '@apollo/client';
 import {REG} from '../apollo/mutations';
@@ -15,7 +16,7 @@ const RegUser = ({navigation}) => {
   const [name, onChangeName] = useState(null);
   const [registrated, setRegistrated] = useState(false);
 
-  const [registration] = useMutation(REG, {
+  const [registration,{loading}] = useMutation(REG, {
     onCompleted: () => {
       setRegistrated(true);
     },
@@ -26,6 +27,12 @@ const RegUser = ({navigation}) => {
       variables: {login, password, name},
     });
   };
+
+  if (loading) return (
+  <View style={styles.container}>
+    <ActivityIndicator size="small" color="#0000ff"/>
+  </View>
+  )
   return (
     <View style={styles.main}>
       {!registrated && (
@@ -72,6 +79,12 @@ const RegUser = ({navigation}) => {
   );
 };
 const styles = StyleSheet.create({
+  container: {
+    height: '100%',
+    backgroundColor: '#30363d',
+    alignItems:'center',
+    justifyContent:'center',
+  },
   main: {
     height: '100%',
     backgroundColor: '#30363d',
