@@ -4,13 +4,17 @@ import {NavigationContainer} from '@react-navigation/native'
 import Lab1 from './screens/Lab1'
 import Lab2 from './screens/Lab2'
 import Lab3 from './screens/Lab3'
+import Lab4 from './screens/Lab4'
 import { StyleSheet, View, Text, Image } from 'react-native';
+import {Provider} from 'react-redux';
+import {store} from './app/store';
 
 
 const Tab = createBottomTabNavigator()
 
 const App = () => {
   return (
+    <Provider store={store}>
       <NavigationContainer>
           <Tab.Navigator
               headerMode="none"
@@ -53,8 +57,21 @@ const App = () => {
                     ),
                   }}
               />
+              <Tab.Screen
+                  name="Lab4"
+                  component={Lab4}
+                  options={{
+                    headerShown: false,
+                    tabBarIcon: () => (
+                      <View>
+                        <Image  source={require('./assets/icons/icon.png')}/>
+                      </View>
+                    ),
+                  }}
+              />
           </Tab.Navigator>
       </NavigationContainer>
+      </Provider>
   )
 }
 const styles = StyleSheet.create({
