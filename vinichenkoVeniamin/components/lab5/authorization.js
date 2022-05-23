@@ -45,7 +45,7 @@ const Authorization = ({ navigation }) => {
             getData();
         }
         else {
-            alert("Введите все данные!")
+            alert("Fill in all the fields!")
         }
     };
 
@@ -55,25 +55,25 @@ const Authorization = ({ navigation }) => {
 
     return (
         <View style={styles.main}>
-            <Text style={styles.title}>Авторизация</Text>
+            <Text style={styles.title}>Authorization</Text>
             <TextInput
                 style={styles.box}
-                placeholder="Логин"
+                placeholder="Username"
                 value={login}
                 onChangeText={enteredText => setLogin(enteredText)}
             />
             <TextInput
                 style={styles.box}
-                placeholder="Пароль"
+                placeholder="Password"
                 value={password}
                 type={password}
                 onChangeText={enteredText => setPassword(enteredText)}
             />
             <TouchableOpacity style={styles.button} onPress={Login}>
-                <Text style={styles.text}>Войти</Text>
+                <Text style={styles.text}>Sign in</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={goRegistration}>
-                <Text style={styles.link}>Зарегистрироваться</Text>
+                <Text style={styles.link}>Sign up</Text>
             </TouchableOpacity>
         </View>
     );
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     link: {
         fontFamily: "Montserrat",
         fontSize: 15,
-        color: 'red'
+        color: 'black'
     },
     button:{
         backgroundColor: '#5AD2F4',

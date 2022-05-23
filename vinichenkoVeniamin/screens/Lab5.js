@@ -1,9 +1,9 @@
 import React, {useState, useCallback, useEffect} from 'react';
-import {View, ScrollView, Text, StyleSheet, TextInput, TouchableOpacity, Image, AsyncStorage} from 'react-native';
+import {View, ScrollView, Text, StyleSheet, TextInput, TouchableOpacity, Image} from 'react-native';
 import {GET_USER} from '../components/lab5/user';
 import {FIND_MANY_POST, DELETE_ONE_POST} from '../components/lab5/getPosts';
 import {useApolloClient, useQuery, useMutation} from '@apollo/client';
-import backIcon from '../assets/icons/backIcon.png';
+import AsyncStorage from "@react-native-community/async-storage";
 import plus from '../assets/icons/plus.png';
 import edit from '../assets/icons/editing.png';
 
@@ -18,7 +18,7 @@ const Lab5 = ({ navigation }) => {
             setId(user.id);
         },
         onError: () => {
-            console.log("Что-то не так");
+            console.log("Something is wrong");
         }
     });
 
@@ -35,7 +35,7 @@ const Lab5 = ({ navigation }) => {
 
     const [deleteItem] = useMutation(DELETE_ONE_POST, {
         onCompleted: ({deleteOnePost}) => {
-            alert("Пост был удален!");
+            alert("The post was delelted!");
         },
         onError: ({message}) => {
             console.log(message);

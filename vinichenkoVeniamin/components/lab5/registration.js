@@ -18,11 +18,11 @@ const Registration = ({ navigation }) => {
                 addUser();
             }
             else {
-                alert("Пароли не совпадают!");
+                alert("Passwords do not match!");
             }
         }
         else {
-            alert("Придумайте логин");
+            alert("Create a username");
         }
     };
 
@@ -40,7 +40,7 @@ const Registration = ({ navigation }) => {
     const [userRegistration] = useMutation(REG, {
         onCompleted: async ({registerUser}) => {
             await AsyncStorage.setItem('token', registerUser.token);
-            console.log("Регистрация прошла успешно");
+            //console.log("Signed up successully");
             apollo.writeQuery({query: GET_USER, data: {user: registerUser.user}});
             navigation.replace('Authorization');
         },
@@ -57,27 +57,27 @@ const Registration = ({ navigation }) => {
                 <Image source={backIcon} style={styles.icon}/>
             </TouchableOpacity>
             <View style={styles.main}>
-                <Text style={styles.title}>Регистрация</Text>
+                <Text style={styles.title}>Sign up</Text>
                 <TextInput
                     style={styles.box}
-                    placeholder="Логин"
+                    placeholder="Username"
                     value={login}
                     onChangeText={enteredText => setLogin(enteredText)}
                 />
                 <TextInput
                     style={styles.box}
-                    placeholder="Пароль"
+                    placeholder="Password"
                     value={password}
                     onChangeText={enteredText => setPassword(enteredText)}
                 />
                 <TextInput
                     style={styles.box}
-                    placeholder="Повторите пароль"
+                    placeholder="Confirm password"
                     value={confirmPassword}
                     onChangeText={enteredText => setConfirmPassword(enteredText)}
                 />
                 <TouchableOpacity style={styles.button} onPress={registrationPressed}>
-                    <Text style={styles.text}>Регистрация</Text>
+                    <Text style={styles.text}></Text>
                 </TouchableOpacity>
             </View>
         </View>
