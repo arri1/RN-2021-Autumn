@@ -12,7 +12,7 @@ const NewPost = ({ navigation }) => {
 
     const createButtonClicked = () => {
         if (text === '' || title === '') {
-            alert("Введите все данные!");
+            alert("Fill all the fields!");
         }
         else {
             onSave();
@@ -30,7 +30,7 @@ const NewPost = ({ navigation }) => {
 
     const [save] = useMutation(CREATE_ONE_POST, {
         onCompleted: ({createOnePost}) => {
-            alert("Пост добавлен!");
+            alert("The post was added!");
             navigation.goBack();
         },
         onError: ({ message }) => {
@@ -59,21 +59,21 @@ const NewPost = ({ navigation }) => {
                 <Image source={backIcon} style={styles.icon}/>
             </TouchableOpacity>
             <View style={styles.main}>
-                <Text style={styles.title}>Добавить новый пост</Text>
+                <Text style={styles.title}>Add a new post</Text>
                 <TextInput
                     style={styles.box}
-                    placeholder="Заголовок"
+                    placeholder="Title"
                     value={title}
                     onChangeText={enteredText => setTitle(enteredText)}
                 />
                 <TextInput
                     style={styles.box}
-                    placeholder="Текст"
+                    placeholder="Text"
                     value={text}
                     onChangeText={enteredText => setText(enteredText)}
                 />
                 <TouchableOpacity style={styles.button} onPress={createButtonClicked}>
-                    <Text style={styles.text}>Создать</Text>
+                    <Text style={styles.text}>Create</Text>
                 </TouchableOpacity>
             </View>
         </View>

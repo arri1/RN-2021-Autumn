@@ -1,5 +1,4 @@
 import {View, ScrollView, Text, StyleSheet, TextInput, TouchableOpacity, Image} from 'react-native';
-import AsyncStorage from "@react-native-community/async-storage";
 import {gql, useQuery, ApolloClient, InMemoryCache} from "@apollo/client";
 import React, {useState} from 'react';
 import {useMutation} from '@apollo/client';
@@ -18,14 +17,14 @@ const Update = ({ navigation }) => {
             setGroup(user.group);
         },
         onError: () => {
-            console.log("Что-то не так");
+            console.log("Something is wrong");
         }
     });
 
     const [update] = useMutation(UPDATE_USER, {
         onCompleted: ({ user }) => {
-            console.log("Все сохранилось");
-            alert("Все сохранилось!");
+            console.log("Saved");
+            alert("Saved!");
             navigation.goBack();
         },
         onError: ({message}) => {
@@ -51,11 +50,11 @@ const Update = ({ navigation }) => {
                 updateUser();
             }
             else {
-                alert("Проверьте пароли!");
+                alert("Check the passwords!");
             }
         }
         else {
-            alert("Введите все данные!");
+            alert("Fill all the fields!");
         }
     };
 
@@ -66,7 +65,7 @@ const Update = ({ navigation }) => {
                 <Image source={backIcon} style={styles.icon}/>
             </TouchableOpacity>
             <View style={styles.main}>
-                <Text style={styles.title}>Редактирование пользователя</Text>
+                <Text style={styles.title}>User editing</Text>
                 <TextInput
                     style={styles.box}
                     placeholder="Имя"
