@@ -18,7 +18,6 @@ export default function MainContainer() {
                 tabBarIcon: ({focused,color,size }) => {
                    let iconName;
                    let rn = route.name;
-
                    if (rn === Lab1Name) {
                        iconName = focused ? 'numeric-1-box' : 'numeric-1-box-outline'
                    } else if (rn === Lab2Name) {

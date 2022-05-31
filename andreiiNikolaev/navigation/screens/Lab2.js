@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react';
 import { Text,  StyleSheet, ScrollView} from 'react-native';
 import axios from 'axios';
 
-export default function Lab2({navigation}) {
+export default function Lab2({}) {
     const [data, dataSet] = useState([]);
 
     useEffect(() => {
@@ -13,9 +13,9 @@ export default function Lab2({navigation}) {
         })
         .catch(() => {});
     });
-  
+
     return (
-      <ScrollView style={styles.from}>
+      <ScrollView style={styles.container}>
         {data.map(item => (
           <Text style={styles.item} key={item.id}>
             {item.title}
@@ -24,8 +24,12 @@ export default function Lab2({navigation}) {
       </ScrollView>
     );
   };
-  
+
   const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: 'lightyellow'
+    },    
     item: {
       marginTop: '5%',     
       width: '100%',
@@ -37,4 +41,3 @@ export default function Lab2({navigation}) {
   });
 
 
-    
