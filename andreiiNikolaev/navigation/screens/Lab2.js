@@ -1,43 +1,58 @@
 import React, { useState, useEffect} from 'react';
-import { Text,  StyleSheet, ScrollView} from 'react-native';
-import axios from 'axios';
+import { ActivityIndicator, FlatList, Text, StyleSheet, ScrollView} from 'react-native';
 
 export default function Lab2({}) {
-    const [data, dataSet] = useState([]);
+    const [isLoading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
+
+    //Вместо axios использован fetch. Код написан в соответствии с рекомендованным шаблоном использования fetch(reactnative версии 0.68) от официального сайта React Native https://reactnative.dev/docs/network#using-fetch .
+    const ToDoList = () => {
+      return fetch('https://my-json-server.typicode.com/Andrey1291/tasks/db')
+        .then((response) => response.json())
+        .then((json) => {
+          return json.task;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
 
     useEffect(() => {
-      axios
-        .get('https://my-json-server.typicode.com/Andrey1291/tasks/task')
-        .then(response => {
-          dataSet(response.data);
-        })
-        .catch(() => {});
-    });
+      ToDoList();
+    }, []);
 
-    return (
-      <ScrollView style={styles.container}>
-        {data.map(item => (
-          <Text style={styles.item} key={item.id}>
-            {item.title}
-          </Text>
-        ))}
-      </ScrollView>
+    return (      
+       <ScrollView style={styles.container}>
+        {isLoading ? <ActivityIndicator/> : (
+        <FlatList
+          data={data}
+          keyExtractor={({ id }, index) => id}
+          renderItem={({ item }) => (
+            <View style={styles.item}>
+              <Text>{item.title}</Text>
+            </View>
+          )}
+        />
+      )}
+       </ScrollView>      
     );
   };
 
+  // Немного изменены стили.
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: 'lightyellow'
+      backgroundColor: 'navajowhite'
     },    
     item: {
-      marginTop: '5%',     
+      marginTop: '3%',     
       width: '100%',
-      padding: 15,
+      padding: 20,      
       height: 60,
-      backgroundColor: '#FFFF99',
-      fontSize: 20,
-    },
+      backgroundColor: 'tan',
+      borderRadius: 10,
+      fontSize: 15     
+    },   
   });
 
 
