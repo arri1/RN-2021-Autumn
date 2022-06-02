@@ -8,72 +8,22 @@ import Lab4 from './screens/Lab4'
 import { StyleSheet, View, Text, Image } from 'react-native';
 import {Provider} from 'react-redux';
 import {store} from './app/store';
-
-
-const Tab = createBottomTabNavigator()
+import { ApolloProvider } from "@apollo/client";
+import client from './components/lab5/client';
+import Main from './components/routers/main';
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <NavigationContainer>
-          <Tab.Navigator
-              headerMode="none"
-              screenOptions={({route}) => ({
-                  headerShown: false,    
-              })}>
-              <Tab.Screen
-                  name="Lab1"
-                  component={Lab1}
-                  options={{
-                    headerShown: false,
-                    tabBarIcon: () => (
-                      <View>
-                        <Image  source={require('./assets/icons/icon.png')}/>
-                      </View>
-                    ),
-                  }}
-              />
-              <Tab.Screen
-                  name="Lab2"
-                  component={Lab2}
-                  options={{
-                    headerShown: false,
-                    tabBarIcon: () => (
-                      <View>
-                        <Image  source={require('./assets/icons/icon.png')}/>
-                      </View>
-                    ),
-                  }}
-              />
-              <Tab.Screen
-                  name="Lab3"
-                  component={Lab3}
-                  options={{
-                    headerShown: false,
-                    tabBarIcon: () => (
-                      <View>
-                        <Image  source={require('./assets/icons/icon.png')}/>
-                      </View>
-                    ),
-                  }}
-              />
-              <Tab.Screen
-                  name="Lab4"
-                  component={Lab4}
-                  options={{
-                    headerShown: false,
-                    tabBarIcon: () => (
-                      <View>
-                        <Image  source={require('./assets/icons/icon.png')}/>
-                      </View>
-                    ),
-                  }}
-              />
-          </Tab.Navigator>
-      </NavigationContainer>
-      </Provider>
-  )
-}
+       <ApolloProvider client={client}>
+            <Provider store={store}>
+                 <NavigationContainer>
+                      <Main />
+                 </NavigationContainer>
+            </Provider>
+       </ApolloProvider>
+  );
+};
+
 const styles = StyleSheet.create({
   text: {
     fontFamily: 'Montserrat',
