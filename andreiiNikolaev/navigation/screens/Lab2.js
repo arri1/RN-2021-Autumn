@@ -18,8 +18,8 @@ const Lab2 = () => {
     }
   }
 
-  ToDoList(() => {
-    getMovies();
+  useEffect(() => {
+    ToDoList();
   }, []);
   
   return (    
