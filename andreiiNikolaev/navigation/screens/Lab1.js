@@ -1,7 +1,7 @@
 import  React, {useState} from 'react';
 import {StyleSheet,Text, Button, View} from 'react-native';
 
-const Lab1 = () => {
+export default function Lab1() {
     
   const randomRgb = () => {
       const red = Math.floor(Math.random() * 256);
@@ -10,13 +10,13 @@ const Lab1 = () => {
       return `rgb(${red}, ${green}, ${blue})`; 
       }
     
-  const [colors, setColors] = useState([]);
+  const [colors, setColors] = useState('rgb(0,0,0)');
 
     return (
         <View style={styles.container}>            
                 <View style={styles.elementStyle}>
-                    <Text style={{backgroundColor: randomRgb(), width: 300, height: 300, borderRadius: 10, marginVertical: 40 }}/>
-                    <Button title ="Random color" onPress={() => {setColors([...colors, randomRgb()]);  }}/>
+                    <Text style={{backgroundColor: colors, width: 300, height: 300, borderRadius: 5, marginVertical: 40 }}/>
+                    <Button title ="Random color" onPress={() => {setColors(randomRgb());  }}/>
                 </View>   
         </View>  
     )
@@ -25,7 +25,7 @@ const Lab1 = () => {
 const styles = StyleSheet.create({
     container: {
        flex: 1,
-       backgroundColor: 'navajowhite',
+       backgroundColor: 'aqua',
     }, 
     elementStyle: {
       top: '15%',
@@ -34,5 +34,3 @@ const styles = StyleSheet.create({
     },
   }
   )
-
-  export default Lab1;
