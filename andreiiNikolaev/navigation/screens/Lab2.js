@@ -1,45 +1,43 @@
-import React, { useState, useEffect} from 'react';
-import { ActivityIndicator, FlatList, Text, StyleSheet, ScrollView} from 'react-native';
+import React, { useState} from 'react';
+import { ActivityIndicator, FlatList, Text, StyleSheet, View} from 'react-native';
 
 export default function Lab2({}) {
-    const [isLoading, setLoading] = useState(true);
-    const [data, setData] = useState([]);
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+//Вместо axios использован fetch. 
+//Код написан в соответствии с рекомендованным шаблоном использования fetch(reactnative версии 0.68) от официального сайта React Native https://reactnative.dev/docs/network.
+  const ToDoList = async () => {
+     try {
+      const response = await fetch('https://my-json-server.typicode.com/Andrey1291/tasks/db');
+      const json = await response.json();
+      setData(json.task);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
-    //Вместо axios использован fetch. Код написан в соответствии с рекомендованным шаблоном использования fetch(reactnative версии 0.68) от официального сайта React Native https://reactnative.dev/docs/network#using-fetch .
-    const ToDoList = () => {
-      return fetch('https://my-json-server.typicode.com/Andrey1291/tasks/db')
-        .then((response) => response.json())
-        .then((json) => {
-          return json.task;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    };
-
-    useEffect(() => {
-      ToDoList();
-    }, []);
-
-    return (      
-       <ScrollView style={styles.container}>
-        {isLoading ? <ActivityIndicator/> : (
+  ToDoList(() => {
+    getMovies();
+  }, []);
+  
+  return (    
+    <View style={styles.container}>  
+      {isLoading ? <ActivityIndicator/> : (
         <FlatList
           data={data}
-          keyExtractor={({ id }, index) => id}
+          keyExtractor={({ id }) => id}
           renderItem={({ item }) => (
-            <View style={styles.item}>
-              <Text>{item.title}</Text>
-            </View>
-          )}
-        />
-      )}
-       </ScrollView>      
-    );
-  };
-
-  // Немного изменены стили.
-  const styles = StyleSheet.create({
+            <Text style={styles.item}>{item.title}</Text>
+            )}         
+        /> 
+        )}     
+    </View>   
+  );
+};
+//Немного изменены стили.
+const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: 'navajowhite'
@@ -54,5 +52,3 @@ export default function Lab2({}) {
       fontSize: 15     
     },   
   });
-
-
