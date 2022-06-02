@@ -1,7 +1,7 @@
 import  React, {useState} from 'react';
 import {StyleSheet,Text, Button, View} from 'react-native';
 
-export default function Lab1() {
+const Lab1 = () => {
     
   const randomRgb = () => {
       const red = Math.floor(Math.random() * 256);
@@ -34,3 +34,5 @@ const styles = StyleSheet.create({
     },
   }
   )
+
+export default Lab1;
