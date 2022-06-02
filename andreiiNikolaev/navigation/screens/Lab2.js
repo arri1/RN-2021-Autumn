@@ -1,7 +1,7 @@
 import React, { useState} from 'react';
 import { ActivityIndicator, FlatList, Text, StyleSheet, View} from 'react-native';
 
-export default function Lab2({}) {
+const Lab2 = () => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 //Вместо axios использован fetch. 
@@ -52,3 +52,5 @@ const styles = StyleSheet.create({
       fontSize: 15     
     },   
   });
+
+  export default Lab2;
