@@ -69,12 +69,12 @@ const styles = StyleSheet.create({
   title: {    
     marginTop: '25%',
     justifyContent: 'center',
-    fontSize: 40,
+    fontSize: 18,
     textAlign: 'center',    
   },
   text: {
     alignItems: 'center',   
-    fontSize: 50,
+    fontSize: 20,
   },   
   counter: {   
     marginTop: '5%',
