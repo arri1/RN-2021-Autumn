@@ -10,6 +10,8 @@ import axios from 'axios';
 
 const styles = StyleSheet.create({
   item: {
+    backgroundColor: '#D1A7A0',
+    color: '#000000',
     padding: 10,
     borderRadius: 10,
     marginBottom: 10,
@@ -17,10 +19,9 @@ const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
   },
   container: {
-    flex: 1,
-    margin: 15,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#D2E0BF',
   },
   title: {
     fontSize: 18,
