@@ -1,30 +1,12 @@
-import React, { useState } from 'react';
-import { StyleSheet, Button, SafeAreaView } from 'react-native';
-
-const colArr = ["#FF0000","#FF7400","#FFE800","#32FF00","#00FFCD","#0C00FF","#B600FF"];
-const Colour = () => {
-    colNum =  Math.floor(Math.random() * colArr.length);
-    return colArr[colNum];
-};
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import BottomTab from './components/navigator/tabs';
 
 const App = () =>{
-    const [backColor, setColor] = useState(Colour())
-    return(
-        <SafeAreaView style = {{...styles.main, backgroundColor: backColor}}>
-            <Button  
-                title = "Нажми меня"
-                onPress={() => setColor(Colour())}
-            />
-        </SafeAreaView>
-    );
+ return (
+   <NavigationContainer>
+     <BottomTab/>
+   </NavigationContainer>
+ );
 };
-
-const styles = StyleSheet.create({
-    main:{
-        height: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
-
 export default App;
