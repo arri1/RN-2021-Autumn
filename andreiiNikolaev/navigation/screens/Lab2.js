@@ -36,21 +36,29 @@ const Lab2 = () => {
     </View>   
   );
 };
-//Немного изменены стили.
+
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: 'navajowhite'
-    },    
-    item: {
-      marginTop: '3%',     
-      width: '100%',
+      backgroundColor: '#FCEBB6',
+      height: '100%',
+      justifyContent: 'center', 
+    },   
+    text: {      
+      textAlign: 'center',
+      fontSize: 20,
+   }, 
+    item: {       
+      borderBottomColor:'#5E412F',
+      borderWidth: 1,
+      marginTop: '2%',   
+      marginBottom: '1%',       
+      marginHorizontal: '2%',    
       padding: 20,      
       height: 60,
-      backgroundColor: 'tan',
-      borderRadius: 10,
-      fontSize: 15     
-    },   
-  });
+      backgroundColor: '#78C0A8',
+      borderRadius: 15,
+      fontSize: 15   
+    },  
 
   export default Lab2;

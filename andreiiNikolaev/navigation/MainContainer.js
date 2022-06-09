@@ -5,7 +5,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import Lab1 from './screens/Lab1'
 import Lab2 from './screens/Lab2'
-
+import Lab3 from './screens/Lab3'
 
 const Lab1Name = 'Лабораторная №1';
 const Lab2Name = 'Лабораторная №2';
@@ -25,13 +25,20 @@ const MainContainer= () => {
                      iconName = focused ? 'numeric-1-box' : 'numeric-1-box-outline'
                    } else if (rn === Lab2Name) {
                      iconName = focused ? 'numeric-2-box' : 'numeric-2-box-outline'
+                   } else if (rn === Lab3Name) {
+                     iconName = focused ? 'numeric-3-box' : 'numeric-3-box-outline'
                    }
+
                    return <MaterialCommunityIcons name={iconName} size={size} color = {color}/>
-                },             
+                },  
+	        tabBarOptions ={{
+               	  activeTintColor: '#F07818',
+                  inactiveTintColor: '#FCEBB6'             
              })}                      
              >          
                 <Tab.Screen name={Lab1Name} component = {Lab1}/>
                 <Tab.Screen name={Lab2Name} component = {Lab2}/>   
+		<Tab.Screen name={Lab3Name} component = {Lab3}/>  
 
            </Tab.Navigator>
        </NavigationContainer>
