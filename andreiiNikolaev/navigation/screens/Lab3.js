@@ -64,7 +64,7 @@ const Lab3 = () => {
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    backgroundColor: 'navajowhite',
+    backgroundColor: '#FFDEAD',
   },
   title: {    
     marginTop: '25%',
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   counter: {   
     marginTop: '5%',
     marginBottom: '10%',
-    backgroundColor: 'tan',
+    backgroundColor: '#D2B48C',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
