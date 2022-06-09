@@ -40,14 +40,14 @@ const Lab2 = () => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: 'navajowhite'
+      backgroundColor: '#FFC1A5'
     },    
     item: {
       marginTop: '3%',     
       width: '100%',
       padding: 20,      
       height: 60,
-      backgroundColor: 'tan',
+      backgroundColor: '#D75A22',
       borderRadius: 10,
       fontSize: 15     
     },   
