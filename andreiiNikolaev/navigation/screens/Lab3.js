@@ -64,22 +64,26 @@ const Lab3 = () => {
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    backgroundColor: '#FFC1A5',
+    backgroundColor: '#FCEBB6',
+    height: '100%',
+    justifyContent: 'center', 
   },
-  title: {    
-    marginTop: '25%',
+  title: {      
     justifyContent: 'center',
-    fontSize: 18,
+    fontSize: 40,
     textAlign: 'center',    
   },
   text: {
     alignItems: 'center',   
-    fontSize: 20,
+    fontSize: 50,
   },   
-  counter: {   
+  counter: {       
+    borderBottomColor:'#5E412F',
+    borderWidth: 1,
     marginTop: '5%',
+    marginHorizontal: '2%',
     marginBottom: '10%',
-    backgroundColor: '#D75A22',
+    backgroundColor: '#78C0A8',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',

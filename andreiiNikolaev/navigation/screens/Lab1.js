@@ -12,27 +12,40 @@ const Lab1 = () => {
     
   const [colors, setColors] = useState('rgb(0,0,0)');
 
-    return (
-        <View style={styles.container}>            
-                <View style={styles.elementStyle}>
-                    <Text style={{backgroundColor: colors, width: 300, height: 300, borderRadius: 5, marginVertical: 40 }}/>
-                    <Button title ="Random color" onPress={() => {setColors(randomRgb());  }}/>
-                </View>   
-        </View>  
+return (
+        <SafeAreaView style={styles.container}>          
+          <Text style={{backgroundColor: colors, width: 300, height: 300, borderRadius: 15, marginVertical: 40 }}/>        
+          <TouchableOpacity style={styles.button} onPress={() => {setColors(randomColor());  }} >
+            <Text style = {styles.text} >random color</Text>
+          </TouchableOpacity>                
+        </SafeAreaView>
     )
 }  
 
 const styles = StyleSheet.create({
     container: {
        flex: 1,
-       backgroundColor: 'aqua',
+       height: '100%',
+       backgroundColor: '#FCEBB6',
+       alignItems: 'center',   
+       justifyContent: 'center',     
     }, 
-    elementStyle: {
-      top: '15%',
-      alignItems: 'center',
-      justifyContent: 'center',   
-    },
-  }
-  )
+    button: {      
+      backgroundColor: '#F07818',
+      borderBottomColor:'#5E412F',
+      borderWidth: 1,
+      paddingHorizontal: 15,
+      paddingVertical: 15,
+      borderRadius: 15,
+      marginLeft: 100,
+      marginRight: 100,  
+   },
+   text: {
+      fontWeight: 'bold',
+      textAlign: 'center',
+      fontSize: 20,
+      borderBottomColor:'#5E412F',
+      borderWidth: 1
+   },
 
 export default Lab1;

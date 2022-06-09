@@ -30,7 +30,10 @@ const MainContainer= () => {
                    }
 
                    return <MaterialCommunityIcons name={iconName} size={size} color = {color}/>
-                },             
+                },  
+	        tabBarOptions ={{
+               	  activeTintColor: '#F07818',
+                  inactiveTintColor: '#FCEBB6'             
              })}                      
              >          
                 <Tab.Screen name={Lab1Name} component = {Lab1}/>
