@@ -1,11 +1,26 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Lab1 from '../screens/lab1';
 import Lab2 from '../screens/lab2';
 import Lab3 from '../screens/lab3';
+import Lab4 from '../screens/lab4';
 import { View, Image, StyleSheet } from 'react-native';
+import axios from 'axios';
+import {useDispatch} from 'react-redux';
+import {loadItems} from '../../store/tasks';
 const Tab = createBottomTabNavigator();
 const BottomTab =()=> {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (dispatch) {
+      axios
+        .get('https://jsonplaceholder.typicode.com/users')
+        .then(({data}) => {
+          dispatch(loadItems(data));
+        })
+        .catch(() => {});
+    }
+  }, [dispatch]);
     return (
       <Tab.Navigator screenOptions={({route}) => ({
         tabBarStyle: { 
@@ -50,6 +65,17 @@ const BottomTab =()=> {
           tabBarIcon: ({focused}) => (
             <View>
               <Image source={ require ('../icons/lab3.png')} style={styles.img}/>
+            </View>
+          )
+        }}
+        />
+        <Tab.Screen 
+        name="Lab4" 
+        component={Lab4}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <View>
+              <Image source={ require ('../icons/lab4.png')} style={styles.img}/>
             </View>
           )
         }}

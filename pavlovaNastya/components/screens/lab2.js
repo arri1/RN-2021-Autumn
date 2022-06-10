@@ -1,12 +1,14 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {
   View,
   Text,
   ActivityIndicator,
   StyleSheet,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
-import axios from 'axios';
+import {useDispatch, useSelector} from 'react-redux';
+import {checkItem} from '../../store/tasks';
 
 const styles = StyleSheet.create({
   item: {
@@ -19,6 +21,7 @@ const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
   },
   container: {
+    height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#D2E0BF',
@@ -32,26 +35,26 @@ const styles = StyleSheet.create({
   },
 });
 const Lab2 = () => {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get('https://jsonplaceholder.typicode.com/users')
-      .then(({data: newData}) => {
-        setData(newData);
-      })
-      .catch(() => {});
-  }, []);
-
+  const data = useSelector(state => state.data.value);
+  const dispatch = useDispatch();
+  
   const content = () => {
     return (
       <ScrollView>
         {data.map(item => {
           return (
-            <View key={item.id} style={styles.item}>
-              <Text style={styles.title}>{item.name}</Text>
-              <Text style={styles.text}>{item.email}</Text>
-            </View>
+            <TouchableOpacity
+            key={item.id}
+            style={[
+              styles.item,
+              item.checked ? {backgroundColor: 'green'} : undefined,
+            ]}
+            onPress={() => {
+              dispatch(checkItem(item.id));
+            }}>
+            <Text style={styles.title}>{item.name}</Text>
+            <Text style={styles.text}>{item.email}</Text>
+          </TouchableOpacity>
           );
         })}
       </ScrollView>
