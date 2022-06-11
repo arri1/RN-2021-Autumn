@@ -4,6 +4,7 @@ import Lab1 from '../screens/lab1';
 import Lab2 from '../screens/lab2';
 import Lab3 from '../screens/lab3';
 import Lab4 from '../screens/lab4';
+import Lab5 from '../screens/lab5';
 import { View, Image, StyleSheet } from 'react-native';
 import axios from 'axios';
 import {useDispatch} from 'react-redux';
@@ -76,6 +77,17 @@ const BottomTab =()=> {
           tabBarIcon: ({focused}) => (
             <View>
               <Image source={ require ('../icons/lab4.png')} style={styles.img}/>
+            </View>
+          )
+        }}
+        />
+        <Tab.Screen 
+        name="Lab5" 
+        component={Lab5}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <View>
+              <Image source={ require ('../icons/lab5.png')} style={styles.img}/>
             </View>
           )
         }}
