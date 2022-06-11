@@ -1,16 +1,19 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import BottomTab from './components/navigator/tabs';
+import StackNavigation from './components/navigator/stackNavigation';
 import store from './store';
 import {Provider} from 'react-redux';
-
+import { ApolloProvider } from '@apollo/client'
+import client from '././components/apollo/apollo'
 const App = () =>{
  return (
-   <Provider store={store}>
+  <ApolloProvider client={client}>
+    <Provider store={store}>
      <NavigationContainer>
-       <BottomTab/>
+       <StackNavigation/>
      </NavigationContainer>
    </Provider>
+  </ApolloProvider>   
  );
 };
 export default App;
